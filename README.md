@@ -19,14 +19,81 @@ The RE4AFAGRI platform...
 
 A more comprehensive background on the design and principles behind the RE4AFAGRI platform is found in Falchetta, G., Adeleke, A., Awais, M., Byers, E., Copinschi, P., Duby, S., ... & Hafner, M. (2022). A renewable energy-centred research agenda for planning and financing Nexus development objectives in rural sub-Saharan Africa. Energy Strategy Reviews, 43, 100922. https://doi.org/10.1016/j.esr.2022.100922
 
+## Downloading the database
+
+The database to run the platform for the pilot country of Zambia is avaiable at [the official Zenodo repository of the RE4AFAGRI platform](https://zenodo.org/deposit/7534846). 
+
+Once downloaded, the database (a zipped folder) should be extracted. The exact full path to the database (e.g. *C:/Users/[yourusername]/Documents/RE4AFAGRI_database/...* should be copied onto the different model at the following positions:
+
+- For WaterCROP:
+- For M-LED: at line 10 of the MLED_hourly.R file, defining the 'db_folder' parameter
+- For OnSSET:
+- For NEST:
+
 ## Setting up the environment
 
 The platform has been developed and tested in a Windows 10 environment connected to the Internet.
 
+Each models is developed in a specific programming language and has thus specific software requirements, which are listed below.
+
+For WaterCROP:
+  - XXX
+
+For M-LED:
+  - Have R (version >=3.6) installed on your local computer: https://cran.r-project.org/bin/windows/base/
+  - Have a recent version of Rstudio installed on your local computer: https://posit.co/download/rstudio-desktop/
+  - Follow the instructions prompted in the first run to install all the required package dependencies
+
+- For OnSSET:
+  - Have Python (version 3+) installed on your local computer:
+  - Have XXX
+
+- For NEST:
+  - XXX
+  
 ## Operating the platform
+
+For WaterCROP:
+  - XXX
+
+## Soft-linking the models
+
+- WaterCrop to M-LED
+
+
+- WaterCROP to NEST
+
+
+- M-LED to OnSSET
+
+
+- OnSSET to NEST
+
 
 ## Customising the analysis
 
+Consult the [Wiki documentation]() (to be released in May 2023) for a detailed characterisation of the modules and key input datasets, parameters, and scenarios definition and updating.
+
 ## Examining the results
 
+Currently, each model has own reporting methods and formats, although a joint reporting module is currently under development. 
+
+In particular results can be examined by:
+
+- For WaterCROP:
+- For M-LED: at line 10 of the MLED_hourly.R file, defining the 'db_folder' parameter
+- For OnSSET:
+- For NEST:
+
 ## Support
+
+General queries: open an issue on this repository.
+
+- For WaterCROP: contact marta.tuninetti@polito.it
+- For M-LED: contact falchetta@iiasa.ac.at
+- For OnSSET: contact gregoryireland@gmail.com
+- For NEST: contact vinca@iiasa.ac.at
+
+###############
+
+Financial support from the European Commission H2020 funded project LEAP-RE (Long-Term Joint EU-AU Research and Innovation Partnership on Renewable Energy), grant number 963530 is gratefully acknowledged.
