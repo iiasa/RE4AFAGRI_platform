@@ -72,7 +72,7 @@ For WaterCROP:
 
 ## Customising the analysis
 
-Consult the [Wiki documentation]() (to be released in May 2023) for a detailed characterisation of the modules and key input datasets, parameters, and scenarios definition and updating.
+Consult the [Wiki documentation](https://github.com/iiasa/RE4AFAGRI_platform/wiki) (to be released in May 2023) for a detailed characterisation of the modules and key input datasets, parameters, and scenarios definition and updating.
 
 ## Examining the results
 
