@@ -21,7 +21,7 @@ A more comprehensive background on the design and principles behind the RE4AFAGR
 
 ## Downloading the database
 
-The database to run the platform for the pilot country of Zambia is avaiable at [the official Zenodo repository of the RE4AFAGRI platform](https://zenodo.org/deposit/7534846). 
+The database to run the platform for the pilot country of Zambia is avaiable at [the official Zenodo repository of the RE4AFAGRI platform](https://doi.org/10.5281/zenodo.7534846). 
 
 Once downloaded, the database (a zipped folder) should be extracted. The exact full path to the database (e.g. *C:/Users/[yourusername]/Documents/RE4AFAGRI_database/...* should be copied onto the different model at the following positions:
 
