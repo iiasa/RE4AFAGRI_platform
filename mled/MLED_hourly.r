@@ -5,9 +5,9 @@
 ####
 # system parameters
 
-setwd("D:/OneDrive - IIASA/RE4AFAGRI_platform/mled") # path of the cloned M-LED GitHub repository
+setwd("./RE4AFAGRI_platform/mled") # path of the cloned M-LED GitHub repository
 
-db_folder = 'G:/Il mio Drive/MLED_database' # path to (or where to download) the M-LED database
+db_folder = './MLED_database' # path to (or where to download) the M-LED database
 
 email<- "giacomo.falchetta@gmail.com" # NB: need to have previously enabled it to use Google Earth Engine via https://signup.earthengine.google.com
 
@@ -171,6 +171,8 @@ lapply(1:nrow(scenarios), function(scenario){
     
     clusters_onsset[paste0("tot_dem_", timestep)] <- aa[paste0("residential_tt_", timestep)] + aa[paste0("nonfarm_smes_tt_", timestep)] + aa[paste0("healthcare_tt_", timestep)] + aa[paste0("education_tt_", timestep)] + aa[paste0("water_pumping_tt_", timestep)] + aa[paste0("crop_processing_tt_", timestep)] + aa[paste0("mining_kwh_tt_", timestep)] + aa[paste0("other_tt_", timestep)]
   }
+  
+  template_ras <- disaggregate(rainfed[[1]], fact=10)
   
   clusters_nest_BCU <- fasterize(clusters_nest, rainfed[[1]], "BCU")
   
