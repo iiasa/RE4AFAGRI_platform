@@ -93,6 +93,9 @@ fast_mask <- function(ras = NULL, mask = NULL, inverse = FALSE, updatevalue = NA
 #if (!isTRUE(ee_check())) {ee_install()}
 ee_Initialize(email)
 
+ifelse(!dir.exists(file.path(getwd(), "results")), dir.create(file.path(getwd(), "results")), FALSE)
+ifelse(!dir.exists(file.path(paste0(getwd(), "results"), countrystudy)), dir.create(file.path(paste0(getwd(), "results"), countrystudy)), FALSE)
+
 ###########
 
 repo_folder <- home_repo_folder <- getwd()

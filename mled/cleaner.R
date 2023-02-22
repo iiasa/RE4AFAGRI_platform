@@ -78,8 +78,6 @@ other_kwh_tt <- melt(as.vector(aa %>% dplyr::select(starts_with("other_tt") & !c
 
 all_sectors <- bind_rows(PerHHD_tt, residual_productive_tt, er_hc_tt, er_sch_tt, er_kwh_tt, kwh_cp_tt, mining_kwh_tt, other_kwh_tt, er_kwh_tt_offgrid)
 
-colnames(all_sectors)[2] <- "variable"
-
 all_sectors$variable <- as.character(all_sectors$variable)
 all_sectors$variable[41:45] <- gsub("_offgrid", "", all_sectors$variable[41:45])
 substrRight <- function(x, n){
@@ -102,8 +100,6 @@ all_sectors$variable <- gsub("mining", "mining", all_sectors$variable)
 all_sectors$variable <- gsub("other", "other", all_sectors$variable)
 
 #
-
-colnames(all_sectors) <- c("value", "variable","year")
 
 ggplot(all_sectors)+
   geom_line(aes(x=year, y=value/1e9, colour=variable, group=variable), size=1)+

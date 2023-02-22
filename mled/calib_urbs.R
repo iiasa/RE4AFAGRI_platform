@@ -23,6 +23,7 @@ for(timestep in planning_year){
   
 pops = aa[ifelse(timestep==planning_year[1], "population" , paste0("population_", timestep))]
 pops = data.frame(pops)
+pops$id = aa$id
 pops = dplyr::arrange(pops, -pops)
   
 urb_rate =   pull(urbproj[,as.character(timestep)]) / 100
@@ -42,8 +43,11 @@ repeat{
   if (urb_rate_est >= urb_rate) break
 }
 
+pops = dplyr::arrange(pops, id)
+
 clusters[,paste0(ifelse(timestep > 2020, "isurban_future_", "isurban_"), timestep)] = pops[,paste0(ifelse(timestep > 2020, "isurban_future_", "isurban_"), timestep)]
 
 }
 
 
+clusters$isurban <- clusters$isurban_2020

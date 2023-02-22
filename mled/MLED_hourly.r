@@ -7,7 +7,7 @@
 
 setwd("./RE4AFAGRI_platform/mled") # path of the cloned M-LED GitHub repository
 
-db_folder = './MLED_database' # path to (or where to download) the M-LED database
+db_folder = 'G:/My Drive/MLED_database' # path to (or where to download) the M-LED database
 
 email<- "giacomo.falchetta@gmail.com" # NB: need to have previously enabled it to use Google Earth Engine via https://signup.earthengine.google.com
 
@@ -172,11 +172,13 @@ lapply(1:nrow(scenarios), function(scenario){
     clusters_onsset[paste0("tot_dem_", timestep)] <- aa[paste0("residential_tt_", timestep)] + aa[paste0("nonfarm_smes_tt_", timestep)] + aa[paste0("healthcare_tt_", timestep)] + aa[paste0("education_tt_", timestep)] + aa[paste0("water_pumping_tt_", timestep)] + aa[paste0("crop_processing_tt_", timestep)] + aa[paste0("mining_kwh_tt_", timestep)] + aa[paste0("other_tt_", timestep)]
   }
   
-  template_ras <- disaggregate(rainfed[[1]], fact=10)
-  
-  clusters_nest_BCU <- fasterize(clusters_nest, rainfed[[1]], "BCU")
+  clusters_nest_BCU <- fasterize(clusters_nest, disaggregate(rainfed[[1]], fact=100), "BCU")
   
   clusters_onsset$BCU <- exact_extract(clusters_nest_BCU, clusters_onsset, "majority")
+  
+  indexes <- st_nearest_feature(clusters_onsset[is.na(clusters_onsset$BCU),], clusters_onsset[!is.na(clusters_onsset$BCU),])
+  
+  clusters_onsset$BCU[is.na(clusters_onsset$BCU)] <-  clusters_onsset$BCU[!is.na(clusters_onsset$BCU)][indexes]
   
   write_sf(clusters_onsset, paste0("results/", countrystudy, "_onsset_clusters_with_mled_loads_", paste(scenarios[scenario,], collapse = "_"), ifelse(isTRUE(latent_d_tot), "_tot_lat_d", "_dem"), ".gpkg"), overwrite=T, layer_options = "SPATIAL_INDEX=NO")
   
