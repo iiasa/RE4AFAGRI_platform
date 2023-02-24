@@ -226,6 +226,8 @@ lapply(1:nrow(scenarios), function(scenario){
   
   clusters_nest_output_2[is.na(clusters_nest_output_2)] <- 0 
   
+  clusters_nest_output_2 <- dplyr::select(clusters_nest_output_2, -contains("isurban_"))
+  
   clusters_nest_output_2 <- st_as_sf(clusters_nest_output_2)
   
   st_crs(clusters_nest_output_2) <- 4326
