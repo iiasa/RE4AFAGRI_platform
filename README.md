@@ -66,11 +66,11 @@ For WaterCROP:
 
 
 - M-LED to OnSSET: 
-  The details of transferring the demand data from MLED into OnSSET compatible files are completed in the "MLED_extraction_to_OnSSET.ipynb" notebook in the onsset root folder
+  - The details of transferring the demand data from the MLED modelling into OnSSET compatible files are completed in the "MLED_extraction_to_OnSSET.ipynb" notebook in the onsset root folder
 
 
 - OnSSET to NEST: 
-  Summary files of the OnSSET geospatial results are created when running the OnSSET scenarios in the "OnSSET_Scenario_Running.ipynb" inside the onnsset code folder. These are used by NEST to split the demands appropriately for each region, rurality, year, technology type, and scenario
+  - Summary files of the OnSSET geospatial results are created when running the OnSSET scenarios in the "OnSSET_Scenario_Running.ipynb" inside the onsset/onsset Python code folder. These are used by NEST to split the demands appropriately for each region, rurality, year, technology type, and scenario
 
 
 ## Customising the analysis
@@ -85,7 +85,8 @@ In particular results can be examined by:
 
 - For WaterCROP:
 - For M-LED: at line 10 of the MLED_hourly.R file, defining the 'db_folder' parameter
-- For OnSSET:
+- For OnSSET: 
+  - The results files can be analysed using Python and Pandas in the "OnSSET_Scenario_Running.ipynb" notebook or with custom notebooks. Otherwise they can be visusalised in GIS software such as QGIS: https://download.qgis.org/. They can be linked back to the cluster .gpkg shape files using a join on the "id" variable to visualise the shapes in addition to the electrification optimization information. Go to the RE4AFAGRI visualisation platform (coming soon) to see the existing scenarios. 
 - For NEST:
 
 ## Support
