@@ -41,7 +41,7 @@ Each models is developed in a specific programming language and has thus specifi
 
 ### For WaterCROP:
   - XXX
-
+  
 ### For M-LED:
   - Have R (version >=3.6) installed on your local computer: https://cran.r-project.org/bin/windows/base/
   - Have a recent version of Rstudio installed on your local computer: https://posit.co/download/rstudio-desktop/
@@ -66,7 +66,6 @@ Each models is developed in a specific programming language and has thus specifi
 
 ### For WaterCROP:
   - XXX
-  - 
 ### For OnSSET:
 - Make sure the replication data is downloaded from [the official Zenodo repository of the RE4AFAGRI platform](https://doi.org/10.5281/zenodo.7534846) as described above. 
 - In the root of the `onsset` folder first open `MLED_extraction_to_OnSSET.ipynb` and run all of the cells. This will extract the MLED demands and create OnSSET compatible input files for use in the next step. The process may take a few minutes. You should find them as .CSV files in the `onsset\mled_processed_input_files` folder with the names of the scenarios.
