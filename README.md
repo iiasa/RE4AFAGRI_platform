@@ -27,7 +27,7 @@ Once downloaded, the database (a zipped folder) should be extracted. The exact f
 
 - For WaterCROP:
 - For M-LED: at line 10 of the MLED_hourly.R file, defining the 'db_folder' parameter
-- For OnSSET: all files and directories are used relative to the working directory so no need to define paths. 
+- For OnSSET: include the OnSSET replication data folder unzipped in `onsset\onsset_replication` (more details below)
 - For NEST:
 
 ## Setting up the environment
@@ -50,7 +50,7 @@ Each models is developed in a specific programming language and has thus specifi
 ### For OnSSET:
   - Have Python (version 3+) and the conda package manager installed on your local computer:
   - If you do not have this, then download and install Anaconda for your operating system from here: https://www.anaconda.com/ (Many useful Jupyter Notebook tutorials are also available there if you are unfamiliar with Jupyter)
-  - Then open "Anaconda Prompt" and navigate to this repository and into the "onsset" folder, and run the following commands:
+  - Then open "Anaconda Prompt" and navigate to this repository and into the `onsset` folder, and run the following commands:
   - `conda env create --name gep_onsset_env --file gep_onsset_env.yml` (This might take a while and download 100+MB of Python packages)
   - Then run the following commands:
     - `conda activate gep_onsset_env`
