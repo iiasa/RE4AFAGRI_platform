@@ -45,8 +45,9 @@ For M-LED:
   - Follow the instructions prompted in the first run to install all the required package dependencies
 
 - For OnSSET:
-  - Have Python (version 3+) installed on your local computer:
-  - Have XXX
+  - Have Python (version 3+) and the conda package manager installed on your local computer:
+  - If you do not have this download and install Anaconda for your operating system here: https://www.anaconda.com/
+  
 
 - For NEST:
   - XXX
@@ -64,10 +65,12 @@ For WaterCROP:
 - WaterCROP to NEST
 
 
-- M-LED to OnSSET
+- M-LED to OnSSET: 
+  The details of transferring the demand data from MLED into OnSSET compatible files are completed in the "MLED_extraction_to_OnSSET.ipynb" notebook in the onsset root folder
 
 
-- OnSSET to NEST
+- OnSSET to NEST: 
+  Summary files of the OnSSET geospatial results are created when running the OnSSET scenarios in the "OnSSET_Scenario_Running.ipynb" inside the onnsset code folder. These are used by NEST to split the demands appropriately for each region, rurality, year, technology type, and scenario
 
 
 ## Customising the analysis
