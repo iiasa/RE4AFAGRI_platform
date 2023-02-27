@@ -7,7 +7,9 @@
 ####
 ## Introduction and contents
 
-The RE4AFAGRI platform...
+The RE4AFAGRI platform is a multi-model framework to analyse deficits, requirements, and optimal solutions for integrated land-water-agriculture-energy-development nexus interlinkages in developing countries. A more comprehensive background on the design and principles behind the RE4AFAGRI platform is found in Falchetta, G., Adeleke, A., Awais, M., Byers, E., Copinschi, P., Duby, S., ... & Hafner, M. (2022). A renewable energy-centred research agenda for planning and financing Nexus development objectives in rural sub-Saharan Africa. Energy Strategy Reviews, 43, 100922. https://doi.org/10.1016/j.esr.2022.100922
+
+The platform combines and soft-links four standalone modelling tools:
 
 - WaterCROP: WaterCROP is an evapotranspiration model to estimate the crop water demand by source (rainfall plus irrigation) as a function of the soil moisture available in the soil and the potential for irrigation expansion (by source, surface water or groundwater bodies) based on current yield gap.
 
@@ -17,7 +19,6 @@ The RE4AFAGRI platform...
 
 - NEST: NEST (The NExus Solutions Tool) is a modeling platform that integrates multi-scale energy–water–land resource optimization with distributed hydrological modeling, providing  insights into the vulnerability of water, energy and land resources to future socioeconomic and climatic change and how multi-sectoral policies, technological solutions and investments can improve the resilience and sustainability of transformation pathways while avoiding counterproductive interactions among sectors. 
 
-A more comprehensive background on the design and principles behind the RE4AFAGRI platform is found in Falchetta, G., Adeleke, A., Awais, M., Byers, E., Copinschi, P., Duby, S., ... & Hafner, M. (2022). A renewable energy-centred research agenda for planning and financing Nexus development objectives in rural sub-Saharan Africa. Energy Strategy Reviews, 43, 100922. https://doi.org/10.1016/j.esr.2022.100922
 
 ## Downloading the database
 
@@ -26,7 +27,7 @@ The database to run the platform for the pilot country of Zambia is avaiable at 
 Once downloaded, the database (a zipped folder) should be extracted. The exact full path to the database (e.g. *C:/Users/[yourusername]/Documents/RE4AFAGRI_database/...* should be copied onto the different model at the following positions:
 
 - For WaterCROP:
-- For M-LED: at line 10 of the MLED_hourly.R file, defining the 'db_folder' parameter
+- For M-LED: at *line 10* of the `MLED_hourly.R` file, defining the `db_folder` parameter
 - For OnSSET: include the OnSSET replication data folder unzipped in `onsset\onsset_replication` (more details below)
 - For NEST:
 
@@ -37,14 +38,14 @@ The platform has been developed and tested in a Windows 10 environment connected
 Each models is developed in a specific programming language and has thus specific software requirements, which are listed below.
 
 ### First - Get the code and repository structure:
-- Download or clone this entire repository either using, Github Desktop, git clone or downloading it as a .zip folder with all of the subfolders for each model included 
+- Download or clone this entire repository either using, Github Desktop, `git clone` or downloading it as a .zip folder with all of the subfolders for each model included 
 
 ### For WaterCROP:
   - XXX
   
 ### For M-LED:
-  - Have R (version >=3.6) installed on your local computer: https://cran.r-project.org/bin/windows/base/
-  - Have a recent version of Rstudio installed on your local computer: https://posit.co/download/rstudio-desktop/
+  - Have `R` (version >=3.6) installed on your local computer: `https://cran.r-project.org/bin/windows/base/`
+  - Have a recent version of `RStudio` installed on your local computer: `https://posit.co/download/rstudio-desktop/`
   - Follow the instructions prompted in the first run to install all the required package dependencies
 
 ### For OnSSET:
@@ -66,6 +67,7 @@ Each models is developed in a specific programming language and has thus specifi
 
 ### For WaterCROP:
   - XXX
+  
 ### For OnSSET:
 - Make sure the replication data is downloaded from [the official Zenodo repository of the RE4AFAGRI platform](https://doi.org/10.5281/zenodo.7534846) as described above. 
 - In the root of the `onsset` folder first open `MLED_extraction_to_OnSSET.ipynb` and run all of the cells. This will extract the MLED demands and create OnSSET compatible input files for use in the next step. The process may take a few minutes. You should find them as .CSV files in the `onsset\mled_processed_input_files` folder with the names of the scenarios.
@@ -74,10 +76,10 @@ Each models is developed in a specific programming language and has thus specifi
 
 ## Soft-linking the models
 
-- WaterCrop to M-LED
+- WaterCrop to M-LED:
+  - WaterCrop produces netcdf files of irrigation water requirements and yield growth potential for all African countries. These files are contained (and can be updated) in the `./MLED_database/input_folder/watercrop` folder and corresponding subfolders for each crop. These files are then read in the `scenario_countryname.R` file of M-LED.
 
-
-- WaterCROP to NEST
+- WaterCROP to NEST:
 
 
 - M-LED to OnSSET: 
@@ -98,11 +100,16 @@ Currently, each model has own reporting methods and formats, although a joint re
 In particular results can be examined by:
 
 - For WaterCROP:
-- For M-LED: at line 10 of the MLED_hourly.R file, defining the 'db_folder' parameter
+  - 
+ 
+- For M-LED:
+  - 
+
 - For OnSSET: 
   - The results files can be analysed using Python and Pandas in the "OnSSET_Scenario_Running.ipynb" notebook or with custom notebooks. 
   - Otherwise they can be visusalised in GIS software such as QGIS: https://download.qgis.org/. They can be linked back to the cluster .gpkg shape files using a join on the "id" variable to visualise the shapes in addition to the electrification optimization information. 
   - Go to the RE4AFAGRI visualisation platform (coming soon) to see the existing scenarios. 
+
 - For NEST:
 
 ## Support
