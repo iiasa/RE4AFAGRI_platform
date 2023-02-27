@@ -79,7 +79,7 @@ Each models is developed in a specific programming language and has thus specifi
   
 ### For OnSSET:
 - Make sure the replication data is downloaded from [the official Zenodo repository of the RE4AFAGRI platform](https://doi.org/10.5281/zenodo.7534846) as described above. 
-- In the root of the `onsset` folder first open `MLED_extraction_to_OnSSET.ipynb` and run all of the cells. This will extract the MLED demands and create OnSSET compatible input files for use in the next step. The process may take a few minutes. You should find them as .CSV files in the `onsset\mled_processed_input_files` folder with the names of the scenarios.
+- In the root of the `onsset` folder first open `MLED_extraction_to_OnSSET.ipynb` and run all of the cells. This will extract the MLED demands and create OnSSET compatible input files for use in the next step. The process may take a few minutes. You should find them as .CSV files in the `onsset\mled_processed_input_files` folder with the names of the scenarios. If for any reason this step fails, then there are pre-processed input files available in the `onsset_replication\mled_processed_input_files` database download which you could use instead or if you wish to double check your results.
 - Then, navigate into the `onsset/onsset` sub folder which also includes the .py Python files used by OnSSET.
 - Open the `OnSSET_Scenario_Running.ipynb` Notebook and run all of the cells. This will take a few minutes and will run the different scenarios and calculate the least-cost electrification options for the entire country. It will output it's results into several folders as .CSV files both as full results files for every population cluster in the country as well as summary files (also used later by NEST). 
 
