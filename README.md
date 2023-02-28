@@ -28,7 +28,7 @@ The database to run the platform for the pilot country of Zambia is avaiable at 
 
 Once downloaded, the database(s) (a zipped folder for each of the four models) should be extracted. The exact full path to the database (e.g. *C:/Users/[yourusername]/Documents/RE4AFAGRI_database/...* should be parsed onto the different model at the following positions:
 
-- For WaterCROP:
+- For WaterCROP: at *line 1, 4, 21, 55, 65, 68 - and subsequently per each crop - and 785* of the 'WaterCROP1_ETactual.mat'
 - For M-LED: at *line 10* of the `MLED_hourly.R` file, defining the `db_folder` parameter
 - For OnSSET: include the OnSSET replication data folder unzipped in `onsset\onsset_replication` (more details below)
 - For NEST: The database only raw data needed in the pre-processing phase. The data needed to run the model is already included in the Github repository
