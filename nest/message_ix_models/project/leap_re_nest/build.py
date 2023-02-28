@@ -23,33 +23,29 @@ from message_data.projects.leap_re_nest.script import add_grid_shares_OnSSET
 
 # load a scenario
 # IIASA users
-mp = ix.Platform(name='ixmp_dev' , jvmargs=['-Xmx14G'])
+# mp = ix.Platform(name='ixmp_dev' , jvmargs=['-Xmx14G'])
 # external users
-# mp2 = ix.Platform(name='local' , jvmargs=['-Xmx14G'])
+mp2 = ix.Platform(name='local' , jvmargs=['-Xmx14G'])
 
 modelName = 'MESSAGEix_ZM'
 scenarioName = 'single_node' 
 scen2Name = 'sub-units'
 
 # IIASA users
-sc_ref = message_ix.Scenario(mp, modelName, scenarioName,cache=True)
+# sc_ref = message_ix.Scenario(mp, modelName, scenarioName,cache=True)
 # sc_ref.to_excel(private_data_path("projects","leap_re_nest","ref_scen.xlsx") )
 # # external users in local database
-# sc_ref2 = ix.Scenario(mp2, modelName, "test", version='new',annotation="load from excel")
-# # the following units seem to not be present in the platform, need to add them the first time
-# ix.Platform.add_unit(mp2,unit = 'MUSD/a')
-# ix.Platform.add_unit(mp2,unit = 'GWa/a')
-# ix.Platform.add_unit(mp2,unit = 'TUSD')
+sc_ref2 = message_ix.Scenario(mp2, modelName, "test", version='new',annotation="load from excel")
 
-# sc_ref2.read_excel(private_data_path("projects","leap_re_nest","ref_scen.xlsx"),
-#                    add_units=True,
-#                    init_items=True,
-#                    commit_steps=True)
+sc_ref2.read_excel(private_data_path("projects","leap_re_nest","ref_scen.xlsx"),
+                    add_units=True,
+                    init_items=True,
+                    commit_steps=True)
 # sc_ref2.commit("")
 # sc_ref2.solve(solve_options={"lpmethod": "4"},model="MESSAGE")
 
 # for all
-sc = sc_ref.clone(modelName, scen2Name,keep_solution=False)
+sc = sc_ref2.clone(modelName, scen2Name,keep_solution=False)
 
 sc.check_out()
 # add basins
@@ -105,6 +101,9 @@ add_MLED_demand.main(sc3)
 add_grid_shares_OnSSET.main(sc3)
 
 caseName = sc3.model + "__" + sc3.scenario + "__v" + str(sc3.version)
+# Solving the model
+sc3.solve(solve_options={"lpmethod": "4"},model="MESSAGE", case=caseName)
+sc3.set_as_default()
 
 # %%4) add water structure
 
@@ -112,9 +111,6 @@ caseName = sc3.model + "__" + sc3.scenario + "__v" + str(sc3.version)
 # with the correct scenari name
 # mix-models --url=ixmp://ixmp_dev/MESSAGEix_ZM/MLED_demand water --regions=ZMB nexus --rcps=7p0 --rels=low
 
-# Solving the model
-sc3.solve(solve_options={"lpmethod": "4"},model="MESSAGE", case=caseName)
-sc3.set_as_default()
+# %% 5) add irrigation and adjust electricity uses in the water
 
 # ADD GDP and Pop info in the timeseries
-
