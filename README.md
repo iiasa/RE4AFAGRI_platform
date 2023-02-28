@@ -28,7 +28,8 @@ The database to run the platform for the pilot country of Zambia is avaiable at 
 
 Once downloaded, the database(s) (a zipped folder for each of the four models) should be extracted. The exact full path to the database (e.g. *C:/Users/[yourusername]/Documents/RE4AFAGRI_database/...* should be parsed onto the different model at the following positions:
 
-- For WaterCROP:
+- For WaterCROP: at *lines 1, 4, 21, 55, 65, 68 - and subsequently for each crop - and 785* of the 'WaterCROP1_ETactual.mat' file
+                 at *lines 9, 14, 20, 94* of the 'WaterCROP2_Irrigation_requirements.mat' file
 - For M-LED: at *line 10* of the `MLED_hourly.R` file, defining the `db_folder` parameter
 - For OnSSET: include the OnSSET replication data folder unzipped in `onsset\onsset_replication` (more details below)
 - For NEST: The database only raw data needed in the pre-processing phase. The data needed to run the model is already included in the Github repository
@@ -43,7 +44,7 @@ Each models is developed in a specific programming language and has thus specifi
 - Download or clone this entire repository either using, Github Desktop, `git clone` or downloading it as a .zip folder with all of the subfolders for each model included 
 
 ### For WaterCROP:
-  - XXX
+  - Have 'Matlab' (version >= R2017a) installed on your local computer
   
 ### For M-LED:
   - Have `R` (version >=3.6) installed on your local computer: https://cran.r-project.org/bin/windows/base/
@@ -75,7 +76,8 @@ Each models is developed in a specific programming language and has thus specifi
 ## Operating the platform
 
 ### For WaterCROP:
-  - XXX
+  - Open 'WaterCROP1_ETactual.mat' file in MATLAB and select the scenario to run; then run the code.
+  - Open 'WaterCROP2_Irrigation_requirements.mat' and run the code. The code will produce the input files produces netcdf files of irrigation water requirements and       yield growth potential for all African countries.
 
 ### For M-LED:
   - Open the `MLED_hourly.r` file in RStudio
@@ -119,7 +121,9 @@ Currently, each model has own reporting methods and formats, although a joint re
 In particular results can be examined by:
 
 ### For WaterCROP:
-  - 
+  - WaterCROP outputs are found in 'results2' folder, and in each specific crop subfolder, which are automatically created after a model run.
+  - WaterCROP writes output data at 5 arcmin for the whole African continent
+  - The results files can be analysed using MATLAB and can be vsualized in GIS softwares
  
 ### For M-LED:
   - M-LED outputs are found in the `results` folder which is automatically created inside the `m-led` home folder after a model run.
