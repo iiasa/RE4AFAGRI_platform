@@ -31,7 +31,7 @@ Once downloaded, the database(s) (a zipped folder for each of the four models) s
 - For WaterCROP:
 - For M-LED: at *line 10* of the `MLED_hourly.R` file, defining the `db_folder` parameter
 - For OnSSET: include the OnSSET replication data folder unzipped in `onsset\onsset_replication` (more details below)
-- For NEST:
+- For NEST: The database only raw data needed in the pre-processing phase. The data needed to run the model is already included in the Github repository
 
 ## Setting up the environment
 
@@ -66,7 +66,11 @@ Each models is developed in a specific programming language and has thus specifi
   - Go to the instructions below to run the different OnSSET parts of the model.
 
 ### For NEST:
-  - XXX
+  - The requirements to run NEST are the same for running MESSAGEix, please check the [MESSAGEix documentation](https://docs.messageix.org/en/stable/install.html)
+  - Python 3.7 or newer
+  - GAMS with an active licence for the solver cplex
+  - R only needed to run pre-processing scripts
+  - once the setup is installed, also install the content of this folder as a `message-ix-models` package from source, following ths instructions in the `message-ix-models` [documentation](https://docs.messageix.org/projects/models/en/latest/install.html)
   
 ## Operating the platform
 
@@ -84,16 +88,18 @@ Each models is developed in a specific programming language and has thus specifi
 - Open the `OnSSET_Scenario_Running.ipynb` Notebook and run all of the cells. This will take a few minutes and will run the different scenarios and calculate the least-cost electrification options for the entire country. It will output it's results into several folders as .CSV files both as full results files for every population cluster in the country as well as summary files (also used later by NEST). 
 
 ### For NEST:
-  - XXX
+  - After having installed the folder by source (see *Setting up the environment*) run the script `nest\message_ix_models\project\leap_re_nest\build.py`
+  - around line 126, at * 4) add water structure* follow the instruction and run the command in the command prompt
 
 ## Soft-linking the models
+
+**RELEASE NOtE:** the current release is still not including all the exchange of data for future scenarios, which will be included in the next release.
 
 ### WaterCrop to M-LED:
   - WaterCrop produces netcdf files of irrigation water requirements and yield growth potential for all African countries. These files are contained (and can be updated) in the `./MLED_database/input_folder/watercrop` folder and corresponding subfolders for each crop. These files are then read in the `scenario_countryname.R` file of M-LED.
  
 ### WaterCROP to NEST:
-  - xxx
-  - 
+  - NEST uses the same input as M-LED
 
 ### M-LED to OnSSET: 
   - The details of transferring the demand data from the MLED modelling into OnSSET compatible files are completed in the `MLED_extraction_to_OnSSET.ipynb` notebook in the onsset root folder
@@ -128,7 +134,7 @@ In particular results can be examined by:
   - Otherwise they can be visusalised in GIS software such as QGIS: https://download.qgis.org/. They can be linked back to the cluster .gpkg shape files using a join on the "id" variable to visualise the shapes in addition to the electrification optimization information. 
   - Go to the RE4AFAGRI visualisation platform (coming soon) to see the existing scenarios. 
 
-### For NEST:
+### For NEST: work in progress
 
 ## Support
 
