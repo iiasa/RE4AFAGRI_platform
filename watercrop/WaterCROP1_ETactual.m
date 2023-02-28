@@ -1,7 +1,7 @@
-cd 'C:\Users\giord\Desktop\IIASA collab\WaterCrop' 
+cd '~\WaterCrop_replication' 
 climate = imread('thcli1.tif');
 
-cd 'C:\Users\giord\Desktop\IIASA collab\WaterCrop\1-ET0mm_day'
+cd '~\WaterCrop_replication\1-ET0mm_day'
 ET0_2020=importdata('ET0_2020_370_GFDL_bias.mat'); 
 ET0_2020(isnan(ET0_2020))=0;
 
@@ -18,7 +18,7 @@ ET0_oct=ET0_2020(:,:,10);
 ET0_nov=ET0_2020(:,:,11);
 ET0_dec=ET0_2020(:,:,12);
  
-cd 'C:\Users\giord\Desktop\IIASA collab\WaterCrop\2-Prec_mm_day'
+cd '~\WaterCrop_replication\2-Prec_mm_day'
 P_2020=importdata('P_2020_370_GFDL_bias.mat'); 
 P_2020(isnan(P_2020))=0;
 
@@ -52,7 +52,7 @@ dec=13:1/30:14-1/30;
 jan_after=14:1/30:15-1/30;
 days=[dec_before,jan,feb,mar,apr,may,jun,jul,aug,sep,oct,nov,dec,jan_after]';
 
-cartella_kc = 'C:\Users\giord\Desktop\IIASA collab\WaterCrop';
+cartella_kc = '~\WaterCrop_replication';
  
 raccolto=1;%,2,3,4,5,6,7,8,9,10,11,12,13,14,15,24,31,32,33]; %19 crops
 for r = 1:length(raccolto) %r crop index
@@ -62,10 +62,10 @@ for r = 1:length(raccolto) %r crop index
 %--  II growing season 
 
         case 1 %Mais
-            cartella='C:\Users\giord\Desktop\IIASA collab\WaterCrop\Maize';
+            cartella='~\WaterCrop_replication\Maize';
          
             coeff_colturale='kc_maize';
-            cartella_risultati='C:\Users\giord\Desktop\IIASA collab\WaterCrop\Risultati1_ETa\Maize';
+            cartella_risultati='~\WaterCrop_replication\Results1_ETa\Maize';
             
             rd_ini=0.3;  %m
             rd_max_rainfed=1.7; %fao 56 tab 22 pag 190
@@ -782,7 +782,7 @@ cd(cartella_kc)
 kc=xlsread('kc_global_NEWCROPS_def.xlsx',coeff_colturale,'C17:I26');
 
 %
-cd 'C:\Users\giord\Desktop\IIASA collab\WaterCrop'
+cd '~\WaterCrop_replication'
 awc_final=importdata('awc_mmalm.mat');
        
 temp=zeros(14,2);
@@ -1638,7 +1638,7 @@ end
     end
 end
 
-
+mkdir(cartella_risultati)
 cd(cartella_risultati)
 
 save('ETa_rain.mat','ETa_tot') 
@@ -1651,16 +1651,16 @@ save('Ptot_ir.mat','Ptot_ir')
 save('ETc_tot_rain.mat','ETc_tot_rain')
 save('ETc_tot_irr.mat','ETc_tot_irr')
 
-save('ETa_rf_month.mat','ETa_month') %NEST
-save('ETc_rf_month.mat','ETc_month') %NEST
+save('ETa_rf_month.mat','ETa_month') 
+save('ETc_rf_month.mat','ETc_month') 
 save('ET0_rf_month.mat','ET0_rf_month')
 save('Pre_eff_monthly.mat','Pre_eff_monthly')
 save('Pre_tot_monthly_gs.mat','Pre_tot_monthly_gs')
 save('ETgreen_month.mat','ETgreen_month')
-save('ETa_irr_month.mat','CWU_month') %NEST
-save('ETblue_month.mat','ETblue_month') %NEST
-save('I_month.mat','I_month') %NEST
-save('ETc_irr_month.mat','ETc_irr_month') %NEST
+save('ETa_irr_month.mat','CWU_month') 
+save('ETblue_month.mat','ETblue_month')
+save('I_month.mat','I_month')
+save('ETc_irr_month.mat','ETc_irr_month')
 save('ET0_irr_month.mat','ET0_irr_month')
 save('Pre_eff_irr_month.mat','Pre_eff_irr_month')
 save('Pre_tot_irr_month_gs.mat','Pre_tot_irr_month_gs')
