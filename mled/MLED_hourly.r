@@ -72,7 +72,7 @@ scenarios <- data.frame(ssp = ssp, rcp = rcp, el_access_share_target=el_access_s
 
 scenarios[,3:4] <- round(scenarios[,3:4], 3)
 
-rownames(scenarios) <- NULL
+rownames(scenarios) <- c("baseline", "moderate_development", "improved_development") # name the scenarios
 
 ############
 # run the analysis
@@ -83,7 +83,7 @@ lapply(1:nrow(scenarios), function(scenario){
   
   scenario <- scenario
   
-  print(paste("Running ", paste(scenarios[scenario,], collapse = "_")))
+  print(paste("Running ", rownames(scenarios)[scenario]))
   
   # Load the country and scenario-specific data
   write(paste0(timestamp(), "starting scenario module"), "log.txt")
@@ -180,7 +180,7 @@ lapply(1:nrow(scenarios), function(scenario){
   
   clusters_onsset$BCU[is.na(clusters_onsset$BCU)] <-  clusters_onsset$BCU[!is.na(clusters_onsset$BCU)][indexes]
   
-  write_sf(clusters_onsset, paste0("results/", countrystudy, "_onsset_clusters_with_mled_loads_", paste(scenarios[scenario,], collapse = "_"), ifelse(isTRUE(latent_d_tot), "_tot_lat_d", "_dem"), ".gpkg"), overwrite=T, layer_options = "SPATIAL_INDEX=NO")
+  write_sf(clusters_onsset, paste0("results/", countrystudy, "_onsset_clusters_with_mled_loads_", rownames(scenarios)[scenario], ifelse(isTRUE(latent_d_tot), "_tot_lat_d", "_dem"), ".gpkg"), overwrite=T, layer_options = "SPATIAL_INDEX=NO")
   
   #write_sf(clusters_voronoi %>% dplyr::select(id), paste0("results/", countrystudy, "_onsset_clusters_voronoi.gpkg"))
   
@@ -215,7 +215,7 @@ lapply(1:nrow(scenarios), function(scenario){
   
   st_crs(clusters_nest_output_1) <- 4326
   
-  write_sf(clusters_nest_output_1, paste0("results/", countrystudy, "_nest_clusters_with_mled_loads_", paste(scenarios[scenario,], collapse = "_"), ifelse(isTRUE(latent_d_tot), "_tot_lat_d", "_dem"), ".gpkg"), layer_options = "SPATIAL_INDEX=NO", overwrite=T)
+  write_sf(clusters_nest_output_1, paste0("results/", countrystudy, "_nest_clusters_with_mled_loads_", rownames(scenarios)[scenario], ifelse(isTRUE(latent_d_tot), "_tot_lat_d", "_dem"), ".gpkg"), layer_options = "SPATIAL_INDEX=NO", overwrite=T)
   
   clusters_nest_output_2 <- merge(clusters_nest_output, clusters_onsset_t, "id")
   clusters_nest_output_2$id <- NULL
@@ -232,7 +232,7 @@ lapply(1:nrow(scenarios), function(scenario){
   
   st_crs(clusters_nest_output_2) <- 4326
   
-  write_sf(clusters_nest_output_2, paste0("results/", countrystudy, "_nest_clusters_with_mled_loads_UR_", paste(scenarios[scenario,], collapse = "_"), ifelse(isTRUE(latent_d_tot), "_tot_lat_d", "_dem"), ".gpkg"), layer_options = "SPATIAL_INDEX=NO", overwrite=T)
+  write_sf(clusters_nest_output_2, paste0("results/", countrystudy, "_nest_clusters_with_mled_loads_UR_", rownames(scenarios)[scenario], ifelse(isTRUE(latent_d_tot), "_tot_lat_d", "_dem"), ".gpkg"), layer_options = "SPATIAL_INDEX=NO", overwrite=T)
   
   
   #
@@ -258,7 +258,7 @@ lapply(1:nrow(scenarios), function(scenario){
   
   gadm2_output <- merge(gadm2_output, clusters_onsset, "id")
   
-  write_sf(gadm2_output, paste0("results/", countrystudy, "_gadm2_with_mled_loads_", paste(scenarios[scenario,], collapse = "_"), ifelse(isTRUE(latent_d_tot), "_tot_lat_d", "_dem"), ".gpkg"), layer_options = "SPATIAL_INDEX=NO", overwrite=T)
+  write_sf(gadm2_output, paste0("results/", countrystudy, "_gadm2_with_mled_loads_", rownames(scenarios)[scenario], ifelse(isTRUE(latent_d_tot), "_tot_lat_d", "_dem"), ".gpkg"), layer_options = "SPATIAL_INDEX=NO", overwrite=T)
   
   gc()
   
