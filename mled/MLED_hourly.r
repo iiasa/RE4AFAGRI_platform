@@ -72,7 +72,7 @@ scenarios <- data.frame(ssp = ssp, rcp = rcp, el_access_share_target=el_access_s
 
 scenarios[,3:4] <- round(scenarios[,3:4], 3)
 
-rownames(scenarios) <- c("baseline", "moderate_development", "improved_development") # name the scenarios
+rownames(scenarios) <- c("baseline", "improved_access", "ambitious_development") # name the scenarios
 
 ############
 # run the analysis
