@@ -6,22 +6,21 @@
 clusters_buffers_cropland_distance <- fasterize(clusters_buffers_cropland_distance, field_size)
 
 rainfed2 <- mixedsort(rainfed)
-rainfed2 <- future_lapply(rainfed2, raster, future.seed=TRUE)
+rainfed2 <- future_lapply(rainfed2, function(X){r <- stack(X); crs(r) <- "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs"; extent(r) <- c(-180, 180, -90, 90); r <- projectRaster(r,  raster(yg_potential[[1]])); r}, future.seed=TRUE)
 
 rainfed2 <- stack(rainfed2)
+rainfed2 <-  mask_raster_to_polygon(rainfed2, st_as_sfc(st_bbox(clusters_voronoi)))
 
 crs(rainfed2) <- as.character(CRS("+init=epsg:4236"))
-rainfed2 <- mask_raster_to_polygon(rainfed2, st_as_sfc(st_bbox(clusters_voronoi)))
-
 rainfed2 <- as.list(rainfed2)
 
-field_size <-  mask_raster_to_polygon(field_size, st_as_sfc(st_bbox(clusters_voronoi)))
+field_size_proc <-  mask_raster_to_polygon(field_size, st_as_sfc(st_bbox(clusters_voronoi)))
 
-if(field_size_contraint==T){field_size <- projectRaster(field_size, mask_raster_to_polygon(rainfed2[[1]], st_as_sfc(st_bbox(clusters_voronoi))), method = "bilinear") ; m <- field_size; m[m > 29] <- NA; field_size <- mask(field_size, m); rainfed2 <- future_lapply(rainfed2, function(X){return(mask_raster_to_polygon(X, st_as_sfc(st_bbox(clusters_voronoi))))}, future.seed=TRUE); for (i in 1:length(rainfed2)){crs(rainfed2[[i]]) <- crs(field_size)}; field_size <- projectRaster(field_size,rainfed2[[1]]); rainfed2 <- future_lapply(rainfed2, function(X){mask(X, field_size)}, future.seed=TRUE)}
+if(field_size_contraint==T){field_size_proc <- projectRaster(field_size_proc, mask_raster_to_polygon(rainfed2[[1]], st_as_sfc(st_bbox(clusters_voronoi))), method = "bilinear") ; m <- field_size_proc; m[m > 29] <- NA; field_size_proc <- mask(field_size_proc, m); rainfed2 <- future_lapply(rainfed2, function(X){return(mask_raster_to_polygon(X, st_as_sfc(st_bbox(clusters_voronoi))))}, future.seed=TRUE); for (i in 1:length(rainfed2)){crs(rainfed2[[i]]) <- crs(field_size_proc)}; field_size_proc <- projectRaster(field_size_proc,rainfed2[[1]]); rainfed2 <- future_lapply(rainfed2, function(X){mask(X, field_size_proc)}, future.seed=TRUE)}
 
 if(buffers_cropland_distance==T){clusters_buffers_cropland_distance <- projectRaster(clusters_buffers_cropland_distance,rainfed2[[1]], method = "ngb"); rainfed2 <- future_lapply(rainfed2, function(X){mask(X, clusters_buffers_cropland_distance)}, future.seed=TRUE)}
 
-rainfed2 <- split(rainfed2,  tolower(unlist(qdapRegex::ex_between(rainfed, "watercrop/", "/cl"))))
+rainfed2 <- split(rainfed2,  rep(tolower(unlist(qdapRegex::ex_between(rainfed, "watercrop/", "/20"))), each=12))
 
 rainfed <- lapply(rainfed2, stack)
 
@@ -54,35 +53,99 @@ files <- stack(files)
 
 rainfed <- future_lapply(1:nlayers(files), function(X) {stack(rainfed[[X]] * (files[[X]] / crops_efficiency_irr$eta_irr[X]) * 10)}, future.seed=TRUE)
 
-# sum by month
+# sum by month and year
 
-rainfed_sum <- rainfed
+rainfed_sum <- list()
 
+for (timestep in planning_year[-length(planning_year)]){
 for (m in 1:12){
   
-  rainfed_sum[[m]] <- do.call("sum", c(future_lapply(1:nlayers(files), function(X){rainfed[[X]][[m]]}, future.seed=TRUE), na.rm = TRUE))
+  rainfed_sum[[as.character(timestep)]][[m]] <- do.call("sum", c(future_lapply(1:nlayers(files), function(X){rainfed[[X]][[((match(timestep, planning_year) - 1) * 12) + m]]}, future.seed=TRUE), na.rm = TRUE))
   
-}
+}}
 
-rainfed_sum <- stack(rainfed_sum)
+rainfed_sum[[5]] <- rainfed_sum[[4]]; names(rainfed_sum)[5] <- as.character(as.numeric(names(rainfed_sum)[4])+ 10) #add 2060
+
 rainfed <- rainfed_sum
+
+####
+# do the same for already irrigated cropland
+
+irrigated2 <- mixedsort(irrigated)
+irrigated2 <- future_lapply(irrigated2, function(X){r <- stack(X); crs(r) <- "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs"; extent(r) <- c(-180, 180, -90, 90); r <- projectRaster(r,  raster(yg_potential[[1]])); r}, future.seed=TRUE)
+
+irrigated2 <- stack(irrigated2)
+irrigated2 <-  mask_raster_to_polygon(irrigated2, st_as_sfc(st_bbox(clusters_voronoi)))
+
+crs(irrigated2) <- as.character(CRS("+init=epsg:4236"))
+irrigated2 <- as.list(irrigated2)
+
+field_size_proc <-  mask_raster_to_polygon(field_size, st_as_sfc(st_bbox(clusters_voronoi)))
+
+if(field_size_contraint==T){field_size_proc <- projectRaster(field_size_proc, mask_raster_to_polygon(irrigated2[[1]], st_as_sfc(st_bbox(clusters_voronoi))), method = "bilinear") ; m <- field_size_proc; m[m > 29] <- NA; field_size_proc <- mask(field_size_proc, m); irrigated2 <- future_lapply(irrigated2, function(X){return(mask_raster_to_polygon(X, st_as_sfc(st_bbox(clusters_voronoi))))}, future.seed=TRUE); for (i in 1:length(irrigated2)){crs(irrigated2[[i]]) <- crs(field_size_proc)}; field_size_proc <- projectRaster(field_size_proc,irrigated2[[1]]); irrigated2 <- future_lapply(irrigated2, function(X){mask(X, field_size_proc)}, future.seed=TRUE)}
+
+if(buffers_cropland_distance==T){clusters_buffers_cropland_distance <- projectRaster(clusters_buffers_cropland_distance,irrigated2[[1]], method = "ngb"); irrigated2 <- future_lapply(irrigated2, function(X){mask(X, clusters_buffers_cropland_distance)}, future.seed=TRUE)}
+
+irrigated2 <- split(irrigated2,  rep(tolower(unlist(qdapRegex::ex_between(irrigated, "watercrop/", "/20"))), each=12))
+
+irrigated <- lapply(irrigated2, stack)
+
+names(irrigated) <- c("barl", "cass", "coco", "cott", "grou", "maiz", "pmil", "smil", "oilp", "pota", "rape", "rice", "sorg", "soyb", "sugb", "sugc", "sunf", "whea", "yams")
+
+#
+
+clusters_voronoi$area <- as.numeric(st_area(clusters_voronoi)) * 0.0001 # in hectares
+
+# extract total bluewater demand in each cluster
+
+files = list.files(path = paste0(input_folder, "spam_folder/spam2017v2r1_ssa_harv_area.geotiff") , pattern = 'I.tif', full.names = T)
+nomi <- tolower(unlist(qdapRegex::ex_between(files, "SSA_H_", "_I.tif")))
+files <- future_lapply(files, raster, future.seed=TRUE)
+files <- stack(files)
+names(files) <- nomi
+files <- raster::subset(files, names(irrigated))
+
+# convert crop water need to actualy water need by applying irrigation efficiency factors specific to each crop
+
+crops_efficiency_irr <- crops[crops$crop %in% names(files),]
+crops_efficiency_irr <- crops_efficiency_irr[order(crops_efficiency_irr$crop),]
+
+gc()
+
+# mm to m3 -> 1 mm supplies 0.001 m3 per m^2 of soil
+
+files <- mask_raster_to_polygon(files, st_as_sfc(st_bbox(clusters_voronoi)))
+files <- stack(files)
+
+irrigated <- future_lapply(1:nlayers(files), function(X) {stack(irrigated[[X]] * (files[[X]] / crops_efficiency_irr$eta_irr[X]) * 10)}, future.seed=TRUE)
+
+# sum by month and year
+
+irrigated_sum <- list()
+
+for (timestep in planning_year[-length(planning_year)]){
+  for (m in 1:12){
+    
+    irrigated_sum[[as.character(timestep)]][[m]] <- do.call("sum", c(future_lapply(1:nlayers(files), function(X){irrigated[[X]][[((match(timestep, planning_year) - 1) * 12) + m]]}, future.seed=TRUE), na.rm = TRUE))
+    
+  }}
+
+irrigated_sum[[5]] <- irrigated_sum[[4]]; names(irrigated_sum)[5] <- as.character(as.numeric(names(irrigated_sum)[4])+ 10) #add 2060
+
+irrigated <- irrigated_sum
 
 
 #########
 
 for (timestep in planning_year){
 
-  markup <- stack(find_it(paste0("markup_", ifelse(scenarios$rcp[scenario]=="rcp60", 585, 245), ".nc")))[[ifelse(timestep==2020, 1, ifelse(timestep==2030, 10, ifelse(timestep==2040, 20, 20)))]]
+  outs <- future_lapply(1:12, function(i){  exact_extract(rainfed[[match(timestep, planning_year)]][[i]], clusters_voronoi, "sum")}, future.seed = TRUE)
   
-  clusters_voronoi$markup <- exact_extract(brick(markup), clusters_voronoi, "median")
-  clusters_voronoi$markup <- ifelse(clusters_voronoi$markup>1, 1, clusters_voronoi$markup)
-  clusters_voronoi$markup <- ifelse(is.na(clusters_voronoi$markup), mean(clusters_voronoi$markup, na.rm=T), clusters_voronoi$markup)
-  
-  outs <- future_lapply(1:12, function(i){  exact_extract(rainfed[[i]], clusters_voronoi, "sum") * (1 + clusters_voronoi$markup) * scenarios$irrigated_cropland_share_target[scenario] * demand_growth_weights[match(timestep, planning_year)]}, future.seed = TRUE)
+  outs2 <- future_lapply(1:12, function(i){  exact_extract(irrigated[[match(timestep, planning_year)]][[i]], clusters_voronoi, "sum")}, future.seed = TRUE)
 
   for (i in 1:12){
   
-  clusters_voronoi[paste0('monthly_IRREQ' , "_" , as.character(i), "_", timestep)] <- outs[[i]]
+  clusters_voronoi[paste0('monthly_IRREQ' , "_" , as.character(i), "_", timestep)] <- outs[[i]] + outs2[[i]]
   
 }
   
