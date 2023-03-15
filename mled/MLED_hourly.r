@@ -1,13 +1,13 @@
 # MLED - Multi-sectoral Latent Electricity Demand assessment platform
 # v0.2 (LEAP_RE)
-# 23/01/2023
+# 09/03/2023
 
 ####
 # system parameters
 
-setwd("./RE4AFAGRI_platform/mled") # path of the cloned M-LED GitHub repository
+setwd("C:/Users/falchetta/OneDrive - IIASA/IIASA_official_RE4AFAGRI_platform/mled") # path of the cloned M-LED GitHub repository
 
-db_folder = 'G:/My Drive/MLED_database' # path to (or where to download) the M-LED database
+db_folder = 'F:/Il mio Drive/MLED_database' # path to (or where to download) the M-LED database
 
 email<- "giacomo.falchetta@gmail.com" # NB: need to have previously enabled it to use Google Earth Engine via https://signup.earthengine.google.com
 
@@ -20,7 +20,7 @@ allowparallel=T # allows paralellised processing. considerably shortens run time
 
 countrystudy <- "zambia" # country to run M-LED on
 
-exclude_countries <- paste("rwanda", "nigeria", "zimbabwe", sep="|") # countries in the database files to exclude from the current run
+exclude_countries <- paste(gsub("\\.r", "",gsub("scenario_", "", list.files(path="country_scenarios", pattern="scenario_"))), collapse ="|") # countries in the database files to exclude from the current run 
 
 planning_year = seq(2020, 2060, 10) # time steps and horizon year to make projections
 

@@ -6,7 +6,7 @@
 clusters_buffers_cropland_distance <- fasterize(clusters_buffers_cropland_distance, field_size)
 
 rainfed2 <- mixedsort(rainfed)
-rainfed2 <- future_lapply(rainfed2, function(X){r <- stack(X); crs(r) <- "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs"; extent(r) <- c(-180, 180, -90, 90); r <- projectRaster(r,  raster(yg_potential[[1]])); r}, future.seed=TRUE)
+rainfed2 <- future_lapply(rainfed2, function(X){r <- t(stack(X)); crs(r) <- "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs"; extent(r) <- c(-180, 180, -90, 90); r}, future.seed=TRUE)
 
 rainfed2 <- stack(rainfed2)
 rainfed2 <-  mask_raster_to_polygon(rainfed2, st_as_sfc(st_bbox(clusters_voronoi)))

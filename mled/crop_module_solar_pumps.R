@@ -76,7 +76,7 @@ rainfed <- rainfed_sum
 # do the same for already irrigated cropland
 
 irrigated2 <- mixedsort(irrigated)
-irrigated2 <- future_lapply(irrigated2, function(X){r <- stack(X); crs(r) <- "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs"; extent(r) <- c(-180, 180, -90, 90); r <- projectRaster(r,  raster(yg_potential[[1]])); r}, future.seed=TRUE)
+irrigated2 <- future_lapply(irrigated2, function(X){r <- t(stack(X)); crs(r) <- "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs"; extent(r) <- c(-180, 180, -90, 90); r}, future.seed=TRUE)
 
 irrigated2 <- stack(irrigated2)
 irrigated2 <-  mask_raster_to_polygon(irrigated2, st_as_sfc(st_bbox(clusters_voronoi)))
