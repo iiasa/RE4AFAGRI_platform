@@ -26,8 +26,16 @@ irr_acc = filter(irr_acc, `Variable Name` =="% of area equipped for irrigation p
 irr_acc_trend = irr_acc$Value
 irr_acc_y = irr_acc$Year
 
+if(length(irr_acc_y)>0){
+
 irr_acc_modirr <- glm(irr_acc_trend/100 ~ irr_acc_y + I(irr_acc_y^2), family = "binomial")
 
 irr_acc_pred = predict(irr_acc_modirr, data.frame(irr_acc_y=planning_year), type="response")
 
 irrigated_cropland_share_target[1] <- as.numeric(last(irr_acc_pred))
+
+} else{
+  
+  irrigated_cropland_share_target[1] <- 0
+  
+}

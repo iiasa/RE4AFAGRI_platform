@@ -189,9 +189,9 @@ yg_potential <- list.files(paste0(input_folder, "watercrop"), full.names = T, pa
 #####################
 
 # Country and provinces shapefiles
-gadm0 = st_as_sf(getData(name="GADM", country=countryiso3, level=0))
-gadm1 = st_as_sf(getData(name="GADM", country=countryiso3, level=1))
-gadm2 = st_as_sf(getData(name="GADM", country=countryiso3, level=2))
+gadm0 = st_as_sf(geodata::gadm(country=countryiso3, level=0, path=getwd()))
+gadm1 = st_as_sf(geodata::gadm(country=countryiso3, level=1, path=getwd()))
+gadm2 = st_as_sf(geodata::gadm(country=countryiso3, level=2, path=getwd()))
 
 # Define extent of country analysed
 ext = extent(gadm0)

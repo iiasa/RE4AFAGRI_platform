@@ -32,7 +32,7 @@ for (i in list_cols[1:((last(planning_year)-2020))]){
 
   j = j+1
   
-  out[[j]] <- fasterize(population_fut_gr, template, i, "first")
+  out[[j]] <- fasterize(st_collection_extract(population_fut_gr, "POLYGON"), template, i, "first")
   
 }
 

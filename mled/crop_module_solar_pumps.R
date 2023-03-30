@@ -9,12 +9,15 @@ field_size <- raster(find_it("field_size_10_40_cropland.img"))
 field_size <- mask_raster_to_polygon(field_size, st_as_sfc(st_bbox(clusters)))
 gc()
 
-clusters_voronoi <- read_sf(paste0(input_country_specific, "clusters_voronoi.gpkg"))
+clusters_voronoi <- read_sf(paste0(input_country_specific,  paste0("clusters_voronoi_", countrystudy, ".gpkg")))
 
 ####
 
-rainfed2 <- mixedsort(rainfed)
-rainfed2 <- future_lapply(rainfed2, function(X){r <- stack(X); crs(r) <- "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs"; extent(r) <- c(-180, 180, -90, 90); r <- projectRaster(r,  raster(yg_potential[[1]])); r}, future.seed=TRUE)
+rainfed2 <- str_replace(rainfed, str_extract(rainfed, "[^_]+(?=\\.tif$)"), as.character(match(str_extract(rainfed, "[^_]+(?=\\.tif$)"), month.name)))
+rainfed2 <- mixedsort(rainfed2)
+rainfed2 <- str_replace(rainfed2, paste0(str_extract(rainfed2, "[^_]+(?=\\.tif$)"), ".tif"), paste0(month.name[as.numeric(str_extract(rainfed2, "[^_]+(?=\\.tif$)"))], ".tif"))
+
+rainfed2 <- future_lapply(rainfed2, raster, future.seed=TRUE)
 
 rainfed2 <- stack(rainfed2)
 rainfed2 <-  mask_raster_to_polygon(rainfed2, st_as_sfc(st_bbox(clusters_voronoi)))
@@ -24,7 +27,7 @@ rainfed2 <- as.list(rainfed2)
 
 if(field_size_contraint==T){field_size <- projectRaster(field_size, mask_raster_to_polygon(rainfed2[[1]], st_as_sfc(st_bbox(clusters_voronoi))), method = "bilinear") ; m <- field_size; m[m > 29] <- NA; field_size <- mask(field_size, m); rainfed2 <- future_lapply(rainfed2, function(X){return(mask_raster_to_polygon(X, st_as_sfc(st_bbox(clusters_voronoi))))}, future.seed=TRUE); for (i in 1:length(rainfed2)){crs(rainfed2[[i]]) <- crs(field_size)}; field_size <- projectRaster(field_size,rainfed2[[1]]); rainfed2 <- future_lapply(rainfed2, function(X){mask(X, field_size)}, future.seed=TRUE)}
 
-rainfed2 <- split(rainfed2,  rep(tolower(unlist(qdapRegex::ex_between(rainfed, "watercrop/", "/20"))), each=12))
+rainfed2 <- split(rainfed2,  tolower(unlist(qdapRegex::ex_between(rainfed, "watercrop/", "/20"))))
 
 rainfed <- lapply(rainfed2, stack)
 
@@ -55,8 +58,11 @@ gc()
 files <- mask_raster_to_polygon(files, st_as_sfc(st_bbox(clusters_voronoi)))
 files <- stack(files)
 
-rainfed <- future_lapply(1:nlayers(files), function(X) {stack(rainfed[[X]] * (files[[X]] / crops_efficiency_irr$eta_irr[X]) * 10)}, future.seed=TRUE)
-
+if (watercrop_unit =="mm"){
+  rainfed <- future_lapply(1:nlayers(files), function(X) {stack(rainfed[[X]] * (files[[X]] / crops_efficiency_irr$eta_irr[X]) * 10)}, future.seed=TRUE)
+} else{ 
+  rainfed <- future_lapply(1:nlayers(files), function(X) {stack(rainfed[[X]] / crops_efficiency_irr$eta_irr[X])}, future.seed=TRUE)
+}
 # sum by month and year
 
 rainfed_sum <- list()
@@ -75,10 +81,16 @@ rainfed <- rainfed_sum
 ####
 # do the same for already irrigated cropland
 
-irrigated2 <- mixedsort(irrigated)
-irrigated2 <- future_lapply(irrigated2, function(X){r <- t(stack(X)); crs(r) <- "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs"; extent(r) <- c(-180, 180, -90, 90); r}, future.seed=TRUE)
+irrigated <- list.files(paste0(input_folder, "watercrop"), full.names = T, pattern = "waterwith", recursive=T)
+
+irrigated2 <- str_replace(irrigated, str_extract(irrigated, "[^_]+(?=\\.tif$)"), as.character(match(str_extract(irrigated, "[^_]+(?=\\.tif$)"), month.name)))
+irrigated2 <- mixedsort(irrigated2)
+irrigated2 <- str_replace(irrigated2, paste0(str_extract(irrigated2, "[^_]+(?=\\.tif$)"), ".tif"), paste0(month.name[as.numeric(str_extract(irrigated2, "[^_]+(?=\\.tif$)"))], ".tif"))
+
+irrigated2 <- future_lapply(irrigated2, raster, future.seed=TRUE)
 
 irrigated2 <- stack(irrigated2)
+
 irrigated2 <-  mask_raster_to_polygon(irrigated2, st_as_sfc(st_bbox(clusters_voronoi)))
 
 crs(irrigated2) <- as.character(CRS("+init=epsg:4236"))
@@ -86,9 +98,9 @@ irrigated2 <- as.list(irrigated2)
 
 field_size_proc <-  mask_raster_to_polygon(field_size, st_as_sfc(st_bbox(clusters_voronoi)))
 
-if(field_size_contraint==T){field_size <- projectRaster(field_size, mask_raster_to_polygon(rainfed2[[1]], st_as_sfc(st_bbox(clusters_voronoi))), method = "bilinear") ; m <- field_size; m[m > 29] <- NA; field_size <- mask(field_size, m); rainfed2 <- future_lapply(rainfed2, function(X){return(mask_raster_to_polygon(X, st_as_sfc(st_bbox(clusters_voronoi))))}, future.seed=TRUE); for (i in 1:length(rainfed2)){crs(rainfed2[[i]]) <- crs(field_size)}; field_size <- projectRaster(field_size,rainfed2[[1]]); rainfed2 <- future_lapply(rainfed2, function(X){mask(X, field_size)}, future.seed=TRUE)}
+if(field_size_contraint==T){field_size <- projectRaster(field_size, mask_raster_to_polygon(irrigated2[[1]], st_as_sfc(st_bbox(clusters_voronoi))), method = "bilinear") ; m <- field_size; m[m > 29] <- NA; field_size <- mask(field_size, m); irrigated2 <- future_lapply(irrigated2, function(X){return(mask_raster_to_polygon(X, st_as_sfc(st_bbox(clusters_voronoi))))}, future.seed=TRUE); for (i in 1:length(irrigated2)){crs(irrigated2[[i]]) <- crs(field_size)}; field_size <- projectRaster(field_size,irrigated2[[1]]); irrigated2 <- future_lapply(irrigated2, function(X){mask(X, field_size)}, future.seed=TRUE)}
 
-irrigated2 <- split(irrigated2,  rep(tolower(unlist(qdapRegex::ex_between(irrigated, "watercrop/", "/20"))), each=12))
+irrigated2 <- split(irrigated2,  tolower(unlist(qdapRegex::ex_between(irrigated, "watercrop/", "/20"))))
 
 irrigated <- lapply(irrigated2, stack)
 
@@ -119,7 +131,11 @@ gc()
 files <- mask_raster_to_polygon(files, st_as_sfc(st_bbox(clusters_voronoi)))
 files <- stack(files)
 
-irrigated <- future_lapply(1:nlayers(files), function(X) {stack(irrigated[[X]] * (files[[X]] / crops_efficiency_irr$eta_irr[X]) * 10)}, future.seed=TRUE)
+if (watercrop_unit =="mm"){
+  irrigated <- future_lapply(1:nlayers(files), function(X) {stack(irrigated[[X]] * (files[[X]] / crops_efficiency_irr$eta_irr[X]) * 10)}, future.seed=TRUE)
+} else{ 
+  irrigated <- future_lapply(1:nlayers(files), function(X) {stack(irrigated[[X]] / crops_efficiency_irr$eta_irr[X])}, future.seed=TRUE)
+}
 
 # sum by month and year
 
@@ -221,9 +237,8 @@ clusters$area_voronoi_ha <- NULL
 
 clusters_voronoi_data <- clusters_voronoi
 clusters_voronoi_data$geom <- NULL
-clusters_voronoi_data <- dplyr::select(clusters_voronoi_data, starts_with("monthly") &  !contains("GQ"), starts_with("yearly") &  !contains("GQ"), area, maxflow)
+clusters_voronoi_data <- dplyr::select(clusters_voronoi_data, id, starts_with("monthly") &  !contains("GQ"), starts_with("yearly") &  !contains("GQ"), area, maxflow)
 clusters_voronoi_data <- dplyr::rename(clusters_voronoi_data, area_voronoi_ha = area)
-clusters_voronoi_data$id <- clusters_voronoi$id
 
 ################
 

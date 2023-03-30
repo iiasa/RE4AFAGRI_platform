@@ -10,42 +10,40 @@
 
 geom <- ee$Geometry$Rectangle(c(as.vector(extent(clusters))[1], as.vector(extent(clusters))[3], as.vector(extent(clusters))[2], as.vector(extent(clusters))[4]))
 
-# srtm = ee$Image('USGS/SRTMGL1_003');
-# slope = ee$Terrain$slope(srtm);
-# 
-# img_01 <- ee_as_raster(
-#   image = slope,
-#   via = "drive",
-#   region = geom,
-#   scale = 500
-# )
+srtm = ee$Image('USGS/SRTMGL1_003');
+slope = ee$Terrain$slope(srtm);
 
-img_01 <- raster(paste0(input_folder, "slope.tif"))
+img_01 <- ee_as_raster(
+  image = slope,
+  via = "drive",
+  region = geom,
+  scale = 500
+)
 
-# i = ee$FeatureCollection("WWF/HydroSHEDS/v1/FreeFlowingRivers") #$filter(ee$Filter$lte('RIV_ORD', 7))
-# i = i$map(function(f) {
-#   f$buffer(20, 10);
-# });
-# 
-# distance = i$distance(searchRadius = 50000, maxError = 25)$clip(geom)
-# 
-# img_02 <- ee_as_raster(
-#   image = distance,
-#   via = "drive",
-#   region = geom,
-#   scale = 500
-# )
+#img_01 <- raster(paste0(input_folder, "slope.tif"))
 
-img_02 <- raster(paste0(input_folder, "groundwater_distance.tif"))
+i = ee$FeatureCollection("WWF/HydroSHEDS/v1/FreeFlowingRivers") #$filter(ee$Filter$lte('RIV_ORD', 7))
+i = i$map(function(f) {
+  f$buffer(20, 10);
+});
 
-# library(lwgeom)
-#
-# world_all_africa <- filter(rnaturalearth::ne_countries(scale = "medium", returnclass = "sf"), region_un=="Africa") %>% st_transform(3395) %>%
-#   st_snap_to_grid(size = 1000) %>%
-#   st_make_valid() %>% st_union() %>% st_transform(4326) %>% st_as_sf()
-#
-#
-# img_02 <- mask_raster_to_polygon(img_02, clusters)
+distance = i$distance(searchRadius = 50000, maxError = 25)$clip(geom)
+
+img_02 <- ee_as_raster(
+  image = distance,
+  via = "drive",
+  region = geom,
+  scale = 500
+)
+
+#img_02 <- raster(paste0(input_folder, "groundwater_distance.tif"))
+
+world_all_africa <- filter(rnaturalearth::ne_countries(scale = "medium", returnclass = "sf"), region_un=="Africa") %>% st_transform(3395) %>%
+  st_snap_to_grid(size = 1000) %>%
+  st_make_valid() %>% st_union() %>% st_transform(4326) %>% st_as_sf()
+
+
+img_02 <- mask_raster_to_polygon(img_02, clusters)
 #
 # writeRaster(img_02,"D:/OneDrive - IIASA/Current papers/Groundwater_economic_feasibility/Groundwater-Cost/Groundwater-Cost/data/noid_image.tif", overwrite=T)
 
@@ -248,21 +246,21 @@ clusters[paste0('er_kwh_tt', "_", timestep)] <- as.numeric(rowSums(aa[,grepl("^e
 
 # # simulate daily profile
 
-if (output_hourly_resolution==T){
-
-for (k in 1:12){
-
-  print(k)
-
-  for (i in 1:24){
-
-    aa <- clusters
-    aa$geometry=NULL
-
-    clusters[paste0('er_kwh_' , as.character(k) , "_" , as.character(i), "_", timestep)] <- (aa[paste0('er_kwh', as.character(k), "_", timestep)]/30)*load_curve_irr[i]
-  }}
-
-}
+# if (output_hourly_resolution==T){
+# 
+# for (k in 1:12){
+# 
+#   print(k)
+# 
+#   for (i in 1:24){
+# 
+#     aa <- clusters
+#     aa$geometry=NULL
+# 
+#     clusters[paste0('er_kwh_' , as.character(k) , "_" , as.character(i), "_", timestep)] <- (aa[paste0('er_kwh', as.character(k), "_", timestep)]/30)*load_curve_irr[i]
+#   }}
+# 
+# }
 
 }
 

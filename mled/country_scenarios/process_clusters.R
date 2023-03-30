@@ -290,7 +290,7 @@ write_sf(clusters, "nigeria/clusters_Nigeria_GRID3_above5population.gpkg")
 rm(list=ls())
 template <- read_sf("F:/Il mio Drive/MLED_database/input_folder/country_studies/zambia/mled_inputs/Zambia_clusters/clusters_Zambia_GRID3_above5population.gpkg")
 
-clusters <- read_sf("kenya/GRID3_Kenya_Settlement_Extents_2C_Version_01.01.geojson")
+clusters <- read_sf("kenya/GRID3_Kenya_Settlement_Extents%2C_Version_01.01..shp")
 clusters <- dplyr::select(clusters, colnames(clusters)[colnames(clusters) %in% colnames(template)])
 
 #"type_1"   ??

@@ -120,12 +120,4 @@ clusters[paste0('er_sch_tt_', timestep)] = out
 }
 
 
-
-if (output_hourly_resolution==F){
-  
-  ### remove the hourly fields
-  
-}
-
-
 #save.image(paste0(processed_folder, "clusters_healthedu.Rdata"))

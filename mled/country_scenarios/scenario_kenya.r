@@ -189,16 +189,16 @@ yg_potential <- list.files(paste0(input_folder, "watercrop"), full.names = T, pa
 #####################
 
 # Country and provinces shapefiles
-gadm0 = st_as_sf(getData(name="GADM", country=countryiso3, level=0))
-gadm1 = st_as_sf(getData(name="GADM", country=countryiso3, level=1))
-gadm2 = st_as_sf(getData(name="GADM", country=countryiso3, level=2))
+gadm0 = st_as_sf(geodata::gadm(country=countryiso3, level=0, path=getwd()))
+gadm1 = st_as_sf(geodata::gadm(country=countryiso3, level=1, path=getwd()))
+gadm2 = st_as_sf(geodata::gadm(country=countryiso3, level=2, path=getwd()))
 
 # Define extent of country analysed
 ext = extent(gadm0)
 
 #
 
-clusters <- read_sf(find_it("GRID3_Kenya_Settlement_Extents_2C_Version_01.01.geojson"), crs=4326)
+clusters <- read_sf(find_it("clusters_Kenya_GRID3_above5population.gpkg"), crs=4326)
 clusters <- filter(clusters, pop_start_worldpop>10)
 
 clusters_centroids <- st_centroid(clusters)
@@ -206,7 +206,7 @@ clusters_buffers_cropland_distance <- st_transform(clusters_centroids, 3395) %>%
 
 #clusters$elrate <- clusters$elecpop_start_worldpop/clusters$pop_start_worldpop
 
-clusters_nest <- read_sf(find_it("Kenya_NEST_delineation.shp"))
+clusters_nest <- gadm1 #read_sf(find_it("Kenya_NEST_delineation.shp"))
 
 #####################
 # Current gridded data
@@ -338,10 +338,10 @@ dhs <- empl_wealth <- filter(dhs, dhs$ISO==countrycode(countryiso3, "iso3c", "is
 # Classifying schools and healthcare facilities
 health = read_sf(find_it('health.geojson'))
 
-health$Tier <- ifelse(health$SubType=="Health Post" | health$SubType=="Rural Health Post" | health$SubType=="Health Compound" | health$SubType=="Doctor Office" | health$SubType=="Health Office", 1, NA)
-health$Tier <- ifelse(health$SubType=="Health Center" | health$SubType=="Rural Health Center" | health$SubType=="Health Compound", 2, health$Tier)
-health$Tier <- ifelse(health$SubType=="Clinic"  | health$SubType=="Clinic Well" | health$SubType=="Under Five Clinic" | health$SubType=="Health Facility" | health$SubType=="Hospital Affiliated Health Center", 3, health$Tier)
-health$Tier <- ifelse(health$SubType=="Hospital" | health$SubType=="Hospital Well", 4, health$Tier)
+health$Tier <- ifelse(health$Type=="Dispensary" | health$Type=="Nursing Home" | health$Type=="VCT Centre (Stand-Alone)" | health$Type=="Laboratory (Stand-alone)" | health$Type=="Maternity Home" | health$Type=="Health Programme" | health$Type=="Eye Centre" | health$Type=="Eye Clinic" | health$Type=="Health Project" | health$Type=="Training Institution in Health (Stand-alone)" | health$Type=="Rural Health Training Centre" | health$Type=="Funeral Home (Stand-alone)", 1, NA)
+health$Tier <- ifelse(health$Type=="Medical Clinic" | health$Type=="Health Centre" | health$Type=="Medical Centre"| health$Type=="Dental Clinic" | health$Type=="Not in List" | health$Type=="Radiology Unit" | health$Type=="District Health Office" | health$Type=="Regional Blood Transfusion Centre" | health$Type=="Blood Bank", 2, health$Tier)
+health$Tier <- ifelse(health$Type=="Other Hospital" | health$Type=="Sub-District Hospital" | health$Type=="District Hospital", 3, health$Tier)
+health$Tier <- ifelse(health$Type=="Provincial General Hospital" | health$Type=="National Referral Hospital", 4, health$Tier)
 
 #Import primaryschools
 primaryschools = read_sf(find_it('schools.geojson'))

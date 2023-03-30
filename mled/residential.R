@@ -154,7 +154,7 @@ aa$geometry=NULL
 
 clusters$HHs = ifelse(pull(aa[paste0("isurban_future_", timestep)])>0, clusters$population_future/urban_hh_size, clusters$population_future/rural_hh_size)
 
-clusters[paste0('PerHHD_ely_tt' , "_", timestep)] <- clusters[paste0('PerHHD_ely' , "_", timestep)] * clusters$HHs * ifelse(latent_d_tot == T, 1, pmax((scenarios$el_access_share_target[scenario]  - clusters$elrate)))
+clusters[paste0('PerHHD_ely_tt' , "_", timestep)] <- pull(aa[paste0('PerHHD_ely' , "_", timestep)]) * clusters$HHs * ifelse(latent_d_tot == T, 1, pmax((scenarios$el_access_share_target[scenario]  - clusters$elrate)))
 
 clusters$acc_pop_t1_new =  (clusters$HHs * as.numeric(pull(aa[paste0("predicted_tier_", timestep)])==0) + clusters$HHs * as.numeric(pull(aa[paste0("predicted_tier_", timestep)])==1)) * ifelse(latent_d_tot == T, 1, pmax((scenarios$el_access_share_target[scenario]  - clusters$elrate) * demand_growth_weights[match(timestep, planning_year)], 0))
 
@@ -243,14 +243,9 @@ for (timestep in planning_year){
 
 ###############################################
 
+clusters <- dplyr::select(clusters, -colnames(clusters)[grepl("PerHHD", colnames(clusters)) & !grepl("tt", colnames(clusters))])
+  
 
-if (output_hourly_resolution==F){
-  
-  ### remove the hourly fields
-  
-  clusters <- dplyr::select(clusters, -colnames(clusters)[grepl("PerHHD", colnames(clusters)) & !grepl("tt", colnames(clusters))])
-  
- }
 
 
 clusters <- st_as_sf(clusters)

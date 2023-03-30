@@ -12,6 +12,8 @@ clusters$traveltime = exact_extract(traveltime, clusters, 'mean')
 # calculate employment rate in each cluster
 empl_wealth <- dplyr::select(empl_wealth, (starts_with("EM") | starts_with("id")))
 
+if(nrow(empl_wealth)>0){
+
 empl_wealth_1 <- fasterize::fasterize(empl_wealth, traveltime, "EMEMPLWEMC", "first")
 empl_wealth_2 <- fasterize::fasterize(empl_wealth, traveltime, "EMEMPLMEMC", "first")
 
@@ -23,6 +25,11 @@ clusters$EMEMPLMEMC <- ifelse(clusters$EMEMPLMEMC>1, 1, clusters$EMEMPLMEMC)
 
 # run PCA
 clusters$employment = (clusters$EMEMPLMEMC + clusters$EMEMPLWEMC)/2
+
+} else{
+  
+  clusters$employment = 1
+}
 
 data_pca = dplyr::select(clusters, employment, popdens_future, traveltime)
 data_pca$geom=NULL

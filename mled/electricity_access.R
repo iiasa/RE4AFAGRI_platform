@@ -87,6 +87,7 @@ if (paste0("ely_cons_1_km_", countrystudy, ".tif") %in% all_input_files_basename
   rwi <- rwi + abs(min(raster::values(rwi), na.rm=T))
   
   el_access <- GHSSMOD2015_lit
+  el_access <- projectRaster(el_access, pop)
   el_access <- crop(el_access, extent(gadm0))
   raster::values(el_access) <- ifelse(is.na(raster::values(el_access)), 0, 1)
   el_access <- mask_raster_to_polygon(el_access, gadm0)
@@ -115,6 +116,8 @@ if (paste0("ely_cons_1_km_", countrystudy, ".tif") %in% all_input_files_basename
   resources <- fasterize::fasterize(prio, pop, field="resources", fun="first")
   resources <- resources>0
   resources <- mask_raster_to_polygon(resources, gadm0)
+  
+  values(resources) <- ifelse(sum(is.na(values(resources))) == length(resources), 0, values(resources))
   
   # resources (PRIO)
   resources <- raster::distance(projectRaster(resources, crs="+proj=merc +lon_0=0 +k=1 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs"))
@@ -193,14 +196,14 @@ if (paste0("ely_cons_1_km_", countrystudy, ".tif") %in% all_input_files_basename
   max_iter <- 5 # Maximum number of iterations
   p_train <- 0.25 # Subsampling of the initial data
   
-  res_rf <- dissever(
-    coarse = output, # stack of fine resolution covariates
-    fine = fine, # coarse resolution raster
-    method = "rf", # regression method used for disseveration
-    p = p_train, # proportion of pixels sampled for training regression model
-    min_iter = min_iter, # minimum iterations
-    max_iter = max_iter # maximum iterations
-  )
+  # res_rf <- dissever(
+  #   coarse = output, # stack of fine resolution covariates
+  #   fine = fine, # coarse resolution raster
+  #   method = "rf", # regression method used for disseveration
+  #   p = p_train, # proportion of pixels sampled for training regression model
+  #   min_iter = min_iter, # minimum iterations
+  #   max_iter = max_iter # maximum iterations
+  # )
   
   res_gam <- dissever(
     coarse = output, # stack of fine resolution covariates
@@ -234,7 +237,7 @@ if (paste0("ely_cons_1_km_", countrystudy, ".tif") %in% all_input_files_basename
   # plot(res_lm, type = 'perf', main = "Linear Model")
   # dev.off()
   
-  preds <- extractPrediction(list(res_rf$fit, res_gam$fit, res_lm$fit))
+  preds <- extractPrediction(list(res_gam$fit, res_lm$fit))
   # plotObsVsPred(preds)
   # dev.off()
   
@@ -249,9 +252,9 @@ if (paste0("ely_cons_1_km_", countrystudy, ".tif") %in% all_input_files_basename
   w <- perf$rsq / sum(perf$rsq)
   
   # Make stack of weighted predictions and compute sum
-  l_maps <- list(res_gam$map, res_lm$map, res_rf$map)
+  l_maps <- list(res_gam$map, res_lm$map)
   
-  ens <- lapply(1:3, function(x) l_maps[[x]] * w[x]) %>%
+  ens <- lapply(1:2, function(x) l_maps[[x]] * w[x]) %>%
     stack %>%
     sum
   

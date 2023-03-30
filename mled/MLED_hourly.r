@@ -1,6 +1,6 @@
 # MLED - Multi-sectoral Latent Electricity Demand assessment platform
 # v0.2 (LEAP_RE)
-# 09/03/2023
+# 30/03/2023
 
 ####
 # system parameters
@@ -20,7 +20,7 @@ allowparallel=T # allows paralellised processing. considerably shortens run time
 
 countrystudy <- "zambia" # country to run M-LED on
 
-exclude_countries <- paste(gsub("\\.r", "",gsub("scenario_", "", list.files(path="country_scenarios", pattern="scenario_"))), collapse ="|") # countries in the database files to exclude from the current run 
+exclude_countries <- paste(gsub("\\.r", "",gsub("scenario_", "", basename(list.files(pattern="scenario_", recursive = T))))[! gsub("\\.r", "",gsub("scenario_", "", basename(list.files(pattern="scenario_", recursive = T)))) %in% c(countrystudy)], collapse ="|") # countries in the database files to exclude from the current run 
 
 planning_year = seq(2020, 2060, 10) # time steps and horizon year to make projections
 
@@ -29,7 +29,7 @@ planning_year = seq(2020, 2060, 10) # time steps and horizon year to make projec
 
 latent_d_tot <- T # estimate evolution of demand given current (and projected) electricity access rates (if FALSE) OR total LATENT DEMAND (DEMAND If EVERYBODY HAD SUDDEN ACCESS TO ELECTRICITY, if TRUE)
 
-output_hourly_resolution <- F  # produce hourly load curves for each month. if false, produce just monthly and yearly totals. ############ NB: bug-fixing in progress, please leave to F
+watercrop_unit  <- "m3" # unit of water demand for irrigation, from Watercrop
 
 no_productive_demand_in_small_clusters <- F # remove any type of productive use of energy in clusters below the "pop_threshold_productive_loads" parameter value
 
@@ -57,8 +57,8 @@ source("backend.R")
 ssp <- c("ssp2", "ssp2", "ssp2") # list SSP scenarios (socio-economic development) to run
 rcp <- c("rcp60", "rcp60", "rcp26") # list RCP scenarios (climate change) to run
 
-source(textConnection(readLines(paste0("scenario_", countrystudy, ".R"))[17]))
-source(textConnection(readLines(paste0("scenario_", countrystudy, ".R"))[30]))
+source(textConnection(readLines(paste0("country_scenarios/scenario_", countrystudy, ".R"))[17]))
+source(textConnection(readLines(paste0("country_scenarios/scenario_", countrystudy, ".R"))[30]))
 
 el_access_share_target <- c(national_official_elrate, 1, 1) # target share of population with electricity in the last planning year
 irrigated_cropland_share_target <- c(cropland_equipped_irrigation, .5, .75)  # target share of rainfed cropland irrigation water demand met in the last planning year
@@ -87,7 +87,7 @@ lapply(1:nrow(scenarios), function(scenario){
   
   # Load the country and scenario-specific data
   write(paste0(timestamp(), "starting scenario module"), "log.txt")
-  source(paste0("scenario_", countrystudy, ".R"), local=TRUE)
+  source(paste0("country_scenarios/scenario_", countrystudy, ".R"), local=TRUE)
   
   # Determines how demand grows across time steps. Calibrated with GDP per capita growth rates
   write(paste0(timestamp(), "starting calibration module"), "log.txt", append=T)
@@ -242,7 +242,7 @@ lapply(1:nrow(scenarios), function(scenario){
   gadm2_output <- gadm2
   
   gadm2_output$id <- 1:nrow(gadm2_output)
-  id <- fasterize(gadm2_output, diesel_price, "id")
+  id <- fasterize(st_collection_extract(gadm2_output, "POLYGON"), diesel_price, "id")
   
   clusters_onsset <- dplyr::select(clusters, contains(demand_fields) & !contains("surface"), contains("IRREQ"), starts_with("Y_"), contains("machines"), contains("yg_potential_"), starts_with("A_"), starts_with("yield_"))
   clusters_onsset$id <- exact_extract(id, clusters_onsset, "majority")
