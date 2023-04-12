@@ -182,7 +182,8 @@ fatsg_yearly_need <- 60 * 365
 rainfed <- list.files(paste0(input_folder, "watercrop"), full.names = T, pattern = "watergap", recursive=T)
 irrigated <- list.files(paste0(input_folder, "watercrop"), full.names = T, pattern = "waterwith", recursive=T)
 
-yg_potential <- list.files(paste0(input_folder, "watercrop"), full.names = T, pattern = "percentage", recursive=T)
+yield <- list.files(paste0(input_folder, "watercrop"), full.names = T, pattern = "yield_avg_ton", recursive=T)
+yg_potential <- list.files(paste0(input_folder, "watercrop"), full.names = T, pattern = "yield_avg_closure", recursive=T)
 
 #####################
 # Country-specific data

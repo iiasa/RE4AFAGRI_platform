@@ -1,6 +1,6 @@
 # MLED - Multi-sectoral Latent Electricity Demand assessment platform
 # v0.2 (LEAP_RE)
-# 30/03/2023
+# 12/04/2023
 
 ####
 # system parameters
@@ -18,7 +18,9 @@ allowparallel=T # allows paralellised processing. considerably shortens run time
 ######################
 # country and year
 
-countrystudy <- "zambia" # country to run M-LED on
+for (countrystudy in c("zambia", "rwanda", "zimbabwe", "nigeria", "kenya")){
+
+#countrystudy <- "zambia" # country to run M-LED on
 
 exclude_countries <- paste(gsub("\\.r", "",gsub("scenario_", "", basename(list.files(pattern="scenario_", recursive = T))))[! gsub("\\.r", "",gsub("scenario_", "", basename(list.files(pattern="scenario_", recursive = T)))) %in% c(countrystudy)], collapse ="|") # countries in the database files to exclude from the current run 
 
@@ -38,8 +40,6 @@ buffers_cropland_distance <- T # do not include agricultural loads from cropland
 field_size_contraint <- T # consider only small farmland patches (smallholder farming)
 
 process_already_irrigated_crops <- T # crop processing: include energy demand to process yield in already irrigated land
-
-calculate_yg_potential <- T # also estimate yield growth potential thanks to input of irrigation
 
 groundwater_sustainability_contraint <- F # impose limit on groundwater pumping based on monthly recharge
 
@@ -133,6 +133,10 @@ lapply(1:nrow(scenarios), function(scenario){
   write(paste0(timestamp(), "starting crop processing CA module"), "log.txt", append=T)
   source("crop_processing_catchment_areas.R", local=TRUE)
   
+  # YG potential
+  write(paste0(timestamp(), "starting yield growth module"), "log.txt", append=T)
+  source("calculate_yield_growth_potential.R", local=TRUE)
+  
   write(paste0(timestamp(), "starting crop processing module"), "log.txt", append=T)
   source("crop_processing.R", local=TRUE)
   
@@ -144,12 +148,7 @@ lapply(1:nrow(scenarios), function(scenario){
   write(paste0(timestamp(), "starting cleaner module"), "log.txt", append=T)
   source("cleaner.R", local=TRUE)
   
-  # YG potential
-  write(paste0(timestamp(), "starting yield growth module"), "log.txt", append=T)
-  if(isTRUE(calculate_yg_potential)){
-    source("calculate_yield_growth_potential.R", local=TRUE)
-  }
-  
+
   ####
   
   # Write output for soft-linking into OnSSET and NEST and for online visualisation
@@ -266,3 +265,4 @@ lapply(1:nrow(scenarios), function(scenario){
   return(print("All scenario runs completed"))
   
 })
+}

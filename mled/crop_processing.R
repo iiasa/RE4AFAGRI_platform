@@ -4,77 +4,15 @@
 ##      2) estimates machinery (#, power) requirements at each crop-processing eligible cluster to carry out crop processing and cold storage at each time step and consistently with the share of crop yield to be processed specified in the main M-LED file. N.B. processing machinery considered are listed and can be customised in the "" file.
 ##      3) calculates crop-specific and total electricity demand for crop processing at each time step
 
-# Extract yield 
-# Import all Yield (kg/ha) cropland layers (Default datasets used: MapSPAM)
-# NB: when using MapSPAM use harvested area, which accounts for multiple growing seasons per year)
-files <- list.files(path=paste0(input_folder, "spam_folder/spam2017v2r1_ssa_yield.geotiff"), pattern="R.tif", full.names=T)
-files <- files[grepl(paste(energy_crops[,1], collapse="|") , files, ignore.case =T)]
-
-files2 = list.files(path = paste0(input_folder, "spam_folder/spam2017v2r1_ssa_harv_area.geotiff") , pattern = 'R.tif', full.names = T)
-files2 <- files2[grepl(paste(energy_crops[,1], collapse="|") , files2, ignore.case =T)]
-
-## implement these constraints
-
-files <- stack(lapply(files, function(X)(raster(X))))
-names(files) <- tolower(unlist(qdapRegex::ex_between(names(files), "SSA_Y_", "_R")))
-
-files2 <- stack(lapply(files2, function(X)(raster(X))))
-names(files2) <- tolower(unlist(qdapRegex::ex_between(names(files2), "SSA_H_", "_R")))
-
-for (i in 1:nlayers(files)){
-  crs(files[[i]]) <- as.character(CRS("+init=epsg:4236"))
-}
-
-for (i in 1:nlayers(files2)){
-  crs(files2[[i]]) <- as.character(CRS("+init=epsg:4236"))
-}
-
-files <- mask_raster_to_polygon(files, st_as_sfc(st_bbox(clusters_voronoi)))
-files2 <- mask_raster_to_polygon(files2, st_as_sfc(st_bbox(clusters_voronoi)))
-
-
-# field_size <- raster(find_it("field_size_10_40_cropland.img"))
-# field_size <- mask_raster_to_polygon(field_size, st_as_sfc(st_bbox(clusters)))
-# crs(field_size) <- as.character(CRS("+init=epsg:4236"))
-# 
-# if(field_size_contraint==T){field_size <- projectRaster(field_size, mask_raster_to_polygon(files[[1]], st_as_sfc(st_bbox(clusters_voronoi))), method = "bilinear") ; m <- field_size; m[m > 29] <- NA; field_size <- mask(field_size, m); for (i in 1:nlayers(files)){crs(files[[i]]) <- crs(field_size)}; field_size <- projectRaster(field_size,files[[1]]); files <- mask(files, field_size)}
-# 
-# field_size <- raster(find_it("field_size_10_40_cropland.img"))
-# field_size <- mask_raster_to_polygon(field_size, st_as_sfc(st_bbox(clusters)))
-# crs(field_size) <- as.character(CRS("+init=epsg:4236"))
-# 
-# if(field_size_contraint==T){field_size <- projectRaster(field_size, mask_raster_to_polygon(files2[[1]], st_as_sfc(st_bbox(clusters_voronoi))), method = "bilinear") ; m <- field_size; m[m > 29] <- NA; field_size <- mask(field_size, m); for (i in 1:nlayers(files2)){crs(files2[[i]]) <- crs(field_size)}; field_size <- projectRaster(field_size,files2[[1]]); files2 <- mask(files2, field_size)}
-
-####
-
-outs <- future_lapply(1:nlayers(files2), function(X){  exact_extract(files2[[X]], clusters_voronoi, fun="sum")}, future.seed = TRUE )
-
-outs2 <- future_lapply(1:nlayers(files), function(X){  exact_extract(files[[X]], clusters_voronoi, fun="mean")}, future.seed = TRUE )
 
 for (X in 1:nlayers(files)){
-  a = paste0("A_" , names(files)[X], "_r")
-  clusters[a] <- outs[[X]]
-  
-  aa <- clusters
-  aa$geom=NULL
-  aa$geometry=NULL
-  
-  clusters[a] <- ifelse(is.na( pull(aa[a])), 0,  pull(aa[a]))
-  
-  a = paste0("Y_" ,  names(files)[X], "_r")
-  clusters[a] <- outs2[[X]]
-  
-  aa <- clusters
-  aa$geom=NULL
-  aa$geometry=NULL
-  
-  clusters[a] <- ifelse(is.na( pull(aa[a])), mean(aa[a], na.rm=T),  pull(aa[a]))
-  
   for (timestep in planning_year){
     
     aa <- clusters
     aa$geom=NULL
     aa$geometry=NULL
+    
+    a = paste0("Y_" ,  names(files)[X], "_r")
     
     clusters <- clusters %>%  mutate(!!paste0("yield_",  names(files)[X], "_r_cp_", timestep) := (!!as.name(a)) * pull(!!aa[paste0("A_",  names(files)[X], "_r")]) * scenarios$crop_processed_share_target[scenario] * demand_growth_weights[match(timestep, planning_year)])
     
@@ -85,69 +23,7 @@ for (X in 1:nlayers(files)){
 
 if (process_already_irrigated_crops==T){
   
-  files <- list.files(path=paste0(input_folder, "spam_folder/spam2017v2r1_ssa_yield.geotiff"), pattern="I.tif", full.names=T)
-  files <- files[grepl(paste(energy_crops[,1], collapse="|") , files, ignore.case =T)]
-  
-  files2 = list.files(path = paste0(input_folder, "spam_folder/spam2017v2r1_ssa_harv_area.geotiff") , pattern = 'I.tif', full.names = T)
-  files2 <- files2[grepl(paste(energy_crops[,1], collapse="|") , files2, ignore.case =T)]
-  
-  ## implement these constraints
-  
-  files <- stack(lapply(files, function(X)(raster(X))))
-  names(files) <- tolower(unlist(qdapRegex::ex_between(names(files), "SSA_Y_", "_I")))
-  
-  files2 <- stack(lapply(files2, function(X)(raster(X))))
-  names(files2) <- tolower(unlist(qdapRegex::ex_between(names(files2), "SSA_H_", "_I")))
-  
-  for (i in 1:nlayers(files)){
-    crs(files[[i]]) <- as.character(CRS("+init=epsg:4236"))
-  }
-  
-  for (i in 1:nlayers(files2)){
-    crs(files2[[i]]) <- as.character(CRS("+init=epsg:4236"))
-  }
-  
-  files <- mask_raster_to_polygon(files, st_as_sfc(st_bbox(clusters_voronoi)))
-  files2 <- mask_raster_to_polygon(files2, st_as_sfc(st_bbox(clusters_voronoi)))
-  
-  
-  field_size <- raster(find_it("field_size_10_40_cropland.img"))
-  field_size <- mask_raster_to_polygon(field_size, st_as_sfc(st_bbox(clusters)))
-  crs(field_size) <- as.character(CRS("+init=epsg:4236"))
-  
-  if(field_size_contraint==T){field_size <- projectRaster(field_size, mask_raster_to_polygon(files[[1]], st_as_sfc(st_bbox(clusters_voronoi))), method = "bilinear") ; m <- field_size; m[m > 29] <- NA; field_size <- mask(field_size, m); for (i in 1:nlayers(files)){crs(files[[i]]) <- crs(field_size)}; field_size <- projectRaster(field_size,files[[1]]); files <- mask(files, field_size)}
-  
-  field_size <- raster(find_it("field_size_10_40_cropland.img"))
-  field_size <- mask_raster_to_polygon(field_size, st_as_sfc(st_bbox(clusters)))
-  crs(field_size) <- as.character(CRS("+init=epsg:4236"))
-  
-  if(field_size_contraint==T){field_size <- projectRaster(field_size, mask_raster_to_polygon(files2[[1]], st_as_sfc(st_bbox(clusters_voronoi))), method = "bilinear") ; m <- field_size; m[m > 29] <- NA; field_size <- mask(field_size, m); for (i in 1:nlayers(files2)){crs(files2[[i]]) <- crs(field_size)}; field_size <- projectRaster(field_size,files2[[1]]); files2 <- mask(files2, field_size)}
-  
-  outs <- future_lapply(1:nlayers(files2), function(X){  exact_extract(files2[[X]], clusters_voronoi, fun="sum") }, future.seed = TRUE)
-  
-  outs2 <- future_lapply(1:nlayers(files), function(X){  exact_extract(files[[X]], clusters_voronoi, fun="mean") }, future.seed = TRUE)
-  
   for (X in 1:nlayers(files)){
-    
-    a = paste0("A_" , names(files)[X], "_i")
-    clusters[a] <- outs[[X]] 
-    
-    aa <- clusters
-    aa$geom=NULL
-    aa$geometry=NULL
-    
-    clusters[a] <- ifelse(is.na( pull(aa[a])), 0,  pull(aa[a]))
-    
-    a = paste0("Y_" ,  names(files)[X], "_i")
-    clusters[a] <- outs2[[X]] 
-    
-    aa <- clusters
-    aa$geom=NULL
-    aa$geometry=NULL
-    
-    clusters[a] <- ifelse(is.na( pull(aa[a])), 0,  pull(aa[a]))
-    
-    
     for (timestep in planning_year){
       
       aa <- clusters
@@ -215,6 +91,8 @@ for (timestep in planning_year){
 # processing to take place in post-harvesting months: for each crop 1) take harvesting date 2) take plantation months. for those months between 1 and 2 equally allocate crop processing
 
 gc()
+
+
 
 crops <- crops[complete.cases(crops), ]
 crops <-  crops[crops$crop %in% as.vector(energy_crops[,1]), ]
