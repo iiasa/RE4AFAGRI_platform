@@ -18,9 +18,9 @@ allowparallel=T # allows paralellised processing. considerably shortens run time
 ######################
 # country and year
 
-for (countrystudy in c("zambia", "rwanda", "zimbabwe", "nigeria", "kenya")){
+countrystudy <- c("zambia")#, "rwanda", "zimbabwe", "nigeria", "kenya") # country(ies) to run M-LED on
 
-#countrystudy <- "zambia" # country to run M-LED on
+for (countrystudy in countrystudy){
 
 exclude_countries <- paste(gsub("\\.r", "",gsub("scenario_", "", basename(list.files(pattern="scenario_", recursive = T))))[! gsub("\\.r", "",gsub("scenario_", "", basename(list.files(pattern="scenario_", recursive = T)))) %in% c(countrystudy)], collapse ="|") # countries in the database files to exclude from the current run 
 

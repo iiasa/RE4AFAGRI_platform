@@ -120,13 +120,13 @@ if(rownames(scenarios)[scenario]=="baseline"){
   
 } else if(rownames(scenarios)[scenario]=="improved_access") {
   
-  yg_potential <- yg_potential[grepl("scen1", basename(yg_potential)) & grepl("2050", basename(yg_potential))]
-  yield <- yield[grepl("scen1", basename(yield)) & grepl("2050", basename(yield))]
+  yg_potential <- yg_potential[grepl("scen2", basename(yg_potential)) & grepl("2050", basename(yg_potential))]
+  yield <- yield[grepl("scen2", basename(yield)) & grepl("2050", basename(yield))]
   
 } else{
   
-  yg_potential <- yg_potential[grepl("scen1", basename(yg_potential)) & grepl("2050", basename(yg_potential))]
-  yield <- yield[grepl("scen1", basename(yield)) & grepl("2050", basename(yield))]
+  yg_potential <- yg_potential[grepl("scen3", basename(yg_potential)) & grepl("2050", basename(yg_potential))]
+  yield <- yield[grepl("scen3", basename(yield)) & grepl("2050", basename(yield))]
   
 }
 

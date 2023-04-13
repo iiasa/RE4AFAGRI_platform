@@ -12,8 +12,8 @@ pacman::p_load(sf, raster, exactextractr, dplyr, readxl, cowplot, ggplot2, scale
 
 if (allowparallel==T){
 
-#cl <- parallel::makeCluster((floor(detectCores() * 0.75)))
-cl <- parallel::makeCluster(4)
+cl <- parallel::makeCluster((floor(detectCores() * 0.75)))
+#cl <- parallel::makeCluster(4)
 plan(cluster, workers=cl)
 
 } else {
