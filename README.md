@@ -2,7 +2,9 @@
 
 # [RE4AFAGRI platform](https://sites.google.com/view/re4afagri/home) - Renewables for African Agriculture
 
-![RE4AFAGRI diagram](https://lh3.googleusercontent.com/ND7Ld9by5HOwWia1uvTGOSSmReCPBgf1iw_DRAmuF-SfSIzI1gVno6V68P4lbNYLpog=w2400)
+<p align="center">
+  <img width="357.5" height="190" src="https://lh3.googleusercontent.com/drive-viewer/AAOQEOQy0oXx2Qp92HLyuCPXDCb7AIRtj3blA-2owSREZ9S0rFFJLI8tVJrdMY7ifIZiDNtaz0JGYxCYEa9dOr2-2IX6SC5P=s2560">
+</p>
 
 ####
 ## Introduction and contents
@@ -21,6 +23,7 @@ The platform combines and soft-links four standalone peer-reviewed modelling too
 
 - **NEST**: NEST (The NExus Solutions Tool) is a modeling platform that integrates multi-scale energy–water–land resource optimization with distributed hydrological modeling, providing  insights into the vulnerability of water, energy and land resources to future socioeconomic and climatic change and how multi-sectoral policies, technological solutions and investments can improve the resilience and sustainability of transformation pathways while avoiding counterproductive interactions among sectors. https://doi.org/10.5194/gmd-13-1095-2020
 
+![RE4AFAGRI diagram](https://lh3.googleusercontent.com/ND7Ld9by5HOwWia1uvTGOSSmReCPBgf1iw_DRAmuF-SfSIzI1gVno6V68P4lbNYLpog=w2400)
 
 ## Downloading the database
 
