@@ -70,7 +70,7 @@ rainfed_sum <- list()
 for (timestep in planning_year[-length(planning_year)]){
   for (m in 1:12){
     
-    rainfed_sum[[as.character(timestep)]][[m]] <- do.call("sum", c(future_lapply(1:nlayers(files), function(X){rainfed[[X]][[((match(timestep, planning_year) - 1) * 12) + m]]}, future.seed=TRUE), na.rm = TRUE))
+    rainfed_sum[[as.character(timestep)]][[m]] <- do.call("sum", c(lapply(1:nlayers(files), function(X){rainfed[[X]][[((match(timestep, planning_year) - 1) * 12) + m]]}), na.rm = TRUE))
     
   }}
 
@@ -144,7 +144,7 @@ irrigated_sum <- list()
 for (timestep in planning_year[-length(planning_year)]){
   for (m in 1:12){
     
-    irrigated_sum[[as.character(timestep)]][[m]] <- do.call("sum", c(future_lapply(1:nlayers(files), function(X){irrigated[[X]][[((match(timestep, planning_year) - 1) * 12) + m]]}, future.seed=TRUE), na.rm = TRUE))
+    irrigated_sum[[as.character(timestep)]][[m]] <- do.call("sum", c(lapply(1:nlayers(files), function(X){irrigated[[X]][[((match(timestep, planning_year) - 1) * 12) + m]]}), na.rm = TRUE))
     
   }}
 

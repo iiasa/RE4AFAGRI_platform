@@ -8,45 +8,47 @@
 
 # Use Google Earth Engine to extract the distance to the nearest source of surface water
 
-geom <- ee$Geometry$Rectangle(c(as.vector(extent(clusters_voronoi))[1], as.vector(extent(clusters_voronoi))[3], as.vector(extent(clusters_voronoi))[2], as.vector(extent(clusters_voronoi))[4]))
+if (length(grep(paste0("slope_", countrystudy, ".tif"), all_input_files_basename))>0){
+  
+  img_01 <- raster(paste0(input_folder, "slope_", countrystudy, ".tif"))
+  
+} else{
+  
+  geom <- ee$Geometry$Rectangle(c(as.vector(extent(clusters))[1], as.vector(extent(clusters))[3], as.vector(extent(clusters))[2], as.vector(extent(clusters))[4]))
+  
+  srtm = ee$Image('USGS/SRTMGL1_003');
+  slope = ee$Terrain$slope(srtm);
+  
+  img_01 <- ee_as_raster(
+    image = slope,
+    via = "drive",
+    region = geom,
+    scale = 500,
+    dsn= paste0(input_folder, "slope_", countrystudy, ".tif")
+  )}
 
-srtm = ee$Image('USGS/SRTMGL1_003');
-slope = ee$Terrain$slope(srtm);
+if (length(grep(paste0("groundwater_distance_", countrystudy, ".tif"), all_input_files_basename))>0){
+  
+  img_02 <- raster(paste0(input_folder, "groundwater_distance_", countrystudy, ".tif"))
+  
+} else{
+  
+  
+  i = ee$FeatureCollection("WWF/HydroSHEDS/v1/FreeFlowingRivers") #$filter(ee$Filter$lte('RIV_ORD', 7))
+  i = i$map(function(f) {
+    f$buffer(20, 10);
+  });
+  
+  distance = i$distance(searchRadius = 50000, maxError = 25)$clip(geom)
+  
+  img_02 <- ee_as_raster(
+    image = distance,
+    via = "drive",
+    region = geom,
+    scale = 500,
+    dsn= paste0(input_folder, "groundwater_distance_", countrystudy, ".tif")
+  )}
 
-img_01 <- ee_as_raster(
-  image = slope,
-  via = "drive",
-  region = geom,
-  scale = 500
-)
-
-#img_01 <- raster(paste0(input_folder, "slope.tif"))
-
-i = ee$FeatureCollection("WWF/HydroSHEDS/v1/FreeFlowingRivers") #$filter(ee$Filter$lte('RIV_ORD', 7))
-i = i$map(function(f) {
-  f$buffer(20, 10);
-});
-
-distance = i$distance(searchRadius = 50000, maxError = 25)$clip(geom)
-
-img_02 <- ee_as_raster(
-  image = distance,
-  via = "drive",
-  region = geom,
-  scale = 500
-)
-
-#img_02 <- raster(paste0(input_folder, "groundwater_distance.tif"))
-
-world_all_africa <- filter(rnaturalearth::ne_countries(scale = "medium", returnclass = "sf"), region_un=="Africa") %>% st_transform(3395) %>%
-  st_snap_to_grid(size = 1000) %>%
-st_make_valid() %>% st_union() %>% st_transform(4326) %>% st_as_sf()
-
-#
-#
-# img_02 <- mask_raster_to_polygon(img_02, clusters)
-#
-# writeRaster(img_02,"D:/OneDrive - IIASA/Current papers/Groundwater_economic_feasibility/Groundwater-Cost/Groundwater-Cost/data/noid_image.tif", overwrite=T)
 
 #
 # # Calculate the mean distance from each cluster to the nearest source of surface water

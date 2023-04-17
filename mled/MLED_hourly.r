@@ -1,6 +1,6 @@
 # MLED - Multi-sectoral Latent Electricity Demand assessment platform
 # v0.2 (LEAP_RE)
-# 12/04/2023
+# 17/04/2023
 
 ####
 # system parameters
@@ -18,7 +18,7 @@ allowparallel=T # allows paralellised processing. considerably shortens run time
 ######################
 # country and year
 
-countrystudy <- c("zambia")#, "rwanda", "zimbabwe", "nigeria", "kenya") # country(ies) to run M-LED on
+countrystudy <- c("zambia", "rwanda", "zimbabwe", "nigeria", "kenya") # country(ies) to run M-LED on
 
 for (countrystudy in countrystudy){
 
@@ -171,7 +171,7 @@ lapply(1:nrow(scenarios), function(scenario){
     clusters_onsset[paste0("tot_dem_", timestep)] <- aa[paste0("residential_tt_", timestep)] + aa[paste0("nonfarm_smes_tt_", timestep)] + aa[paste0("healthcare_tt_", timestep)] + aa[paste0("education_tt_", timestep)] + aa[paste0("water_pumping_tt_", timestep)] + aa[paste0("crop_processing_tt_", timestep)] + aa[paste0("mining_kwh_tt_", timestep)] + aa[paste0("other_tt_", timestep)]
   }
   
-  clusters_nest_BCU <- fasterize(clusters_nest, disaggregate(rainfed[[1]], fact=100), "BCU")
+  clusters_nest_BCU <- fasterize(clusters_nest, disaggregate(rainfed[[1]][[1]], fact=100), "BCU")
   
   clusters_onsset$BCU <- exact_extract(clusters_nest_BCU, clusters_onsset, "majority")
   
@@ -187,7 +187,7 @@ lapply(1:nrow(scenarios), function(scenario){
   
   clusters_nest_output <- clusters_nest
   clusters_nest_output$id <- 1:nrow(clusters_nest)
-  id <- fasterize(clusters_nest_output, rainfed[[1]], "id")
+  id <- fasterize(clusters_nest_output, rainfed[[1]][[1]], "id")
   
   clusters_onsset$id <- exact_extract(id, clusters_onsset, "majority")
   clusters_onsset$geom <- NULL
@@ -219,11 +219,11 @@ lapply(1:nrow(scenarios), function(scenario){
   clusters_nest_output_2 <- merge(clusters_nest_output, clusters_onsset_t, "id")
   clusters_nest_output_2$id <- NULL
   
-  clusters_nest_output_2 <- complete(clusters_nest_output_2, nesting(BCU, FID_zmb_ad, OBJECTID, Province_n, Shape_Area, Shape_Leng), isurban)
+  clusters_nest_output_2 <- complete(clusters_nest_output_2, nesting(BCU), isurban)
   
   clusters_nest_output_2 <- group_by(clusters_nest_output_2, BCU) %>% mutate(geometry = ifelse(st_is_empty(geometry), geometry[!st_is_empty(geometry)], geometry)) %>% st_as_sf()
   
-  clusters_nest_output_2[is.na(clusters_nest_output_2)] <- 0 
+  clusters_nest_output_2[is.na(clusters_nest_output_2) & is.numeric(clusters_nest_output_2)] <- 0 
   
   clusters_nest_output_2 <- dplyr::select(clusters_nest_output_2, -contains("isurban_"))
   
@@ -238,7 +238,7 @@ lapply(1:nrow(scenarios), function(scenario){
   
   demand_fields <- c("residential_tt", "residential_tt_monthly", "nonfarm_smes_tt", "nonfarm_smes_tt_monthly", "healthcare_tt", "healthcare_tt_monthly", "education_tt", "education_tt_monthly", "water_pumping", "crop_processing_tt", "mining_kwh_tt", "other_tt")
   
-  gadm2_output <- gadm2
+  gadm2_output <- clusters_nest
   
   gadm2_output$id <- 1:nrow(gadm2_output)
   id <- fasterize(st_collection_extract(gadm2_output, "POLYGON"), diesel_price, "id")

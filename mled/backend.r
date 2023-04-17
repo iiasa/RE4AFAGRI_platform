@@ -8,11 +8,11 @@ if (!require("pacman")) install.packages("pacman"); library(pacman)
 
 if (!require("Rcpp")) install.packages("Rcpp", repos="https://rcppcore.github.io/drat"); library(Rcpp)
 
-pacman::p_load(sf, raster, exactextractr, dplyr, readxl, cowplot, ggplot2, scales, tidyr, tidyverse, rgeos, gdalUtils, chron, nngeo, strex, rgee, data.table, gdata, FactoMineR, factoextra, maps  , mapdata, maptools, grid, randomForestSRC, countrycode, remotes, stars, gdistance, rgl, rasterVis, qlcMatrix, stars, tvm, gtools, wbstats, stars, patchwork, ggrepel, terra, pbapply, googledrive, nnet, caret, randomForest, beepr, ncdf4, s2, zip, sfsmisc, dissever, gam, lsa, doBy, geojsonio, insol, matrixStats, purrr, future.apply, parallel, doParallel, qdapRegex, geodata, lwgeom)
+pacman::p_load(sf, raster, exactextractr, dplyr, readxl, cowplot, ggplot2, scales, tidyr, tidyverse, rgeos, gdalUtils, chron, nngeo, strex, rgee, data.table, gdata, FactoMineR, factoextra, maps  , mapdata, maptools, grid, randomForestSRC, countrycode, remotes, stars, gdistance, rgl, rasterVis, qlcMatrix, stars, tvm, gtools, wbstats, stars, patchwork, ggrepel, terra, pbapply, googledrive, nnet, caret, randomForest, beepr, ncdf4, s2, zip, sfsmisc, dissever, gam, lsa, doBy, geojsonio, matrixStats, purrr, future.apply, parallel, doParallel, qdapRegex, geodata, lwgeom)
 
 if (allowparallel==T){
 
-cl <- parallel::makeCluster((floor(detectCores() * 0.75)))
+cl <- parallel::makeCluster((floor(detectCores() * 0.5)))
 #cl <- parallel::makeCluster(4)
 plan(cluster, workers=cl)
 
