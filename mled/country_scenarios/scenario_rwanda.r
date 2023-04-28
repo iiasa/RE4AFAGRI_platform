@@ -207,7 +207,7 @@ clusters_buffers_cropland_distance <- st_transform(clusters_centroids, 3395) %>%
 
 #clusters$elrate <- clusters$elecpop_start_worldpop/clusters$pop_start_worldpop
 
-clusters_nest <- gadm1 %>% mutate(BCU=1:nrow(gadm1)) #read_sf(find_it("Rwanda_NEST_delineation.shp"))
+clusters_nest <- gadm2 %>% mutate(BCU=1:nrow(gadm2)) #read_sf(find_it("Rwanda_NEST_delineation.shp"))
 
 #####################
 # Current gridded data

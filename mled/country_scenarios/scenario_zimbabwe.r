@@ -207,14 +207,14 @@ clusters_buffers_cropland_distance <- st_transform(clusters_centroids, 3395) %>%
 
 #clusters$elrate <- clusters$elecpop_start_worldpop/clusters$pop_start_worldpop
 
-clusters_nest <- gadm1 %>% mutate(BCU=1:nrow(gadm1)) #read_sf(find_it("Zimbabwe_NEST_delineation.shp"))
+clusters_nest <- gadm2 %>% mutate(BCU=1:nrow(gadm2)) #read_sf(find_it("Zimbabwe_NEST_delineation.shp"))
 
 #####################
 # Current gridded data
 #####################
 
 # gridded population (current)
-population_baseline <- raster(find_it("ZWE_population_v1_0_gridded.tif"))
+population_baseline <- raster(find_it("zwe_ppp_2020_UNadj_constrained.tif"))
 
 # gridded gdp_baseline (current)
 gdp_baseline <- stack(find_it(paste0("gdp_", scenarios$ssp[scenario], "soc_10km_2010-2100.nc")))[[2]]

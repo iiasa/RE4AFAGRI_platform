@@ -117,8 +117,6 @@ if (paste0("ely_cons_1_km_", countrystudy, ".tif") %in% all_input_files_basename
   resources <- resources>0
   resources <- mask_raster_to_polygon(resources, gadm0)
   
-  values(resources) <- ifelse(sum(is.na(values(resources))) == length(resources), 0, values(resources))
-  
   # resources (PRIO)
   resources <- raster::distance(projectRaster(resources, crs="+proj=merc +lon_0=0 +k=1 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs"))
   resources <- projectRaster(resources, crs="+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs 
@@ -278,5 +276,3 @@ if (paste0("ely_cons_1_km_", countrystudy, ".tif") %in% all_input_files_basename
 
 
 if(isTRUE(latent_d_tot)){  clusters$elrate <- 1 }
-
-

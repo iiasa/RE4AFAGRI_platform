@@ -12,7 +12,7 @@ pacman::p_load(sf, raster, exactextractr, dplyr, readxl, cowplot, ggplot2, scale
 
 if (allowparallel==T){
 
-cl <- parallel::makeCluster((floor(detectCores() * 0.5)))
+cl <- parallel::makeCluster((floor(detectCores() * 0.25)))
 #cl <- parallel::makeCluster(4)
 plan(cluster, workers=cl)
 
@@ -41,6 +41,8 @@ mask_raster_to_polygon <- function (raster_object, polygon)
 }
 
 sf::sf_use_s2(F)
+
+options(future.globals.maxSize= 891289600)
 
 fast_mask <- function(ras = NULL, mask = NULL, inverse = FALSE, updatevalue = NA) {
   
@@ -93,7 +95,7 @@ fast_mask <- function(ras = NULL, mask = NULL, inverse = FALSE, updatevalue = NA
 }
 
 #if (!isTRUE(ee_check())) {ee_install()}
-ee_Initialize(email)
+ee_Initialize(email, drive=T, gcs=F)
 
 ifelse(!dir.exists(file.path(getwd(), "/results")), dir.create(file.path(getwd(), "/results")), FALSE)
 ifelse(!dir.exists(file.path(paste0(getwd(), "/results/"), countrystudy)), dir.create(file.path(paste0(getwd(), "/results/"), countrystudy)), FALSE)

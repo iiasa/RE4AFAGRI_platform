@@ -19,13 +19,13 @@ national_official_population_without_access = national_official_population- (nat
 ppp_gdp_capita <- 5459
 gini <- 35.1
 
-nigeria_electr_final_demand_tot <- 26700000000  #https://www.iea.org/countries/nigeria
+electr_final_demand_tot <- 26700000000  #https://www.iea.org/countries/nigeria
 
-nigeria_industry_final_demand_tot <- 3926667000
+industry_final_demand_tot <- 3926667000
 
-nigeria_residential_final_demand_tot <- 15953060000
+residential_final_demand_tot <- 15953060000
 
-nigeria_other_final_demand_tot <- nigeria_electr_final_demand_tot - nigeria_industry_final_demand_tot - nigeria_residential_final_demand_tot
+other_final_demand_tot <- electr_final_demand_tot - industry_final_demand_tot - residential_final_demand_tot
 
 cropland_equipped_irrigation = 0.387 #https://tableau.apps.fao.org/#/views/ReviewDashboard-v1/country_dashboard
 
@@ -207,14 +207,14 @@ clusters_buffers_cropland_distance <- st_transform(clusters_centroids, 3395) %>%
 
 #clusters$elrate <- clusters$elecpop_start_worldpop/clusters$pop_start_worldpop
 
-clusters_nest <- gadm1 %>% mutate(BCU=1:nrow(gadm1)) #read_sf(find_it("Nigeria_NEST_delineation.shp"))
+clusters_nest <- gadm2 %>% mutate(BCU=1:nrow(gadm2)) #read_sf(find_it("Nigeria_NEST_delineation.shp"))
 
 #####################
 # Current gridded data
 #####################
 
 # gridded population (current)
-population_baseline <- raster(find_it("NGA_population_v1_0_gridded.tif"))
+population_baseline <- raster(find_it("NGA_population_v2_0_gridded_WorldPop_GRID3.tif"))
 
 # gridded gdp_baseline (current)
 gdp_baseline <- stack(find_it(paste0("gdp_", scenarios$ssp[scenario], "soc_10km_2010-2100.nc")))[[2]]
