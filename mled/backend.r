@@ -16,11 +16,16 @@ cl <- parallel::makeCluster((floor(detectCores() * 0.25)))
 #cl <- parallel::makeCluster(4)
 plan(cluster, workers=cl)
 
+future_lapply <- purrr::partial(future_lapply, future.seed = TRUE)
+
+
 } else {
   
   future_lapply <- lapply 
   
 }
+
+# exact_extract <- purrr::partial(exactextractr::exact_extract, x=crop(x, extent(y)), max_cells_in_memory = 1e9 )
 
 exact_extract <- purrr::partial(exactextractr::exact_extract, max_cells_in_memory = 1e9 )
 
@@ -110,19 +115,11 @@ if (download_data==T){
   
   wd_bk <- getwd()
   
-  out <- read_rds(paste0("download_data_index_", countrystudy, ".rds"))
-  all_input_files_stub <- read_rds(paste0("download_data_index_stubs_", countrystudy, ".rds"))
-  
   setwd(db_folder)
   
-  r <- sapply(file.path(db_folder, dirname(all_input_files_stub)), 
-         dir.create, recursive = TRUE, showWarnings = FALSE)
-  
-  for (i in 1:length(all_input_files_stub)){
-    print(paste0("Downloading database. Progress: ", as.character(round((i/length(all_input_files_stub))*100, 3)), "%"))
-    drive_download(file=out[[i]]$id,
-                   path = paste0(getwd(), "/", all_input_files_stub[i]), overwrite = T
-    )}
+  d <- download.file("https://zenodo.org/record/7908181/files/mled_replication.zip", destfile = "mled_replication.zip")
+  unzip(d)
+  file.remove(d)
   
   setwd(wd_bk)
   
@@ -144,7 +141,7 @@ all_input_files <- list.files(path=input_folder, recursive = T, full.names = T)
 
 all_input_files <- all_input_files[grep(exclude_countries, all_input_files,ignore.case=TRUE, invert = TRUE)]
 
-all_input_files <- all_input_files[grep("\\.ini$|\\.docx$|\\.png$|\\.r$|\\.mat$|r_tmp_|results|\\.pyc$|\\.pdf$|\\.rds$|\\.rdata$|\\.dbf$|\\.xml$", all_input_files,ignore.case=TRUE, invert = TRUE)] 
+all_input_files <- all_input_files[grep("\\.ini$|\\.docx$|\\.png$|\\.r$|\\.mat$|r_tmp_|\\.pyc$|\\.pdf$|\\.rds$|\\.rdata$|\\.xml$", all_input_files,ignore.case=TRUE, invert = TRUE)] 
 
 all_input_files <- gsub("//", "/", all_input_files)
 

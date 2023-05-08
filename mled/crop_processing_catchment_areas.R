@@ -54,7 +54,7 @@ functpop <-future_lapply(1:nrow(all_facilities),function(i){
   p = st_sf(p)
   p$id = id_exp
   p
-}, future.seed=TRUE)
+})
 
 
 for(i in 1:length(functpop)){

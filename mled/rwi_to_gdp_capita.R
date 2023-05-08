@@ -28,7 +28,7 @@ outer <- function(rwi, gini, gdp_capita){
     
   }
   
-  out <- future_lapply(1:length(rwi), rwi_to_awi, future.seed=TRUE)
+  out <- future_lapply(1:length(rwi), rwi_to_awi)
   
   out <- do.call(rbind, out)[,1]
   

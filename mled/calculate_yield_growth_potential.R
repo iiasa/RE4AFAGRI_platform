@@ -31,9 +31,9 @@ files2 <- mask_raster_to_polygon(files2, st_as_sfc(st_bbox(clusters_voronoi)))
 
 ###########
 
-outs <- future_lapply(1:nlayers(files2), function(X){  exact_extract(files2[[X]], clusters_voronoi, fun="sum")}, future.seed = TRUE )
+outs <- future_lapply(1:nlayers(files2), function(X){  exact_extract(files2[[X]], clusters_voronoi, fun="sum")})
 
-outs2 <- future_lapply(1:nlayers(files), function(X){  exact_extract(files[[X]], clusters_voronoi, fun="mean")}, future.seed = TRUE )
+outs2 <- future_lapply(1:nlayers(files), function(X){  exact_extract(files[[X]], clusters_voronoi, fun="mean")})
 
 for (X in 1:nlayers(files)){
 
@@ -84,9 +84,9 @@ for (i in 1:nlayers(files2)){
 files <- mask_raster_to_polygon(files, st_as_sfc(st_bbox(clusters_voronoi)))
 files2 <- mask_raster_to_polygon(files2, st_as_sfc(st_bbox(clusters_voronoi)))
 
-outs <- future_lapply(1:nlayers(files2), function(X){  exact_extract(files2[[X]], clusters_voronoi, fun="sum")}, future.seed = TRUE )
+outs <- future_lapply(1:nlayers(files2), function(X){  exact_extract(files2[[X]], clusters_voronoi, fun="sum")})
 
-outs2 <- future_lapply(1:nlayers(files), function(X){  exact_extract(files[[X]], clusters_voronoi, fun="mean")}, future.seed = TRUE )
+outs2 <- future_lapply(1:nlayers(files), function(X){  exact_extract(files[[X]], clusters_voronoi, fun="mean")})
 
 
 for (X in 1:nlayers(files)){

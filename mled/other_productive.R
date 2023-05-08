@@ -38,9 +38,9 @@ data_pca$geometry=NULL
 data_pca[] <- future_lapply(data_pca, function(x) { 
 x[is.na(x)] <- mean(x, na.rm = TRUE)
 x
-}, future.seed=TRUE)
+})
 
-data_pca <- future_lapply(data_pca, function(x) round((x-min(x, na.rm=T))/(max(x, na.rm=T)-min(x, na.rm=T)), 2), future.seed=TRUE) %>% bind_cols()
+data_pca <- future_lapply(data_pca, function(x) round((x-min(x, na.rm=T))/(max(x, na.rm=T)-min(x, na.rm=T)), 2)) %>% bind_cols()
 
 data_pca <- data_pca[ , colSums(is.na(data_pca)) == 0]
 

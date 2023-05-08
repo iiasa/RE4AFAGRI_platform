@@ -57,8 +57,8 @@ source("backend.R")
 ssp <- c("ssp2", "ssp2", "ssp2") # list SSP scenarios (socio-economic development) to run
 rcp <- c("rcp60", "rcp60", "rcp26") # list RCP scenarios (climate change) to run
 
-source(textConnection(readLines(paste0("country_scenarios/scenario_", countrystudy, ".R"))[17]))
-source(textConnection(readLines(paste0("country_scenarios/scenario_", countrystudy, ".R"))[30]))
+r <- readLines(paste0("country_scenarios/scenario_", countrystudy, ".R"))[17]; source(textConnection(r))
+r2 <- readLines(paste0("country_scenarios/scenario_", countrystudy, ".R"))[30]; source(textConnection(r2))
 
 el_access_share_target <- c(national_official_elrate, 1, 1) # target share of population with electricity in the last planning year
 irrigated_cropland_share_target <- c(cropland_equipped_irrigation, .5, .75)  # target share of rainfed cropland irrigation water demand met in the last planning year
