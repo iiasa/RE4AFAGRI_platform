@@ -220,12 +220,6 @@ population_baseline <- raster(find_it("zwe_ppp_2020_UNadj_constrained.tif"))
 gdp_baseline <- stack(find_it(paste0("gdp_", scenarios$ssp[scenario], "soc_10km_2010-2100.nc")))[[2]]
 gdp_baseline <- mask_raster_to_polygon(gdp_baseline, gadm0)
 
-# current and future cropping patterns
-cropping_baseline = ncdf4::nc_open(find_it(paste0(scenarios$rcp[scenario], 'soc_miroc5_landuse-15crops_annual_2006_2099.nc')))
-variables = names(cropping_baseline[['var']])[c(2:23)]
-ncdf4::nc_close(cropping_baseline)
-cropping_baseline =  lapply(variables, function(X){stack(find_it(paste0(scenarios$rcp[scenario], "soc_miroc5_landuse-15crops_annual_2006_2099.nc")), varname=X)[[15]]})
-
 # groundwater recharge (baseline)
 qr_baseline <- stack(find_it(paste0("lpjml_gfdl-esm2m_ewembi_", scenarios$rcp[scenario], "_", scenarios$rcp[scenario], "soc_co2_qr_global_monthly_2006_2099.nc4")))
 
