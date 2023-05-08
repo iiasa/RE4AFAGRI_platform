@@ -348,15 +348,6 @@ field_size <- raster(find_it("field_size_10_40_cropland.img"))
 field_size <- mask_raster_to_polygon(field_size, st_as_sfc(st_bbox(clusters)))
 gc()
 
-# PV cost layers
-rr <- list.files(paste0(input_folder, "pv_cost"), full.names = T, pattern = "tif")
-
-# solar radiation
-solar_rad <- list.files(path=paste0(input_folder, "pv_cost"), pattern="asc", full.names = T)
-
-# PV out
-pvout_t <- stack(pblapply(list.files(paste0(input_folder, "monthly"), full.names = T, pattern = "asc"), raster))
-
 maxflow <- field_size
 gc()
 v <- scales::rescale(raster::values(maxflow), to = maxflow_boundaries)
