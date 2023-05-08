@@ -50,7 +50,7 @@ Each models is developed in a specific programming language and has thus specifi
   - Have 'Matlab' (version >= R2017a) installed on your local computer
   
 ### For M-LED:
-  - Have `R` (version >=3.6) installed on your local computer: https://cran.r-project.org/bin/windows/base/
+  - Have `R` (version >=4) installed on your local computer: https://cran.r-project.org/bin/windows/base/
   - Have a recent version of `RStudio` installed on your local computer: https://posit.co/download/rstudio-desktop/
   - Open the `MLED_hourly.r` file in RStudio
   - Update your email adrress in `line 12`. Note that you need to enable the address to use Google Earth Engine, the procedure can be completed on https://signup.earthengine.google.com
