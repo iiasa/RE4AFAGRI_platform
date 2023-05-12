@@ -99,7 +99,7 @@ fast_mask <- function(ras = NULL, mask = NULL, inverse = FALSE, updatevalue = NA
   
 }
 
-#if (!isTRUE(ee_check())) {ee_install()}
+if (!isTRUE(ee_check())) {ee_install(); shell("GoogleCloudSDKInstaller.exe")}
 ee_Initialize(email, drive=T, gcs=F)
 
 ifelse(!dir.exists(file.path(getwd(), "/results")), dir.create(file.path(getwd(), "/results")), FALSE)
