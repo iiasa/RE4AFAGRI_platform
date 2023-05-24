@@ -6,49 +6,11 @@
 
 # Groundwater and surface water pumping module
 
-# Use Google Earth Engine to extract the distance to the nearest source of surface water
+img_01 <- raster(find_it("slope_africa.tif"))
+img_02 <- raster(find_it("surfwater_distance_africa.tif"))
 
-if (length(grep(paste0("slope_", countrystudy, ".tif"), all_input_files_basename))>0){
-  
-  img_01 <- raster(paste0(input_folder, "slope_", countrystudy, ".tif"))
-  
-} else{
-  
-  geom <- ee$Geometry$Rectangle(c(as.vector(extent(clusters))[1], as.vector(extent(clusters))[3], as.vector(extent(clusters))[2], as.vector(extent(clusters))[4]))
-  
-  srtm = ee$Image('USGS/SRTMGL1_003');
-  slope = ee$Terrain$slope(srtm);
-  
-  img_01 <- ee_as_raster(
-    image = slope,
-    via = "drive",
-    region = geom,
-    scale = 500,
-    dsn= paste0(input_folder, "slope_", countrystudy, ".tif")
-  )}
-
-if (length(grep(paste0("groundwater_distance_", countrystudy, ".tif"), all_input_files_basename))>0){
-  
-  img_02 <- raster(paste0(input_folder, "groundwater_distance_", countrystudy, ".tif"))
-  
-} else{
-  
-  
-  i = ee$FeatureCollection("WWF/HydroSHEDS/v1/FreeFlowingRivers") #$filter(ee$Filter$lte('RIV_ORD', 7))
-  i = i$map(function(f) {
-    f$buffer(20, 10);
-  });
-  
-  distance = i$distance(searchRadius = 50000, maxError = 25)$clip(geom)
-  
-  img_02 <- ee_as_raster(
-    image = distance,
-    via = "drive",
-    region = geom,
-    scale = 500,
-    dsn= paste0(input_folder, "groundwater_distance_", countrystudy, ".tif")
-  )}
-
+img_01 <- crop(img_01, extent(clusters_voronoi))
+img_02 <- crop(img_02, extent(clusters_voronoi))
 
 #
 # # Calculate the mean distance from each cluster to the nearest source of surface water

@@ -5,10 +5,10 @@
 crops_v <- c("barl", "cass", "coco", "cott", "grou", "maiz", "pmil", "smil", "oilp", "pota", "rape", "rice", "sorg", "soyb", "sugb", "sugc", "sunf", "whea", "yams")
 
 files <- list.files(path=paste0(input_folder, "spam_folder/spam2017v2r1_ssa_yield.geotiff"), pattern="R.tif", full.names=T)
-files <- files[grepl(paste(energy_crops[,1], collapse="|") , files, ignore.case =T)]
+#files <- files[grepl(paste(energy_crops[,1], collapse="|") , files, ignore.case =T)]
 
 files2 = list.files(path = paste0(input_folder, "spam_folder/spam2017v2r1_ssa_harv_area.geotiff") , pattern = 'R.tif', full.names = T)
-files2 <- files2[grepl(paste(energy_crops[,1], collapse="|") , files2, ignore.case =T)]
+#files2 <- files2[grepl(paste(energy_crops[,1], collapse="|") , files2, ignore.case =T)]
 
 ## implement these constraints
 
@@ -60,10 +60,10 @@ clusters[a] <- ifelse(is.na( pull(aa[a])), mean(aa[a], na.rm=T),  pull(aa[a]))
 #####
 
 files <- list.files(path=paste0(input_folder, "spam_folder/spam2017v2r1_ssa_yield.geotiff"), pattern="I.tif", full.names=T)
-files <- files[grepl(paste(energy_crops[,1], collapse="|") , files, ignore.case =T)]
+#files <- files[grepl(paste(energy_crops[,1], collapse="|") , files, ignore.case =T)]
 
 files2 = list.files(path = paste0(input_folder, "spam_folder/spam2017v2r1_ssa_harv_area.geotiff") , pattern = 'I.tif', full.names = T)
-files2 <- files2[grepl(paste(energy_crops[,1], collapse="|") , files2, ignore.case =T)]
+#files2 <- files2[grepl(paste(energy_crops[,1], collapse="|") , files2, ignore.case =T)]
 
 ## implement these constraints
 
@@ -130,6 +130,7 @@ if(rownames(scenarios)[scenario]=="baseline"){
   
 }
 
+####
 
 yg_potential <- mixedsort(yg_potential)
 yg_potential <- lapply(yg_potential, raster)
@@ -166,7 +167,7 @@ for (X in 1:length(crops_v)){
 
 ####
 
-crops_v <- intersect(crops_v, energy_crops[,1])
+#crops_v <- intersect(crops_v, energy_crops[,1])
 
 for (timestep in planning_year){
   
@@ -181,4 +182,3 @@ for (timestep in planning_year){
   
   
   }}
-

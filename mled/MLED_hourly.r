@@ -9,7 +9,7 @@ setwd("C:/Users/falchetta/OneDrive - IIASA/IIASA_official_RE4AFAGRI_platform/mle
 
 db_folder = 'F:/Il mio Drive/MLED_database' # path to (or where to download) the M-LED database [must be an existing path]
 
-email<- "giacomo.falchetta@gmail.com" # NB: need to have previously enabled it to use Google Earth Engine via https://signup.earthengine.google.com
+email<- "giacomo.falchetta@gmail.com"
 
 download_data <- F # flag: download the M-LED database? Type "F" if you already have done so previously.
 
@@ -238,7 +238,7 @@ lapply(1:nrow(scenarios), function(scenario){
   
   demand_fields <- c("residential_tt", "residential_tt_monthly", "nonfarm_smes_tt", "nonfarm_smes_tt_monthly", "healthcare_tt", "healthcare_tt_monthly", "education_tt", "education_tt_monthly", "water_pumping", "crop_processing_tt", "mining_kwh_tt", "other_tt")
   
-  gadm2_output <- st_cast(clusters_nest, "MULTIPOLYGON")
+  gadm2_output <- gadm2
   
   gadm2_output$id <- 1:nrow(gadm2_output)
   id <- fasterize(st_collection_extract(gadm2_output, "POLYGON"), diesel_price, "id")

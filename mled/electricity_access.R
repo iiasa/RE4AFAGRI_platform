@@ -3,51 +3,11 @@
 ##      1) estimates electricity access in each cluster in the spirit of Falchetta et al. (2019) Scientific Data's paper, using built-up area and nighttime lights
 ##      2) downscales national electricity consumption statistics to each cluster using the dissever methodology (see Roudier et al. 2017 Computers and Electronics in Agriculture paper)
 
-
-geom <- ee$Geometry$Rectangle(c(as.vector(extent(gadm0))[1], as.vector(extent(gadm0))[3], as.vector(extent(gadm0))[2], as.vector(extent(gadm0))[4]))
-
-GHSSMOD2015 = ee$Image("JRC/GHSL/P2016/BUILT_LDSMT_GLOBE_V1")$select('built')
-
-GHSSMOD2015 = GHSSMOD2015$gte(3)
-
-nl19 =  ee$Image("users/giacomofalchetta/ntl_payne_2021")$subtract(0.125)
-nl19 = nl19$where(nl19$lt(0.25), ee$Image(0))
-
-GHSSMOD2015_lit <- GHSSMOD2015$mask(nl19$gt(0))
-
-if (paste0("builtup_", countryiso3, ".tif") %in% all_input_files_basename){
+GHSSMOD2015 <- raster(find_it("builtup_africa.tif"))
+GHSSMOD2015_lit <- raster(find_it("builtup_lit_africa.tif"))
   
-  GHSSMOD2015 <- raster(find_it(paste0("builtup_", countryiso3, ".tif")))
-  
-} else {
-  
-  GHSSMOD2015 <- ee_as_raster(
-    image = GHSSMOD2015,
-    via = "drive",
-    region = geom,
-    scale = 500,
-    dsn = paste0(processed_folder, "builtup_", countryiso3, ".tif")
-  )
-  
-}
-
-
-if (paste0("builtup_lit_", countryiso3, ".tif") %in% all_input_files_basename){
-  
-  GHSSMOD2015_lit <- raster(find_it(paste0("builtup_lit_", countryiso3, ".tif")))
-  
-} else {
-  
-  
-  GHSSMOD2015_lit <- ee_as_raster(
-    image = GHSSMOD2015_lit,
-    via = "drive",
-    region = geom,
-    scale = 500,
-    dsn = paste0(processed_folder, "builtup_lit_", countryiso3, ".tif")
-  )
-  
-}
+GHSSMOD2015 <- crop(GHSSMOD2015, extent(clusters))
+GHSSMOD2015_lit <- crop(GHSSMOD2015_lit, extent(clusters))
 
 clusters$elrate <-  exact_extract(GHSSMOD2015_lit, clusters, fun="sum") / exact_extract(GHSSMOD2015, clusters, fun="sum")
 clusters$elrate <- ifelse(is.na(clusters$elrate), 0, clusters$elrate)

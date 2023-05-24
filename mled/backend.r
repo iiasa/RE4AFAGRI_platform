@@ -8,7 +8,7 @@ if (!require("pacman")) install.packages("pacman"); library(pacman)
 
 if (!require("Rcpp")) install.packages("Rcpp", repos="https://rcppcore.github.io/drat"); library(Rcpp)
 
-pacman::p_load(sf, raster, exactextractr, dplyr, readxl, cowplot, ggplot2, scales, tidyr, tidyverse, rgeos, gdalUtils, chron, nngeo, strex, rgee, data.table, gdata, FactoMineR, factoextra, maps  , mapdata, maptools, grid, randomForestSRC, countrycode, remotes, stars, gdistance, rgl, rasterVis, qlcMatrix, stars, tvm, gtools, wbstats, stars, patchwork, ggrepel, terra, pbapply, googledrive, nnet, caret, randomForest, beepr, ncdf4, s2, zip, sfsmisc, dissever, gam, lsa, doBy, geojsonio, matrixStats, purrr, future.apply, parallel, doParallel, qdapRegex, geodata, lwgeom)
+pacman::p_load(sf, raster, exactextractr, dplyr, readxl, cowplot, ggplot2, scales, tidyr, tidyverse, rgeos, gdalUtils, chron, nngeo, strex, data.table, gdata, FactoMineR, factoextra, maps  , mapdata, maptools, grid, randomForestSRC, countrycode, remotes, stars, gdistance, rgl, rasterVis, qlcMatrix, stars, tvm, gtools, wbstats, stars, patchwork, ggrepel, terra, pbapply, googledrive, nnet, caret, randomForest, beepr, ncdf4, s2, zip, sfsmisc, dissever, gam, lsa, doBy, geojsonio, matrixStats, purrr, future.apply, parallel, doParallel, qdapRegex, geodata, lwgeom)
 
 if (allowparallel==T){
 
@@ -98,9 +98,6 @@ fast_mask <- function(ras = NULL, mask = NULL, inverse = FALSE, updatevalue = NA
   ras.masked
   
 }
-
-if (!isTRUE(ee_check())) {ee_install(); shell("GoogleCloudSDKInstaller.exe")}
-ee_Initialize(email, drive=T, gcs=F)
 
 ifelse(!dir.exists(file.path(getwd(), "/results")), dir.create(file.path(getwd(), "/results")), FALSE)
 ifelse(!dir.exists(file.path(paste0(getwd(), "/results/"), countrystudy)), dir.create(file.path(paste0(getwd(), "/results/"), countrystudy)), FALSE)
