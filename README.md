@@ -3,7 +3,7 @@
 # [RE4AFAGRI platform](https://sites.google.com/view/re4afagri/home) - Renewables for African Agriculture
 
 <p align="center">
-  <img width="357.5" height="190" src="https://lh3.googleusercontent.com/drive-viewer/AAOQEOQy0oXx2Qp92HLyuCPXDCb7AIRtj3blA-2owSREZ9S0rFFJLI8tVJrdMY7ifIZiDNtaz0JGYxCYEa9dOr2-2IX6SC5P=s2560">
+  <img width="357.5" height="190" src="https://github.com/iiasa/RE4AFAGRI_platform/assets/36954873/c4587eba-fb0a-41f5-9309-cc5077f22f66">
 </p>
 
 ####
