@@ -53,7 +53,6 @@ Each models is developed in a specific programming language and has thus specifi
   - Have `R` (version >=4) installed on your local computer: https://cran.r-project.org/bin/windows/base/
   - Have a recent version of `RStudio` installed on your local computer: https://posit.co/download/rstudio-desktop/
   - Open the `MLED_hourly.r` file in RStudio
-  - Update your email adrress in `line 12`. Note that you need to enable the address to use Google Earth Engine, the procedure can be completed on https://signup.earthengine.google.com
   - Run `lines 1-75`. This will automatically run the `backend.R` file, which will take care of installing all the required package dependencies
   - During this procedure (to be carried out only the first time M-LED is run), please follow the instructions prompted in the first run to install and reply accordingly to the user prompt requests.
 
