@@ -20,6 +20,7 @@ def dem_from_csv(sc,csv_file):
     dem_names = sc.idx_names('demand')
     dem_ur = dem[dem["isurban"] == 1]
     dem_ur['mess_sect'] = dem_ur['mess_sect']+ "_urb"
+    dem_ur = dem_ur[dem_ur['mess_sect'] != "crop_urb"]
     dem_rur = dem[dem["isurban"] == 0]
     dem_rur['mess_sect'] = dem_rur['mess_sect']+ "_rur"
     
@@ -34,7 +35,7 @@ def dem_from_csv(sc,csv_file):
     return dem
 
 
-def main(sc):
+def main(sc,ss):
     """ This script removes old electricity demand from MESSAGE and
     replaces it with estimated demand from MLED, with sub-annual timestep 
     (by adding the technologies...)
@@ -52,7 +53,7 @@ def main(sc):
     print("Removed old electricity demand: " + str(tot_dem_el_old) + 
           " GWa/a")
     
-    file = "electricity_demand_MLED_NEST_GWh_mth.csv"
+    file = "electricity_demand_MLED_NEST_GWh_mth_" + ss + ".csv"
     path_csv = private_data_path('projects','leap_re_nest',file)
     
     dem_csv = pd.read_csv(path_csv)
@@ -61,7 +62,7 @@ def main(sc):
     
     #add demand
     sc.add_set('commodity',["ind_man_urb","ind_man_rur",
-                            "res_com_urb","res_com_rur"])
+                            "res_com_urb","res_com_rur","crop_rur"])
     sc.add_par('demand',dem)
     sc.commit("")
     print('Electricity demand from MLED added ' + str(tot_dem_el_new) + 

@@ -3,11 +3,12 @@ from functools import lru_cache, partial
 from typing import Mapping
 
 import pandas as pd
+from sdmx.model import Code
 
 from message_ix_models import ScenarioInfo
 from message_ix_models.model import build
 from message_ix_models.model.structure import get_codes
-from message_ix_models.util import private_data_path
+from message_ix_models.util import package_data_path
 
 from .utils import read_config
 
@@ -46,8 +47,8 @@ def get_spec(context) -> Mapping[str, ScenarioInfo]:
             add.set[set_name].extend(config.get("add", []))
 
         # The set of required nodes varies according to context.regions
-        nodes = get_codes(f"node/{context.regions}")
-        nodes = list(map(str, nodes[nodes.index("World")].child))
+        n_codes = get_codes(f"node/{context.regions}")
+        nodes = list(map(str, n_codes[n_codes.index(Code(id="World"))].child))
         require.set["node"].extend(nodes)
 
         # Share commodity for groundwater
@@ -210,7 +211,7 @@ def map_basin(context) -> Mapping[str, ScenarioInfo]:
     # read csv file for basin names and region mapping
     # reading basin_delineation
     FILE = f"basins_by_region_simpl_{context.regions}.csv"
-    PATH = private_data_path("water", "delineation", FILE)
+    PATH = package_data_path("water", "delineation", FILE)
 
     df = pd.read_csv(PATH)
     # Assigning proper nomenclature

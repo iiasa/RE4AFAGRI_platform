@@ -10,6 +10,7 @@ from message_ix_models.util import (broadcast,private_data_path,
                                     same_node,same_time)
 import numpy as np
 import pandas as pd
+import xarray as xr
 from message_ix import make_df
 from message_data.model.water.utils import map_yv_ya_lt
 
@@ -154,11 +155,56 @@ def add_trsm_dist_basin(sc):
         # This is done externlly to this function, in calib_energy()
         out_RC = out_RC[out_RC["year_vtg"] >= last_vtg_year]
         sc.add_par('output', pd.concat([out_I,out_RC]) ) 
+        # end of loop
+    
+    # add sp_el_crop link the new transmission technologies to the crop 
+    # processing demands, only in the rural generation
+    sc.add_set("technology", ['sp_el_crop_basin_rur'])
+    ur = "_rur"
+    inp = sc.par('input',{'technology' : "sp_el_I"})
+    inp["time"] = np.nan
+    inp["node_loc"] = np.nan
+    inp = inp.pipe(broadcast, time = ti,
+                   node_loc = ba)           
+    inp["level"] = 'final'+ur
+    inp["time_origin"] = inp["time"]
+    inp["node_origin"] = inp["node_loc"]
+    
+    inp_crop = inp.copy(deep = True)
+    inp_crop['technology'] = 'sp_el_crop_basin'+ur
+    sc.add_par('input', inp_crop )    
+    # output, need to be split into basins
+    out = sc.par('output',{'technology' : "sp_el_I"})
+    out["time"] = np.nan
+    out["node_loc"] = np.nan
+    out = out.pipe(broadcast, time = ti,
+                   node_loc = ba)           
+    out["time_dest"] = out["time"]
+    out["node_dest"] = out["node_loc"]
+    
+    out_crop = out.copy(deep = True)
+    out_crop['technology'] = 'sp_el_crop_basin'+ur
+    out_crop['commodity'] = 'crop'+ur
+    sc.add_par('output', out_crop)
         
     sc.commit('new electricity transmission')
     print('New distribution and linkaged to basin\'s demand added')
     
-def add_offgrid_gen(sc):
+def add_offgrid_gen(sc,scen_name):
+    """ This function adds off-grid electricity generation technologies
+    
+    Parameters
+    ----------
+    sc : :class:`message_ix.Scenario`
+        Scenario to which changes should be applied.
+    scen_name : string
+        name of the specific LEAP-RE policy scenario
+
+    Returns
+    -------
+    None.
+
+    """
     
     # get some info needed
     first_year = sc.firstmodelyear
@@ -175,12 +221,22 @@ def add_offgrid_gen(sc):
     sc.add_set("technology",["offgrid_urb","offgrid_rur"])
     sc.add_set("level",["offgrid_final_urb","offgrid_final_rur"])
     
-    file = "energy_total_all.csv"
+    file = "energy_allocation_results_for_nest.csv"
     path_csv = private_data_path('projects','leap_re_nest',file)
     onsset_en = pd.read_csv(path_csv)
+    onsset_en = onsset_en[onsset_en["scenario"] == scen_name]
+    # interpolate missing years IT MIGHT CHANGE in FUTURE VERSION
+    onsset_en_int = (onsset_en
+       .pivot(index='year', columns=['BCU', 'tec', 'urb_rur', 
+                                     'scenario', 'unit'], 
+                                     values='value')
+       .reindex(range(onsset_en['year'].min(), onsset_en['year'].max()+1,10))
+       .interpolate('index')
+       .unstack(-1).reset_index(name='value')
+    )
     
-    strings = ["B"+ str(x) for x in onsset_en['BCU']]
-    onsset_en['BCU'] = strings
+    strings = ["B"+ str(x) for x in onsset_en_int['BCU']]
+    onsset_en_int['BCU'] = strings
     
     nodes = list(sc.set('node'))
     nodes_df = pd.DataFrame({
@@ -190,9 +246,13 @@ def add_offgrid_gen(sc):
     
     # Calculate the share of grid vs offgrid generation and use it to make a 
     # share constraints
-    df = onsset_en.merge(nodes_df,how = 'left')
+    df = onsset_en_int.merge(nodes_df,how = 'left')
     df_grid = df.copy()
-    df_grid["tec"][df_grid["tec"] != "grid"] = "offgrid"
+    # exclude unelectrified
+    df_grid = df_grid[df_grid["tec"] != "unelectrified"]
+    df_grid["tec"]=["offgrid" if x not in 
+                     ["grid_existing","grid_new"] else 
+                     "grid" for x in df_grid["tec"] ] 
     df_grid = (df_grid
          .groupby(['node','year','urb_rur',"tec"],as_index=False)
          .sum("value")
@@ -200,6 +260,7 @@ def add_offgrid_gen(sc):
     df_grid = (df_grid
          .groupby(['node','year','urb_rur'])
          .apply(lambda grp: grp.assign(share = lambda x: x.value / x.value.sum() ) )
+         .fillna(0)
     )
     df_grid["urb_rur"] = "_" + df_grid["urb_rur"]
     
@@ -208,16 +269,18 @@ def add_offgrid_gen(sc):
     # off-grid technology
     
     df_off = df.copy()
-    df_off = df_off[df_off["tec"] != "grid"]
+    df_off = df_off[~df_off.tec.isin(["grid_existing","grid_new","unelectrified"])]
     df_off = (df_off
          .groupby(['node','year','urb_rur'])
          .apply(lambda grp: grp.assign(share = lambda x: x.value / x.value.sum() ) )
+         .fillna(0)
     )
     
     # load file with investment cost assumption from OnSSET
     file = "OnSSET_cost_paramters.xlsx"
     path_xls = private_data_path('projects','leap_re_nest',file)
     tec_cost = pd.read_excel(path_xls, sheet_name="for_NEST")
+    avg_cost = int(tec_cost[tec_cost["tec"] == "average"]['inv_cost'])
     
     df_offc = df_off.merge(tec_cost,how = "left")
     df_offc['tot_cost'] = df_offc["share"] * df_offc["inv_cost"]
@@ -267,15 +330,15 @@ def add_offgrid_gen(sc):
         inv_t = (
             make_df( "inv_cost",
             technology = "offgrid" + ur,
-            # year_vtg = inv_df["year"], # to change once we have values for all years
+            year_vtg = inv_df["year"], 
             unit = "USD/kW",
             node_loc = inv_df["node"],
-            value = 3000 if inv_df.empty else  inv_df["tot_cost"]
+            value = avg_cost if inv_df.empty else  inv_df["tot_cost"]
             )
-        .pipe(broadcast, 
-              year_vtg = out_t.year_vtg.unique()
-              )
         )
+        
+        inv_df["tot_cost"][inv_df["tot_cost"] == 0 ] = avg_cost
+        inv_df["tot_cost"] = round(inv_df["tot_cost"],1)
         
         # add paramenters
         sc.add_par("output",out_t)
@@ -323,6 +386,7 @@ def add_offgrid_gen(sc):
         sc.add_par("output",out_f)
         
         # add share for the electricity use from df_gridd
+        # TODO simplyfy decimals
         sc.add_set("shares",["share_grid"])
         share_df = df_grid[df_grid['urb_rur'].str.contains(ur) ]
         share_df["share"][share_df["share"].isna() ] = 1
@@ -331,6 +395,7 @@ def add_offgrid_gen(sc):
         share_og["tec"] = "offgrid"
         share_og["share"] = 1 - share_og["share"]
         share_df = pd.concat([share_g,share_og])
+        share_df["share"] = round(share_df["share"],4)
         
         share_df["mode"] = np.where(share_df['tec'] == "grid", 'M1','M2')
         
@@ -343,11 +408,10 @@ def add_offgrid_gen(sc):
             node_share=share_df["node"],
             value=share_df["share"],
             unit="%",
-            # year_act=df_sw["year"], # to be fixed when we have annual values
+            year_act=share_df["year"], 
             )
             .pipe(broadcast,
-                  time = ti,
-                  year_act = out_t.year_vtg.unique() )
+                  time = ti)
         )
         
         sc.add_par("share_mode_up",share_f)
@@ -376,14 +440,14 @@ def calib_energy(sc,sc_cali):
     sc.commit("calibrating historical new capcity")
     print("Calibrated historical new caapcity added to the model")
     
-def main(sc):
+def main(sc,scen_name):
     """ Adding transmission technologies in the sub-nodes and off-grid generation
     """
     
     #load previous total demand in firstmodelyear
     
     add_trsm_dist_basin(sc)
-    add_offgrid_gen(sc)
+    add_offgrid_gen(sc,scen_name)
     
     # calibration
     sc_cali = sc.clone(sc.model, sc.scenario + '_cali',keep_solution=False)

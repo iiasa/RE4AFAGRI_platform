@@ -7,98 +7,77 @@ import pandas as pd
 import xarray as xr
 from message_ix import make_df
 
-from message_ix_models.util import broadcast, private_data_path
+from message_ix_models.util import broadcast, package_data_path
+
+
+def get_basin_sizes(basin, node):
+    """Returns the sizes of developing and developed basins for a given node"""
+    temp = basin[basin["BCU_name"] == node]
+    sizes = temp.pivot_table(index=["STATUS"], aggfunc="size")
+    return sizes["DEV"], sizes["IND"]
+
+
+def set_target_rate(df, node, year, target):
+    """Sets the target value for a given node and year"""
+    indices = df[df["node"] == node][df[df["node"] == node]["year"] == year].index
+    for index in indices:
+        if (
+            df[df["node"] == node][df[df["node"] == node]["year"] == year].at[
+                index, "value"
+            ]
+            < target
+        ):
+            df.at[index, "value"] = target
+
+
+def set_target_rate_developed(df, node, target):
+    """Sets target rate for a developed basin"""
+    set_target_rate(df, node, 2030, target)
+
+
+def set_target_rate_developing(df, node, target):
+    """Sets target rate for a developing basin"""
+    for i in df.index:
+        if df.at[i, "node"] == node and df.at[i, "year"] == 2030:
+            value_2030 = df.at[i, "value"]
+            break
+
+    set_target_rate(
+        df,
+        node,
+        2035,
+        (value_2030 + target) / 2,
+    )
+    set_target_rate(df, node, 2040, target)
+
+
+def set_target_rates(df, basin, val):
+    """Sets target rates for all nodes in a given basin"""
+    for node in df.node.unique():
+        dev_size, ind_size = get_basin_sizes(basin, node)
+        if dev_size >= ind_size:
+            set_target_rate_developed(df, node, val)
+        else:
+            set_target_rate_developing(df, node, val)
 
 
 def target_rate(df, basin, val):
     """
-    Sets target connection and sanitation rates for SDG scenario
-    It filters out the basins as developing and developed baed on the countries
-    overlapping basins. If the numbers of developing countries in the basins are
-    more than basin is cateogirzez as developing and vice versa.
-    If the number of developing and developed countries are equal in a basin, then
-    the basin is assumed developing.
-    For developed basins target is set at 2030.
-    For developing basins, the access target is set at 2040 and 2035 target is the average of
+    Sets target connection and sanitation rates for SDG scenario.
+    The function filters out the basins as developing and
+    developed based on the countries overlapping basins.
+    If the number of developing countries in the basins are
+    more than basin is categorized as developing and vice versa.
+    If the number of developing and developed countries are equal
+    in a basin, then the basin is assumed developing.
+    For developed basins, target is set at 2030.
+    For developing basins, the access target is set at
+    2040 and 2035 target is the average of
     2030 original rate and 2040 target.
-    Returns
-    -------
-    data : dict of (str -> pandas.DataFrame)
+    Returns:
+        df (pandas.DataFrame): Data frame with updated value column.
     """
-    value = []
-    for i in df.node.unique():
-        temp = basin[basin["BCU_name"] == i]
-
-        sizes = temp.pivot_table(index=["STATUS"], aggfunc="size")
-
-        if len(sizes) > 1:
-            if sizes["DEV"] > sizes["IND"] or sizes["DEV"] == sizes["IND"]:
-                # for j in urban[urban["node"] == i][urban[urban["node"] == i]["year"] == 2030].index:
-                #      if urban[urban["node"] == i][urban[urban["node"] == i]["year"] == 2030].at[j, "value"] < np.float64(0.75):
-                #          value.append([j, np.float64(0.75)])
-
-                for ind, j in enumerate(
-                    df[df["node"] == i][df[df["node"] == i]["year"] == 2030].index
-                ):
-                    jj = df[df["node"] == i][df[df["node"] == i]["year"] == 2035].index
-                    temp = (
-                        df[df["node"] == i][df[df["node"] == i]["year"] == 2030].at[
-                            j, "value"
-                        ]
-                        + val
-                    ) / 2
-                    value.append([jj[ind], np.float64(temp)])
-
-                for j in df[df["node"] == i][df[df["node"] == i]["year"] >= 2040].index:
-                    if df[df["node"] == i][df[df["node"] == i]["year"] >= 2040].at[
-                        j, "value"
-                    ] < np.float64(val):
-                        value.append([j, np.float64(val)])
-            else:
-                for j in df[df["node"] == i][df[df["node"] == i]["year"] >= 2030].index:
-                    if df[df["node"] == i][df[df["node"] == i]["year"] >= 2030].at[
-                        j, "value"
-                    ] < np.float64(val):
-                        value.append([j, np.float64(val)])
-        else:
-            if sizes.index[0] == "DEV":
-                # for j in urban[urban["node"] == i][urban[urban["node"] == i]["year"] == 2030].index:
-                #       if urban[urban["node"] == i][urban[urban["node"] == i]["year"] == 2030].at[j, "value"] < np.float64(0.75):
-                #           value.append([j, np.float64(0.75)])
-
-                for ind, j in enumerate(
-                    df[df["node"] == i][df[df["node"] == i]["year"] == 2030].index
-                ):
-                    jj = df[df["node"] == i][df[df["node"] == i]["year"] == 2035].index
-                    temp = (
-                        df[df["node"] == i][df[df["node"] == i]["year"] == 2030].at[
-                            j, "value"
-                        ]
-                        + val
-                    ) / 2
-                    value.append([jj[ind], np.float64(temp)])
-
-                for j in df[df["node"] == i][df[df["node"] == i]["year"] >= 2040].index:
-                    if df[df["node"] == i][df[df["node"] == i]["year"] >= 2040].at[
-                        j, "value"
-                    ] < np.float64(val):
-                        value.append([j, np.float64(val)])
-            else:
-                for j in df[df["node"] == i][df[df["node"] == i]["year"] >= 2030].index:
-                    if df[df["node"] == i][df[df["node"] == i]["year"] >= 2030].at[
-                        j, "value"
-                    ] < np.float64(val):
-                        value.append([j, np.float64(val)])
-    valuetest = pd.DataFrame(data=value, columns=["Index", "Value"])
-
-    for i in range(len(valuetest["Index"])):
-        df.at[valuetest["Index"][i], "Value"] = valuetest["Value"][i]
-
-    real_value = df["Value"].combine_first(df["value"])
-
-    df.drop(["value", "Value"], axis=1, inplace=True)
-    df["value"] = real_value
-
+    set_target_rates(df, basin, val)
     return df
 
 
@@ -184,9 +163,9 @@ def add_sectoral_demands(context):
     # defines path to read in demand data
     region = f"{context.regions}"
     sub_time = context.time
-    path = private_data_path("water", "demands", "harmonized", region, ".")
+    path = package_data_path("water", "demands", "harmonized", region, ".")
     # make sure all of the csvs have format, otherwise it might not work
-    list_of_csvs = list(path.glob("*_baseline.csv"))
+    list_of_csvs = list(path.glob("ssp2_regional_*.csv"))
     # define names for variables
     fns = [os.path.splitext(os.path.basename(x))[0] for x in list_of_csvs]
     fns = " ".join(fns).replace("ssp2_regional_", "").split()
@@ -224,7 +203,7 @@ def add_sectoral_demands(context):
     # if we are using sub-annual timesteps we replace the rural and municipal
     # withdrawals and return flows with monthly data and also add industrial
     if "year" not in context.time:
-        PATH = private_data_path(
+        PATH = package_data_path(
             "water", "demands", "harmonized", region, "ssp2_m_water_demands.csv"
         )
         df_m = pd.read_csv(PATH)
@@ -300,31 +279,63 @@ def add_sectoral_demands(context):
         ]
     )
 
-    if context.SDG:
-        # reading basin mapping to countries
-        FILE2 = f"basins_country_{context.regions}.csv"
-        PATH = private_data_path("water", "delineation", FILE2)
+    if context.SDG != "baseline":
+        # only if SDG exactly equal to SDG, otherwise other policies are possible
+        if context.SDG == "SDG":
+            # reading basin mapping to countries
+            FILE2 = f"basins_country_{context.regions}.csv"
+            PATH = package_data_path("water", "delineation", FILE2)
 
-        df_basin = pd.read_csv(PATH)
+            df_basin = pd.read_csv(PATH)
 
-        # Applying 80% sanitation rate for rural sanitation
-        rural_treatment_rate_df = rural_treatment_rate_df_sdg = target_rate(
-            rural_treatment_rate_df, df_basin, 0.8
-        )
-        # Applying 95% sanitation rate for urban sanitation
-        urban_treatment_rate_df = urban_treatment_rate_df_sdg = target_rate(
-            urban_treatment_rate_df, df_basin, 0.95
-        )
-        # Applying 99% connection rate for urban infrastructure
-        urban_connection_rate_df = urban_connection_rate_df_sdg = target_rate(
-            urban_connection_rate_df, df_basin, 0.99
-        )
-        # Applying 80% connection rate for rural infrastructure
-        rural_connection_rate_df = rural_connection_rate_df_sdg = target_rate(
-            rural_connection_rate_df, df_basin, 0.8
-        )
-        # Applying sdg6 waste water treatment target
-        df_recycling = df_recycling_sdg = target_rate_trt(df_recycling, df_basin)
+            # Applying 80% sanitation rate for rural sanitation
+            rural_treatment_rate_df = rural_treatment_rate_df_sdg = target_rate(
+                rural_treatment_rate_df, df_basin, 0.8
+            )
+            # Applying 95% sanitation rate for urban sanitation
+            urban_treatment_rate_df = urban_treatment_rate_df_sdg = target_rate(
+                urban_treatment_rate_df, df_basin, 0.95
+            )
+            # Applying 99% connection rate for urban infrastructure
+            urban_connection_rate_df = urban_connection_rate_df_sdg = target_rate(
+                urban_connection_rate_df, df_basin, 0.99
+            )
+            # Applying 80% connection rate for rural infrastructure
+            rural_connection_rate_df = rural_connection_rate_df_sdg = target_rate(
+                rural_connection_rate_df, df_basin, 0.8
+            )
+            # Applying sdg6 waste water treatment target
+            df_recycling = df_recycling_sdg = target_rate_trt(df_recycling, df_basin)
+
+        else:
+            pol_scen = context.SDG
+
+            # check if data is there
+            check_dm = df_dmds[df_dmds["variable"] == "urban_connection_rate_" + pol_scen]
+            if check_dm.empty:
+                raise ValueError(f"Policy data is missing for the {pol_scen} scenario.")
+            urban_connection_rate_df = urban_connection_rate_df_sdg = df_dmds[
+                df_dmds["variable"] == "urban_connection_rate_" + pol_scen
+            ]
+            urban_connection_rate_df.reset_index(drop=True, inplace=True)
+            rural_connection_rate_df = rural_connection_rate_df_sdg = df_dmds[
+                df_dmds["variable"] == "rural_connection_rate_" + pol_scen
+            ]
+            rural_connection_rate_df.reset_index(drop=True, inplace=True)
+
+            urban_treatment_rate_df = urban_treatment_rate_df_sdg = df_dmds[
+                df_dmds["variable"] == "urban_treatment_rate_" + pol_scen
+            ]
+            urban_treatment_rate_df.reset_index(drop=True, inplace=True)
+
+            rural_treatment_rate_df = rural_treatment_rate_df_sdg = df_dmds[
+                df_dmds["variable"] == "rural_treatment_rate_" + pol_scen
+            ]
+            rural_treatment_rate_df.reset_index(drop=True, inplace=True)
+
+            df_recycling = df_recycling_sdg = df_dmds[
+                df_dmds["variable"] == "urban_recycling_rate_" + pol_scen]
+            df_recycling.reset_index(drop=True, inplace=True)
 
         all_rates_sdg = pd.concat(
             [
@@ -336,10 +347,10 @@ def add_sectoral_demands(context):
             ]
         )
         all_rates_sdg["variable"] = [
-            x.replace("baseline", "sdg") for x in all_rates_sdg["variable"]
+            x.replace("baseline", pol_scen) for x in all_rates_sdg["variable"]
         ]
         all_rates = pd.concat([all_rates_base, all_rates_sdg])
-        save_path = private_data_path("water", "demands", "harmonized", context.regions)
+        save_path = package_data_path("water", "demands", "harmonized", context.regions)
         # save all the rates for reporting purposes
         all_rates.to_csv(save_path / "all_rates_SSP2.csv", index=False)
 
@@ -581,7 +592,8 @@ def add_sectoral_demands(context):
         "industry_untreated",
         "rural_untreated",
     ]
-    # create a new column and use np.select to assign values to it using our lists as arguments
+    # create a new column and use np.select to assign
+    # values to it using our lists as arguments
     h_act["commodity"] = np.select(conditions, values)
     h_act["value"] = h_act["value"].abs()
 
@@ -686,9 +698,9 @@ def add_sectoral_demands(context):
 
 def read_water_availability(context):
     """
-    Reads water availability data and bias correct it for the historical years and no climate
+    Reads water availability data and bias correct
+    it for the historical years and no climate
     scenario assumptions.
-
 
     Parameters
     ----------
@@ -703,22 +715,20 @@ def read_water_availability(context):
     # Reference to the water configuration
     info = context["water build info"]
     # reading sample for assiging basins
-    # info = context["water build info"]
-
-    PATH = private_data_path(
+    PATH = package_data_path(
         "water", "delineation", f"basins_by_region_simpl_{context.regions}.csv"
     )
     df_x = pd.read_csv(PATH)
 
     if "year" in context.time:
         # path for reading basin delineation file
-        PATH = private_data_path(
+        PATH = package_data_path(
             "water", "delineation", f"basins_by_region_simpl_{context.regions}.csv"
         )
         df_x = pd.read_csv(PATH)
         # Adding freshwater supply constraints
         # Reading data, the data is spatially and temprally aggregated from GHMs
-        path1 = private_data_path(
+        path1 = package_data_path(
             "water",
             "availability",
             f"qtot_5y_{context.RCP}_{context.REL}_{context.regions}.csv",
@@ -741,7 +751,7 @@ def read_water_availability(context):
 
         # Adding groundwater supply constraints
         # Reading data, the data is spatially and temprally aggregated from GHMs
-        path1 = private_data_path(
+        path1 = package_data_path(
             "water",
             "availability",
             f"qr_5y_{context.RCP}_{context.REL}_{context.regions}.csv",
@@ -765,7 +775,7 @@ def read_water_availability(context):
     else:
         # Adding freshwater supply constraints
         # Reading data, the data is spatially and temprally aggregated from GHMs
-        path1 = private_data_path(
+        path1 = package_data_path(
             "water",
             "availability",
             f"qtot_5y_m_{context.RCP}_{context.REL}_{context.regions}.csv",
@@ -787,7 +797,7 @@ def read_water_availability(context):
         df_sw = df_sw[df_sw["year"].isin(info.Y)]
 
         # Reading data, the data is spatially and temporally aggregated from GHMs
-        path1 = private_data_path(
+        path1 = package_data_path(
             "water",
             "availability",
             f"qr_5y_m_{context.RCP}_{context.REL}_{context.regions}.csv",
@@ -823,8 +833,6 @@ def add_water_availability(context):
         Keys are MESSAGE parameter names such as 'input', 'fix_cost'. Values
         are data frames ready for :meth:`~.Scenario.add_par`.
     """
-    # Reference to the water configuration
-    info = context["water build info"]
 
     # define an empty dictionary
     results = {}

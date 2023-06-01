@@ -8,13 +8,13 @@ from message_ix_models.model.water.data.water_supply import map_basin_region_wat
 from message_ix_models.util import (
     broadcast,
     make_matched_dfs,
-    private_data_path,
+    package_data_path,
     same_node,
 )
 
 
 # water & electricity for cooling technologies
-def cool_tech(context):
+def cool_tech(context):  # noqa: C901
     """Process cooling technology data for a scenario instance.
     The input values of parent technologies are read in from a scenario instance and
     then cooling fractions are calculated by using the data from
@@ -33,6 +33,7 @@ def cool_tech(context):
         Years in the data include the model horizon indicated by
         ``context["water build info"]``, plus the additional year 2010.
     """
+    # TODO reduce complexity of this function from 18 to 15 or less
     #: Name of the input file.
     # The input file mentions water withdrawals and emission heating fractions for
     # cooling technologies alongwith parent technologies:
@@ -54,7 +55,7 @@ def cool_tech(context):
 
     # reading basin_delineation
     FILE2 = f"basins_by_region_simpl_{context.regions}.csv"
-    PATH = private_data_path("water", "delineation", FILE2)
+    PATH = package_data_path("water", "delineation", FILE2)
 
     df_node = pd.read_csv(PATH)
     # Assigning proper nomenclature
@@ -67,7 +68,7 @@ def cool_tech(context):
 
     node_region = df_node["region"].unique()
     # reading ppl cooling tech dataframe
-    path = private_data_path("water", "ppl_cooling_tech", FILE)
+    path = package_data_path("water", "ppl_cooling_tech", FILE)
     df = pd.read_csv(path)
     cooling_df = df.loc[df["technology_group"] == "cooling"]
     # Separate a column for parent technologies of respective cooling
@@ -341,7 +342,7 @@ def cool_tech(context):
         results["output"] = out
 
     # costs and historical parameters
-    path1 = private_data_path("water", "ppl_cooling_tech", FILE1)
+    path1 = package_data_path("water", "ppl_cooling_tech", FILE1)
     cost = pd.read_csv(path1)
     # Combine technology name to get full cooling tech names
     cost["technology"] = cost["utype"] + "__" + cost["cooling"]
@@ -655,13 +656,15 @@ def cool_tech(context):
 
     cap_fact = make_matched_dfs(inp, capacity_factor=1)
     # Climate Impacts on freshwater cooling capacity
-    # Taken from https://www.sciencedirect.com/science/article/pii/S0959378016301236?via%3Dihub#sec0080
+    # Taken from
+    # https://www.sciencedirect.com/science/article/
+    #  pii/S0959378016301236?via%3Dihub#sec0080
     if context.RCP == "no_climate":
         df = cap_fact["capacity_factor"]
     else:
         df = cap_fact["capacity_factor"]
         # reading ppl cooling impact dataframe
-        path = private_data_path(
+        path = package_data_path(
             "water", "ppl_cooling_tech", "power_plant_cooling_impact_MESSAGE.xlsx"
         )
         df_impact = pd.read_excel(path, sheet_name=f"{context.regions}_{context.RCP}")
@@ -756,7 +759,7 @@ def non_cooling_tec(context):
     results = {}
 
     FILE = "tech_water_performance_ssp_msg.csv"
-    path = private_data_path("water", "ppl_cooling_tech", FILE)
+    path = package_data_path("water", "ppl_cooling_tech", FILE)
     df = pd.read_csv(path)
     cooling_df = df.loc[df["technology_group"] == "cooling"]
     # Separate a column for parent technologies of respective cooling
