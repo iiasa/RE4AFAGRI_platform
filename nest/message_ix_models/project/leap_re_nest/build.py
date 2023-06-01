@@ -32,28 +32,28 @@ from message_ix_models.model.water.reporting import report
 
 # load a scenario
 # IIASA users
-mp = ix.Platform(name='ixmp_dev' , jvmargs=['-Xmx14G'])
+# mp = ix.Platform(name='ixmp_dev' , jvmargs=['-Xmx14G'])
 # external users
-# mp2 = ix.Platform(name='local' , jvmargs=['-Xmx14G'])
+mp = ix.Platform(name='local' , jvmargs=['-Xmx14G'])
 
 modelName = 'MESSAGEix_ZM'
 scenarioName = 'single_node' 
 scen2Name = 'sub-units'
 
 # IIASA users
-sc_ref = message_ix.Scenario(mp, modelName, scenarioName,cache=True)
+# sc_ref = message_ix.Scenario(mp, modelName, scenarioName,cache=True)
 mp.add_unit("km3/month")
 mp.add_unit("GWa/month")
 # sc_ref.to_excel(private_data_path("projects","leap_re_nest","ref_scen.xlsx") )
 # # external users in local database
-# sc_ref2 = message_ix.Scenario(mp2, modelName, "test", version='new',annotation="load from excel")
+sc_ref = message_ix.Scenario(mp, modelName, "test", version='new',annotation="load from excel")
 
-# sc_ref2.read_excel(private_data_path("projects","leap_re_nest","ref_scen.xlsx"),
-#                     add_units=True,
-#                     init_items=True,
-#                     commit_steps=True)
-# sc_ref2.commit("")
-# sc_ref2.solve(solve_options={"lpmethod": "4"},model="MESSAGE")
+sc_ref.read_excel(private_data_path("projects","leap_re_nest","ref_scen.xlsx"),
+                    add_units=True,
+                    init_items=True,
+                    commit_steps=True)
+sc_ref.commit("")
+sc_ref.solve(solve_options={"lpmethod": "4"},model="MESSAGE")
 
 # for all
 sc = sc_ref.clone(modelName, scen2Name,keep_solution=False)
