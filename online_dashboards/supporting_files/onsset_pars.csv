@@ -1,0 +1,6 @@
+pars,techs
+new_capacity,sh_grid
+tot_inv,sh_SA_PV
+,sh_MG_Hydro
+,sh_MG_PV
+,sh_MG_Wind

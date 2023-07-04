@@ -43,6 +43,7 @@ clusters <- dplyr::select(clusters, colnames(clusters)[colnames(clusters) %in% c
 # pop_start_un
 
 un_pop <- 13600000  
+ele_rate =  0.49 
 
 clusters$pop_start_un <- clusters$population * (un_pop / sum(clusters$population, na.rm=T))
 
@@ -86,7 +87,23 @@ clusters$elec_pop <- exact_extract(ntl_s, clusters, "sum", max_cells_in_memory= 
 clusters$elecpop_start_un <- clusters$elecperc * clusters$pop_start_un
 clusters$elecpop_start_worldpop <- clusters$elecperc * clusters$pop_start_worldpop
 
-# isurban
+#####
+
+# calibrate electrification rate
+electrification_rate_modelled <- sum(clusters$elecpop_start_un, na.rm=T) / sum(clusters$pop_start_un, na.rm=T)
+electrification_rate_adjustment_factor = ele_rate / electrification_rate_modelled
+clusters$elecpop_start_un = clusters$elecpop_start_un * electrification_rate_adjustment_factor
+
+electrification_rate_modelled <- sum(clusters$elecpop_start_worldpop, na.rm=T) / sum(clusters$pop_start_worldpop, na.rm=T)
+electrification_rate_adjustment_factor = ele_rate / electrification_rate_modelled
+clusters$elecpop_start_worldpop = clusters$elecpop_start_worldpop * electrification_rate_adjustment_factor
+
+electrification_rate_modelled <- sum(clusters$elec_pop, na.rm=T) / sum(clusters$population, na.rm=T)
+electrification_rate_adjustment_factor = ele_rate / electrification_rate_modelled
+clusters$elec_pop = clusters$elec_pop * electrification_rate_adjustment_factor
+
+
+# isurban 
 
 clusters = dplyr::arrange(clusters, -population)
 
@@ -111,6 +128,7 @@ clusters = dplyr::arrange(clusters, id)
 
 # split big big clusters in very dense areas using administrative units
 
+file.remove("rwanda/clusters_Rwanda_GRID3_above5population.gpkg")
 write_sf(clusters, "rwanda/clusters_Rwanda_GRID3_above5population.gpkg")
 
 
@@ -128,6 +146,7 @@ clusters <- dplyr::select(clusters, colnames(clusters)[colnames(clusters) %in% c
 # pop_start_un
 
 un_pop <- 16320537  
+ele_rate =  0.49 
 
 clusters$pop_start_un <- clusters$population * (un_pop / sum(clusters$population, na.rm=T))
 
@@ -171,6 +190,19 @@ clusters$elec_pop <- exact_extract(ntl_s, clusters, "sum", max_cells_in_memory= 
 clusters$elecpop_start_un <- clusters$elecperc * clusters$pop_start_un
 clusters$elecpop_start_worldpop <- clusters$elecperc * clusters$pop_start_worldpop
 
+# calibrate electrification rate
+electrification_rate_modelled <- sum(clusters$elecpop_start_un, na.rm=T) / sum(clusters$pop_start_un, na.rm=T)
+electrification_rate_adjustment_factor = ele_rate / electrification_rate_modelled
+clusters$elecpop_start_un = clusters$elecpop_start_un * electrification_rate_adjustment_factor
+
+electrification_rate_modelled <- sum(clusters$elecpop_start_worldpop, na.rm=T) / sum(clusters$pop_start_worldpop, na.rm=T)
+electrification_rate_adjustment_factor = ele_rate / electrification_rate_modelled
+clusters$elecpop_start_worldpop = clusters$elecpop_start_worldpop * electrification_rate_adjustment_factor
+
+electrification_rate_modelled <- sum(clusters$elec_pop, na.rm=T) / sum(clusters$population, na.rm=T)
+electrification_rate_adjustment_factor = ele_rate / electrification_rate_modelled
+clusters$elec_pop = clusters$elec_pop * electrification_rate_adjustment_factor
+
 # isurban
 
 clusters = dplyr::arrange(clusters, -population)
@@ -196,6 +228,7 @@ clusters = dplyr::arrange(clusters, id)
 
 # split big big clusters in very dense areas using administrative units
 
+file.remove("zimbabwe/clusters_Zimbabwe_GRID3_above5population.gpkg")
 write_sf(clusters, "zimbabwe/clusters_Zimbabwe_GRID3_above5population.gpkg")
 
 
@@ -214,6 +247,7 @@ clusters <- dplyr::select(clusters, colnames(clusters)[colnames(clusters) %in% c
 # pop_start_un
 
 un_pop <- 218541212  
+ele_rate =  0.6 
 
 clusters$pop_start_un <- clusters$population * (un_pop / sum(clusters$population, na.rm=T))
 
@@ -257,6 +291,19 @@ clusters$elec_pop <- exact_extract(ntl_s, clusters, "sum", max_cells_in_memory= 
 clusters$elecpop_start_un <- clusters$elecperc * clusters$pop_start_un
 clusters$elecpop_start_worldpop <- clusters$elecperc * clusters$pop_start_worldpop
 
+# calibrate electrification rate
+electrification_rate_modelled <- sum(clusters$elecpop_start_un, na.rm=T) / sum(clusters$pop_start_un, na.rm=T)
+electrification_rate_adjustment_factor = ele_rate / electrification_rate_modelled
+clusters$elecpop_start_un = clusters$elecpop_start_un * electrification_rate_adjustment_factor
+
+electrification_rate_modelled <- sum(clusters$elecpop_start_worldpop, na.rm=T) / sum(clusters$pop_start_worldpop, na.rm=T)
+electrification_rate_adjustment_factor = ele_rate / electrification_rate_modelled
+clusters$elecpop_start_worldpop = clusters$elecpop_start_worldpop * electrification_rate_adjustment_factor
+
+electrification_rate_modelled <- sum(clusters$elec_pop, na.rm=T) / sum(clusters$population, na.rm=T)
+electrification_rate_adjustment_factor = ele_rate / electrification_rate_modelled
+clusters$elec_pop = clusters$elec_pop * electrification_rate_adjustment_factor
+
 # isurban
 
 clusters = dplyr::arrange(clusters, -population)
@@ -282,6 +329,7 @@ clusters = dplyr::arrange(clusters, id)
 
 # split big big clusters in very dense areas using administrative units
 
+file.remove("nigeria/clusters_Nigeria_GRID3_above5population.gpkg")
 write_sf(clusters, "nigeria/clusters_Nigeria_GRID3_above5population.gpkg")
 
 ###########
@@ -298,6 +346,7 @@ clusters <- dplyr::select(clusters, colnames(clusters)[colnames(clusters) %in% c
 # pop_start_un
 
 un_pop <- 54027487  
+ele_rate =  0.77 
 
 clusters$pop_start_un <- clusters$population * (un_pop / sum(clusters$population, na.rm=T))
 
@@ -341,6 +390,19 @@ clusters$elec_pop <- exact_extract(ntl_s, clusters, "sum", max_cells_in_memory= 
 clusters$elecpop_start_un <- clusters$elecperc * clusters$pop_start_un
 clusters$elecpop_start_worldpop <- clusters$elecperc * clusters$pop_start_worldpop
 
+# calibrate electrification rate
+electrification_rate_modelled <- sum(clusters$elecpop_start_un, na.rm=T) / sum(clusters$pop_start_un, na.rm=T)
+electrification_rate_adjustment_factor = ele_rate / electrification_rate_modelled
+clusters$elecpop_start_un = clusters$elecpop_start_un * electrification_rate_adjustment_factor
+
+electrification_rate_modelled <- sum(clusters$elecpop_start_worldpop, na.rm=T) / sum(clusters$pop_start_worldpop, na.rm=T)
+electrification_rate_adjustment_factor = ele_rate / electrification_rate_modelled
+clusters$elecpop_start_worldpop = clusters$elecpop_start_worldpop * electrification_rate_adjustment_factor
+
+electrification_rate_modelled <- sum(clusters$elec_pop, na.rm=T) / sum(clusters$population, na.rm=T)
+electrification_rate_adjustment_factor = ele_rate / electrification_rate_modelled
+clusters$elec_pop = clusters$elec_pop * electrification_rate_adjustment_factor
+
 # isurban
 
 clusters = dplyr::arrange(clusters, -population)
@@ -366,5 +428,6 @@ clusters = dplyr::arrange(clusters, id)
 
 # split big big clusters in very dense areas using administrative units
 
+file.remove("kenya/clusters_Kenya_GRID3_above5population.gpkg")
 write_sf(clusters, "kenya/clusters_Kenya_GRID3_above5population.gpkg")
 

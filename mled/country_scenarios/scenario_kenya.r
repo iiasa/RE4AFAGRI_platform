@@ -363,8 +363,6 @@ rm(v); gc()
 mining_sites <- read_sf(find_it("global_mining_polygons_v2.gpkg"))
 mining_sites <- filter(mining_sites, COUNTRY_NAME == countryname)  
 
-traveltime_market = ee$Image("Oxford/MAP/accessibility_to_cities_2015_v1_0")
-
 # Import diesel price layer (In each pixel: 2015 prices baseline , cost per transporting it from large cities)
 diesel_price = raster(find_it('diesel_price_baseline_countryspecific.tif'))
 diesel_price <- mask_raster_to_polygon(diesel_price, gadm0)
