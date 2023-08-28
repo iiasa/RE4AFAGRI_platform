@@ -1,12 +1,7 @@
-##------ Tue Mar 28 16:58:22 2023 ------##starting scenario module
-##------ Tue Mar 28 16:59:12 2023 ------##starting RWI to GDP capita
-##------ Tue Mar 28 17:00:50 2023 ------##starting SSP project
-##------ Tue Mar 28 17:08:45 2023 ------##Calibrating urban rates
-##------ Tue Mar 28 17:10:58 2023 ------##starting calibration module
-##------ Tue Mar 28 17:10:58 2023 ------##starting electricity access module
-##------ Tue Mar 28 17:13:52 2023 ------##starting clusters voronoi
-##------ Tue Mar 28 17:29:13 2023 ------##starting crop module
-##------ Tue Mar 28 18:17:53 2023 ------##starting pumping module
-##------ Tue Mar 28 19:26:12 2023 ------##starting offgrid crop module
-##------ Tue Mar 28 20:14:36 2023 ------##starting offgrid offgrid pumping module
-##------ Tue Mar 28 20:28:07 2023 ------##starting mining module
+##------ Mon Aug 28 08:28:07 2023 ------##starting scenario module
+##------ Mon Aug 28 08:30:09 2023 ------##starting RWI to GDP capita
+##------ Mon Aug 28 08:43:23 2023 ------##starting SSP project
+##------ Mon Aug 28 09:00:09 2023 ------##Calibrating urban rates
+##------ Mon Aug 28 09:06:41 2023 ------##starting calibration module
+##------ Mon Aug 28 09:06:41 2023 ------##starting electricity access module
+##------ Mon Aug 28 09:09:11 2023 ------##starting clusters voronoi

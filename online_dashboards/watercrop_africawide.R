@@ -14,6 +14,9 @@ clusters <- read_sf("online_dashboards/supporting_files/gadm_410-level_2.gpkg")
 
 ###
 
+rasterOptions(tmpdir = "L:/Falchetta")
+write("TMP = 'L:/Falchetta", file=file.path(Sys.getenv('R_USER'), '.Renviron'))
+
 input_folder <- "F:/Il mio Drive/MLED_database/input_folder/"
 
 watercrop_unit <- "m3"
@@ -25,10 +28,6 @@ for (scenario in c("baseline", "improved_access", "ambitious_development")){
 rainfed <- list.files(paste0(input_folder, "watercrop"), full.names = T, pattern = "watergap", recursive=T) %>% .[grepl(ifelse(scenario=="baseline", "scen1", ifelse(scenario=="improved_access", "scen2", "scen3")), .)]
 
 irrigated <- list.files(paste0(input_folder, "watercrop"), full.names = T, pattern = "waterwith", recursive=T) %>% .[grepl(ifelse(scenario=="baseline", "scen1", ifelse(scenario=="improved_access", "scen2", "scen3")), .)]
-
-yield <- list.files(paste0(input_folder, "watercrop"), full.names = T, pattern = "yield_avg_ton", recursive=T) %>% .[grepl(ifelse(scenario=="baseline", "scen1", ifelse(scenario=="improved_access", "scen2", "scen3")), .)]
-
-yg_potential <- list.files(paste0(input_folder, "watercrop"), full.names = T, pattern = "yield_avg_closure", recursive=T) %>% .[grepl(ifelse(scenario=="baseline", "scen1", ifelse(scenario=="improved_access", "scen2", "scen3")), .)]
 
 ####
 
@@ -142,25 +141,63 @@ for (timestep in planning_year){
     
     irrigated_sum[[as.character(timestep)]][[m]] <- do.call("sum", c(lapply(1:nlayers(files), function(X){irrigated[[X]][[((match(timestep, planning_year) - 1) * 12) + m]]}), na.rm = TRUE))
     
-  }
+  }}
+
+##########
+
+rainfed_sum_bycrop <- list()
+
+for (timestep in planning_year){
+  for (crop in 1:length(rainfed)){
+    rainfed_sum_bycrop[[as.character(timestep)]][[crop]] <- sum(rainfed[[crop]][[c(1:12)+(12*((match(timestep, planning_year)-1)))]])
+  }}
+
+irrigated_sum_bycrop <- list()
+
+for (timestep in planning_year){
+  for (crop in 1:length(irrigated)){
+    irrigated_sum_bycrop[[as.character(timestep)]][[crop]] <- sum(irrigated[[crop]][[c(1:12)+(12*((match(timestep, planning_year)-1)))]])
+  }}
+
+#############
+
+for (timestep in planning_year){
   
-  outs <- lapply(1:12, function(i){  exact_extract(rainfed_sum[[match(timestep, planning_year)]][[i]], clusters, "sum")})
+  outs <- lapply(1:length(rainfed), function(i){  exact_extract(rainfed_sum_bycrop[[match(timestep, planning_year)]][[i]], clusters, "sum")})
   
-  outs2 <- lapply(1:12, function(i){  exact_extract(irrigated_sum[[match(timestep, planning_year)]][[i]], clusters, "sum")})
+  outs2 <- lapply(1:length(rainfed), function(i){  exact_extract(irrigated_sum_bycrop[[match(timestep, planning_year)]][[i]], clusters, "sum")})
   
-  for (i in 1:12){
+  for (i in 1:length(rainfed)){
     
-    clusters[paste0('IRREQ_irrigated_total' , "_" , as.character(i), "_", timestep, "_", scenario)] <- outs2[[i]]
+    clusters[paste0('IRREQ_irrigated_' , c("barl", "cass", "coco", "cott", "grou", "maiz", "pmil", "smil", "oilp", "pota", "rape", "rice", "sorg", "soyb", "sugb", "sugc", "sunf", "whea", "yams")[i] , "_" , "Yearly", "_", timestep, "_", scenario)] <- outs2[[i]]
     
-    clusters[paste0('IRREQ_rainfed_total' , "_" , as.character(i), "_", timestep, "_", scenario)] <- outs[[i]]
+    clusters[paste0('IRREQ_rainfed_' , c("barl", "cass", "coco", "cott", "grou", "maiz", "pmil", "smil", "oilp", "pota", "rape", "rice", "sorg", "soyb", "sugb", "sugc", "sunf", "whea", "yams")[i] , "_" , "Yearly", "_", timestep, "_", scenario)] <- outs[[i]]
     
-    
-  }
+  }}
+
+##########################
+##########################
+##########################
+
+for (timestep in planning_year){
   
-  aa <- clusters
-  aa$geometry=NULL
-  aa$x=NULL
-  aa$geom=NULL
+    outs <- lapply(1:12, function(i){  exact_extract(rainfed_sum[[match(timestep, planning_year)]][[i]], clusters, "sum")})
+    
+    outs2 <- lapply(1:12, function(i){  exact_extract(irrigated_sum[[match(timestep, planning_year)]][[i]], clusters, "sum")})
+    
+    for (i in 1:12){
+      
+      clusters[paste0('IRREQ_irrigated_total' , "_" , as.character(i), "_", timestep, "_", scenario)] <- outs2[[i]]
+      
+      clusters[paste0('IRREQ_rainfed_total' , "_" , as.character(i), "_", timestep, "_", scenario)] <- outs[[i]]
+      
+      
+    }
+    
+    aa <- clusters
+    aa$geometry=NULL
+    aa$x=NULL
+    aa$geom=NULL
   
   clusters[paste0('IRREQ_irrigated' , "_total_Yearly_",  timestep, "_", scenario)] <- rowSums(dplyr::select(aa, starts_with("IRREQ_irrigated_total") & contains(as.character(timestep))& contains(as.character(scenario))))
   
@@ -186,11 +223,79 @@ for (timestep in planning_year){
     
     ##########################
     
-clusters <- bind_cols(outs, outs2)
+clusters <- bind_cols(clusters, outs, outs2)
+clusters <- st_as_sf(clusters)
+    
+}
+
+####
+
+# adjust yield extraction
+
+
+####
+
+for (scenario in c("baseline", "improved_access", "ambitious_development")){
   
+  print(scenario)
+  
+  yield <- list.files(paste0(input_folder, "watercrop"), full.names = T, pattern = "yield_avg_ton", recursive=T) %>% .[grepl(ifelse(scenario=="baseline", "scen1", ifelse(scenario=="improved_access", "scen2", "scen3")), .)]
+  
+  yg_potential <- list.files(paste0(input_folder, "watercrop"), full.names = T, pattern = "yield_avg_closure", recursive=T) %>% .[grepl(ifelse(scenario=="baseline", "scen1", ifelse(scenario=="improved_access", "scen2", "scen3")), .)]
+  
+  ####
+  
+  yield2 <- lapply(yield, raster)
+  yield2 <- stack(yield2)
+  crs(yield2) <- as.character(CRS("+init=epsg:4236"))
+  yield2 <- as.list(yield2)
+  
+  ####
+  
+  yield2 <- split(yield2, rep(c("barl", "cass", "coco", "cott", "grou", "maiz", "pmil", "smil", "oilp", "pota", "rape", "rice", "sorg", "soyb", "sugb", "sugc", "sunf", "whea", "yams"), each=4))
+  yield <- lapply(yield2, stack)
+  names(yield) <- c("barl", "cass", "coco", "cott", "grou", "maiz", "pmil", "smil", "oilp", "pota", "rape", "rice", "sorg", "soyb", "sugb", "sugc", "sunf", "whea", "yams")
+  
+  # sum by month and year
+  
+  planning_year <- seq(2020, 2050, 10)
+  
+  outs <- exact_extract(stack(yield), clusters, "mean")
+  
+  n <- expand.grid(c("barl", "cass", "coco", "cott", "grou", "maiz", "pmil", "smil", "oilp", "pota", "rape", "rice", "sorg", "soyb", "sugb", "sugc", "sunf", "whea", "yams"), planning_year)
+  
+  n <- arrange(n, Var1, Var2)
+  
+  colnames(outs) <- paste0('yield' , "_", n$Var1, "_", n$Var2, "_", scenario)
+  
+
+  ####
+  
+  yg_potential2 <- lapply(yg_potential, raster)
+  yg_potential2 <- stack(yg_potential2)
+  crs(yg_potential2) <- as.character(CRS("+init=epsg:4236"))
+  yg_potential2 <- as.list(yg_potential2)
+  
+  yg_potential2 <- split(yg_potential2, rep(c("barl", "cass", "coco", "cott", "grou", "maiz", "pmil", "smil", "oilp", "pota", "rape", "rice", "sorg", "soyb", "sugb", "sugc", "sunf", "whea", "yams"), each=4))
+  yg_potential <- lapply(yg_potential2, stack)
+  
+  names(yg_potential) <- c("barl", "cass", "coco", "cott", "grou", "maiz", "pmil", "smil", "oilp", "pota", "rape", "rice", "sorg", "soyb", "sugb", "sugc", "sunf", "whea", "yams")
+  
+  outs2 <- exact_extract(stack(yg_potential), clusters, "mean")
+  
+  n <- expand.grid(c("barl", "cass", "coco", "cott", "grou", "maiz", "pmil", "smil", "oilp", "pota", "rape", "rice", "sorg", "soyb", "sugb", "sugc", "sunf", "whea", "yams"), planning_year)
+  
+  n <- arrange(n, Var1, Var2)
+  
+  colnames(outs2) <- paste0('yg_potential' , "_", n$Var1, "_", n$Var2, "_", scenario)
+  
+  clusters <- bind_cols(clusters, outs, outs2)
+  clusters <- st_as_sf(clusters)
 }
 
 #############
+
+clusters[clusters == 0] <- NA
 
 file.remove("watercrop/watercrop_results_for_africawide_dashboard.geojson")
 write_sf(clusters, "watercrop/watercrop_results_for_africawide_dashboard.geojson")

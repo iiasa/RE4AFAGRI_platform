@@ -1,0 +1,301 @@
+IF
+[Period]=="2030" 
+AND
+[Scenario]=="baseline"
+ 
+AND
+[ONSSET_TECH]=="sh_grid"
+THEN
+[sh_grid_2030_baseline] *100 
+
+ELSEIF
+[Period]=="2060" 
+AND
+[Scenario]=="baseline"
+ 
+AND
+[ONSSET_TECH]=="sh_grid"
+THEN
+[sh_grid_2060_baseline] *100 
+
+ELSEIF
+[Period]=="2030" 
+AND
+[Scenario]=="baseline"
+ 
+AND
+[ONSSET_TECH]=="sh_SA_PV"
+THEN
+[sh_SA_PV_2030_baseline] *100 
+
+ELSEIF
+[Period]=="2060" 
+AND
+[Scenario]=="baseline"
+ 
+AND
+[ONSSET_TECH]=="sh_SA_PV"
+THEN
+[sh_SA_PV_2060_baseline] *100 
+
+ELSEIF
+[Period]=="2030" 
+AND
+[Scenario]=="baseline"
+ 
+AND
+[ONSSET_TECH]=="sh_MG_Hydro"
+THEN
+[sh_MG_Hydro_2030_baseline] *100 
+
+ELSEIF
+[Period]=="2060" 
+AND
+[Scenario]=="baseline"
+ 
+AND
+[ONSSET_TECH]=="sh_MG_Hydro"
+THEN
+[sh_MG_Hydro_2060_baseline] *100 
+
+ELSEIF
+[Period]=="2030" 
+AND
+[Scenario]=="baseline"
+ 
+AND
+[ONSSET_TECH]=="sh_MG_PV"
+THEN
+[sh_MG_PV_2030_baseline] *100 
+
+ELSEIF
+[Period]=="2060" 
+AND
+[Scenario]=="baseline"
+ 
+AND
+[ONSSET_TECH]=="sh_MG_PV"
+THEN
+[sh_MG_PV_2060_baseline] *100 
+
+ELSEIF
+[Period]=="2030" 
+AND
+[Scenario]=="baseline"
+ 
+AND
+[ONSSET_TECH]=="sh_MG_Wind"
+THEN
+[sh_MG_Wind_2030_baseline] *100 
+
+ELSEIF
+[Period]=="2060" 
+AND
+[Scenario]=="baseline"
+ 
+AND
+[ONSSET_TECH]=="sh_MG_Wind"
+THEN
+[sh_MG_Wind_2060_baseline] *100 
+
+ELSEIF
+[Period]=="2030" 
+AND
+[Scenario]=="improved_access"
+ 
+AND
+[ONSSET_TECH]=="sh_grid"
+THEN
+[sh_grid_2030_improved_access] *100 
+
+ELSEIF
+[Period]=="2060" 
+AND
+[Scenario]=="improved_access"
+ 
+AND
+[ONSSET_TECH]=="sh_grid"
+THEN
+[sh_grid_2060_improved_access] *100 
+
+ELSEIF
+[Period]=="2030" 
+AND
+[Scenario]=="improved_access"
+ 
+AND
+[ONSSET_TECH]=="sh_SA_PV"
+THEN
+[sh_SA_PV_2030_improved_access] *100 
+
+ELSEIF
+[Period]=="2060" 
+AND
+[Scenario]=="improved_access"
+ 
+AND
+[ONSSET_TECH]=="sh_SA_PV"
+THEN
+[sh_SA_PV_2060_improved_access] *100 
+
+ELSEIF
+[Period]=="2030" 
+AND
+[Scenario]=="improved_access"
+ 
+AND
+[ONSSET_TECH]=="sh_MG_Hydro"
+THEN
+[sh_MG_Hydro_2030_improved_access] *100 
+
+ELSEIF
+[Period]=="2060" 
+AND
+[Scenario]=="improved_access"
+ 
+AND
+[ONSSET_TECH]=="sh_MG_Hydro"
+THEN
+[sh_MG_Hydro_2060_improved_access] *100 
+
+ELSEIF
+[Period]=="2030" 
+AND
+[Scenario]=="improved_access"
+ 
+AND
+[ONSSET_TECH]=="sh_MG_PV"
+THEN
+[sh_MG_PV_2030_improved_access] *100 
+
+ELSEIF
+[Period]=="2060" 
+AND
+[Scenario]=="improved_access"
+ 
+AND
+[ONSSET_TECH]=="sh_MG_PV"
+THEN
+[sh_MG_PV_2060_improved_access] *100 
+
+ELSEIF
+[Period]=="2030" 
+AND
+[Scenario]=="improved_access"
+ 
+AND
+[ONSSET_TECH]=="sh_MG_Wind"
+THEN
+[sh_MG_Wind_2030_improved_access] *100 
+
+ELSEIF
+[Period]=="2060" 
+AND
+[Scenario]=="improved_access"
+ 
+AND
+[ONSSET_TECH]=="sh_MG_Wind"
+THEN
+[sh_MG_Wind_2060_improved_access] *100 
+
+ELSEIF
+[Period]=="2030" 
+AND
+[Scenario]=="ambitious_development"
+ 
+AND
+[ONSSET_TECH]=="sh_grid"
+THEN
+[sh_grid_2030_ambitious_development] *100 
+
+ELSEIF
+[Period]=="2060" 
+AND
+[Scenario]=="ambitious_development"
+ 
+AND
+[ONSSET_TECH]=="sh_grid"
+THEN
+[sh_grid_2060_ambitious_development] *100 
+
+ELSEIF
+[Period]=="2030" 
+AND
+[Scenario]=="ambitious_development"
+ 
+AND
+[ONSSET_TECH]=="sh_SA_PV"
+THEN
+[sh_SA_PV_2030_ambitious_development] *100 
+
+ELSEIF
+[Period]=="2060" 
+AND
+[Scenario]=="ambitious_development"
+ 
+AND
+[ONSSET_TECH]=="sh_SA_PV"
+THEN
+[sh_SA_PV_2060_ambitious_development] *100 
+
+ELSEIF
+[Period]=="2030" 
+AND
+[Scenario]=="ambitious_development"
+ 
+AND
+[ONSSET_TECH]=="sh_MG_Hydro"
+THEN
+[sh_MG_Hydro_2030_ambitious_development] *100 
+
+ELSEIF
+[Period]=="2060" 
+AND
+[Scenario]=="ambitious_development"
+ 
+AND
+[ONSSET_TECH]=="sh_MG_Hydro"
+THEN
+[sh_MG_Hydro_2060_ambitious_development] *100 
+
+ELSEIF
+[Period]=="2030" 
+AND
+[Scenario]=="ambitious_development"
+ 
+AND
+[ONSSET_TECH]=="sh_MG_PV"
+THEN
+[sh_MG_PV_2030_ambitious_development] *100 
+
+ELSEIF
+[Period]=="2060" 
+AND
+[Scenario]=="ambitious_development"
+ 
+AND
+[ONSSET_TECH]=="sh_MG_PV"
+THEN
+[sh_MG_PV_2060_ambitious_development] *100 
+
+ELSEIF
+[Period]=="2030" 
+AND
+[Scenario]=="ambitious_development"
+ 
+AND
+[ONSSET_TECH]=="sh_MG_Wind"
+THEN
+[sh_MG_Wind_2030_ambitious_development] *100 
+
+ELSEIF
+[Period]=="2060" 
+AND
+[Scenario]=="ambitious_development"
+ 
+AND
+[ONSSET_TECH]=="sh_MG_Wind"
+THEN
+[sh_MG_Wind_2060_ambitious_development] *100 
+
+END

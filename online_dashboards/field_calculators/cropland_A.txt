@@ -1,0 +1,589 @@
+IF
+[Crop]=="acof" 
+AND
+[Irrigation type]=="r"
+THEN
+[A_acof_r_baseline]  / 1000 
+
+ELSEIF
+[Crop]=="bana" 
+AND
+[Irrigation type]=="r"
+THEN
+[A_bana_r_baseline]  / 1000 
+
+ELSEIF
+[Crop]=="barl" 
+AND
+[Irrigation type]=="r"
+THEN
+[A_barl_r_baseline]  / 1000 
+
+ELSEIF
+[Crop]=="bean" 
+AND
+[Irrigation type]=="r"
+THEN
+[A_bean_r_baseline]  / 1000 
+
+ELSEIF
+[Crop]=="cass" 
+AND
+[Irrigation type]=="r"
+THEN
+[A_cass_r_baseline]  / 1000 
+
+ELSEIF
+[Crop]=="chic" 
+AND
+[Irrigation type]=="r"
+THEN
+[A_chic_r_baseline]  / 1000 
+
+ELSEIF
+[Crop]=="cnut" 
+AND
+[Irrigation type]=="r"
+THEN
+[A_cnut_r_baseline]  / 1000 
+
+ELSEIF
+[Crop]=="coco" 
+AND
+[Irrigation type]=="r"
+THEN
+[A_coco_r_baseline]  / 1000 
+
+ELSEIF
+[Crop]=="cott" 
+AND
+[Irrigation type]=="r"
+THEN
+[A_cott_r_baseline]  / 1000 
+
+ELSEIF
+[Crop]=="cowp" 
+AND
+[Irrigation type]=="r"
+THEN
+[A_cowp_r_baseline]  / 1000 
+
+ELSEIF
+[Crop]=="grou" 
+AND
+[Irrigation type]=="r"
+THEN
+[A_grou_r_baseline]  / 1000 
+
+ELSEIF
+[Crop]=="lent" 
+AND
+[Irrigation type]=="r"
+THEN
+[A_lent_r_baseline]  / 1000 
+
+ELSEIF
+[Crop]=="maiz" 
+AND
+[Irrigation type]=="r"
+THEN
+[A_maiz_r_baseline]  / 1000 
+
+ELSEIF
+[Crop]=="ocer" 
+AND
+[Irrigation type]=="r"
+THEN
+[A_ocer_r_baseline]  / 1000 
+
+ELSEIF
+[Crop]=="ofib" 
+AND
+[Irrigation type]=="r"
+THEN
+[A_ofib_r_baseline]  / 1000 
+
+ELSEIF
+[Crop]=="oilp" 
+AND
+[Irrigation type]=="r"
+THEN
+[A_oilp_r_baseline]  / 1000 
+
+ELSEIF
+[Crop]=="ooil" 
+AND
+[Irrigation type]=="r"
+THEN
+[A_ooil_r_baseline]  / 1000 
+
+ELSEIF
+[Crop]=="opul" 
+AND
+[Irrigation type]=="r"
+THEN
+[A_opul_r_baseline]  / 1000 
+
+ELSEIF
+[Crop]=="orts" 
+AND
+[Irrigation type]=="r"
+THEN
+[A_orts_r_baseline]  / 1000 
+
+ELSEIF
+[Crop]=="pige" 
+AND
+[Irrigation type]=="r"
+THEN
+[A_pige_r_baseline]  / 1000 
+
+ELSEIF
+[Crop]=="plnt" 
+AND
+[Irrigation type]=="r"
+THEN
+[A_plnt_r_baseline]  / 1000 
+
+ELSEIF
+[Crop]=="pmil" 
+AND
+[Irrigation type]=="r"
+THEN
+[A_pmil_r_baseline]  / 1000 
+
+ELSEIF
+[Crop]=="pota" 
+AND
+[Irrigation type]=="r"
+THEN
+[A_pota_r_baseline]  / 1000 
+
+ELSEIF
+[Crop]=="rape" 
+AND
+[Irrigation type]=="r"
+THEN
+[A_rape_r_baseline]  / 1000 
+
+ELSEIF
+[Crop]=="rcof" 
+AND
+[Irrigation type]=="r"
+THEN
+[A_rcof_r_baseline]  / 1000 
+
+ELSEIF
+[Crop]=="rest" 
+AND
+[Irrigation type]=="r"
+THEN
+[A_rest_r_baseline]  / 1000 
+
+ELSEIF
+[Crop]=="rice" 
+AND
+[Irrigation type]=="r"
+THEN
+[A_rice_r_baseline]  / 1000 
+
+ELSEIF
+[Crop]=="sesa" 
+AND
+[Irrigation type]=="r"
+THEN
+[A_sesa_r_baseline]  / 1000 
+
+ELSEIF
+[Crop]=="smil" 
+AND
+[Irrigation type]=="r"
+THEN
+[A_smil_r_baseline]  / 1000 
+
+ELSEIF
+[Crop]=="sorg" 
+AND
+[Irrigation type]=="r"
+THEN
+[A_sorg_r_baseline]  / 1000 
+
+ELSEIF
+[Crop]=="soyb" 
+AND
+[Irrigation type]=="r"
+THEN
+[A_soyb_r_baseline]  / 1000 
+
+ELSEIF
+[Crop]=="sugb" 
+AND
+[Irrigation type]=="r"
+THEN
+[A_sugb_r_baseline]  / 1000 
+
+ELSEIF
+[Crop]=="sugc" 
+AND
+[Irrigation type]=="r"
+THEN
+[A_sugc_r_baseline]  / 1000 
+
+ELSEIF
+[Crop]=="sunf" 
+AND
+[Irrigation type]=="r"
+THEN
+[A_sunf_r_baseline]  / 1000 
+
+ELSEIF
+[Crop]=="swpo" 
+AND
+[Irrigation type]=="r"
+THEN
+[A_swpo_r_baseline]  / 1000 
+
+ELSEIF
+[Crop]=="teas" 
+AND
+[Irrigation type]=="r"
+THEN
+[A_teas_r_baseline]  / 1000 
+
+ELSEIF
+[Crop]=="temf" 
+AND
+[Irrigation type]=="r"
+THEN
+[A_temf_r_baseline]  / 1000 
+
+ELSEIF
+[Crop]=="toba" 
+AND
+[Irrigation type]=="r"
+THEN
+[A_toba_r_baseline]  / 1000 
+
+ELSEIF
+[Crop]=="trof" 
+AND
+[Irrigation type]=="r"
+THEN
+[A_trof_r_baseline]  / 1000 
+
+ELSEIF
+[Crop]=="vege" 
+AND
+[Irrigation type]=="r"
+THEN
+[A_vege_r_baseline]  / 1000 
+
+ELSEIF
+[Crop]=="whea" 
+AND
+[Irrigation type]=="r"
+THEN
+[A_whea_r_baseline]  / 1000 
+
+ELSEIF
+[Crop]=="yams" 
+AND
+[Irrigation type]=="r"
+THEN
+[A_yams_r_baseline]  / 1000 
+
+ELSEIF
+[Crop]=="acof" 
+AND
+[Irrigation type]=="i"
+THEN
+[A_acof_i_baseline]  / 1000 
+
+ELSEIF
+[Crop]=="bana" 
+AND
+[Irrigation type]=="i"
+THEN
+[A_bana_i_baseline]  / 1000 
+
+ELSEIF
+[Crop]=="barl" 
+AND
+[Irrigation type]=="i"
+THEN
+[A_barl_i_baseline]  / 1000 
+
+ELSEIF
+[Crop]=="bean" 
+AND
+[Irrigation type]=="i"
+THEN
+[A_bean_i_baseline]  / 1000 
+
+ELSEIF
+[Crop]=="cass" 
+AND
+[Irrigation type]=="i"
+THEN
+[A_cass_i_baseline]  / 1000 
+
+ELSEIF
+[Crop]=="chic" 
+AND
+[Irrigation type]=="i"
+THEN
+[A_chic_i_baseline]  / 1000 
+
+ELSEIF
+[Crop]=="cnut" 
+AND
+[Irrigation type]=="i"
+THEN
+[A_cnut_i_baseline]  / 1000 
+
+ELSEIF
+[Crop]=="coco" 
+AND
+[Irrigation type]=="i"
+THEN
+[A_coco_i_baseline]  / 1000 
+
+ELSEIF
+[Crop]=="cott" 
+AND
+[Irrigation type]=="i"
+THEN
+[A_cott_i_baseline]  / 1000 
+
+ELSEIF
+[Crop]=="cowp" 
+AND
+[Irrigation type]=="i"
+THEN
+[A_cowp_i_baseline]  / 1000 
+
+ELSEIF
+[Crop]=="grou" 
+AND
+[Irrigation type]=="i"
+THEN
+[A_grou_i_baseline]  / 1000 
+
+ELSEIF
+[Crop]=="lent" 
+AND
+[Irrigation type]=="i"
+THEN
+[A_lent_i_baseline]  / 1000 
+
+ELSEIF
+[Crop]=="maiz" 
+AND
+[Irrigation type]=="i"
+THEN
+[A_maiz_i_baseline]  / 1000 
+
+ELSEIF
+[Crop]=="ocer" 
+AND
+[Irrigation type]=="i"
+THEN
+[A_ocer_i_baseline]  / 1000 
+
+ELSEIF
+[Crop]=="ofib" 
+AND
+[Irrigation type]=="i"
+THEN
+[A_ofib_i_baseline]  / 1000 
+
+ELSEIF
+[Crop]=="oilp" 
+AND
+[Irrigation type]=="i"
+THEN
+[A_oilp_i_baseline]  / 1000 
+
+ELSEIF
+[Crop]=="ooil" 
+AND
+[Irrigation type]=="i"
+THEN
+[A_ooil_i_baseline]  / 1000 
+
+ELSEIF
+[Crop]=="opul" 
+AND
+[Irrigation type]=="i"
+THEN
+[A_opul_i_baseline]  / 1000 
+
+ELSEIF
+[Crop]=="orts" 
+AND
+[Irrigation type]=="i"
+THEN
+[A_orts_i_baseline]  / 1000 
+
+ELSEIF
+[Crop]=="pige" 
+AND
+[Irrigation type]=="i"
+THEN
+[A_pige_i_baseline]  / 1000 
+
+ELSEIF
+[Crop]=="plnt" 
+AND
+[Irrigation type]=="i"
+THEN
+[A_plnt_i_baseline]  / 1000 
+
+ELSEIF
+[Crop]=="pmil" 
+AND
+[Irrigation type]=="i"
+THEN
+[A_pmil_i_baseline]  / 1000 
+
+ELSEIF
+[Crop]=="pota" 
+AND
+[Irrigation type]=="i"
+THEN
+[A_pota_i_baseline]  / 1000 
+
+ELSEIF
+[Crop]=="rape" 
+AND
+[Irrigation type]=="i"
+THEN
+[A_rape_i_baseline]  / 1000 
+
+ELSEIF
+[Crop]=="rcof" 
+AND
+[Irrigation type]=="i"
+THEN
+[A_rcof_i_baseline]  / 1000 
+
+ELSEIF
+[Crop]=="rest" 
+AND
+[Irrigation type]=="i"
+THEN
+[A_rest_i_baseline]  / 1000 
+
+ELSEIF
+[Crop]=="rice" 
+AND
+[Irrigation type]=="i"
+THEN
+[A_rice_i_baseline]  / 1000 
+
+ELSEIF
+[Crop]=="sesa" 
+AND
+[Irrigation type]=="i"
+THEN
+[A_sesa_i_baseline]  / 1000 
+
+ELSEIF
+[Crop]=="smil" 
+AND
+[Irrigation type]=="i"
+THEN
+[A_smil_i_baseline]  / 1000 
+
+ELSEIF
+[Crop]=="sorg" 
+AND
+[Irrigation type]=="i"
+THEN
+[A_sorg_i_baseline]  / 1000 
+
+ELSEIF
+[Crop]=="soyb" 
+AND
+[Irrigation type]=="i"
+THEN
+[A_soyb_i_baseline]  / 1000 
+
+ELSEIF
+[Crop]=="sugb" 
+AND
+[Irrigation type]=="i"
+THEN
+[A_sugb_i_baseline]  / 1000 
+
+ELSEIF
+[Crop]=="sugc" 
+AND
+[Irrigation type]=="i"
+THEN
+[A_sugc_i_baseline]  / 1000 
+
+ELSEIF
+[Crop]=="sunf" 
+AND
+[Irrigation type]=="i"
+THEN
+[A_sunf_i_baseline]  / 1000 
+
+ELSEIF
+[Crop]=="swpo" 
+AND
+[Irrigation type]=="i"
+THEN
+[A_swpo_i_baseline]  / 1000 
+
+ELSEIF
+[Crop]=="teas" 
+AND
+[Irrigation type]=="i"
+THEN
+[A_teas_i_baseline]  / 1000 
+
+ELSEIF
+[Crop]=="temf" 
+AND
+[Irrigation type]=="i"
+THEN
+[A_temf_i_baseline]  / 1000 
+
+ELSEIF
+[Crop]=="toba" 
+AND
+[Irrigation type]=="i"
+THEN
+[A_toba_i_baseline]  / 1000 
+
+ELSEIF
+[Crop]=="trof" 
+AND
+[Irrigation type]=="i"
+THEN
+[A_trof_i_baseline]  / 1000 
+
+ELSEIF
+[Crop]=="vege" 
+AND
+[Irrigation type]=="i"
+THEN
+[A_vege_i_baseline]  / 1000 
+
+ELSEIF
+[Crop]=="whea" 
+AND
+[Irrigation type]=="i"
+THEN
+[A_whea_i_baseline]  / 1000 
+
+ELSEIF
+[Crop]=="yams" 
+AND
+[Irrigation type]=="i"
+THEN
+[A_yams_i_baseline]  / 1000 
+
+END

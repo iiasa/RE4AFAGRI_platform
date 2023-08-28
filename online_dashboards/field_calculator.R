@@ -387,10 +387,9 @@ out <- paste0('ELSEIF
 [Year]=="', l$Var2,
               '" \nAND
 [Scenario]=="', l$Var1,
-              '" \nAND
-[Month]=="', l$Var3,'"
+              '"
 THEN',
-              '\n[', 'water_infra_volume_km3_yr_', l$Var1, '_', l$Var3, '_', l$Var2, ']\n')
+              '\n[', 'water_infra_volume_km3_yr_', l$Var1, '_', "Yearly", '_', l$Var2, ']\n')
 
 out[1] <- gsub("ELSE", "", out[1])
 out[length(out)+1] <- "END"
@@ -409,10 +408,9 @@ out <- paste0('ELSEIF
 [Year]=="', l$Var2,
               '" \nAND
 [Scenario]=="', l$Var1,
-              '" \nAND
-[Month]=="', l$Var3,'"
+              '"
 THEN',
-              '\n[', 'water_infr_invest_bn_', l$Var1, '_', l$Var3, '_', l$Var2, ']\n')
+              '\n[', 'water_infr_invest_bn_', l$Var1, '_', "Yearly", '_', l$Var2, ']\n')
 
 out[1] <- gsub("ELSE", "", out[1])
 out[length(out)+1] <- "END"
@@ -431,13 +429,12 @@ l <- expand.grid(scen, year, months, techs, stringsAsFactors = F)
 out <- paste0('ELSEIF
 [Year]=="', l$Var2,
               '" \nAND
-[ tech_electricity_investment]=="', l$Var4,
+[tech_electricity_investment]=="', l$Var4,
               '" \nAND              
 [Scenario]=="', l$Var1,
-              '" \nAND
-[Month]=="', l$Var3,'"
+              '"
 THEN',
-              '\n[', 'electricity_investment_', l$Var4, "_bn_usd_yr", "_", l$Var1, '_', l$Var3, '_', l$Var2, ']\n')
+              '\n[', 'electricity_investment_', l$Var4, "_bn_usd_yr", "_", l$Var1, '_', "Yearly", '_', l$Var2, ']\n')
 
 out[1] <- gsub("ELSE", "", out[1])
 out[length(out)+1] <- "END"

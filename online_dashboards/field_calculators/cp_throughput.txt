@@ -1,0 +1,3301 @@
+IF
+[Crop]=="cass" 
+AND
+[Scenario]=="baseline"
+ 
+AND
+[Year]=="2020"
+THEN
+[yield_cass_r_cp_2020_baseline] / 1000000 
+
+ELSEIF
+[Crop]=="grou" 
+AND
+[Scenario]=="baseline"
+ 
+AND
+[Year]=="2020"
+THEN
+[yield_grou_r_cp_2020_baseline] / 1000000 
+
+ELSEIF
+[Crop]=="maiz" 
+AND
+[Scenario]=="baseline"
+ 
+AND
+[Year]=="2020"
+THEN
+[yield_maiz_r_cp_2020_baseline] / 1000000 
+
+ELSEIF
+[Crop]=="pmil" 
+AND
+[Scenario]=="baseline"
+ 
+AND
+[Year]=="2020"
+THEN
+[yield_pmil_r_cp_2020_baseline] / 1000000 
+
+ELSEIF
+[Crop]=="smil" 
+AND
+[Scenario]=="baseline"
+ 
+AND
+[Year]=="2020"
+THEN
+[yield_smil_r_cp_2020_baseline] / 1000000 
+
+ELSEIF
+[Crop]=="rape" 
+AND
+[Scenario]=="baseline"
+ 
+AND
+[Year]=="2020"
+THEN
+[yield_rape_r_cp_2020_baseline] / 1000000 
+
+ELSEIF
+[Crop]=="rice" 
+AND
+[Scenario]=="baseline"
+ 
+AND
+[Year]=="2020"
+THEN
+[yield_rice_r_cp_2020_baseline] / 1000000 
+
+ELSEIF
+[Crop]=="soyb" 
+AND
+[Scenario]=="baseline"
+ 
+AND
+[Year]=="2020"
+THEN
+[yield_soyb_r_cp_2020_baseline] / 1000000 
+
+ELSEIF
+[Crop]=="sugc" 
+AND
+[Scenario]=="baseline"
+ 
+AND
+[Year]=="2020"
+THEN
+[yield_sugc_r_cp_2020_baseline] / 1000000 
+
+ELSEIF
+[Crop]=="sunf" 
+AND
+[Scenario]=="baseline"
+ 
+AND
+[Year]=="2020"
+THEN
+[yield_sunf_r_cp_2020_baseline] / 1000000 
+
+ELSEIF
+[Crop]=="whea" 
+AND
+[Scenario]=="baseline"
+ 
+AND
+[Year]=="2020"
+THEN
+[yield_whea_r_cp_2020_baseline] / 1000000 
+
+ELSEIF
+[Crop]=="cass" 
+AND
+[Scenario]=="baseline"
+ 
+AND
+[Year]=="2030"
+THEN
+[yield_cass_r_cp_2030_baseline] / 1000000 
+
+ELSEIF
+[Crop]=="grou" 
+AND
+[Scenario]=="baseline"
+ 
+AND
+[Year]=="2030"
+THEN
+[yield_grou_r_cp_2030_baseline] / 1000000 
+
+ELSEIF
+[Crop]=="maiz" 
+AND
+[Scenario]=="baseline"
+ 
+AND
+[Year]=="2030"
+THEN
+[yield_maiz_r_cp_2030_baseline] / 1000000 
+
+ELSEIF
+[Crop]=="pmil" 
+AND
+[Scenario]=="baseline"
+ 
+AND
+[Year]=="2030"
+THEN
+[yield_pmil_r_cp_2030_baseline] / 1000000 
+
+ELSEIF
+[Crop]=="smil" 
+AND
+[Scenario]=="baseline"
+ 
+AND
+[Year]=="2030"
+THEN
+[yield_smil_r_cp_2030_baseline] / 1000000 
+
+ELSEIF
+[Crop]=="rape" 
+AND
+[Scenario]=="baseline"
+ 
+AND
+[Year]=="2030"
+THEN
+[yield_rape_r_cp_2030_baseline] / 1000000 
+
+ELSEIF
+[Crop]=="rice" 
+AND
+[Scenario]=="baseline"
+ 
+AND
+[Year]=="2030"
+THEN
+[yield_rice_r_cp_2030_baseline] / 1000000 
+
+ELSEIF
+[Crop]=="soyb" 
+AND
+[Scenario]=="baseline"
+ 
+AND
+[Year]=="2030"
+THEN
+[yield_soyb_r_cp_2030_baseline] / 1000000 
+
+ELSEIF
+[Crop]=="sugc" 
+AND
+[Scenario]=="baseline"
+ 
+AND
+[Year]=="2030"
+THEN
+[yield_sugc_r_cp_2030_baseline] / 1000000 
+
+ELSEIF
+[Crop]=="sunf" 
+AND
+[Scenario]=="baseline"
+ 
+AND
+[Year]=="2030"
+THEN
+[yield_sunf_r_cp_2030_baseline] / 1000000 
+
+ELSEIF
+[Crop]=="whea" 
+AND
+[Scenario]=="baseline"
+ 
+AND
+[Year]=="2030"
+THEN
+[yield_whea_r_cp_2030_baseline] / 1000000 
+
+ELSEIF
+[Crop]=="cass" 
+AND
+[Scenario]=="baseline"
+ 
+AND
+[Year]=="2040"
+THEN
+[yield_cass_r_cp_2040_baseline] / 1000000 
+
+ELSEIF
+[Crop]=="grou" 
+AND
+[Scenario]=="baseline"
+ 
+AND
+[Year]=="2040"
+THEN
+[yield_grou_r_cp_2040_baseline] / 1000000 
+
+ELSEIF
+[Crop]=="maiz" 
+AND
+[Scenario]=="baseline"
+ 
+AND
+[Year]=="2040"
+THEN
+[yield_maiz_r_cp_2040_baseline] / 1000000 
+
+ELSEIF
+[Crop]=="pmil" 
+AND
+[Scenario]=="baseline"
+ 
+AND
+[Year]=="2040"
+THEN
+[yield_pmil_r_cp_2040_baseline] / 1000000 
+
+ELSEIF
+[Crop]=="smil" 
+AND
+[Scenario]=="baseline"
+ 
+AND
+[Year]=="2040"
+THEN
+[yield_smil_r_cp_2040_baseline] / 1000000 
+
+ELSEIF
+[Crop]=="rape" 
+AND
+[Scenario]=="baseline"
+ 
+AND
+[Year]=="2040"
+THEN
+[yield_rape_r_cp_2040_baseline] / 1000000 
+
+ELSEIF
+[Crop]=="rice" 
+AND
+[Scenario]=="baseline"
+ 
+AND
+[Year]=="2040"
+THEN
+[yield_rice_r_cp_2040_baseline] / 1000000 
+
+ELSEIF
+[Crop]=="soyb" 
+AND
+[Scenario]=="baseline"
+ 
+AND
+[Year]=="2040"
+THEN
+[yield_soyb_r_cp_2040_baseline] / 1000000 
+
+ELSEIF
+[Crop]=="sugc" 
+AND
+[Scenario]=="baseline"
+ 
+AND
+[Year]=="2040"
+THEN
+[yield_sugc_r_cp_2040_baseline] / 1000000 
+
+ELSEIF
+[Crop]=="sunf" 
+AND
+[Scenario]=="baseline"
+ 
+AND
+[Year]=="2040"
+THEN
+[yield_sunf_r_cp_2040_baseline] / 1000000 
+
+ELSEIF
+[Crop]=="whea" 
+AND
+[Scenario]=="baseline"
+ 
+AND
+[Year]=="2040"
+THEN
+[yield_whea_r_cp_2040_baseline] / 1000000 
+
+ELSEIF
+[Crop]=="cass" 
+AND
+[Scenario]=="baseline"
+ 
+AND
+[Year]=="2050"
+THEN
+[yield_cass_r_cp_2050_baseline] / 1000000 
+
+ELSEIF
+[Crop]=="grou" 
+AND
+[Scenario]=="baseline"
+ 
+AND
+[Year]=="2050"
+THEN
+[yield_grou_r_cp_2050_baseline] / 1000000 
+
+ELSEIF
+[Crop]=="maiz" 
+AND
+[Scenario]=="baseline"
+ 
+AND
+[Year]=="2050"
+THEN
+[yield_maiz_r_cp_2050_baseline] / 1000000 
+
+ELSEIF
+[Crop]=="pmil" 
+AND
+[Scenario]=="baseline"
+ 
+AND
+[Year]=="2050"
+THEN
+[yield_pmil_r_cp_2050_baseline] / 1000000 
+
+ELSEIF
+[Crop]=="smil" 
+AND
+[Scenario]=="baseline"
+ 
+AND
+[Year]=="2050"
+THEN
+[yield_smil_r_cp_2050_baseline] / 1000000 
+
+ELSEIF
+[Crop]=="rape" 
+AND
+[Scenario]=="baseline"
+ 
+AND
+[Year]=="2050"
+THEN
+[yield_rape_r_cp_2050_baseline] / 1000000 
+
+ELSEIF
+[Crop]=="rice" 
+AND
+[Scenario]=="baseline"
+ 
+AND
+[Year]=="2050"
+THEN
+[yield_rice_r_cp_2050_baseline] / 1000000 
+
+ELSEIF
+[Crop]=="soyb" 
+AND
+[Scenario]=="baseline"
+ 
+AND
+[Year]=="2050"
+THEN
+[yield_soyb_r_cp_2050_baseline] / 1000000 
+
+ELSEIF
+[Crop]=="sugc" 
+AND
+[Scenario]=="baseline"
+ 
+AND
+[Year]=="2050"
+THEN
+[yield_sugc_r_cp_2050_baseline] / 1000000 
+
+ELSEIF
+[Crop]=="sunf" 
+AND
+[Scenario]=="baseline"
+ 
+AND
+[Year]=="2050"
+THEN
+[yield_sunf_r_cp_2050_baseline] / 1000000 
+
+ELSEIF
+[Crop]=="whea" 
+AND
+[Scenario]=="baseline"
+ 
+AND
+[Year]=="2050"
+THEN
+[yield_whea_r_cp_2050_baseline] / 1000000 
+
+ELSEIF
+[Crop]=="cass" 
+AND
+[Scenario]=="baseline"
+ 
+AND
+[Year]=="2060"
+THEN
+[yield_cass_r_cp_2060_baseline] / 1000000 
+
+ELSEIF
+[Crop]=="grou" 
+AND
+[Scenario]=="baseline"
+ 
+AND
+[Year]=="2060"
+THEN
+[yield_grou_r_cp_2060_baseline] / 1000000 
+
+ELSEIF
+[Crop]=="maiz" 
+AND
+[Scenario]=="baseline"
+ 
+AND
+[Year]=="2060"
+THEN
+[yield_maiz_r_cp_2060_baseline] / 1000000 
+
+ELSEIF
+[Crop]=="pmil" 
+AND
+[Scenario]=="baseline"
+ 
+AND
+[Year]=="2060"
+THEN
+[yield_pmil_r_cp_2060_baseline] / 1000000 
+
+ELSEIF
+[Crop]=="smil" 
+AND
+[Scenario]=="baseline"
+ 
+AND
+[Year]=="2060"
+THEN
+[yield_smil_r_cp_2060_baseline] / 1000000 
+
+ELSEIF
+[Crop]=="rape" 
+AND
+[Scenario]=="baseline"
+ 
+AND
+[Year]=="2060"
+THEN
+[yield_rape_r_cp_2060_baseline] / 1000000 
+
+ELSEIF
+[Crop]=="rice" 
+AND
+[Scenario]=="baseline"
+ 
+AND
+[Year]=="2060"
+THEN
+[yield_rice_r_cp_2060_baseline] / 1000000 
+
+ELSEIF
+[Crop]=="soyb" 
+AND
+[Scenario]=="baseline"
+ 
+AND
+[Year]=="2060"
+THEN
+[yield_soyb_r_cp_2060_baseline] / 1000000 
+
+ELSEIF
+[Crop]=="sugc" 
+AND
+[Scenario]=="baseline"
+ 
+AND
+[Year]=="2060"
+THEN
+[yield_sugc_r_cp_2060_baseline] / 1000000 
+
+ELSEIF
+[Crop]=="sunf" 
+AND
+[Scenario]=="baseline"
+ 
+AND
+[Year]=="2060"
+THEN
+[yield_sunf_r_cp_2060_baseline] / 1000000 
+
+ELSEIF
+[Crop]=="whea" 
+AND
+[Scenario]=="baseline"
+ 
+AND
+[Year]=="2060"
+THEN
+[yield_whea_r_cp_2060_baseline] / 1000000 
+
+ELSEIF
+[Crop]=="cass" 
+AND
+[Scenario]=="improved_access"
+ 
+AND
+[Year]=="2020"
+THEN
+[yield_cass_r_cp_2020_improved_access] / 1000000 
+
+ELSEIF
+[Crop]=="grou" 
+AND
+[Scenario]=="improved_access"
+ 
+AND
+[Year]=="2020"
+THEN
+[yield_grou_r_cp_2020_improved_access] / 1000000 
+
+ELSEIF
+[Crop]=="maiz" 
+AND
+[Scenario]=="improved_access"
+ 
+AND
+[Year]=="2020"
+THEN
+[yield_maiz_r_cp_2020_improved_access] / 1000000 
+
+ELSEIF
+[Crop]=="pmil" 
+AND
+[Scenario]=="improved_access"
+ 
+AND
+[Year]=="2020"
+THEN
+[yield_pmil_r_cp_2020_improved_access] / 1000000 
+
+ELSEIF
+[Crop]=="smil" 
+AND
+[Scenario]=="improved_access"
+ 
+AND
+[Year]=="2020"
+THEN
+[yield_smil_r_cp_2020_improved_access] / 1000000 
+
+ELSEIF
+[Crop]=="rape" 
+AND
+[Scenario]=="improved_access"
+ 
+AND
+[Year]=="2020"
+THEN
+[yield_rape_r_cp_2020_improved_access] / 1000000 
+
+ELSEIF
+[Crop]=="rice" 
+AND
+[Scenario]=="improved_access"
+ 
+AND
+[Year]=="2020"
+THEN
+[yield_rice_r_cp_2020_improved_access] / 1000000 
+
+ELSEIF
+[Crop]=="soyb" 
+AND
+[Scenario]=="improved_access"
+ 
+AND
+[Year]=="2020"
+THEN
+[yield_soyb_r_cp_2020_improved_access] / 1000000 
+
+ELSEIF
+[Crop]=="sugc" 
+AND
+[Scenario]=="improved_access"
+ 
+AND
+[Year]=="2020"
+THEN
+[yield_sugc_r_cp_2020_improved_access] / 1000000 
+
+ELSEIF
+[Crop]=="sunf" 
+AND
+[Scenario]=="improved_access"
+ 
+AND
+[Year]=="2020"
+THEN
+[yield_sunf_r_cp_2020_improved_access] / 1000000 
+
+ELSEIF
+[Crop]=="whea" 
+AND
+[Scenario]=="improved_access"
+ 
+AND
+[Year]=="2020"
+THEN
+[yield_whea_r_cp_2020_improved_access] / 1000000 
+
+ELSEIF
+[Crop]=="cass" 
+AND
+[Scenario]=="improved_access"
+ 
+AND
+[Year]=="2030"
+THEN
+[yield_cass_r_cp_2030_improved_access] / 1000000 
+
+ELSEIF
+[Crop]=="grou" 
+AND
+[Scenario]=="improved_access"
+ 
+AND
+[Year]=="2030"
+THEN
+[yield_grou_r_cp_2030_improved_access] / 1000000 
+
+ELSEIF
+[Crop]=="maiz" 
+AND
+[Scenario]=="improved_access"
+ 
+AND
+[Year]=="2030"
+THEN
+[yield_maiz_r_cp_2030_improved_access] / 1000000 
+
+ELSEIF
+[Crop]=="pmil" 
+AND
+[Scenario]=="improved_access"
+ 
+AND
+[Year]=="2030"
+THEN
+[yield_pmil_r_cp_2030_improved_access] / 1000000 
+
+ELSEIF
+[Crop]=="smil" 
+AND
+[Scenario]=="improved_access"
+ 
+AND
+[Year]=="2030"
+THEN
+[yield_smil_r_cp_2030_improved_access] / 1000000 
+
+ELSEIF
+[Crop]=="rape" 
+AND
+[Scenario]=="improved_access"
+ 
+AND
+[Year]=="2030"
+THEN
+[yield_rape_r_cp_2030_improved_access] / 1000000 
+
+ELSEIF
+[Crop]=="rice" 
+AND
+[Scenario]=="improved_access"
+ 
+AND
+[Year]=="2030"
+THEN
+[yield_rice_r_cp_2030_improved_access] / 1000000 
+
+ELSEIF
+[Crop]=="soyb" 
+AND
+[Scenario]=="improved_access"
+ 
+AND
+[Year]=="2030"
+THEN
+[yield_soyb_r_cp_2030_improved_access] / 1000000 
+
+ELSEIF
+[Crop]=="sugc" 
+AND
+[Scenario]=="improved_access"
+ 
+AND
+[Year]=="2030"
+THEN
+[yield_sugc_r_cp_2030_improved_access] / 1000000 
+
+ELSEIF
+[Crop]=="sunf" 
+AND
+[Scenario]=="improved_access"
+ 
+AND
+[Year]=="2030"
+THEN
+[yield_sunf_r_cp_2030_improved_access] / 1000000 
+
+ELSEIF
+[Crop]=="whea" 
+AND
+[Scenario]=="improved_access"
+ 
+AND
+[Year]=="2030"
+THEN
+[yield_whea_r_cp_2030_improved_access] / 1000000 
+
+ELSEIF
+[Crop]=="cass" 
+AND
+[Scenario]=="improved_access"
+ 
+AND
+[Year]=="2040"
+THEN
+[yield_cass_r_cp_2040_improved_access] / 1000000 
+
+ELSEIF
+[Crop]=="grou" 
+AND
+[Scenario]=="improved_access"
+ 
+AND
+[Year]=="2040"
+THEN
+[yield_grou_r_cp_2040_improved_access] / 1000000 
+
+ELSEIF
+[Crop]=="maiz" 
+AND
+[Scenario]=="improved_access"
+ 
+AND
+[Year]=="2040"
+THEN
+[yield_maiz_r_cp_2040_improved_access] / 1000000 
+
+ELSEIF
+[Crop]=="pmil" 
+AND
+[Scenario]=="improved_access"
+ 
+AND
+[Year]=="2040"
+THEN
+[yield_pmil_r_cp_2040_improved_access] / 1000000 
+
+ELSEIF
+[Crop]=="smil" 
+AND
+[Scenario]=="improved_access"
+ 
+AND
+[Year]=="2040"
+THEN
+[yield_smil_r_cp_2040_improved_access] / 1000000 
+
+ELSEIF
+[Crop]=="rape" 
+AND
+[Scenario]=="improved_access"
+ 
+AND
+[Year]=="2040"
+THEN
+[yield_rape_r_cp_2040_improved_access] / 1000000 
+
+ELSEIF
+[Crop]=="rice" 
+AND
+[Scenario]=="improved_access"
+ 
+AND
+[Year]=="2040"
+THEN
+[yield_rice_r_cp_2040_improved_access] / 1000000 
+
+ELSEIF
+[Crop]=="soyb" 
+AND
+[Scenario]=="improved_access"
+ 
+AND
+[Year]=="2040"
+THEN
+[yield_soyb_r_cp_2040_improved_access] / 1000000 
+
+ELSEIF
+[Crop]=="sugc" 
+AND
+[Scenario]=="improved_access"
+ 
+AND
+[Year]=="2040"
+THEN
+[yield_sugc_r_cp_2040_improved_access] / 1000000 
+
+ELSEIF
+[Crop]=="sunf" 
+AND
+[Scenario]=="improved_access"
+ 
+AND
+[Year]=="2040"
+THEN
+[yield_sunf_r_cp_2040_improved_access] / 1000000 
+
+ELSEIF
+[Crop]=="whea" 
+AND
+[Scenario]=="improved_access"
+ 
+AND
+[Year]=="2040"
+THEN
+[yield_whea_r_cp_2040_improved_access] / 1000000 
+
+ELSEIF
+[Crop]=="cass" 
+AND
+[Scenario]=="improved_access"
+ 
+AND
+[Year]=="2050"
+THEN
+[yield_cass_r_cp_2050_improved_access] / 1000000 
+
+ELSEIF
+[Crop]=="grou" 
+AND
+[Scenario]=="improved_access"
+ 
+AND
+[Year]=="2050"
+THEN
+[yield_grou_r_cp_2050_improved_access] / 1000000 
+
+ELSEIF
+[Crop]=="maiz" 
+AND
+[Scenario]=="improved_access"
+ 
+AND
+[Year]=="2050"
+THEN
+[yield_maiz_r_cp_2050_improved_access] / 1000000 
+
+ELSEIF
+[Crop]=="pmil" 
+AND
+[Scenario]=="improved_access"
+ 
+AND
+[Year]=="2050"
+THEN
+[yield_pmil_r_cp_2050_improved_access] / 1000000 
+
+ELSEIF
+[Crop]=="smil" 
+AND
+[Scenario]=="improved_access"
+ 
+AND
+[Year]=="2050"
+THEN
+[yield_smil_r_cp_2050_improved_access] / 1000000 
+
+ELSEIF
+[Crop]=="rape" 
+AND
+[Scenario]=="improved_access"
+ 
+AND
+[Year]=="2050"
+THEN
+[yield_rape_r_cp_2050_improved_access] / 1000000 
+
+ELSEIF
+[Crop]=="rice" 
+AND
+[Scenario]=="improved_access"
+ 
+AND
+[Year]=="2050"
+THEN
+[yield_rice_r_cp_2050_improved_access] / 1000000 
+
+ELSEIF
+[Crop]=="soyb" 
+AND
+[Scenario]=="improved_access"
+ 
+AND
+[Year]=="2050"
+THEN
+[yield_soyb_r_cp_2050_improved_access] / 1000000 
+
+ELSEIF
+[Crop]=="sugc" 
+AND
+[Scenario]=="improved_access"
+ 
+AND
+[Year]=="2050"
+THEN
+[yield_sugc_r_cp_2050_improved_access] / 1000000 
+
+ELSEIF
+[Crop]=="sunf" 
+AND
+[Scenario]=="improved_access"
+ 
+AND
+[Year]=="2050"
+THEN
+[yield_sunf_r_cp_2050_improved_access] / 1000000 
+
+ELSEIF
+[Crop]=="whea" 
+AND
+[Scenario]=="improved_access"
+ 
+AND
+[Year]=="2050"
+THEN
+[yield_whea_r_cp_2050_improved_access] / 1000000 
+
+ELSEIF
+[Crop]=="cass" 
+AND
+[Scenario]=="improved_access"
+ 
+AND
+[Year]=="2060"
+THEN
+[yield_cass_r_cp_2060_improved_access] / 1000000 
+
+ELSEIF
+[Crop]=="grou" 
+AND
+[Scenario]=="improved_access"
+ 
+AND
+[Year]=="2060"
+THEN
+[yield_grou_r_cp_2060_improved_access] / 1000000 
+
+ELSEIF
+[Crop]=="maiz" 
+AND
+[Scenario]=="improved_access"
+ 
+AND
+[Year]=="2060"
+THEN
+[yield_maiz_r_cp_2060_improved_access] / 1000000 
+
+ELSEIF
+[Crop]=="pmil" 
+AND
+[Scenario]=="improved_access"
+ 
+AND
+[Year]=="2060"
+THEN
+[yield_pmil_r_cp_2060_improved_access] / 1000000 
+
+ELSEIF
+[Crop]=="smil" 
+AND
+[Scenario]=="improved_access"
+ 
+AND
+[Year]=="2060"
+THEN
+[yield_smil_r_cp_2060_improved_access] / 1000000 
+
+ELSEIF
+[Crop]=="rape" 
+AND
+[Scenario]=="improved_access"
+ 
+AND
+[Year]=="2060"
+THEN
+[yield_rape_r_cp_2060_improved_access] / 1000000 
+
+ELSEIF
+[Crop]=="rice" 
+AND
+[Scenario]=="improved_access"
+ 
+AND
+[Year]=="2060"
+THEN
+[yield_rice_r_cp_2060_improved_access] / 1000000 
+
+ELSEIF
+[Crop]=="soyb" 
+AND
+[Scenario]=="improved_access"
+ 
+AND
+[Year]=="2060"
+THEN
+[yield_soyb_r_cp_2060_improved_access] / 1000000 
+
+ELSEIF
+[Crop]=="sugc" 
+AND
+[Scenario]=="improved_access"
+ 
+AND
+[Year]=="2060"
+THEN
+[yield_sugc_r_cp_2060_improved_access] / 1000000 
+
+ELSEIF
+[Crop]=="sunf" 
+AND
+[Scenario]=="improved_access"
+ 
+AND
+[Year]=="2060"
+THEN
+[yield_sunf_r_cp_2060_improved_access] / 1000000 
+
+ELSEIF
+[Crop]=="whea" 
+AND
+[Scenario]=="improved_access"
+ 
+AND
+[Year]=="2060"
+THEN
+[yield_whea_r_cp_2060_improved_access] / 1000000 
+
+ELSEIF
+[Crop]=="cass" 
+AND
+[Scenario]=="ambitious_development"
+ 
+AND
+[Year]=="2020"
+THEN
+[yield_cass_r_cp_2020_ambitious_development] / 1000000 
+
+ELSEIF
+[Crop]=="grou" 
+AND
+[Scenario]=="ambitious_development"
+ 
+AND
+[Year]=="2020"
+THEN
+[yield_grou_r_cp_2020_ambitious_development] / 1000000 
+
+ELSEIF
+[Crop]=="maiz" 
+AND
+[Scenario]=="ambitious_development"
+ 
+AND
+[Year]=="2020"
+THEN
+[yield_maiz_r_cp_2020_ambitious_development] / 1000000 
+
+ELSEIF
+[Crop]=="pmil" 
+AND
+[Scenario]=="ambitious_development"
+ 
+AND
+[Year]=="2020"
+THEN
+[yield_pmil_r_cp_2020_ambitious_development] / 1000000 
+
+ELSEIF
+[Crop]=="smil" 
+AND
+[Scenario]=="ambitious_development"
+ 
+AND
+[Year]=="2020"
+THEN
+[yield_smil_r_cp_2020_ambitious_development] / 1000000 
+
+ELSEIF
+[Crop]=="rape" 
+AND
+[Scenario]=="ambitious_development"
+ 
+AND
+[Year]=="2020"
+THEN
+[yield_rape_r_cp_2020_ambitious_development] / 1000000 
+
+ELSEIF
+[Crop]=="rice" 
+AND
+[Scenario]=="ambitious_development"
+ 
+AND
+[Year]=="2020"
+THEN
+[yield_rice_r_cp_2020_ambitious_development] / 1000000 
+
+ELSEIF
+[Crop]=="soyb" 
+AND
+[Scenario]=="ambitious_development"
+ 
+AND
+[Year]=="2020"
+THEN
+[yield_soyb_r_cp_2020_ambitious_development] / 1000000 
+
+ELSEIF
+[Crop]=="sugc" 
+AND
+[Scenario]=="ambitious_development"
+ 
+AND
+[Year]=="2020"
+THEN
+[yield_sugc_r_cp_2020_ambitious_development] / 1000000 
+
+ELSEIF
+[Crop]=="sunf" 
+AND
+[Scenario]=="ambitious_development"
+ 
+AND
+[Year]=="2020"
+THEN
+[yield_sunf_r_cp_2020_ambitious_development] / 1000000 
+
+ELSEIF
+[Crop]=="whea" 
+AND
+[Scenario]=="ambitious_development"
+ 
+AND
+[Year]=="2020"
+THEN
+[yield_whea_r_cp_2020_ambitious_development] / 1000000 
+
+ELSEIF
+[Crop]=="cass" 
+AND
+[Scenario]=="ambitious_development"
+ 
+AND
+[Year]=="2030"
+THEN
+[yield_cass_r_cp_2030_ambitious_development] / 1000000 
+
+ELSEIF
+[Crop]=="grou" 
+AND
+[Scenario]=="ambitious_development"
+ 
+AND
+[Year]=="2030"
+THEN
+[yield_grou_r_cp_2030_ambitious_development] / 1000000 
+
+ELSEIF
+[Crop]=="maiz" 
+AND
+[Scenario]=="ambitious_development"
+ 
+AND
+[Year]=="2030"
+THEN
+[yield_maiz_r_cp_2030_ambitious_development] / 1000000 
+
+ELSEIF
+[Crop]=="pmil" 
+AND
+[Scenario]=="ambitious_development"
+ 
+AND
+[Year]=="2030"
+THEN
+[yield_pmil_r_cp_2030_ambitious_development] / 1000000 
+
+ELSEIF
+[Crop]=="smil" 
+AND
+[Scenario]=="ambitious_development"
+ 
+AND
+[Year]=="2030"
+THEN
+[yield_smil_r_cp_2030_ambitious_development] / 1000000 
+
+ELSEIF
+[Crop]=="rape" 
+AND
+[Scenario]=="ambitious_development"
+ 
+AND
+[Year]=="2030"
+THEN
+[yield_rape_r_cp_2030_ambitious_development] / 1000000 
+
+ELSEIF
+[Crop]=="rice" 
+AND
+[Scenario]=="ambitious_development"
+ 
+AND
+[Year]=="2030"
+THEN
+[yield_rice_r_cp_2030_ambitious_development] / 1000000 
+
+ELSEIF
+[Crop]=="soyb" 
+AND
+[Scenario]=="ambitious_development"
+ 
+AND
+[Year]=="2030"
+THEN
+[yield_soyb_r_cp_2030_ambitious_development] / 1000000 
+
+ELSEIF
+[Crop]=="sugc" 
+AND
+[Scenario]=="ambitious_development"
+ 
+AND
+[Year]=="2030"
+THEN
+[yield_sugc_r_cp_2030_ambitious_development] / 1000000 
+
+ELSEIF
+[Crop]=="sunf" 
+AND
+[Scenario]=="ambitious_development"
+ 
+AND
+[Year]=="2030"
+THEN
+[yield_sunf_r_cp_2030_ambitious_development] / 1000000 
+
+ELSEIF
+[Crop]=="whea" 
+AND
+[Scenario]=="ambitious_development"
+ 
+AND
+[Year]=="2030"
+THEN
+[yield_whea_r_cp_2030_ambitious_development] / 1000000 
+
+ELSEIF
+[Crop]=="cass" 
+AND
+[Scenario]=="ambitious_development"
+ 
+AND
+[Year]=="2040"
+THEN
+[yield_cass_r_cp_2040_ambitious_development] / 1000000 
+
+ELSEIF
+[Crop]=="grou" 
+AND
+[Scenario]=="ambitious_development"
+ 
+AND
+[Year]=="2040"
+THEN
+[yield_grou_r_cp_2040_ambitious_development] / 1000000 
+
+ELSEIF
+[Crop]=="maiz" 
+AND
+[Scenario]=="ambitious_development"
+ 
+AND
+[Year]=="2040"
+THEN
+[yield_maiz_r_cp_2040_ambitious_development] / 1000000 
+
+ELSEIF
+[Crop]=="pmil" 
+AND
+[Scenario]=="ambitious_development"
+ 
+AND
+[Year]=="2040"
+THEN
+[yield_pmil_r_cp_2040_ambitious_development] / 1000000 
+
+ELSEIF
+[Crop]=="smil" 
+AND
+[Scenario]=="ambitious_development"
+ 
+AND
+[Year]=="2040"
+THEN
+[yield_smil_r_cp_2040_ambitious_development] / 1000000 
+
+ELSEIF
+[Crop]=="rape" 
+AND
+[Scenario]=="ambitious_development"
+ 
+AND
+[Year]=="2040"
+THEN
+[yield_rape_r_cp_2040_ambitious_development] / 1000000 
+
+ELSEIF
+[Crop]=="rice" 
+AND
+[Scenario]=="ambitious_development"
+ 
+AND
+[Year]=="2040"
+THEN
+[yield_rice_r_cp_2040_ambitious_development] / 1000000 
+
+ELSEIF
+[Crop]=="soyb" 
+AND
+[Scenario]=="ambitious_development"
+ 
+AND
+[Year]=="2040"
+THEN
+[yield_soyb_r_cp_2040_ambitious_development] / 1000000 
+
+ELSEIF
+[Crop]=="sugc" 
+AND
+[Scenario]=="ambitious_development"
+ 
+AND
+[Year]=="2040"
+THEN
+[yield_sugc_r_cp_2040_ambitious_development] / 1000000 
+
+ELSEIF
+[Crop]=="sunf" 
+AND
+[Scenario]=="ambitious_development"
+ 
+AND
+[Year]=="2040"
+THEN
+[yield_sunf_r_cp_2040_ambitious_development] / 1000000 
+
+ELSEIF
+[Crop]=="whea" 
+AND
+[Scenario]=="ambitious_development"
+ 
+AND
+[Year]=="2040"
+THEN
+[yield_whea_r_cp_2040_ambitious_development] / 1000000 
+
+ELSEIF
+[Crop]=="cass" 
+AND
+[Scenario]=="ambitious_development"
+ 
+AND
+[Year]=="2050"
+THEN
+[yield_cass_r_cp_2050_ambitious_development] / 1000000 
+
+ELSEIF
+[Crop]=="grou" 
+AND
+[Scenario]=="ambitious_development"
+ 
+AND
+[Year]=="2050"
+THEN
+[yield_grou_r_cp_2050_ambitious_development] / 1000000 
+
+ELSEIF
+[Crop]=="maiz" 
+AND
+[Scenario]=="ambitious_development"
+ 
+AND
+[Year]=="2050"
+THEN
+[yield_maiz_r_cp_2050_ambitious_development] / 1000000 
+
+ELSEIF
+[Crop]=="pmil" 
+AND
+[Scenario]=="ambitious_development"
+ 
+AND
+[Year]=="2050"
+THEN
+[yield_pmil_r_cp_2050_ambitious_development] / 1000000 
+
+ELSEIF
+[Crop]=="smil" 
+AND
+[Scenario]=="ambitious_development"
+ 
+AND
+[Year]=="2050"
+THEN
+[yield_smil_r_cp_2050_ambitious_development] / 1000000 
+
+ELSEIF
+[Crop]=="rape" 
+AND
+[Scenario]=="ambitious_development"
+ 
+AND
+[Year]=="2050"
+THEN
+[yield_rape_r_cp_2050_ambitious_development] / 1000000 
+
+ELSEIF
+[Crop]=="rice" 
+AND
+[Scenario]=="ambitious_development"
+ 
+AND
+[Year]=="2050"
+THEN
+[yield_rice_r_cp_2050_ambitious_development] / 1000000 
+
+ELSEIF
+[Crop]=="soyb" 
+AND
+[Scenario]=="ambitious_development"
+ 
+AND
+[Year]=="2050"
+THEN
+[yield_soyb_r_cp_2050_ambitious_development] / 1000000 
+
+ELSEIF
+[Crop]=="sugc" 
+AND
+[Scenario]=="ambitious_development"
+ 
+AND
+[Year]=="2050"
+THEN
+[yield_sugc_r_cp_2050_ambitious_development] / 1000000 
+
+ELSEIF
+[Crop]=="sunf" 
+AND
+[Scenario]=="ambitious_development"
+ 
+AND
+[Year]=="2050"
+THEN
+[yield_sunf_r_cp_2050_ambitious_development] / 1000000 
+
+ELSEIF
+[Crop]=="whea" 
+AND
+[Scenario]=="ambitious_development"
+ 
+AND
+[Year]=="2050"
+THEN
+[yield_whea_r_cp_2050_ambitious_development] / 1000000 
+
+ELSEIF
+[Crop]=="cass" 
+AND
+[Scenario]=="ambitious_development"
+ 
+AND
+[Year]=="2060"
+THEN
+[yield_cass_r_cp_2060_ambitious_development] / 1000000 
+
+ELSEIF
+[Crop]=="grou" 
+AND
+[Scenario]=="ambitious_development"
+ 
+AND
+[Year]=="2060"
+THEN
+[yield_grou_r_cp_2060_ambitious_development] / 1000000 
+
+ELSEIF
+[Crop]=="maiz" 
+AND
+[Scenario]=="ambitious_development"
+ 
+AND
+[Year]=="2060"
+THEN
+[yield_maiz_r_cp_2060_ambitious_development] / 1000000 
+
+ELSEIF
+[Crop]=="pmil" 
+AND
+[Scenario]=="ambitious_development"
+ 
+AND
+[Year]=="2060"
+THEN
+[yield_pmil_r_cp_2060_ambitious_development] / 1000000 
+
+ELSEIF
+[Crop]=="smil" 
+AND
+[Scenario]=="ambitious_development"
+ 
+AND
+[Year]=="2060"
+THEN
+[yield_smil_r_cp_2060_ambitious_development] / 1000000 
+
+ELSEIF
+[Crop]=="rape" 
+AND
+[Scenario]=="ambitious_development"
+ 
+AND
+[Year]=="2060"
+THEN
+[yield_rape_r_cp_2060_ambitious_development] / 1000000 
+
+ELSEIF
+[Crop]=="rice" 
+AND
+[Scenario]=="ambitious_development"
+ 
+AND
+[Year]=="2060"
+THEN
+[yield_rice_r_cp_2060_ambitious_development] / 1000000 
+
+ELSEIF
+[Crop]=="soyb" 
+AND
+[Scenario]=="ambitious_development"
+ 
+AND
+[Year]=="2060"
+THEN
+[yield_soyb_r_cp_2060_ambitious_development] / 1000000 
+
+ELSEIF
+[Crop]=="sugc" 
+AND
+[Scenario]=="ambitious_development"
+ 
+AND
+[Year]=="2060"
+THEN
+[yield_sugc_r_cp_2060_ambitious_development] / 1000000 
+
+ELSEIF
+[Crop]=="sunf" 
+AND
+[Scenario]=="ambitious_development"
+ 
+AND
+[Year]=="2060"
+THEN
+[yield_sunf_r_cp_2060_ambitious_development] / 1000000 
+
+ELSEIF
+[Crop]=="whea" 
+AND
+[Scenario]=="ambitious_development"
+ 
+AND
+[Year]=="2060"
+THEN
+[yield_whea_r_cp_2060_ambitious_development] / 1000000 
+
+ELSEIF
+[Crop]=="cass" 
+AND
+[Scenario]=="baseline"
+ 
+AND
+[Year]=="2020"
+THEN
+[yield_cass_i_cp_2020_baseline] / 1000000 
+
+ELSEIF
+[Crop]=="grou" 
+AND
+[Scenario]=="baseline"
+ 
+AND
+[Year]=="2020"
+THEN
+[yield_grou_i_cp_2020_baseline] / 1000000 
+
+ELSEIF
+[Crop]=="maiz" 
+AND
+[Scenario]=="baseline"
+ 
+AND
+[Year]=="2020"
+THEN
+[yield_maiz_i_cp_2020_baseline] / 1000000 
+
+ELSEIF
+[Crop]=="pmil" 
+AND
+[Scenario]=="baseline"
+ 
+AND
+[Year]=="2020"
+THEN
+[yield_pmil_i_cp_2020_baseline] / 1000000 
+
+ELSEIF
+[Crop]=="smil" 
+AND
+[Scenario]=="baseline"
+ 
+AND
+[Year]=="2020"
+THEN
+[yield_smil_i_cp_2020_baseline] / 1000000 
+
+ELSEIF
+[Crop]=="rape" 
+AND
+[Scenario]=="baseline"
+ 
+AND
+[Year]=="2020"
+THEN
+[yield_rape_i_cp_2020_baseline] / 1000000 
+
+ELSEIF
+[Crop]=="rice" 
+AND
+[Scenario]=="baseline"
+ 
+AND
+[Year]=="2020"
+THEN
+[yield_rice_i_cp_2020_baseline] / 1000000 
+
+ELSEIF
+[Crop]=="soyb" 
+AND
+[Scenario]=="baseline"
+ 
+AND
+[Year]=="2020"
+THEN
+[yield_soyb_i_cp_2020_baseline] / 1000000 
+
+ELSEIF
+[Crop]=="sugc" 
+AND
+[Scenario]=="baseline"
+ 
+AND
+[Year]=="2020"
+THEN
+[yield_sugc_i_cp_2020_baseline] / 1000000 
+
+ELSEIF
+[Crop]=="sunf" 
+AND
+[Scenario]=="baseline"
+ 
+AND
+[Year]=="2020"
+THEN
+[yield_sunf_i_cp_2020_baseline] / 1000000 
+
+ELSEIF
+[Crop]=="whea" 
+AND
+[Scenario]=="baseline"
+ 
+AND
+[Year]=="2020"
+THEN
+[yield_whea_i_cp_2020_baseline] / 1000000 
+
+ELSEIF
+[Crop]=="cass" 
+AND
+[Scenario]=="baseline"
+ 
+AND
+[Year]=="2030"
+THEN
+[yield_cass_i_cp_2030_baseline] / 1000000 
+
+ELSEIF
+[Crop]=="grou" 
+AND
+[Scenario]=="baseline"
+ 
+AND
+[Year]=="2030"
+THEN
+[yield_grou_i_cp_2030_baseline] / 1000000 
+
+ELSEIF
+[Crop]=="maiz" 
+AND
+[Scenario]=="baseline"
+ 
+AND
+[Year]=="2030"
+THEN
+[yield_maiz_i_cp_2030_baseline] / 1000000 
+
+ELSEIF
+[Crop]=="pmil" 
+AND
+[Scenario]=="baseline"
+ 
+AND
+[Year]=="2030"
+THEN
+[yield_pmil_i_cp_2030_baseline] / 1000000 
+
+ELSEIF
+[Crop]=="smil" 
+AND
+[Scenario]=="baseline"
+ 
+AND
+[Year]=="2030"
+THEN
+[yield_smil_i_cp_2030_baseline] / 1000000 
+
+ELSEIF
+[Crop]=="rape" 
+AND
+[Scenario]=="baseline"
+ 
+AND
+[Year]=="2030"
+THEN
+[yield_rape_i_cp_2030_baseline] / 1000000 
+
+ELSEIF
+[Crop]=="rice" 
+AND
+[Scenario]=="baseline"
+ 
+AND
+[Year]=="2030"
+THEN
+[yield_rice_i_cp_2030_baseline] / 1000000 
+
+ELSEIF
+[Crop]=="soyb" 
+AND
+[Scenario]=="baseline"
+ 
+AND
+[Year]=="2030"
+THEN
+[yield_soyb_i_cp_2030_baseline] / 1000000 
+
+ELSEIF
+[Crop]=="sugc" 
+AND
+[Scenario]=="baseline"
+ 
+AND
+[Year]=="2030"
+THEN
+[yield_sugc_i_cp_2030_baseline] / 1000000 
+
+ELSEIF
+[Crop]=="sunf" 
+AND
+[Scenario]=="baseline"
+ 
+AND
+[Year]=="2030"
+THEN
+[yield_sunf_i_cp_2030_baseline] / 1000000 
+
+ELSEIF
+[Crop]=="whea" 
+AND
+[Scenario]=="baseline"
+ 
+AND
+[Year]=="2030"
+THEN
+[yield_whea_i_cp_2030_baseline] / 1000000 
+
+ELSEIF
+[Crop]=="cass" 
+AND
+[Scenario]=="baseline"
+ 
+AND
+[Year]=="2040"
+THEN
+[yield_cass_i_cp_2040_baseline] / 1000000 
+
+ELSEIF
+[Crop]=="grou" 
+AND
+[Scenario]=="baseline"
+ 
+AND
+[Year]=="2040"
+THEN
+[yield_grou_i_cp_2040_baseline] / 1000000 
+
+ELSEIF
+[Crop]=="maiz" 
+AND
+[Scenario]=="baseline"
+ 
+AND
+[Year]=="2040"
+THEN
+[yield_maiz_i_cp_2040_baseline] / 1000000 
+
+ELSEIF
+[Crop]=="pmil" 
+AND
+[Scenario]=="baseline"
+ 
+AND
+[Year]=="2040"
+THEN
+[yield_pmil_i_cp_2040_baseline] / 1000000 
+
+ELSEIF
+[Crop]=="smil" 
+AND
+[Scenario]=="baseline"
+ 
+AND
+[Year]=="2040"
+THEN
+[yield_smil_i_cp_2040_baseline] / 1000000 
+
+ELSEIF
+[Crop]=="rape" 
+AND
+[Scenario]=="baseline"
+ 
+AND
+[Year]=="2040"
+THEN
+[yield_rape_i_cp_2040_baseline] / 1000000 
+
+ELSEIF
+[Crop]=="rice" 
+AND
+[Scenario]=="baseline"
+ 
+AND
+[Year]=="2040"
+THEN
+[yield_rice_i_cp_2040_baseline] / 1000000 
+
+ELSEIF
+[Crop]=="soyb" 
+AND
+[Scenario]=="baseline"
+ 
+AND
+[Year]=="2040"
+THEN
+[yield_soyb_i_cp_2040_baseline] / 1000000 
+
+ELSEIF
+[Crop]=="sugc" 
+AND
+[Scenario]=="baseline"
+ 
+AND
+[Year]=="2040"
+THEN
+[yield_sugc_i_cp_2040_baseline] / 1000000 
+
+ELSEIF
+[Crop]=="sunf" 
+AND
+[Scenario]=="baseline"
+ 
+AND
+[Year]=="2040"
+THEN
+[yield_sunf_i_cp_2040_baseline] / 1000000 
+
+ELSEIF
+[Crop]=="whea" 
+AND
+[Scenario]=="baseline"
+ 
+AND
+[Year]=="2040"
+THEN
+[yield_whea_i_cp_2040_baseline] / 1000000 
+
+ELSEIF
+[Crop]=="cass" 
+AND
+[Scenario]=="baseline"
+ 
+AND
+[Year]=="2050"
+THEN
+[yield_cass_i_cp_2050_baseline] / 1000000 
+
+ELSEIF
+[Crop]=="grou" 
+AND
+[Scenario]=="baseline"
+ 
+AND
+[Year]=="2050"
+THEN
+[yield_grou_i_cp_2050_baseline] / 1000000 
+
+ELSEIF
+[Crop]=="maiz" 
+AND
+[Scenario]=="baseline"
+ 
+AND
+[Year]=="2050"
+THEN
+[yield_maiz_i_cp_2050_baseline] / 1000000 
+
+ELSEIF
+[Crop]=="pmil" 
+AND
+[Scenario]=="baseline"
+ 
+AND
+[Year]=="2050"
+THEN
+[yield_pmil_i_cp_2050_baseline] / 1000000 
+
+ELSEIF
+[Crop]=="smil" 
+AND
+[Scenario]=="baseline"
+ 
+AND
+[Year]=="2050"
+THEN
+[yield_smil_i_cp_2050_baseline] / 1000000 
+
+ELSEIF
+[Crop]=="rape" 
+AND
+[Scenario]=="baseline"
+ 
+AND
+[Year]=="2050"
+THEN
+[yield_rape_i_cp_2050_baseline] / 1000000 
+
+ELSEIF
+[Crop]=="rice" 
+AND
+[Scenario]=="baseline"
+ 
+AND
+[Year]=="2050"
+THEN
+[yield_rice_i_cp_2050_baseline] / 1000000 
+
+ELSEIF
+[Crop]=="soyb" 
+AND
+[Scenario]=="baseline"
+ 
+AND
+[Year]=="2050"
+THEN
+[yield_soyb_i_cp_2050_baseline] / 1000000 
+
+ELSEIF
+[Crop]=="sugc" 
+AND
+[Scenario]=="baseline"
+ 
+AND
+[Year]=="2050"
+THEN
+[yield_sugc_i_cp_2050_baseline] / 1000000 
+
+ELSEIF
+[Crop]=="sunf" 
+AND
+[Scenario]=="baseline"
+ 
+AND
+[Year]=="2050"
+THEN
+[yield_sunf_i_cp_2050_baseline] / 1000000 
+
+ELSEIF
+[Crop]=="whea" 
+AND
+[Scenario]=="baseline"
+ 
+AND
+[Year]=="2050"
+THEN
+[yield_whea_i_cp_2050_baseline] / 1000000 
+
+ELSEIF
+[Crop]=="cass" 
+AND
+[Scenario]=="baseline"
+ 
+AND
+[Year]=="2060"
+THEN
+[yield_cass_i_cp_2060_baseline] / 1000000 
+
+ELSEIF
+[Crop]=="grou" 
+AND
+[Scenario]=="baseline"
+ 
+AND
+[Year]=="2060"
+THEN
+[yield_grou_i_cp_2060_baseline] / 1000000 
+
+ELSEIF
+[Crop]=="maiz" 
+AND
+[Scenario]=="baseline"
+ 
+AND
+[Year]=="2060"
+THEN
+[yield_maiz_i_cp_2060_baseline] / 1000000 
+
+ELSEIF
+[Crop]=="pmil" 
+AND
+[Scenario]=="baseline"
+ 
+AND
+[Year]=="2060"
+THEN
+[yield_pmil_i_cp_2060_baseline] / 1000000 
+
+ELSEIF
+[Crop]=="smil" 
+AND
+[Scenario]=="baseline"
+ 
+AND
+[Year]=="2060"
+THEN
+[yield_smil_i_cp_2060_baseline] / 1000000 
+
+ELSEIF
+[Crop]=="rape" 
+AND
+[Scenario]=="baseline"
+ 
+AND
+[Year]=="2060"
+THEN
+[yield_rape_i_cp_2060_baseline] / 1000000 
+
+ELSEIF
+[Crop]=="rice" 
+AND
+[Scenario]=="baseline"
+ 
+AND
+[Year]=="2060"
+THEN
+[yield_rice_i_cp_2060_baseline] / 1000000 
+
+ELSEIF
+[Crop]=="soyb" 
+AND
+[Scenario]=="baseline"
+ 
+AND
+[Year]=="2060"
+THEN
+[yield_soyb_i_cp_2060_baseline] / 1000000 
+
+ELSEIF
+[Crop]=="sugc" 
+AND
+[Scenario]=="baseline"
+ 
+AND
+[Year]=="2060"
+THEN
+[yield_sugc_i_cp_2060_baseline] / 1000000 
+
+ELSEIF
+[Crop]=="sunf" 
+AND
+[Scenario]=="baseline"
+ 
+AND
+[Year]=="2060"
+THEN
+[yield_sunf_i_cp_2060_baseline] / 1000000 
+
+ELSEIF
+[Crop]=="whea" 
+AND
+[Scenario]=="baseline"
+ 
+AND
+[Year]=="2060"
+THEN
+[yield_whea_i_cp_2060_baseline] / 1000000 
+
+ELSEIF
+[Crop]=="cass" 
+AND
+[Scenario]=="improved_access"
+ 
+AND
+[Year]=="2020"
+THEN
+[yield_cass_i_cp_2020_improved_access] / 1000000 
+
+ELSEIF
+[Crop]=="grou" 
+AND
+[Scenario]=="improved_access"
+ 
+AND
+[Year]=="2020"
+THEN
+[yield_grou_i_cp_2020_improved_access] / 1000000 
+
+ELSEIF
+[Crop]=="maiz" 
+AND
+[Scenario]=="improved_access"
+ 
+AND
+[Year]=="2020"
+THEN
+[yield_maiz_i_cp_2020_improved_access] / 1000000 
+
+ELSEIF
+[Crop]=="pmil" 
+AND
+[Scenario]=="improved_access"
+ 
+AND
+[Year]=="2020"
+THEN
+[yield_pmil_i_cp_2020_improved_access] / 1000000 
+
+ELSEIF
+[Crop]=="smil" 
+AND
+[Scenario]=="improved_access"
+ 
+AND
+[Year]=="2020"
+THEN
+[yield_smil_i_cp_2020_improved_access] / 1000000 
+
+ELSEIF
+[Crop]=="rape" 
+AND
+[Scenario]=="improved_access"
+ 
+AND
+[Year]=="2020"
+THEN
+[yield_rape_i_cp_2020_improved_access] / 1000000 
+
+ELSEIF
+[Crop]=="rice" 
+AND
+[Scenario]=="improved_access"
+ 
+AND
+[Year]=="2020"
+THEN
+[yield_rice_i_cp_2020_improved_access] / 1000000 
+
+ELSEIF
+[Crop]=="soyb" 
+AND
+[Scenario]=="improved_access"
+ 
+AND
+[Year]=="2020"
+THEN
+[yield_soyb_i_cp_2020_improved_access] / 1000000 
+
+ELSEIF
+[Crop]=="sugc" 
+AND
+[Scenario]=="improved_access"
+ 
+AND
+[Year]=="2020"
+THEN
+[yield_sugc_i_cp_2020_improved_access] / 1000000 
+
+ELSEIF
+[Crop]=="sunf" 
+AND
+[Scenario]=="improved_access"
+ 
+AND
+[Year]=="2020"
+THEN
+[yield_sunf_i_cp_2020_improved_access] / 1000000 
+
+ELSEIF
+[Crop]=="whea" 
+AND
+[Scenario]=="improved_access"
+ 
+AND
+[Year]=="2020"
+THEN
+[yield_whea_i_cp_2020_improved_access] / 1000000 
+
+ELSEIF
+[Crop]=="cass" 
+AND
+[Scenario]=="improved_access"
+ 
+AND
+[Year]=="2030"
+THEN
+[yield_cass_i_cp_2030_improved_access] / 1000000 
+
+ELSEIF
+[Crop]=="grou" 
+AND
+[Scenario]=="improved_access"
+ 
+AND
+[Year]=="2030"
+THEN
+[yield_grou_i_cp_2030_improved_access] / 1000000 
+
+ELSEIF
+[Crop]=="maiz" 
+AND
+[Scenario]=="improved_access"
+ 
+AND
+[Year]=="2030"
+THEN
+[yield_maiz_i_cp_2030_improved_access] / 1000000 
+
+ELSEIF
+[Crop]=="pmil" 
+AND
+[Scenario]=="improved_access"
+ 
+AND
+[Year]=="2030"
+THEN
+[yield_pmil_i_cp_2030_improved_access] / 1000000 
+
+ELSEIF
+[Crop]=="smil" 
+AND
+[Scenario]=="improved_access"
+ 
+AND
+[Year]=="2030"
+THEN
+[yield_smil_i_cp_2030_improved_access] / 1000000 
+
+ELSEIF
+[Crop]=="rape" 
+AND
+[Scenario]=="improved_access"
+ 
+AND
+[Year]=="2030"
+THEN
+[yield_rape_i_cp_2030_improved_access] / 1000000 
+
+ELSEIF
+[Crop]=="rice" 
+AND
+[Scenario]=="improved_access"
+ 
+AND
+[Year]=="2030"
+THEN
+[yield_rice_i_cp_2030_improved_access] / 1000000 
+
+ELSEIF
+[Crop]=="soyb" 
+AND
+[Scenario]=="improved_access"
+ 
+AND
+[Year]=="2030"
+THEN
+[yield_soyb_i_cp_2030_improved_access] / 1000000 
+
+ELSEIF
+[Crop]=="sugc" 
+AND
+[Scenario]=="improved_access"
+ 
+AND
+[Year]=="2030"
+THEN
+[yield_sugc_i_cp_2030_improved_access] / 1000000 
+
+ELSEIF
+[Crop]=="sunf" 
+AND
+[Scenario]=="improved_access"
+ 
+AND
+[Year]=="2030"
+THEN
+[yield_sunf_i_cp_2030_improved_access] / 1000000 
+
+ELSEIF
+[Crop]=="whea" 
+AND
+[Scenario]=="improved_access"
+ 
+AND
+[Year]=="2030"
+THEN
+[yield_whea_i_cp_2030_improved_access] / 1000000 
+
+ELSEIF
+[Crop]=="cass" 
+AND
+[Scenario]=="improved_access"
+ 
+AND
+[Year]=="2040"
+THEN
+[yield_cass_i_cp_2040_improved_access] / 1000000 
+
+ELSEIF
+[Crop]=="grou" 
+AND
+[Scenario]=="improved_access"
+ 
+AND
+[Year]=="2040"
+THEN
+[yield_grou_i_cp_2040_improved_access] / 1000000 
+
+ELSEIF
+[Crop]=="maiz" 
+AND
+[Scenario]=="improved_access"
+ 
+AND
+[Year]=="2040"
+THEN
+[yield_maiz_i_cp_2040_improved_access] / 1000000 
+
+ELSEIF
+[Crop]=="pmil" 
+AND
+[Scenario]=="improved_access"
+ 
+AND
+[Year]=="2040"
+THEN
+[yield_pmil_i_cp_2040_improved_access] / 1000000 
+
+ELSEIF
+[Crop]=="smil" 
+AND
+[Scenario]=="improved_access"
+ 
+AND
+[Year]=="2040"
+THEN
+[yield_smil_i_cp_2040_improved_access] / 1000000 
+
+ELSEIF
+[Crop]=="rape" 
+AND
+[Scenario]=="improved_access"
+ 
+AND
+[Year]=="2040"
+THEN
+[yield_rape_i_cp_2040_improved_access] / 1000000 
+
+ELSEIF
+[Crop]=="rice" 
+AND
+[Scenario]=="improved_access"
+ 
+AND
+[Year]=="2040"
+THEN
+[yield_rice_i_cp_2040_improved_access] / 1000000 
+
+ELSEIF
+[Crop]=="soyb" 
+AND
+[Scenario]=="improved_access"
+ 
+AND
+[Year]=="2040"
+THEN
+[yield_soyb_i_cp_2040_improved_access] / 1000000 
+
+ELSEIF
+[Crop]=="sugc" 
+AND
+[Scenario]=="improved_access"
+ 
+AND
+[Year]=="2040"
+THEN
+[yield_sugc_i_cp_2040_improved_access] / 1000000 
+
+ELSEIF
+[Crop]=="sunf" 
+AND
+[Scenario]=="improved_access"
+ 
+AND
+[Year]=="2040"
+THEN
+[yield_sunf_i_cp_2040_improved_access] / 1000000 
+
+ELSEIF
+[Crop]=="whea" 
+AND
+[Scenario]=="improved_access"
+ 
+AND
+[Year]=="2040"
+THEN
+[yield_whea_i_cp_2040_improved_access] / 1000000 
+
+ELSEIF
+[Crop]=="cass" 
+AND
+[Scenario]=="improved_access"
+ 
+AND
+[Year]=="2050"
+THEN
+[yield_cass_i_cp_2050_improved_access] / 1000000 
+
+ELSEIF
+[Crop]=="grou" 
+AND
+[Scenario]=="improved_access"
+ 
+AND
+[Year]=="2050"
+THEN
+[yield_grou_i_cp_2050_improved_access] / 1000000 
+
+ELSEIF
+[Crop]=="maiz" 
+AND
+[Scenario]=="improved_access"
+ 
+AND
+[Year]=="2050"
+THEN
+[yield_maiz_i_cp_2050_improved_access] / 1000000 
+
+ELSEIF
+[Crop]=="pmil" 
+AND
+[Scenario]=="improved_access"
+ 
+AND
+[Year]=="2050"
+THEN
+[yield_pmil_i_cp_2050_improved_access] / 1000000 
+
+ELSEIF
+[Crop]=="smil" 
+AND
+[Scenario]=="improved_access"
+ 
+AND
+[Year]=="2050"
+THEN
+[yield_smil_i_cp_2050_improved_access] / 1000000 
+
+ELSEIF
+[Crop]=="rape" 
+AND
+[Scenario]=="improved_access"
+ 
+AND
+[Year]=="2050"
+THEN
+[yield_rape_i_cp_2050_improved_access] / 1000000 
+
+ELSEIF
+[Crop]=="rice" 
+AND
+[Scenario]=="improved_access"
+ 
+AND
+[Year]=="2050"
+THEN
+[yield_rice_i_cp_2050_improved_access] / 1000000 
+
+ELSEIF
+[Crop]=="soyb" 
+AND
+[Scenario]=="improved_access"
+ 
+AND
+[Year]=="2050"
+THEN
+[yield_soyb_i_cp_2050_improved_access] / 1000000 
+
+ELSEIF
+[Crop]=="sugc" 
+AND
+[Scenario]=="improved_access"
+ 
+AND
+[Year]=="2050"
+THEN
+[yield_sugc_i_cp_2050_improved_access] / 1000000 
+
+ELSEIF
+[Crop]=="sunf" 
+AND
+[Scenario]=="improved_access"
+ 
+AND
+[Year]=="2050"
+THEN
+[yield_sunf_i_cp_2050_improved_access] / 1000000 
+
+ELSEIF
+[Crop]=="whea" 
+AND
+[Scenario]=="improved_access"
+ 
+AND
+[Year]=="2050"
+THEN
+[yield_whea_i_cp_2050_improved_access] / 1000000 
+
+ELSEIF
+[Crop]=="cass" 
+AND
+[Scenario]=="improved_access"
+ 
+AND
+[Year]=="2060"
+THEN
+[yield_cass_i_cp_2060_improved_access] / 1000000 
+
+ELSEIF
+[Crop]=="grou" 
+AND
+[Scenario]=="improved_access"
+ 
+AND
+[Year]=="2060"
+THEN
+[yield_grou_i_cp_2060_improved_access] / 1000000 
+
+ELSEIF
+[Crop]=="maiz" 
+AND
+[Scenario]=="improved_access"
+ 
+AND
+[Year]=="2060"
+THEN
+[yield_maiz_i_cp_2060_improved_access] / 1000000 
+
+ELSEIF
+[Crop]=="pmil" 
+AND
+[Scenario]=="improved_access"
+ 
+AND
+[Year]=="2060"
+THEN
+[yield_pmil_i_cp_2060_improved_access] / 1000000 
+
+ELSEIF
+[Crop]=="smil" 
+AND
+[Scenario]=="improved_access"
+ 
+AND
+[Year]=="2060"
+THEN
+[yield_smil_i_cp_2060_improved_access] / 1000000 
+
+ELSEIF
+[Crop]=="rape" 
+AND
+[Scenario]=="improved_access"
+ 
+AND
+[Year]=="2060"
+THEN
+[yield_rape_i_cp_2060_improved_access] / 1000000 
+
+ELSEIF
+[Crop]=="rice" 
+AND
+[Scenario]=="improved_access"
+ 
+AND
+[Year]=="2060"
+THEN
+[yield_rice_i_cp_2060_improved_access] / 1000000 
+
+ELSEIF
+[Crop]=="soyb" 
+AND
+[Scenario]=="improved_access"
+ 
+AND
+[Year]=="2060"
+THEN
+[yield_soyb_i_cp_2060_improved_access] / 1000000 
+
+ELSEIF
+[Crop]=="sugc" 
+AND
+[Scenario]=="improved_access"
+ 
+AND
+[Year]=="2060"
+THEN
+[yield_sugc_i_cp_2060_improved_access] / 1000000 
+
+ELSEIF
+[Crop]=="sunf" 
+AND
+[Scenario]=="improved_access"
+ 
+AND
+[Year]=="2060"
+THEN
+[yield_sunf_i_cp_2060_improved_access] / 1000000 
+
+ELSEIF
+[Crop]=="whea" 
+AND
+[Scenario]=="improved_access"
+ 
+AND
+[Year]=="2060"
+THEN
+[yield_whea_i_cp_2060_improved_access] / 1000000 
+
+ELSEIF
+[Crop]=="cass" 
+AND
+[Scenario]=="ambitious_development"
+ 
+AND
+[Year]=="2020"
+THEN
+[yield_cass_i_cp_2020_ambitious_development] / 1000000 
+
+ELSEIF
+[Crop]=="grou" 
+AND
+[Scenario]=="ambitious_development"
+ 
+AND
+[Year]=="2020"
+THEN
+[yield_grou_i_cp_2020_ambitious_development] / 1000000 
+
+ELSEIF
+[Crop]=="maiz" 
+AND
+[Scenario]=="ambitious_development"
+ 
+AND
+[Year]=="2020"
+THEN
+[yield_maiz_i_cp_2020_ambitious_development] / 1000000 
+
+ELSEIF
+[Crop]=="pmil" 
+AND
+[Scenario]=="ambitious_development"
+ 
+AND
+[Year]=="2020"
+THEN
+[yield_pmil_i_cp_2020_ambitious_development] / 1000000 
+
+ELSEIF
+[Crop]=="smil" 
+AND
+[Scenario]=="ambitious_development"
+ 
+AND
+[Year]=="2020"
+THEN
+[yield_smil_i_cp_2020_ambitious_development] / 1000000 
+
+ELSEIF
+[Crop]=="rape" 
+AND
+[Scenario]=="ambitious_development"
+ 
+AND
+[Year]=="2020"
+THEN
+[yield_rape_i_cp_2020_ambitious_development] / 1000000 
+
+ELSEIF
+[Crop]=="rice" 
+AND
+[Scenario]=="ambitious_development"
+ 
+AND
+[Year]=="2020"
+THEN
+[yield_rice_i_cp_2020_ambitious_development] / 1000000 
+
+ELSEIF
+[Crop]=="soyb" 
+AND
+[Scenario]=="ambitious_development"
+ 
+AND
+[Year]=="2020"
+THEN
+[yield_soyb_i_cp_2020_ambitious_development] / 1000000 
+
+ELSEIF
+[Crop]=="sugc" 
+AND
+[Scenario]=="ambitious_development"
+ 
+AND
+[Year]=="2020"
+THEN
+[yield_sugc_i_cp_2020_ambitious_development] / 1000000 
+
+ELSEIF
+[Crop]=="sunf" 
+AND
+[Scenario]=="ambitious_development"
+ 
+AND
+[Year]=="2020"
+THEN
+[yield_sunf_i_cp_2020_ambitious_development] / 1000000 
+
+ELSEIF
+[Crop]=="whea" 
+AND
+[Scenario]=="ambitious_development"
+ 
+AND
+[Year]=="2020"
+THEN
+[yield_whea_i_cp_2020_ambitious_development] / 1000000 
+
+ELSEIF
+[Crop]=="cass" 
+AND
+[Scenario]=="ambitious_development"
+ 
+AND
+[Year]=="2030"
+THEN
+[yield_cass_i_cp_2030_ambitious_development] / 1000000 
+
+ELSEIF
+[Crop]=="grou" 
+AND
+[Scenario]=="ambitious_development"
+ 
+AND
+[Year]=="2030"
+THEN
+[yield_grou_i_cp_2030_ambitious_development] / 1000000 
+
+ELSEIF
+[Crop]=="maiz" 
+AND
+[Scenario]=="ambitious_development"
+ 
+AND
+[Year]=="2030"
+THEN
+[yield_maiz_i_cp_2030_ambitious_development] / 1000000 
+
+ELSEIF
+[Crop]=="pmil" 
+AND
+[Scenario]=="ambitious_development"
+ 
+AND
+[Year]=="2030"
+THEN
+[yield_pmil_i_cp_2030_ambitious_development] / 1000000 
+
+ELSEIF
+[Crop]=="smil" 
+AND
+[Scenario]=="ambitious_development"
+ 
+AND
+[Year]=="2030"
+THEN
+[yield_smil_i_cp_2030_ambitious_development] / 1000000 
+
+ELSEIF
+[Crop]=="rape" 
+AND
+[Scenario]=="ambitious_development"
+ 
+AND
+[Year]=="2030"
+THEN
+[yield_rape_i_cp_2030_ambitious_development] / 1000000 
+
+ELSEIF
+[Crop]=="rice" 
+AND
+[Scenario]=="ambitious_development"
+ 
+AND
+[Year]=="2030"
+THEN
+[yield_rice_i_cp_2030_ambitious_development] / 1000000 
+
+ELSEIF
+[Crop]=="soyb" 
+AND
+[Scenario]=="ambitious_development"
+ 
+AND
+[Year]=="2030"
+THEN
+[yield_soyb_i_cp_2030_ambitious_development] / 1000000 
+
+ELSEIF
+[Crop]=="sugc" 
+AND
+[Scenario]=="ambitious_development"
+ 
+AND
+[Year]=="2030"
+THEN
+[yield_sugc_i_cp_2030_ambitious_development] / 1000000 
+
+ELSEIF
+[Crop]=="sunf" 
+AND
+[Scenario]=="ambitious_development"
+ 
+AND
+[Year]=="2030"
+THEN
+[yield_sunf_i_cp_2030_ambitious_development] / 1000000 
+
+ELSEIF
+[Crop]=="whea" 
+AND
+[Scenario]=="ambitious_development"
+ 
+AND
+[Year]=="2030"
+THEN
+[yield_whea_i_cp_2030_ambitious_development] / 1000000 
+
+ELSEIF
+[Crop]=="cass" 
+AND
+[Scenario]=="ambitious_development"
+ 
+AND
+[Year]=="2040"
+THEN
+[yield_cass_i_cp_2040_ambitious_development] / 1000000 
+
+ELSEIF
+[Crop]=="grou" 
+AND
+[Scenario]=="ambitious_development"
+ 
+AND
+[Year]=="2040"
+THEN
+[yield_grou_i_cp_2040_ambitious_development] / 1000000 
+
+ELSEIF
+[Crop]=="maiz" 
+AND
+[Scenario]=="ambitious_development"
+ 
+AND
+[Year]=="2040"
+THEN
+[yield_maiz_i_cp_2040_ambitious_development] / 1000000 
+
+ELSEIF
+[Crop]=="pmil" 
+AND
+[Scenario]=="ambitious_development"
+ 
+AND
+[Year]=="2040"
+THEN
+[yield_pmil_i_cp_2040_ambitious_development] / 1000000 
+
+ELSEIF
+[Crop]=="smil" 
+AND
+[Scenario]=="ambitious_development"
+ 
+AND
+[Year]=="2040"
+THEN
+[yield_smil_i_cp_2040_ambitious_development] / 1000000 
+
+ELSEIF
+[Crop]=="rape" 
+AND
+[Scenario]=="ambitious_development"
+ 
+AND
+[Year]=="2040"
+THEN
+[yield_rape_i_cp_2040_ambitious_development] / 1000000 
+
+ELSEIF
+[Crop]=="rice" 
+AND
+[Scenario]=="ambitious_development"
+ 
+AND
+[Year]=="2040"
+THEN
+[yield_rice_i_cp_2040_ambitious_development] / 1000000 
+
+ELSEIF
+[Crop]=="soyb" 
+AND
+[Scenario]=="ambitious_development"
+ 
+AND
+[Year]=="2040"
+THEN
+[yield_soyb_i_cp_2040_ambitious_development] / 1000000 
+
+ELSEIF
+[Crop]=="sugc" 
+AND
+[Scenario]=="ambitious_development"
+ 
+AND
+[Year]=="2040"
+THEN
+[yield_sugc_i_cp_2040_ambitious_development] / 1000000 
+
+ELSEIF
+[Crop]=="sunf" 
+AND
+[Scenario]=="ambitious_development"
+ 
+AND
+[Year]=="2040"
+THEN
+[yield_sunf_i_cp_2040_ambitious_development] / 1000000 
+
+ELSEIF
+[Crop]=="whea" 
+AND
+[Scenario]=="ambitious_development"
+ 
+AND
+[Year]=="2040"
+THEN
+[yield_whea_i_cp_2040_ambitious_development] / 1000000 
+
+ELSEIF
+[Crop]=="cass" 
+AND
+[Scenario]=="ambitious_development"
+ 
+AND
+[Year]=="2050"
+THEN
+[yield_cass_i_cp_2050_ambitious_development] / 1000000 
+
+ELSEIF
+[Crop]=="grou" 
+AND
+[Scenario]=="ambitious_development"
+ 
+AND
+[Year]=="2050"
+THEN
+[yield_grou_i_cp_2050_ambitious_development] / 1000000 
+
+ELSEIF
+[Crop]=="maiz" 
+AND
+[Scenario]=="ambitious_development"
+ 
+AND
+[Year]=="2050"
+THEN
+[yield_maiz_i_cp_2050_ambitious_development] / 1000000 
+
+ELSEIF
+[Crop]=="pmil" 
+AND
+[Scenario]=="ambitious_development"
+ 
+AND
+[Year]=="2050"
+THEN
+[yield_pmil_i_cp_2050_ambitious_development] / 1000000 
+
+ELSEIF
+[Crop]=="smil" 
+AND
+[Scenario]=="ambitious_development"
+ 
+AND
+[Year]=="2050"
+THEN
+[yield_smil_i_cp_2050_ambitious_development] / 1000000 
+
+ELSEIF
+[Crop]=="rape" 
+AND
+[Scenario]=="ambitious_development"
+ 
+AND
+[Year]=="2050"
+THEN
+[yield_rape_i_cp_2050_ambitious_development] / 1000000 
+
+ELSEIF
+[Crop]=="rice" 
+AND
+[Scenario]=="ambitious_development"
+ 
+AND
+[Year]=="2050"
+THEN
+[yield_rice_i_cp_2050_ambitious_development] / 1000000 
+
+ELSEIF
+[Crop]=="soyb" 
+AND
+[Scenario]=="ambitious_development"
+ 
+AND
+[Year]=="2050"
+THEN
+[yield_soyb_i_cp_2050_ambitious_development] / 1000000 
+
+ELSEIF
+[Crop]=="sugc" 
+AND
+[Scenario]=="ambitious_development"
+ 
+AND
+[Year]=="2050"
+THEN
+[yield_sugc_i_cp_2050_ambitious_development] / 1000000 
+
+ELSEIF
+[Crop]=="sunf" 
+AND
+[Scenario]=="ambitious_development"
+ 
+AND
+[Year]=="2050"
+THEN
+[yield_sunf_i_cp_2050_ambitious_development] / 1000000 
+
+ELSEIF
+[Crop]=="whea" 
+AND
+[Scenario]=="ambitious_development"
+ 
+AND
+[Year]=="2050"
+THEN
+[yield_whea_i_cp_2050_ambitious_development] / 1000000 
+
+ELSEIF
+[Crop]=="cass" 
+AND
+[Scenario]=="ambitious_development"
+ 
+AND
+[Year]=="2060"
+THEN
+[yield_cass_i_cp_2060_ambitious_development] / 1000000 
+
+ELSEIF
+[Crop]=="grou" 
+AND
+[Scenario]=="ambitious_development"
+ 
+AND
+[Year]=="2060"
+THEN
+[yield_grou_i_cp_2060_ambitious_development] / 1000000 
+
+ELSEIF
+[Crop]=="maiz" 
+AND
+[Scenario]=="ambitious_development"
+ 
+AND
+[Year]=="2060"
+THEN
+[yield_maiz_i_cp_2060_ambitious_development] / 1000000 
+
+ELSEIF
+[Crop]=="pmil" 
+AND
+[Scenario]=="ambitious_development"
+ 
+AND
+[Year]=="2060"
+THEN
+[yield_pmil_i_cp_2060_ambitious_development] / 1000000 
+
+ELSEIF
+[Crop]=="smil" 
+AND
+[Scenario]=="ambitious_development"
+ 
+AND
+[Year]=="2060"
+THEN
+[yield_smil_i_cp_2060_ambitious_development] / 1000000 
+
+ELSEIF
+[Crop]=="rape" 
+AND
+[Scenario]=="ambitious_development"
+ 
+AND
+[Year]=="2060"
+THEN
+[yield_rape_i_cp_2060_ambitious_development] / 1000000 
+
+ELSEIF
+[Crop]=="rice" 
+AND
+[Scenario]=="ambitious_development"
+ 
+AND
+[Year]=="2060"
+THEN
+[yield_rice_i_cp_2060_ambitious_development] / 1000000 
+
+ELSEIF
+[Crop]=="soyb" 
+AND
+[Scenario]=="ambitious_development"
+ 
+AND
+[Year]=="2060"
+THEN
+[yield_soyb_i_cp_2060_ambitious_development] / 1000000 
+
+ELSEIF
+[Crop]=="sugc" 
+AND
+[Scenario]=="ambitious_development"
+ 
+AND
+[Year]=="2060"
+THEN
+[yield_sugc_i_cp_2060_ambitious_development] / 1000000 
+
+ELSEIF
+[Crop]=="sunf" 
+AND
+[Scenario]=="ambitious_development"
+ 
+AND
+[Year]=="2060"
+THEN
+[yield_sunf_i_cp_2060_ambitious_development] / 1000000 
+
+ELSEIF
+[Crop]=="whea" 
+AND
+[Scenario]=="ambitious_development"
+ 
+AND
+[Year]=="2060"
+THEN
+[yield_whea_i_cp_2060_ambitious_development] / 1000000 
+
+END

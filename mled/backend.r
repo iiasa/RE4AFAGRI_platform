@@ -16,7 +16,7 @@ cl <- parallel::makeCluster((floor(detectCores() * 0.25)))
 #cl <- parallel::makeCluster(4)
 plan(cluster, workers=cl)
 
-future_lapply <- purrr::partial(future_lapply, future.seed = TRUE)
+future_lapply <- purrr::partial(future.apply::future_lapply, future.seed = TRUE)
 
 
 } else {
@@ -140,7 +140,7 @@ all_input_files <- list.files(path=input_folder, recursive = T, full.names = T)
 
 all_input_files <- all_input_files[grep(exclude_countries, all_input_files,ignore.case=TRUE, invert = TRUE)]
 
-all_input_files <- all_input_files[grep("\\.ini$|\\.docx$|\\.png$|\\.r$|\\.mat$|r_tmp_|\\.pyc$|\\.pdf$|\\.rds$|\\.rdata$|\\.xml$", all_input_files,ignore.case=TRUE, invert = TRUE)] 
+all_input_files <- all_input_files[grep("\\.ini$|\\.docx$|\\.png$|\\.r$|\\.mat$|r_tmp_|\\.pyc$|\\.pdf$|\\.rds$|\\.rdata$|\\.xml$|\\~\\$", all_input_files,ignore.case=TRUE, invert = TRUE)] 
 
 all_input_files <- gsub("//", "/", all_input_files)
 

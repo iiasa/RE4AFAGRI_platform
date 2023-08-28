@@ -1,6 +1,6 @@
 # MLED - Multi-sectoral Latent Electricity Demand assessment platform
 # v0.2 (LEAP_RE)
-# 17/04/2023
+# 24/08/2023
 
 ####
 # system parameters
@@ -18,7 +18,7 @@ allowparallel=T # allows paralellised processing. considerably shortens run time
 ######################
 # country and year
 
-countrystudy <- c("rwanda", "zambia",  "zimbabwe", "kenya", "nigeria") # country(ies) to run M-LED on 
+countrystudy <- c("kenya", "rwanda", "zimbabwe", "zambia", "nigeria") # country(ies) to run M-LED on 
 
 for (countrystudy in countrystudy){
 
@@ -187,7 +187,7 @@ lapply(1:nrow(scenarios), function(scenario){
   
   clusters_nest_output <- st_cast(clusters_nest, "MULTIPOLYGON")
   clusters_nest_output$id <- 1:nrow(st_cast(clusters_nest, "MULTIPOLYGON"))
-  id <- fasterize(clusters_nest_output, rainfed[[1]][[1]], "id")
+  id <- fasterize(clusters_nest_output,  disaggregate(rainfed[[1]][[1]], fact=100), "id")
   
   clusters_onsset$id <- exact_extract(id, clusters_onsset, "majority")
   clusters_onsset$geom <- NULL
@@ -241,10 +241,23 @@ lapply(1:nrow(scenarios), function(scenario){
   gadm2_output <- gadm2
   
   gadm2_output$id <- 1:nrow(gadm2_output)
-  id <- fasterize(st_collection_extract(gadm2_output, "POLYGON"), diesel_price, "id")
+  id <- fasterize(st_collection_extract(gadm2_output, "POLYGON"), disaggregate(rainfed[[1]][[1]], fact=100), "id")
   
   clusters_onsset <- dplyr::select(clusters, contains(demand_fields) & !contains("surface"), contains("IRREQ"), starts_with("Y_"), contains("machines"), contains("yg_potential_"), starts_with("A_"), starts_with("yield_"))
   clusters_onsset$id <- exact_extract(id, clusters_onsset, "majority")
+  
+  if(length(unique( clusters_onsset$id))<nrow(gadm2)){
+    
+    gadm2_output <- gadm1
+    
+    gadm2_output$id <- 1:nrow(gadm2_output)
+    id <- fasterize(st_collection_extract(gadm2_output, "POLYGON"), disaggregate(rainfed[[1]][[1]], fact=100), "id")
+    
+    clusters_onsset <- dplyr::select(clusters, contains(demand_fields) & !contains("surface"), contains("IRREQ"), starts_with("Y_"), contains("machines"), contains("yg_potential_"), starts_with("A_"), starts_with("yield_"))
+    clusters_onsset$id <- exact_extract(id, clusters_onsset, "majority")
+    
+  }
+  
   clusters_onsset$geom <- NULL
   clusters_onsset$geometry <- NULL
   
@@ -262,7 +275,11 @@ lapply(1:nrow(scenarios), function(scenario){
   gc()
   
   write(paste0(timestamp(), "scenario run completed"), "log.txt", append=T)
-  return(print("All scenario runs completed"))
+  return(print("Scenario run completed"))
   
 })
+
+stopCluster(cl)
+gc()
+
 }

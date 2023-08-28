@@ -42,7 +42,7 @@ if (length(grep(paste0(processed_folder, "clusters_traveltime_processing_", coun
 
 # create catchment areas
 
-functpop <-future_lapply(1:nrow(all_facilities),function(i){
+functpop <-pblapply(1:nrow(all_facilities),function(i){
   id_exp = all_facilities[i, ]$id
   xy.matrix <-st_coordinates(all_facilities[i, ])
   servedpop <- accCost(T.GC, xy.matrix)

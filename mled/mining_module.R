@@ -5,19 +5,9 @@
 
 # extract nighttime lights above mining sites
 
-replacement = ee$Image(0)
-replacement_top = ee$Image(100)
+nl <- raster(find_it("ntl.tif"))
 
-noise_floor <- 0.25
-noise_floor_top <- 100
-
-nl =  ee$Image("users/giacomofalchetta/ntl_payne_2021")$subtract(0.125)
-nl = nl$where(nl$lt(noise_floor), replacement)
-nl = nl$where(nl$gt(noise_floor_top), replacement_top)
-
-mining_sites_nl <- (nl$reduceRegions(reducer = ee$Reducer$sum(), collection=sf_as_ee(mining_sites), scale=450) %>% ee_as_sf() %>% dplyr::select(sum) %>% st_set_geometry(NULL))$sum
-
-mining_sites$ntl <- mining_sites_nl
+mining_sites$ntl <- exact_extract(nl, mining_sites, "sum")
 
 #
 
@@ -45,7 +35,7 @@ for (timestep in planning_year){
   aa$geom=NULL
   
   clusters[paste0("mining_kwh_tt_" , timestep)] <-  clusters$mining_kwh_tt* sqrt((1 + ((pull(aa[paste0("gdp_capita_", timestep)]) - clusters$gdp_capita_2020) / clusters$gdp_capita_2020)))
-
+  
 }
 
 clusters$mining_kwh_tt  <- NULL

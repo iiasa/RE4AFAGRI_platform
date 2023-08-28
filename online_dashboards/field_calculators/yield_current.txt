@@ -1,0 +1,2773 @@
+IF
+[Crop]=="acof"
+
+AND
+[Scenario]=="baseline"
+
+AND
+[Irrigation type]=="r"
+THEN
+[Y_acof_r_baseline] / 1000 
+
+ELSEIF
+[Crop]=="bana"
+
+AND
+[Scenario]=="baseline"
+
+AND
+[Irrigation type]=="r"
+THEN
+[Y_bana_r_baseline] / 1000 
+
+ELSEIF
+[Crop]=="barl"
+
+AND
+[Scenario]=="baseline"
+
+AND
+[Irrigation type]=="r"
+THEN
+[Y_barl_r_baseline] / 1000 
+
+ELSEIF
+[Crop]=="bean"
+
+AND
+[Scenario]=="baseline"
+
+AND
+[Irrigation type]=="r"
+THEN
+[Y_bean_r_baseline] / 1000 
+
+ELSEIF
+[Crop]=="cass"
+
+AND
+[Scenario]=="baseline"
+
+AND
+[Irrigation type]=="r"
+THEN
+[Y_cass_r_baseline] / 1000 
+
+ELSEIF
+[Crop]=="chic"
+
+AND
+[Scenario]=="baseline"
+
+AND
+[Irrigation type]=="r"
+THEN
+[Y_chic_r_baseline] / 1000 
+
+ELSEIF
+[Crop]=="cnut"
+
+AND
+[Scenario]=="baseline"
+
+AND
+[Irrigation type]=="r"
+THEN
+[Y_cnut_r_baseline] / 1000 
+
+ELSEIF
+[Crop]=="coco"
+
+AND
+[Scenario]=="baseline"
+
+AND
+[Irrigation type]=="r"
+THEN
+[Y_coco_r_baseline] / 1000 
+
+ELSEIF
+[Crop]=="cott"
+
+AND
+[Scenario]=="baseline"
+
+AND
+[Irrigation type]=="r"
+THEN
+[Y_cott_r_baseline] / 1000 
+
+ELSEIF
+[Crop]=="cowp"
+
+AND
+[Scenario]=="baseline"
+
+AND
+[Irrigation type]=="r"
+THEN
+[Y_cowp_r_baseline] / 1000 
+
+ELSEIF
+[Crop]=="grou"
+
+AND
+[Scenario]=="baseline"
+
+AND
+[Irrigation type]=="r"
+THEN
+[Y_grou_r_baseline] / 1000 
+
+ELSEIF
+[Crop]=="lent"
+
+AND
+[Scenario]=="baseline"
+
+AND
+[Irrigation type]=="r"
+THEN
+[Y_lent_r_baseline] / 1000 
+
+ELSEIF
+[Crop]=="maiz"
+
+AND
+[Scenario]=="baseline"
+
+AND
+[Irrigation type]=="r"
+THEN
+[Y_maiz_r_baseline] / 1000 
+
+ELSEIF
+[Crop]=="ocer"
+
+AND
+[Scenario]=="baseline"
+
+AND
+[Irrigation type]=="r"
+THEN
+[Y_ocer_r_baseline] / 1000 
+
+ELSEIF
+[Crop]=="ofib"
+
+AND
+[Scenario]=="baseline"
+
+AND
+[Irrigation type]=="r"
+THEN
+[Y_ofib_r_baseline] / 1000 
+
+ELSEIF
+[Crop]=="oilp"
+
+AND
+[Scenario]=="baseline"
+
+AND
+[Irrigation type]=="r"
+THEN
+[Y_oilp_r_baseline] / 1000 
+
+ELSEIF
+[Crop]=="ooil"
+
+AND
+[Scenario]=="baseline"
+
+AND
+[Irrigation type]=="r"
+THEN
+[Y_ooil_r_baseline] / 1000 
+
+ELSEIF
+[Crop]=="opul"
+
+AND
+[Scenario]=="baseline"
+
+AND
+[Irrigation type]=="r"
+THEN
+[Y_opul_r_baseline] / 1000 
+
+ELSEIF
+[Crop]=="orts"
+
+AND
+[Scenario]=="baseline"
+
+AND
+[Irrigation type]=="r"
+THEN
+[Y_orts_r_baseline] / 1000 
+
+ELSEIF
+[Crop]=="pige"
+
+AND
+[Scenario]=="baseline"
+
+AND
+[Irrigation type]=="r"
+THEN
+[Y_pige_r_baseline] / 1000 
+
+ELSEIF
+[Crop]=="plnt"
+
+AND
+[Scenario]=="baseline"
+
+AND
+[Irrigation type]=="r"
+THEN
+[Y_plnt_r_baseline] / 1000 
+
+ELSEIF
+[Crop]=="pmil"
+
+AND
+[Scenario]=="baseline"
+
+AND
+[Irrigation type]=="r"
+THEN
+[Y_pmil_r_baseline] / 1000 
+
+ELSEIF
+[Crop]=="pota"
+
+AND
+[Scenario]=="baseline"
+
+AND
+[Irrigation type]=="r"
+THEN
+[Y_pota_r_baseline] / 1000 
+
+ELSEIF
+[Crop]=="rape"
+
+AND
+[Scenario]=="baseline"
+
+AND
+[Irrigation type]=="r"
+THEN
+[Y_rape_r_baseline] / 1000 
+
+ELSEIF
+[Crop]=="rcof"
+
+AND
+[Scenario]=="baseline"
+
+AND
+[Irrigation type]=="r"
+THEN
+[Y_rcof_r_baseline] / 1000 
+
+ELSEIF
+[Crop]=="rest"
+
+AND
+[Scenario]=="baseline"
+
+AND
+[Irrigation type]=="r"
+THEN
+[Y_rest_r_baseline] / 1000 
+
+ELSEIF
+[Crop]=="rice"
+
+AND
+[Scenario]=="baseline"
+
+AND
+[Irrigation type]=="r"
+THEN
+[Y_rice_r_baseline] / 1000 
+
+ELSEIF
+[Crop]=="sesa"
+
+AND
+[Scenario]=="baseline"
+
+AND
+[Irrigation type]=="r"
+THEN
+[Y_sesa_r_baseline] / 1000 
+
+ELSEIF
+[Crop]=="smil"
+
+AND
+[Scenario]=="baseline"
+
+AND
+[Irrigation type]=="r"
+THEN
+[Y_smil_r_baseline] / 1000 
+
+ELSEIF
+[Crop]=="sorg"
+
+AND
+[Scenario]=="baseline"
+
+AND
+[Irrigation type]=="r"
+THEN
+[Y_sorg_r_baseline] / 1000 
+
+ELSEIF
+[Crop]=="soyb"
+
+AND
+[Scenario]=="baseline"
+
+AND
+[Irrigation type]=="r"
+THEN
+[Y_soyb_r_baseline] / 1000 
+
+ELSEIF
+[Crop]=="sugb"
+
+AND
+[Scenario]=="baseline"
+
+AND
+[Irrigation type]=="r"
+THEN
+[Y_sugb_r_baseline] / 1000 
+
+ELSEIF
+[Crop]=="sugc"
+
+AND
+[Scenario]=="baseline"
+
+AND
+[Irrigation type]=="r"
+THEN
+[Y_sugc_r_baseline] / 1000 
+
+ELSEIF
+[Crop]=="sunf"
+
+AND
+[Scenario]=="baseline"
+
+AND
+[Irrigation type]=="r"
+THEN
+[Y_sunf_r_baseline] / 1000 
+
+ELSEIF
+[Crop]=="swpo"
+
+AND
+[Scenario]=="baseline"
+
+AND
+[Irrigation type]=="r"
+THEN
+[Y_swpo_r_baseline] / 1000 
+
+ELSEIF
+[Crop]=="teas"
+
+AND
+[Scenario]=="baseline"
+
+AND
+[Irrigation type]=="r"
+THEN
+[Y_teas_r_baseline] / 1000 
+
+ELSEIF
+[Crop]=="temf"
+
+AND
+[Scenario]=="baseline"
+
+AND
+[Irrigation type]=="r"
+THEN
+[Y_temf_r_baseline] / 1000 
+
+ELSEIF
+[Crop]=="toba"
+
+AND
+[Scenario]=="baseline"
+
+AND
+[Irrigation type]=="r"
+THEN
+[Y_toba_r_baseline] / 1000 
+
+ELSEIF
+[Crop]=="trof"
+
+AND
+[Scenario]=="baseline"
+
+AND
+[Irrigation type]=="r"
+THEN
+[Y_trof_r_baseline] / 1000 
+
+ELSEIF
+[Crop]=="vege"
+
+AND
+[Scenario]=="baseline"
+
+AND
+[Irrigation type]=="r"
+THEN
+[Y_vege_r_baseline] / 1000 
+
+ELSEIF
+[Crop]=="whea"
+
+AND
+[Scenario]=="baseline"
+
+AND
+[Irrigation type]=="r"
+THEN
+[Y_whea_r_baseline] / 1000 
+
+ELSEIF
+[Crop]=="yams"
+
+AND
+[Scenario]=="baseline"
+
+AND
+[Irrigation type]=="r"
+THEN
+[Y_yams_r_baseline] / 1000 
+
+ELSEIF
+[Crop]=="acof"
+
+AND
+[Scenario]=="baseline"
+
+AND
+[Irrigation type]=="i"
+THEN
+[Y_acof_i_baseline] / 1000 
+
+ELSEIF
+[Crop]=="bana"
+
+AND
+[Scenario]=="baseline"
+
+AND
+[Irrigation type]=="i"
+THEN
+[Y_bana_i_baseline] / 1000 
+
+ELSEIF
+[Crop]=="barl"
+
+AND
+[Scenario]=="baseline"
+
+AND
+[Irrigation type]=="i"
+THEN
+[Y_barl_i_baseline] / 1000 
+
+ELSEIF
+[Crop]=="bean"
+
+AND
+[Scenario]=="baseline"
+
+AND
+[Irrigation type]=="i"
+THEN
+[Y_bean_i_baseline] / 1000 
+
+ELSEIF
+[Crop]=="cass"
+
+AND
+[Scenario]=="baseline"
+
+AND
+[Irrigation type]=="i"
+THEN
+[Y_cass_i_baseline] / 1000 
+
+ELSEIF
+[Crop]=="chic"
+
+AND
+[Scenario]=="baseline"
+
+AND
+[Irrigation type]=="i"
+THEN
+[Y_chic_i_baseline] / 1000 
+
+ELSEIF
+[Crop]=="cnut"
+
+AND
+[Scenario]=="baseline"
+
+AND
+[Irrigation type]=="i"
+THEN
+[Y_cnut_i_baseline] / 1000 
+
+ELSEIF
+[Crop]=="coco"
+
+AND
+[Scenario]=="baseline"
+
+AND
+[Irrigation type]=="i"
+THEN
+[Y_coco_i_baseline] / 1000 
+
+ELSEIF
+[Crop]=="cott"
+
+AND
+[Scenario]=="baseline"
+
+AND
+[Irrigation type]=="i"
+THEN
+[Y_cott_i_baseline] / 1000 
+
+ELSEIF
+[Crop]=="cowp"
+
+AND
+[Scenario]=="baseline"
+
+AND
+[Irrigation type]=="i"
+THEN
+[Y_cowp_i_baseline] / 1000 
+
+ELSEIF
+[Crop]=="grou"
+
+AND
+[Scenario]=="baseline"
+
+AND
+[Irrigation type]=="i"
+THEN
+[Y_grou_i_baseline] / 1000 
+
+ELSEIF
+[Crop]=="lent"
+
+AND
+[Scenario]=="baseline"
+
+AND
+[Irrigation type]=="i"
+THEN
+[Y_lent_i_baseline] / 1000 
+
+ELSEIF
+[Crop]=="maiz"
+
+AND
+[Scenario]=="baseline"
+
+AND
+[Irrigation type]=="i"
+THEN
+[Y_maiz_i_baseline] / 1000 
+
+ELSEIF
+[Crop]=="ocer"
+
+AND
+[Scenario]=="baseline"
+
+AND
+[Irrigation type]=="i"
+THEN
+[Y_ocer_i_baseline] / 1000 
+
+ELSEIF
+[Crop]=="ofib"
+
+AND
+[Scenario]=="baseline"
+
+AND
+[Irrigation type]=="i"
+THEN
+[Y_ofib_i_baseline] / 1000 
+
+ELSEIF
+[Crop]=="oilp"
+
+AND
+[Scenario]=="baseline"
+
+AND
+[Irrigation type]=="i"
+THEN
+[Y_oilp_i_baseline] / 1000 
+
+ELSEIF
+[Crop]=="ooil"
+
+AND
+[Scenario]=="baseline"
+
+AND
+[Irrigation type]=="i"
+THEN
+[Y_ooil_i_baseline] / 1000 
+
+ELSEIF
+[Crop]=="opul"
+
+AND
+[Scenario]=="baseline"
+
+AND
+[Irrigation type]=="i"
+THEN
+[Y_opul_i_baseline] / 1000 
+
+ELSEIF
+[Crop]=="orts"
+
+AND
+[Scenario]=="baseline"
+
+AND
+[Irrigation type]=="i"
+THEN
+[Y_orts_i_baseline] / 1000 
+
+ELSEIF
+[Crop]=="pige"
+
+AND
+[Scenario]=="baseline"
+
+AND
+[Irrigation type]=="i"
+THEN
+[Y_pige_i_baseline] / 1000 
+
+ELSEIF
+[Crop]=="plnt"
+
+AND
+[Scenario]=="baseline"
+
+AND
+[Irrigation type]=="i"
+THEN
+[Y_plnt_i_baseline] / 1000 
+
+ELSEIF
+[Crop]=="pmil"
+
+AND
+[Scenario]=="baseline"
+
+AND
+[Irrigation type]=="i"
+THEN
+[Y_pmil_i_baseline] / 1000 
+
+ELSEIF
+[Crop]=="pota"
+
+AND
+[Scenario]=="baseline"
+
+AND
+[Irrigation type]=="i"
+THEN
+[Y_pota_i_baseline] / 1000 
+
+ELSEIF
+[Crop]=="rape"
+
+AND
+[Scenario]=="baseline"
+
+AND
+[Irrigation type]=="i"
+THEN
+[Y_rape_i_baseline] / 1000 
+
+ELSEIF
+[Crop]=="rcof"
+
+AND
+[Scenario]=="baseline"
+
+AND
+[Irrigation type]=="i"
+THEN
+[Y_rcof_i_baseline] / 1000 
+
+ELSEIF
+[Crop]=="rest"
+
+AND
+[Scenario]=="baseline"
+
+AND
+[Irrigation type]=="i"
+THEN
+[Y_rest_i_baseline] / 1000 
+
+ELSEIF
+[Crop]=="rice"
+
+AND
+[Scenario]=="baseline"
+
+AND
+[Irrigation type]=="i"
+THEN
+[Y_rice_i_baseline] / 1000 
+
+ELSEIF
+[Crop]=="sesa"
+
+AND
+[Scenario]=="baseline"
+
+AND
+[Irrigation type]=="i"
+THEN
+[Y_sesa_i_baseline] / 1000 
+
+ELSEIF
+[Crop]=="smil"
+
+AND
+[Scenario]=="baseline"
+
+AND
+[Irrigation type]=="i"
+THEN
+[Y_smil_i_baseline] / 1000 
+
+ELSEIF
+[Crop]=="sorg"
+
+AND
+[Scenario]=="baseline"
+
+AND
+[Irrigation type]=="i"
+THEN
+[Y_sorg_i_baseline] / 1000 
+
+ELSEIF
+[Crop]=="soyb"
+
+AND
+[Scenario]=="baseline"
+
+AND
+[Irrigation type]=="i"
+THEN
+[Y_soyb_i_baseline] / 1000 
+
+ELSEIF
+[Crop]=="sugb"
+
+AND
+[Scenario]=="baseline"
+
+AND
+[Irrigation type]=="i"
+THEN
+[Y_sugb_i_baseline] / 1000 
+
+ELSEIF
+[Crop]=="sugc"
+
+AND
+[Scenario]=="baseline"
+
+AND
+[Irrigation type]=="i"
+THEN
+[Y_sugc_i_baseline] / 1000 
+
+ELSEIF
+[Crop]=="sunf"
+
+AND
+[Scenario]=="baseline"
+
+AND
+[Irrigation type]=="i"
+THEN
+[Y_sunf_i_baseline] / 1000 
+
+ELSEIF
+[Crop]=="swpo"
+
+AND
+[Scenario]=="baseline"
+
+AND
+[Irrigation type]=="i"
+THEN
+[Y_swpo_i_baseline] / 1000 
+
+ELSEIF
+[Crop]=="teas"
+
+AND
+[Scenario]=="baseline"
+
+AND
+[Irrigation type]=="i"
+THEN
+[Y_teas_i_baseline] / 1000 
+
+ELSEIF
+[Crop]=="temf"
+
+AND
+[Scenario]=="baseline"
+
+AND
+[Irrigation type]=="i"
+THEN
+[Y_temf_i_baseline] / 1000 
+
+ELSEIF
+[Crop]=="toba"
+
+AND
+[Scenario]=="baseline"
+
+AND
+[Irrigation type]=="i"
+THEN
+[Y_toba_i_baseline] / 1000 
+
+ELSEIF
+[Crop]=="trof"
+
+AND
+[Scenario]=="baseline"
+
+AND
+[Irrigation type]=="i"
+THEN
+[Y_trof_i_baseline] / 1000 
+
+ELSEIF
+[Crop]=="vege"
+
+AND
+[Scenario]=="baseline"
+
+AND
+[Irrigation type]=="i"
+THEN
+[Y_vege_i_baseline] / 1000 
+
+ELSEIF
+[Crop]=="whea"
+
+AND
+[Scenario]=="baseline"
+
+AND
+[Irrigation type]=="i"
+THEN
+[Y_whea_i_baseline] / 1000 
+
+ELSEIF
+[Crop]=="yams"
+
+AND
+[Scenario]=="baseline"
+
+AND
+[Irrigation type]=="i"
+THEN
+[Y_yams_i_baseline] / 1000 
+
+ELSEIF
+[Crop]=="acof"
+
+AND
+[Scenario]=="improved_access"
+
+AND
+[Irrigation type]=="r"
+THEN
+[Y_acof_r_improved_access] / 1000 
+
+ELSEIF
+[Crop]=="bana"
+
+AND
+[Scenario]=="improved_access"
+
+AND
+[Irrigation type]=="r"
+THEN
+[Y_bana_r_improved_access] / 1000 
+
+ELSEIF
+[Crop]=="barl"
+
+AND
+[Scenario]=="improved_access"
+
+AND
+[Irrigation type]=="r"
+THEN
+[Y_barl_r_improved_access] / 1000 
+
+ELSEIF
+[Crop]=="bean"
+
+AND
+[Scenario]=="improved_access"
+
+AND
+[Irrigation type]=="r"
+THEN
+[Y_bean_r_improved_access] / 1000 
+
+ELSEIF
+[Crop]=="cass"
+
+AND
+[Scenario]=="improved_access"
+
+AND
+[Irrigation type]=="r"
+THEN
+[Y_cass_r_improved_access] / 1000 
+
+ELSEIF
+[Crop]=="chic"
+
+AND
+[Scenario]=="improved_access"
+
+AND
+[Irrigation type]=="r"
+THEN
+[Y_chic_r_improved_access] / 1000 
+
+ELSEIF
+[Crop]=="cnut"
+
+AND
+[Scenario]=="improved_access"
+
+AND
+[Irrigation type]=="r"
+THEN
+[Y_cnut_r_improved_access] / 1000 
+
+ELSEIF
+[Crop]=="coco"
+
+AND
+[Scenario]=="improved_access"
+
+AND
+[Irrigation type]=="r"
+THEN
+[Y_coco_r_improved_access] / 1000 
+
+ELSEIF
+[Crop]=="cott"
+
+AND
+[Scenario]=="improved_access"
+
+AND
+[Irrigation type]=="r"
+THEN
+[Y_cott_r_improved_access] / 1000 
+
+ELSEIF
+[Crop]=="cowp"
+
+AND
+[Scenario]=="improved_access"
+
+AND
+[Irrigation type]=="r"
+THEN
+[Y_cowp_r_improved_access] / 1000 
+
+ELSEIF
+[Crop]=="grou"
+
+AND
+[Scenario]=="improved_access"
+
+AND
+[Irrigation type]=="r"
+THEN
+[Y_grou_r_improved_access] / 1000 
+
+ELSEIF
+[Crop]=="lent"
+
+AND
+[Scenario]=="improved_access"
+
+AND
+[Irrigation type]=="r"
+THEN
+[Y_lent_r_improved_access] / 1000 
+
+ELSEIF
+[Crop]=="maiz"
+
+AND
+[Scenario]=="improved_access"
+
+AND
+[Irrigation type]=="r"
+THEN
+[Y_maiz_r_improved_access] / 1000 
+
+ELSEIF
+[Crop]=="ocer"
+
+AND
+[Scenario]=="improved_access"
+
+AND
+[Irrigation type]=="r"
+THEN
+[Y_ocer_r_improved_access] / 1000 
+
+ELSEIF
+[Crop]=="ofib"
+
+AND
+[Scenario]=="improved_access"
+
+AND
+[Irrigation type]=="r"
+THEN
+[Y_ofib_r_improved_access] / 1000 
+
+ELSEIF
+[Crop]=="oilp"
+
+AND
+[Scenario]=="improved_access"
+
+AND
+[Irrigation type]=="r"
+THEN
+[Y_oilp_r_improved_access] / 1000 
+
+ELSEIF
+[Crop]=="ooil"
+
+AND
+[Scenario]=="improved_access"
+
+AND
+[Irrigation type]=="r"
+THEN
+[Y_ooil_r_improved_access] / 1000 
+
+ELSEIF
+[Crop]=="opul"
+
+AND
+[Scenario]=="improved_access"
+
+AND
+[Irrigation type]=="r"
+THEN
+[Y_opul_r_improved_access] / 1000 
+
+ELSEIF
+[Crop]=="orts"
+
+AND
+[Scenario]=="improved_access"
+
+AND
+[Irrigation type]=="r"
+THEN
+[Y_orts_r_improved_access] / 1000 
+
+ELSEIF
+[Crop]=="pige"
+
+AND
+[Scenario]=="improved_access"
+
+AND
+[Irrigation type]=="r"
+THEN
+[Y_pige_r_improved_access] / 1000 
+
+ELSEIF
+[Crop]=="plnt"
+
+AND
+[Scenario]=="improved_access"
+
+AND
+[Irrigation type]=="r"
+THEN
+[Y_plnt_r_improved_access] / 1000 
+
+ELSEIF
+[Crop]=="pmil"
+
+AND
+[Scenario]=="improved_access"
+
+AND
+[Irrigation type]=="r"
+THEN
+[Y_pmil_r_improved_access] / 1000 
+
+ELSEIF
+[Crop]=="pota"
+
+AND
+[Scenario]=="improved_access"
+
+AND
+[Irrigation type]=="r"
+THEN
+[Y_pota_r_improved_access] / 1000 
+
+ELSEIF
+[Crop]=="rape"
+
+AND
+[Scenario]=="improved_access"
+
+AND
+[Irrigation type]=="r"
+THEN
+[Y_rape_r_improved_access] / 1000 
+
+ELSEIF
+[Crop]=="rcof"
+
+AND
+[Scenario]=="improved_access"
+
+AND
+[Irrigation type]=="r"
+THEN
+[Y_rcof_r_improved_access] / 1000 
+
+ELSEIF
+[Crop]=="rest"
+
+AND
+[Scenario]=="improved_access"
+
+AND
+[Irrigation type]=="r"
+THEN
+[Y_rest_r_improved_access] / 1000 
+
+ELSEIF
+[Crop]=="rice"
+
+AND
+[Scenario]=="improved_access"
+
+AND
+[Irrigation type]=="r"
+THEN
+[Y_rice_r_improved_access] / 1000 
+
+ELSEIF
+[Crop]=="sesa"
+
+AND
+[Scenario]=="improved_access"
+
+AND
+[Irrigation type]=="r"
+THEN
+[Y_sesa_r_improved_access] / 1000 
+
+ELSEIF
+[Crop]=="smil"
+
+AND
+[Scenario]=="improved_access"
+
+AND
+[Irrigation type]=="r"
+THEN
+[Y_smil_r_improved_access] / 1000 
+
+ELSEIF
+[Crop]=="sorg"
+
+AND
+[Scenario]=="improved_access"
+
+AND
+[Irrigation type]=="r"
+THEN
+[Y_sorg_r_improved_access] / 1000 
+
+ELSEIF
+[Crop]=="soyb"
+
+AND
+[Scenario]=="improved_access"
+
+AND
+[Irrigation type]=="r"
+THEN
+[Y_soyb_r_improved_access] / 1000 
+
+ELSEIF
+[Crop]=="sugb"
+
+AND
+[Scenario]=="improved_access"
+
+AND
+[Irrigation type]=="r"
+THEN
+[Y_sugb_r_improved_access] / 1000 
+
+ELSEIF
+[Crop]=="sugc"
+
+AND
+[Scenario]=="improved_access"
+
+AND
+[Irrigation type]=="r"
+THEN
+[Y_sugc_r_improved_access] / 1000 
+
+ELSEIF
+[Crop]=="sunf"
+
+AND
+[Scenario]=="improved_access"
+
+AND
+[Irrigation type]=="r"
+THEN
+[Y_sunf_r_improved_access] / 1000 
+
+ELSEIF
+[Crop]=="swpo"
+
+AND
+[Scenario]=="improved_access"
+
+AND
+[Irrigation type]=="r"
+THEN
+[Y_swpo_r_improved_access] / 1000 
+
+ELSEIF
+[Crop]=="teas"
+
+AND
+[Scenario]=="improved_access"
+
+AND
+[Irrigation type]=="r"
+THEN
+[Y_teas_r_improved_access] / 1000 
+
+ELSEIF
+[Crop]=="temf"
+
+AND
+[Scenario]=="improved_access"
+
+AND
+[Irrigation type]=="r"
+THEN
+[Y_temf_r_improved_access] / 1000 
+
+ELSEIF
+[Crop]=="toba"
+
+AND
+[Scenario]=="improved_access"
+
+AND
+[Irrigation type]=="r"
+THEN
+[Y_toba_r_improved_access] / 1000 
+
+ELSEIF
+[Crop]=="trof"
+
+AND
+[Scenario]=="improved_access"
+
+AND
+[Irrigation type]=="r"
+THEN
+[Y_trof_r_improved_access] / 1000 
+
+ELSEIF
+[Crop]=="vege"
+
+AND
+[Scenario]=="improved_access"
+
+AND
+[Irrigation type]=="r"
+THEN
+[Y_vege_r_improved_access] / 1000 
+
+ELSEIF
+[Crop]=="whea"
+
+AND
+[Scenario]=="improved_access"
+
+AND
+[Irrigation type]=="r"
+THEN
+[Y_whea_r_improved_access] / 1000 
+
+ELSEIF
+[Crop]=="yams"
+
+AND
+[Scenario]=="improved_access"
+
+AND
+[Irrigation type]=="r"
+THEN
+[Y_yams_r_improved_access] / 1000 
+
+ELSEIF
+[Crop]=="acof"
+
+AND
+[Scenario]=="improved_access"
+
+AND
+[Irrigation type]=="i"
+THEN
+[Y_acof_i_improved_access] / 1000 
+
+ELSEIF
+[Crop]=="bana"
+
+AND
+[Scenario]=="improved_access"
+
+AND
+[Irrigation type]=="i"
+THEN
+[Y_bana_i_improved_access] / 1000 
+
+ELSEIF
+[Crop]=="barl"
+
+AND
+[Scenario]=="improved_access"
+
+AND
+[Irrigation type]=="i"
+THEN
+[Y_barl_i_improved_access] / 1000 
+
+ELSEIF
+[Crop]=="bean"
+
+AND
+[Scenario]=="improved_access"
+
+AND
+[Irrigation type]=="i"
+THEN
+[Y_bean_i_improved_access] / 1000 
+
+ELSEIF
+[Crop]=="cass"
+
+AND
+[Scenario]=="improved_access"
+
+AND
+[Irrigation type]=="i"
+THEN
+[Y_cass_i_improved_access] / 1000 
+
+ELSEIF
+[Crop]=="chic"
+
+AND
+[Scenario]=="improved_access"
+
+AND
+[Irrigation type]=="i"
+THEN
+[Y_chic_i_improved_access] / 1000 
+
+ELSEIF
+[Crop]=="cnut"
+
+AND
+[Scenario]=="improved_access"
+
+AND
+[Irrigation type]=="i"
+THEN
+[Y_cnut_i_improved_access] / 1000 
+
+ELSEIF
+[Crop]=="coco"
+
+AND
+[Scenario]=="improved_access"
+
+AND
+[Irrigation type]=="i"
+THEN
+[Y_coco_i_improved_access] / 1000 
+
+ELSEIF
+[Crop]=="cott"
+
+AND
+[Scenario]=="improved_access"
+
+AND
+[Irrigation type]=="i"
+THEN
+[Y_cott_i_improved_access] / 1000 
+
+ELSEIF
+[Crop]=="cowp"
+
+AND
+[Scenario]=="improved_access"
+
+AND
+[Irrigation type]=="i"
+THEN
+[Y_cowp_i_improved_access] / 1000 
+
+ELSEIF
+[Crop]=="grou"
+
+AND
+[Scenario]=="improved_access"
+
+AND
+[Irrigation type]=="i"
+THEN
+[Y_grou_i_improved_access] / 1000 
+
+ELSEIF
+[Crop]=="lent"
+
+AND
+[Scenario]=="improved_access"
+
+AND
+[Irrigation type]=="i"
+THEN
+[Y_lent_i_improved_access] / 1000 
+
+ELSEIF
+[Crop]=="maiz"
+
+AND
+[Scenario]=="improved_access"
+
+AND
+[Irrigation type]=="i"
+THEN
+[Y_maiz_i_improved_access] / 1000 
+
+ELSEIF
+[Crop]=="ocer"
+
+AND
+[Scenario]=="improved_access"
+
+AND
+[Irrigation type]=="i"
+THEN
+[Y_ocer_i_improved_access] / 1000 
+
+ELSEIF
+[Crop]=="ofib"
+
+AND
+[Scenario]=="improved_access"
+
+AND
+[Irrigation type]=="i"
+THEN
+[Y_ofib_i_improved_access] / 1000 
+
+ELSEIF
+[Crop]=="oilp"
+
+AND
+[Scenario]=="improved_access"
+
+AND
+[Irrigation type]=="i"
+THEN
+[Y_oilp_i_improved_access] / 1000 
+
+ELSEIF
+[Crop]=="ooil"
+
+AND
+[Scenario]=="improved_access"
+
+AND
+[Irrigation type]=="i"
+THEN
+[Y_ooil_i_improved_access] / 1000 
+
+ELSEIF
+[Crop]=="opul"
+
+AND
+[Scenario]=="improved_access"
+
+AND
+[Irrigation type]=="i"
+THEN
+[Y_opul_i_improved_access] / 1000 
+
+ELSEIF
+[Crop]=="orts"
+
+AND
+[Scenario]=="improved_access"
+
+AND
+[Irrigation type]=="i"
+THEN
+[Y_orts_i_improved_access] / 1000 
+
+ELSEIF
+[Crop]=="pige"
+
+AND
+[Scenario]=="improved_access"
+
+AND
+[Irrigation type]=="i"
+THEN
+[Y_pige_i_improved_access] / 1000 
+
+ELSEIF
+[Crop]=="plnt"
+
+AND
+[Scenario]=="improved_access"
+
+AND
+[Irrigation type]=="i"
+THEN
+[Y_plnt_i_improved_access] / 1000 
+
+ELSEIF
+[Crop]=="pmil"
+
+AND
+[Scenario]=="improved_access"
+
+AND
+[Irrigation type]=="i"
+THEN
+[Y_pmil_i_improved_access] / 1000 
+
+ELSEIF
+[Crop]=="pota"
+
+AND
+[Scenario]=="improved_access"
+
+AND
+[Irrigation type]=="i"
+THEN
+[Y_pota_i_improved_access] / 1000 
+
+ELSEIF
+[Crop]=="rape"
+
+AND
+[Scenario]=="improved_access"
+
+AND
+[Irrigation type]=="i"
+THEN
+[Y_rape_i_improved_access] / 1000 
+
+ELSEIF
+[Crop]=="rcof"
+
+AND
+[Scenario]=="improved_access"
+
+AND
+[Irrigation type]=="i"
+THEN
+[Y_rcof_i_improved_access] / 1000 
+
+ELSEIF
+[Crop]=="rest"
+
+AND
+[Scenario]=="improved_access"
+
+AND
+[Irrigation type]=="i"
+THEN
+[Y_rest_i_improved_access] / 1000 
+
+ELSEIF
+[Crop]=="rice"
+
+AND
+[Scenario]=="improved_access"
+
+AND
+[Irrigation type]=="i"
+THEN
+[Y_rice_i_improved_access] / 1000 
+
+ELSEIF
+[Crop]=="sesa"
+
+AND
+[Scenario]=="improved_access"
+
+AND
+[Irrigation type]=="i"
+THEN
+[Y_sesa_i_improved_access] / 1000 
+
+ELSEIF
+[Crop]=="smil"
+
+AND
+[Scenario]=="improved_access"
+
+AND
+[Irrigation type]=="i"
+THEN
+[Y_smil_i_improved_access] / 1000 
+
+ELSEIF
+[Crop]=="sorg"
+
+AND
+[Scenario]=="improved_access"
+
+AND
+[Irrigation type]=="i"
+THEN
+[Y_sorg_i_improved_access] / 1000 
+
+ELSEIF
+[Crop]=="soyb"
+
+AND
+[Scenario]=="improved_access"
+
+AND
+[Irrigation type]=="i"
+THEN
+[Y_soyb_i_improved_access] / 1000 
+
+ELSEIF
+[Crop]=="sugb"
+
+AND
+[Scenario]=="improved_access"
+
+AND
+[Irrigation type]=="i"
+THEN
+[Y_sugb_i_improved_access] / 1000 
+
+ELSEIF
+[Crop]=="sugc"
+
+AND
+[Scenario]=="improved_access"
+
+AND
+[Irrigation type]=="i"
+THEN
+[Y_sugc_i_improved_access] / 1000 
+
+ELSEIF
+[Crop]=="sunf"
+
+AND
+[Scenario]=="improved_access"
+
+AND
+[Irrigation type]=="i"
+THEN
+[Y_sunf_i_improved_access] / 1000 
+
+ELSEIF
+[Crop]=="swpo"
+
+AND
+[Scenario]=="improved_access"
+
+AND
+[Irrigation type]=="i"
+THEN
+[Y_swpo_i_improved_access] / 1000 
+
+ELSEIF
+[Crop]=="teas"
+
+AND
+[Scenario]=="improved_access"
+
+AND
+[Irrigation type]=="i"
+THEN
+[Y_teas_i_improved_access] / 1000 
+
+ELSEIF
+[Crop]=="temf"
+
+AND
+[Scenario]=="improved_access"
+
+AND
+[Irrigation type]=="i"
+THEN
+[Y_temf_i_improved_access] / 1000 
+
+ELSEIF
+[Crop]=="toba"
+
+AND
+[Scenario]=="improved_access"
+
+AND
+[Irrigation type]=="i"
+THEN
+[Y_toba_i_improved_access] / 1000 
+
+ELSEIF
+[Crop]=="trof"
+
+AND
+[Scenario]=="improved_access"
+
+AND
+[Irrigation type]=="i"
+THEN
+[Y_trof_i_improved_access] / 1000 
+
+ELSEIF
+[Crop]=="vege"
+
+AND
+[Scenario]=="improved_access"
+
+AND
+[Irrigation type]=="i"
+THEN
+[Y_vege_i_improved_access] / 1000 
+
+ELSEIF
+[Crop]=="whea"
+
+AND
+[Scenario]=="improved_access"
+
+AND
+[Irrigation type]=="i"
+THEN
+[Y_whea_i_improved_access] / 1000 
+
+ELSEIF
+[Crop]=="yams"
+
+AND
+[Scenario]=="improved_access"
+
+AND
+[Irrigation type]=="i"
+THEN
+[Y_yams_i_improved_access] / 1000 
+
+ELSEIF
+[Crop]=="acof"
+
+AND
+[Scenario]=="ambitious_development"
+
+AND
+[Irrigation type]=="r"
+THEN
+[Y_acof_r_ambitious_development] / 1000 
+
+ELSEIF
+[Crop]=="bana"
+
+AND
+[Scenario]=="ambitious_development"
+
+AND
+[Irrigation type]=="r"
+THEN
+[Y_bana_r_ambitious_development] / 1000 
+
+ELSEIF
+[Crop]=="barl"
+
+AND
+[Scenario]=="ambitious_development"
+
+AND
+[Irrigation type]=="r"
+THEN
+[Y_barl_r_ambitious_development] / 1000 
+
+ELSEIF
+[Crop]=="bean"
+
+AND
+[Scenario]=="ambitious_development"
+
+AND
+[Irrigation type]=="r"
+THEN
+[Y_bean_r_ambitious_development] / 1000 
+
+ELSEIF
+[Crop]=="cass"
+
+AND
+[Scenario]=="ambitious_development"
+
+AND
+[Irrigation type]=="r"
+THEN
+[Y_cass_r_ambitious_development] / 1000 
+
+ELSEIF
+[Crop]=="chic"
+
+AND
+[Scenario]=="ambitious_development"
+
+AND
+[Irrigation type]=="r"
+THEN
+[Y_chic_r_ambitious_development] / 1000 
+
+ELSEIF
+[Crop]=="cnut"
+
+AND
+[Scenario]=="ambitious_development"
+
+AND
+[Irrigation type]=="r"
+THEN
+[Y_cnut_r_ambitious_development] / 1000 
+
+ELSEIF
+[Crop]=="coco"
+
+AND
+[Scenario]=="ambitious_development"
+
+AND
+[Irrigation type]=="r"
+THEN
+[Y_coco_r_ambitious_development] / 1000 
+
+ELSEIF
+[Crop]=="cott"
+
+AND
+[Scenario]=="ambitious_development"
+
+AND
+[Irrigation type]=="r"
+THEN
+[Y_cott_r_ambitious_development] / 1000 
+
+ELSEIF
+[Crop]=="cowp"
+
+AND
+[Scenario]=="ambitious_development"
+
+AND
+[Irrigation type]=="r"
+THEN
+[Y_cowp_r_ambitious_development] / 1000 
+
+ELSEIF
+[Crop]=="grou"
+
+AND
+[Scenario]=="ambitious_development"
+
+AND
+[Irrigation type]=="r"
+THEN
+[Y_grou_r_ambitious_development] / 1000 
+
+ELSEIF
+[Crop]=="lent"
+
+AND
+[Scenario]=="ambitious_development"
+
+AND
+[Irrigation type]=="r"
+THEN
+[Y_lent_r_ambitious_development] / 1000 
+
+ELSEIF
+[Crop]=="maiz"
+
+AND
+[Scenario]=="ambitious_development"
+
+AND
+[Irrigation type]=="r"
+THEN
+[Y_maiz_r_ambitious_development] / 1000 
+
+ELSEIF
+[Crop]=="ocer"
+
+AND
+[Scenario]=="ambitious_development"
+
+AND
+[Irrigation type]=="r"
+THEN
+[Y_ocer_r_ambitious_development] / 1000 
+
+ELSEIF
+[Crop]=="ofib"
+
+AND
+[Scenario]=="ambitious_development"
+
+AND
+[Irrigation type]=="r"
+THEN
+[Y_ofib_r_ambitious_development] / 1000 
+
+ELSEIF
+[Crop]=="oilp"
+
+AND
+[Scenario]=="ambitious_development"
+
+AND
+[Irrigation type]=="r"
+THEN
+[Y_oilp_r_ambitious_development] / 1000 
+
+ELSEIF
+[Crop]=="ooil"
+
+AND
+[Scenario]=="ambitious_development"
+
+AND
+[Irrigation type]=="r"
+THEN
+[Y_ooil_r_ambitious_development] / 1000 
+
+ELSEIF
+[Crop]=="opul"
+
+AND
+[Scenario]=="ambitious_development"
+
+AND
+[Irrigation type]=="r"
+THEN
+[Y_opul_r_ambitious_development] / 1000 
+
+ELSEIF
+[Crop]=="orts"
+
+AND
+[Scenario]=="ambitious_development"
+
+AND
+[Irrigation type]=="r"
+THEN
+[Y_orts_r_ambitious_development] / 1000 
+
+ELSEIF
+[Crop]=="pige"
+
+AND
+[Scenario]=="ambitious_development"
+
+AND
+[Irrigation type]=="r"
+THEN
+[Y_pige_r_ambitious_development] / 1000 
+
+ELSEIF
+[Crop]=="plnt"
+
+AND
+[Scenario]=="ambitious_development"
+
+AND
+[Irrigation type]=="r"
+THEN
+[Y_plnt_r_ambitious_development] / 1000 
+
+ELSEIF
+[Crop]=="pmil"
+
+AND
+[Scenario]=="ambitious_development"
+
+AND
+[Irrigation type]=="r"
+THEN
+[Y_pmil_r_ambitious_development] / 1000 
+
+ELSEIF
+[Crop]=="pota"
+
+AND
+[Scenario]=="ambitious_development"
+
+AND
+[Irrigation type]=="r"
+THEN
+[Y_pota_r_ambitious_development] / 1000 
+
+ELSEIF
+[Crop]=="rape"
+
+AND
+[Scenario]=="ambitious_development"
+
+AND
+[Irrigation type]=="r"
+THEN
+[Y_rape_r_ambitious_development] / 1000 
+
+ELSEIF
+[Crop]=="rcof"
+
+AND
+[Scenario]=="ambitious_development"
+
+AND
+[Irrigation type]=="r"
+THEN
+[Y_rcof_r_ambitious_development] / 1000 
+
+ELSEIF
+[Crop]=="rest"
+
+AND
+[Scenario]=="ambitious_development"
+
+AND
+[Irrigation type]=="r"
+THEN
+[Y_rest_r_ambitious_development] / 1000 
+
+ELSEIF
+[Crop]=="rice"
+
+AND
+[Scenario]=="ambitious_development"
+
+AND
+[Irrigation type]=="r"
+THEN
+[Y_rice_r_ambitious_development] / 1000 
+
+ELSEIF
+[Crop]=="sesa"
+
+AND
+[Scenario]=="ambitious_development"
+
+AND
+[Irrigation type]=="r"
+THEN
+[Y_sesa_r_ambitious_development] / 1000 
+
+ELSEIF
+[Crop]=="smil"
+
+AND
+[Scenario]=="ambitious_development"
+
+AND
+[Irrigation type]=="r"
+THEN
+[Y_smil_r_ambitious_development] / 1000 
+
+ELSEIF
+[Crop]=="sorg"
+
+AND
+[Scenario]=="ambitious_development"
+
+AND
+[Irrigation type]=="r"
+THEN
+[Y_sorg_r_ambitious_development] / 1000 
+
+ELSEIF
+[Crop]=="soyb"
+
+AND
+[Scenario]=="ambitious_development"
+
+AND
+[Irrigation type]=="r"
+THEN
+[Y_soyb_r_ambitious_development] / 1000 
+
+ELSEIF
+[Crop]=="sugb"
+
+AND
+[Scenario]=="ambitious_development"
+
+AND
+[Irrigation type]=="r"
+THEN
+[Y_sugb_r_ambitious_development] / 1000 
+
+ELSEIF
+[Crop]=="sugc"
+
+AND
+[Scenario]=="ambitious_development"
+
+AND
+[Irrigation type]=="r"
+THEN
+[Y_sugc_r_ambitious_development] / 1000 
+
+ELSEIF
+[Crop]=="sunf"
+
+AND
+[Scenario]=="ambitious_development"
+
+AND
+[Irrigation type]=="r"
+THEN
+[Y_sunf_r_ambitious_development] / 1000 
+
+ELSEIF
+[Crop]=="swpo"
+
+AND
+[Scenario]=="ambitious_development"
+
+AND
+[Irrigation type]=="r"
+THEN
+[Y_swpo_r_ambitious_development] / 1000 
+
+ELSEIF
+[Crop]=="teas"
+
+AND
+[Scenario]=="ambitious_development"
+
+AND
+[Irrigation type]=="r"
+THEN
+[Y_teas_r_ambitious_development] / 1000 
+
+ELSEIF
+[Crop]=="temf"
+
+AND
+[Scenario]=="ambitious_development"
+
+AND
+[Irrigation type]=="r"
+THEN
+[Y_temf_r_ambitious_development] / 1000 
+
+ELSEIF
+[Crop]=="toba"
+
+AND
+[Scenario]=="ambitious_development"
+
+AND
+[Irrigation type]=="r"
+THEN
+[Y_toba_r_ambitious_development] / 1000 
+
+ELSEIF
+[Crop]=="trof"
+
+AND
+[Scenario]=="ambitious_development"
+
+AND
+[Irrigation type]=="r"
+THEN
+[Y_trof_r_ambitious_development] / 1000 
+
+ELSEIF
+[Crop]=="vege"
+
+AND
+[Scenario]=="ambitious_development"
+
+AND
+[Irrigation type]=="r"
+THEN
+[Y_vege_r_ambitious_development] / 1000 
+
+ELSEIF
+[Crop]=="whea"
+
+AND
+[Scenario]=="ambitious_development"
+
+AND
+[Irrigation type]=="r"
+THEN
+[Y_whea_r_ambitious_development] / 1000 
+
+ELSEIF
+[Crop]=="yams"
+
+AND
+[Scenario]=="ambitious_development"
+
+AND
+[Irrigation type]=="r"
+THEN
+[Y_yams_r_ambitious_development] / 1000 
+
+ELSEIF
+[Crop]=="acof"
+
+AND
+[Scenario]=="ambitious_development"
+
+AND
+[Irrigation type]=="i"
+THEN
+[Y_acof_i_ambitious_development] / 1000 
+
+ELSEIF
+[Crop]=="bana"
+
+AND
+[Scenario]=="ambitious_development"
+
+AND
+[Irrigation type]=="i"
+THEN
+[Y_bana_i_ambitious_development] / 1000 
+
+ELSEIF
+[Crop]=="barl"
+
+AND
+[Scenario]=="ambitious_development"
+
+AND
+[Irrigation type]=="i"
+THEN
+[Y_barl_i_ambitious_development] / 1000 
+
+ELSEIF
+[Crop]=="bean"
+
+AND
+[Scenario]=="ambitious_development"
+
+AND
+[Irrigation type]=="i"
+THEN
+[Y_bean_i_ambitious_development] / 1000 
+
+ELSEIF
+[Crop]=="cass"
+
+AND
+[Scenario]=="ambitious_development"
+
+AND
+[Irrigation type]=="i"
+THEN
+[Y_cass_i_ambitious_development] / 1000 
+
+ELSEIF
+[Crop]=="chic"
+
+AND
+[Scenario]=="ambitious_development"
+
+AND
+[Irrigation type]=="i"
+THEN
+[Y_chic_i_ambitious_development] / 1000 
+
+ELSEIF
+[Crop]=="cnut"
+
+AND
+[Scenario]=="ambitious_development"
+
+AND
+[Irrigation type]=="i"
+THEN
+[Y_cnut_i_ambitious_development] / 1000 
+
+ELSEIF
+[Crop]=="coco"
+
+AND
+[Scenario]=="ambitious_development"
+
+AND
+[Irrigation type]=="i"
+THEN
+[Y_coco_i_ambitious_development] / 1000 
+
+ELSEIF
+[Crop]=="cott"
+
+AND
+[Scenario]=="ambitious_development"
+
+AND
+[Irrigation type]=="i"
+THEN
+[Y_cott_i_ambitious_development] / 1000 
+
+ELSEIF
+[Crop]=="cowp"
+
+AND
+[Scenario]=="ambitious_development"
+
+AND
+[Irrigation type]=="i"
+THEN
+[Y_cowp_i_ambitious_development] / 1000 
+
+ELSEIF
+[Crop]=="grou"
+
+AND
+[Scenario]=="ambitious_development"
+
+AND
+[Irrigation type]=="i"
+THEN
+[Y_grou_i_ambitious_development] / 1000 
+
+ELSEIF
+[Crop]=="lent"
+
+AND
+[Scenario]=="ambitious_development"
+
+AND
+[Irrigation type]=="i"
+THEN
+[Y_lent_i_ambitious_development] / 1000 
+
+ELSEIF
+[Crop]=="maiz"
+
+AND
+[Scenario]=="ambitious_development"
+
+AND
+[Irrigation type]=="i"
+THEN
+[Y_maiz_i_ambitious_development] / 1000 
+
+ELSEIF
+[Crop]=="ocer"
+
+AND
+[Scenario]=="ambitious_development"
+
+AND
+[Irrigation type]=="i"
+THEN
+[Y_ocer_i_ambitious_development] / 1000 
+
+ELSEIF
+[Crop]=="ofib"
+
+AND
+[Scenario]=="ambitious_development"
+
+AND
+[Irrigation type]=="i"
+THEN
+[Y_ofib_i_ambitious_development] / 1000 
+
+ELSEIF
+[Crop]=="oilp"
+
+AND
+[Scenario]=="ambitious_development"
+
+AND
+[Irrigation type]=="i"
+THEN
+[Y_oilp_i_ambitious_development] / 1000 
+
+ELSEIF
+[Crop]=="ooil"
+
+AND
+[Scenario]=="ambitious_development"
+
+AND
+[Irrigation type]=="i"
+THEN
+[Y_ooil_i_ambitious_development] / 1000 
+
+ELSEIF
+[Crop]=="opul"
+
+AND
+[Scenario]=="ambitious_development"
+
+AND
+[Irrigation type]=="i"
+THEN
+[Y_opul_i_ambitious_development] / 1000 
+
+ELSEIF
+[Crop]=="orts"
+
+AND
+[Scenario]=="ambitious_development"
+
+AND
+[Irrigation type]=="i"
+THEN
+[Y_orts_i_ambitious_development] / 1000 
+
+ELSEIF
+[Crop]=="pige"
+
+AND
+[Scenario]=="ambitious_development"
+
+AND
+[Irrigation type]=="i"
+THEN
+[Y_pige_i_ambitious_development] / 1000 
+
+ELSEIF
+[Crop]=="plnt"
+
+AND
+[Scenario]=="ambitious_development"
+
+AND
+[Irrigation type]=="i"
+THEN
+[Y_plnt_i_ambitious_development] / 1000 
+
+ELSEIF
+[Crop]=="pmil"
+
+AND
+[Scenario]=="ambitious_development"
+
+AND
+[Irrigation type]=="i"
+THEN
+[Y_pmil_i_ambitious_development] / 1000 
+
+ELSEIF
+[Crop]=="pota"
+
+AND
+[Scenario]=="ambitious_development"
+
+AND
+[Irrigation type]=="i"
+THEN
+[Y_pota_i_ambitious_development] / 1000 
+
+ELSEIF
+[Crop]=="rape"
+
+AND
+[Scenario]=="ambitious_development"
+
+AND
+[Irrigation type]=="i"
+THEN
+[Y_rape_i_ambitious_development] / 1000 
+
+ELSEIF
+[Crop]=="rcof"
+
+AND
+[Scenario]=="ambitious_development"
+
+AND
+[Irrigation type]=="i"
+THEN
+[Y_rcof_i_ambitious_development] / 1000 
+
+ELSEIF
+[Crop]=="rest"
+
+AND
+[Scenario]=="ambitious_development"
+
+AND
+[Irrigation type]=="i"
+THEN
+[Y_rest_i_ambitious_development] / 1000 
+
+ELSEIF
+[Crop]=="rice"
+
+AND
+[Scenario]=="ambitious_development"
+
+AND
+[Irrigation type]=="i"
+THEN
+[Y_rice_i_ambitious_development] / 1000 
+
+ELSEIF
+[Crop]=="sesa"
+
+AND
+[Scenario]=="ambitious_development"
+
+AND
+[Irrigation type]=="i"
+THEN
+[Y_sesa_i_ambitious_development] / 1000 
+
+ELSEIF
+[Crop]=="smil"
+
+AND
+[Scenario]=="ambitious_development"
+
+AND
+[Irrigation type]=="i"
+THEN
+[Y_smil_i_ambitious_development] / 1000 
+
+ELSEIF
+[Crop]=="sorg"
+
+AND
+[Scenario]=="ambitious_development"
+
+AND
+[Irrigation type]=="i"
+THEN
+[Y_sorg_i_ambitious_development] / 1000 
+
+ELSEIF
+[Crop]=="soyb"
+
+AND
+[Scenario]=="ambitious_development"
+
+AND
+[Irrigation type]=="i"
+THEN
+[Y_soyb_i_ambitious_development] / 1000 
+
+ELSEIF
+[Crop]=="sugb"
+
+AND
+[Scenario]=="ambitious_development"
+
+AND
+[Irrigation type]=="i"
+THEN
+[Y_sugb_i_ambitious_development] / 1000 
+
+ELSEIF
+[Crop]=="sugc"
+
+AND
+[Scenario]=="ambitious_development"
+
+AND
+[Irrigation type]=="i"
+THEN
+[Y_sugc_i_ambitious_development] / 1000 
+
+ELSEIF
+[Crop]=="sunf"
+
+AND
+[Scenario]=="ambitious_development"
+
+AND
+[Irrigation type]=="i"
+THEN
+[Y_sunf_i_ambitious_development] / 1000 
+
+ELSEIF
+[Crop]=="swpo"
+
+AND
+[Scenario]=="ambitious_development"
+
+AND
+[Irrigation type]=="i"
+THEN
+[Y_swpo_i_ambitious_development] / 1000 
+
+ELSEIF
+[Crop]=="teas"
+
+AND
+[Scenario]=="ambitious_development"
+
+AND
+[Irrigation type]=="i"
+THEN
+[Y_teas_i_ambitious_development] / 1000 
+
+ELSEIF
+[Crop]=="temf"
+
+AND
+[Scenario]=="ambitious_development"
+
+AND
+[Irrigation type]=="i"
+THEN
+[Y_temf_i_ambitious_development] / 1000 
+
+ELSEIF
+[Crop]=="toba"
+
+AND
+[Scenario]=="ambitious_development"
+
+AND
+[Irrigation type]=="i"
+THEN
+[Y_toba_i_ambitious_development] / 1000 
+
+ELSEIF
+[Crop]=="trof"
+
+AND
+[Scenario]=="ambitious_development"
+
+AND
+[Irrigation type]=="i"
+THEN
+[Y_trof_i_ambitious_development] / 1000 
+
+ELSEIF
+[Crop]=="vege"
+
+AND
+[Scenario]=="ambitious_development"
+
+AND
+[Irrigation type]=="i"
+THEN
+[Y_vege_i_ambitious_development] / 1000 
+
+ELSEIF
+[Crop]=="whea"
+
+AND
+[Scenario]=="ambitious_development"
+
+AND
+[Irrigation type]=="i"
+THEN
+[Y_whea_i_ambitious_development] / 1000 
+
+ELSEIF
+[Crop]=="yams"
+
+AND
+[Scenario]=="ambitious_development"
+
+AND
+[Irrigation type]=="i"
+THEN
+[Y_yams_i_ambitious_development] / 1000 
+
+END
