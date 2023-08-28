@@ -105,6 +105,9 @@ for (i in 1:length(sf_split)){
 #
   ups <- drive_upload(paste0("C:/Users/falchetta/OneDrive - IIASA/IIASA_official_RE4AFAGRI_platform/mled/results/", ctr, "_", gsub("'|/", "-", unique(sf_split[[i]]$NAME_2)), "_clusters_RE4AFAGRI.geojson"), path = as_id("1KgQOdJWW79_Dx1fW8k8sC-6Qta1raVDC")) %>% drive_share_anyone()
 #
+  
+  file.remove(paste0("C:/Users/falchetta/OneDrive - IIASA/IIASA_official_RE4AFAGRI_platform/mled/results/", ctr, "_", gsub("'|/", "-", unique(sf_split[[i]]$NAME_2)) , "_clusters_RE4AFAGRI.geojson"))
+  
   up[i] <- ups$drive_resource[[1]]$webContentLink
 
 }
