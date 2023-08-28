@@ -113,12 +113,13 @@ if (download_data==T){
   wd_bk <- getwd()
   
   setwd(db_folder)
+
+  d <- download.file(paste0("https://zenodo.org/record/7908475/files/mled_replication_", countrystudy, ".zip"), destfile = paste0("mled_replication_", countrystudy, ".zip"))
+
+  unzip(paste0("mled_replication_", countrystudy, ".zip"))
+  file.remove(paste0("mled_replication_", countrystudy, ".zip"))
   
-  d <- download.file("https://zenodo.org/record/7908475/files/mled_replication.zip", destfile = "mled_replication.zip")
-  unzip("mled_replication.zip")
-  file.remove("mled_replication.zip")
-  
-  db_folder <- paste0(db_folder, "/MLED_database_dwnld/")
+  db_folder <- paste0(db_folder, "/", countrystudy, "/")
   
   setwd(wd_bk)
   
