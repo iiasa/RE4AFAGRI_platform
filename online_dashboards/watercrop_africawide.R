@@ -239,9 +239,26 @@ for (scenario in c("baseline", "improved_access", "ambitious_development")){
   
   print(scenario)
   
-  yield <- list.files(paste0(input_folder, "watercrop"), full.names = T, pattern = "yield_avg_ton", recursive=T) %>% .[grepl(ifelse(scenario=="baseline", "scen1", ifelse(scenario=="improved_access", "scen2", "scen3")), .)]
+  yield <- list.files(paste0(input_folder, "watercrop"), full.names = T, pattern = "yield_avg_ton", recursive=T) 
   
-  yg_potential <- list.files(paste0(input_folder, "watercrop"), full.names = T, pattern = "yield_avg_closure", recursive=T) %>% .[grepl(ifelse(scenario=="baseline", "scen1", ifelse(scenario=="improved_access", "scen2", "scen3")), .)]
+  yg_potential <- list.files(paste0(input_folder, "watercrop"), full.names = T, pattern = "yield_avg_closure", recursive=T) 
+  
+  if(rownames(scenarios)[scenario]=="baseline"){
+    
+    yg_potential <- yield[grepl("scen1", basename(yg_potential)) & grepl(timestep, basename(yg_potential))]
+    yield <- yield[grepl("scen1", basename(yield)) & grepl(timestep, basename(yield))]
+    
+  } else if(rownames(scenarios)[scenario]=="improved_access") {
+    
+    yg_potential <- yg_potential[grepl("scen2", basename(yg_potential)) & grepl(timestep, basename(yg_potential))]
+    yield <- yield[grepl("scen2", basename(yield)) & grepl(timestep, basename(yield))]
+    
+  } else{
+    
+    yg_potential <- yg_potential[grepl("scen3", basename(yg_potential)) & grepl(timestep, basename(yg_potential))]
+    yield <- yield[grepl("scen3", basename(yield)) & grepl(timestep, basename(yield))]
+    
+  }
   
   ####
   

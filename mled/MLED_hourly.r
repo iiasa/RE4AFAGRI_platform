@@ -279,7 +279,7 @@ lapply(1:nrow(scenarios), function(scenario){
   
 })
 
-stopCluster(cl)
+if(allowparallel==T){stopCluster(cl)}
 gc()
 
 }

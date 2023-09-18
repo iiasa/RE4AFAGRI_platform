@@ -2,7 +2,9 @@ library(sf)
 library(tidyverse)
 library(googledrive)
 
-googledrive::drive_auth("giacomo.falchetta@unive.it")
+ll <- list.files(path="F:/Il mio Drive/RE4AFAGRI_dashboards_highres_data", recursive = T)
+lapply(ll, file.remove)
+
 
 #
 f <- list.files(path="C:/Users/falchetta/OneDrive - IIASA/IIASA_official_RE4AFAGRI_platform/mled/results", pattern="gadm2_with", full.names = T, recursive = T)
@@ -12,6 +14,8 @@ f_all <- f[!grepl("ALL_SCENARIOS", f)]
 ##########################################
 
 for (ctr in ctrs){
+  
+  print(ctr)
 
 f <- f_all[grepl(ctr, f_all)]
   
@@ -101,20 +105,11 @@ for (i in 1:length(sf_split)){
 #
   file.remove(paste0("C:/Users/falchetta/OneDrive - IIASA/IIASA_official_RE4AFAGRI_platform/mled/results/", ctr, "_", gsub("'|/", "-", unique(sf_split[[i]]$NAME_2)) , "_clusters_RE4AFAGRI.geojson"))
 #
-  write_sf(sf_split[[i]], paste0("C:/Users/falchetta/OneDrive - IIASA/IIASA_official_RE4AFAGRI_platform/mled/results/", ctr, "_", gsub("'|/", "-", unique(sf_split[[i]]$NAME_2)) , "_clusters_RE4AFAGRI.geojson"))
-#
-  ups <- drive_upload(paste0("C:/Users/falchetta/OneDrive - IIASA/IIASA_official_RE4AFAGRI_platform/mled/results/", ctr, "_", gsub("'|/", "-", unique(sf_split[[i]]$NAME_2)), "_clusters_RE4AFAGRI.geojson"), path = as_id("1KgQOdJWW79_Dx1fW8k8sC-6Qta1raVDC")) %>% drive_share_anyone()
-#
+  write_sf(sf_split[[i]], paste0("F:/Il mio Drive/RE4AFAGRI_dashboards_highres_data/", ctr, "/", ctr, "_", gsub("'|/", "-", unique(sf_split[[i]]$NAME_2)) , "_clusters_RE4AFAGRI.geojson"))
   
-  file.remove(paste0("C:/Users/falchetta/OneDrive - IIASA/IIASA_official_RE4AFAGRI_platform/mled/results/", ctr, "_", gsub("'|/", "-", unique(sf_split[[i]]$NAME_2)) , "_clusters_RE4AFAGRI.geojson"))
-  
-  up[i] <- ups$drive_resource[[1]]$webContentLink
-
 }
 #
 #
-#
-sf$link <- c(up, up[which(duplicated(sf$NAME_2))])
 #
 sf <- st_as_sf(sf)
 #

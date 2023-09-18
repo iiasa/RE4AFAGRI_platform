@@ -6,12 +6,14 @@ library(countrycode)
 
 setwd("C:/Users/falchetta/OneDrive - IIASA/IIASA_official_RE4AFAGRI_platform") # path of the cloned M-LED GitHub repository
 
-for (ctr in ctrs){
+for (ctr in "zambia"){
 
 #############
 
 onsset_r <- read.csv(paste0("onsset/results/onsset_full_results/baseline_", tolower(countrycode(ctr, 'country.name', 'iso2c')), "-2-0_0_0_0_0_0.csv"))
-#onsset_r[onsset_r==99] <- NA
+onsset_r[onsset_r==99] <- NA
+
+ups <- drive_upload(paste0("onsset/results/onsset_full_results/baseline_", tolower(countrycode(ctr, 'country.name', 'iso2c')), "-2-0_0_0_0_0_0.csv"), path = as_id("1KgQOdJWW79_Dx1fW8k8sC-6Qta1raVDC")) %>% drive_share_anyone()
 
 onsset_r <- st_as_sf(onsset_r, coords=c("X_deg", "Y_deg"), crs=4326)
 
@@ -59,6 +61,8 @@ onsset_r_s_baseline_2060 <- onsset_r %>% dplyr::group_by(NAME_2) %>%
 onsset_r <- read.csv(paste0("onsset/results/onsset_full_results/improved_access_", tolower(countrycode(ctr, 'country.name', 'iso2c')), "-2-0_0_0_0_0_0.csv"))
 onsset_r[onsset_r==99] <- NA
 
+ups <- drive_upload(paste0("onsset/results/onsset_full_results/improved_access_", tolower(countrycode(ctr, 'country.name', 'iso2c')), "-2-0_0_0_0_0_0.csv"), path = as_id("1KgQOdJWW79_Dx1fW8k8sC-6Qta1raVDC")) %>% drive_share_anyone()
+
 onsset_r <- st_as_sf(onsset_r, coords=c("X_deg", "Y_deg"), crs=4326)
 
 sf <- read_sf(paste0("C:/Users/falchetta/OneDrive - IIASA/IIASA_official_RE4AFAGRI_platform/mled/results/", ctr, "_gadm2_with_mled_loads_ALL_SCENARIOS.geojson")) %>% dplyr::select(NAME_2)
@@ -105,6 +109,8 @@ onsset_r_s_improved_access_2060 <- onsset_r %>% dplyr::group_by(NAME_2) %>%
 onsset_r <- read.csv(paste0("onsset/results/onsset_full_results/ambitious_development_", tolower(countrycode(ctr, 'country.name', 'iso2c')), "-2-0_0_0_0_0_0.csv"))
 
 onsset_r[onsset_r==99] <- NA
+
+ups <- drive_upload(paste0("onsset/results/onsset_full_results/ambitious_development_", tolower(countrycode(ctr, 'country.name', 'iso2c')), "-2-0_0_0_0_0_0.csv"), path = as_id("1KgQOdJWW79_Dx1fW8k8sC-6Qta1raVDC")) %>% drive_share_anyone()
 
 onsset_r <- st_as_sf(onsset_r, coords=c("X_deg", "Y_deg"), crs=4326)
 
@@ -196,5 +202,7 @@ sf <- sf  %>%  mutate_at(vars((contains('2050') | contains('2060')) & contains('
 
 file.remove(paste0("mled/results/", ctr, "/", ctr, "_gadm2_with_mled_loads_ALL_SCENARIOS_OnSSET_added.geojson"))
 write_sf(sf, paste0("mled/results/", ctr, "/", ctr, "_gadm2_with_mled_loads_ALL_SCENARIOS_OnSSET_added.geojson"))
+
+ups <- drive_upload(paste0("mled/results/", ctr, "/", ctr, "_gadm2_with_mled_loads_ALL_SCENARIOS_OnSSET_added.geojson"), path = as_id("1KgQOdJWW79_Dx1fW8k8sC-6Qta1raVDC")) %>% drive_share_anyone()
 
 }

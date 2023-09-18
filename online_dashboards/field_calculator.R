@@ -89,7 +89,7 @@ out <- paste0('ELSEIF
  \nAND
 [Year]=="', l$Var4,'"
 THEN',
-              '\n[yg_potential_',l$Var3, '_', l$Var4, '_', l$Var5, '] / 1000000 \n')
+              '\n[yg_potential_',l$Var3, '_', l$Var4, '_', l$Var5, '] \n')
 
 out[1] <- gsub("ELSE", "", out[1])
 out[length(out)+1] <- "END"
@@ -118,7 +118,7 @@ out <- paste0('ELSEIF
 \nAND
 [Irrigation type]=="', l$Var4,'"
 THEN',
-              '\n[Y_',l$Var1, '_', l$Var4, "_", l$Var5, '] / 1000 \n')
+              '\n[Y_',l$Var1, '_', l$Var4, "_", l$Var5, '] \n')
 
 out[1] <- gsub("ELSE", "", out[1])
 out[length(out)+1] <- "END"
