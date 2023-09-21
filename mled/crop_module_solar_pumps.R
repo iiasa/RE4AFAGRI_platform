@@ -162,7 +162,7 @@ for (timestep in planning_year){
   
   for (i in 1:12){
     
-    clusters_voronoi[paste0('monthly_IRREQ' , "_" , as.character(i), "_", timestep)] <- outs[[i]] + outs2[[i]]
+    clusters_voronoi[paste0('monthly_IRREQ' , "_" , as.character(i), "_", timestep)] <- (outs[[i]] *  scenarios$irrigated_cropland_share_target[scenario] * demand_growth_weights[match(timestep, planning_year)]) + outs2[[i]]
     
   }
   
@@ -201,6 +201,20 @@ for (timestep in planning_year){
   clusters_voronoi[paste0('yearly_IRREQ' , "_", timestep)] <- rowSums(dplyr::select(aa, starts_with("monthly_IRREQ") & contains(as.character(timestep))))
   
 }
+
+#
+
+for (i in 1:12){
+  
+  aa <- clusters_voronoi
+  aa$geometry=NULL
+  aa$geom=NULL
+  
+  clusters_voronoi[paste0('monthly_IRREQ' , "_" , as.character(i), "_", "2050")] <- pull(aa[paste0('monthly_IRREQ' , "_" , as.character(i), "_", "2060")])
+  
+}
+
+clusters_voronoi$yearly_IRREQ_2050 <- clusters_voronoi$yearly_IRREQ_2060
 
 #
 

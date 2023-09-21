@@ -179,11 +179,11 @@ fatsg_yearly_need <- 60 * 365
 # Irrigation needs (source: soft-link from WaterCROP)
 #####################
 
-rainfed <- list.files(paste0(input_folder, "watercrop"), full.names = T, pattern = "watergap", recursive=T)
-irrigated <- list.files(paste0(input_folder, "watercrop"), full.names = T, pattern = "waterwith", recursive=T)
+rainfed <- list.files(paste0(input_folder, "watercrop"), full.names = T, pattern = "watergap", recursive=T) %>% .[grepl("scen3", .)]
+irrigated <- list.files(paste0(input_folder, "watercrop"), full.names = T, pattern = "waterwith", recursive=T) %>% .[grepl("scen3", .)]
 
-yield <- list.files(paste0(input_folder, "watercrop"), full.names = T, pattern = "yield_avg_ton", recursive=T)
-yg_potential <- list.files(paste0(input_folder, "watercrop"), full.names = T, pattern = "yield_avg_closure", recursive=T)
+yield <- list.files(paste0(input_folder, "watercrop"), full.names = T, pattern = "yield_avg_ton", recursive=T) %>% .[grepl(ifelse(rownames(scenarios)[scenario]=="baseline", "scen1", ifelse(rownames(scenarios)[scenario]=="improved_access", "scen2", "scen3")), .)]
+yg_potential <- list.files(paste0(input_folder, "watercrop"), full.names = T, pattern = "yield_avg_closure", recursive=T) %>% .[grepl(ifelse(rownames(scenarios)[scenario]=="baseline", "scen1", ifelse(rownames(scenarios)[scenario]=="improved_access", "scen2", "scen3")), .)]
 
 #####################
 # Country-specific data

@@ -36,6 +36,6 @@ irrigated_cropland_share_target[1] <- as.numeric(last(irr_acc_pred))
 
 } else{
   
-  irrigated_cropland_share_target[1] <- 0
+  irrigated_cropland_share_target[1] <- irrigated_cropland_share_target[1]
   
 }

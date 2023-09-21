@@ -14,7 +14,7 @@ for (X in 1:nlayers(files)){
     
     a = paste0("Y_" ,  names(files)[X], "_r")
     
-    clusters <- clusters %>%  mutate(!!paste0("yield_",  names(files)[X], "_r_cp_", timestep) := (!!as.name(a)) * pull(!!aa[paste0("A_",  names(files)[X], "_r")]) * scenarios$crop_processed_share_target[scenario] * demand_growth_weights[match(timestep, planning_year)])
+    clusters <- clusters %>%  mutate(!!paste0("yield_",  names(files)[X], "_r_cp_", timestep) := ((!!as.name(a)) * 1000) * pull(!!aa[paste0("A_",  names(files)[X], "_r")]) * scenarios$crop_processed_share_target[scenario] * demand_growth_weights[match(timestep, planning_year)])
     
   }}
 
@@ -30,7 +30,7 @@ if (process_already_irrigated_crops==T){
       aa$geom=NULL
       aa$geometry=NULL
       
-      clusters <- clusters %>%  mutate(!!paste0("yield_",  names(files)[X], "_i_cp_", timestep) := (!!as.name(a)) * pull(!!aa[paste0("A_",  names(files)[X], "_i")]) * scenarios$crop_processed_share_target[scenario] * demand_growth_weights[match(timestep, planning_year)])
+      clusters <- clusters %>%  mutate(!!paste0("yield_",  names(files)[X], "_i_cp_", timestep) := ((!!as.name(a)) * 1000) * pull(!!aa[paste0("A_",  names(files)[X], "_i")]) * scenarios$crop_processed_share_target[scenario] * demand_growth_weights[match(timestep, planning_year)])
       
       
     }}}

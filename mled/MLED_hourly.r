@@ -18,7 +18,7 @@ allowparallel=T # allows paralellised processing. considerably shortens run time
 ######################
 # country and year
 
-countrystudy <- c("kenya", "rwanda", "zimbabwe", "zambia", "nigeria") # country(ies) to run M-LED on 
+countrystudy <- c("rwanda", "kenya", "zimbabwe", "zambia", "nigeria") # country(ies) to run M-LED on 
 
 for (countrystudy in countrystudy){
 

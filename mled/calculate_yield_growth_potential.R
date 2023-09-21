@@ -147,7 +147,7 @@ for (timestep in planning_year[-length(planning_year)]){
   ##############
   
   outs <- lapply(1:nlayers(yg_potential_s), function(X){  exact_extract(yg_potential_s[[X]], clusters_voronoi, fun="mean") })
-  outs2 <- lapply(1:nlayers(yield_s), function(X){  exact_extract(yield_s[[X]], clusters_voronoi, fun="mean") })
+  #outs2 <- lapply(1:nlayers(yield_s), function(X){  exact_extract(yield_s[[X]], clusters_voronoi, fun="mean") })
   
   ###############################
   
@@ -165,7 +165,9 @@ for (timestep in planning_year[-length(planning_year)]){
     
     } else{
       
-      clusters[a] <- 0
+      b = paste0("Y_" , crops_v[X], "_r")
+      
+      clusters[a] <- pull(aa[b]) * 1000
   
     }
     
