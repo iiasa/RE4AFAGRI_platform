@@ -27,7 +27,7 @@ The platform combines and soft-links four standalone peer-reviewed modelling too
 
 ## Downloading the database
 
-The database to run the platform for the pilot country of Zambia is avaiable at [the official Zenodo repository of the RE4AFAGRI platform](https://zenodo.org/record/7908475#.ZFnjK3ZBxhk)). 
+The database to run the platform for the pilot country of Zambia is avaiable at [the official Zenodo repository of the RE4AFAGRI platform](https://zenodo.org/record/8365630#.ZFnjK3ZBxhk)). 
 
 Once downloaded, the database(s) (a zipped folder for each of the four models) should be extracted. The exact full path to the database (e.g. *C:/Users/[yourusername]/Documents/RE4AFAGRI_database/...* should be parsed onto the different model at the following positions:
 
@@ -65,7 +65,7 @@ Each models is developed in a specific programming language and has thus specifi
     - `conda activate gep_onsset_env`
     - `jupyter notebook` or `jupyter lab` (if you are familiar with JupyterLab and know how to ensure your correct environment is activated)
   - This will open up the Jupyter Notebook in a browser window. 
-  - Include the "onsset_replication" data from the [the official Zenodo repository of the RE4AFAGRI platform](https://zenodo.org/record/7908475#.ZFnjK3ZBxhk) Unzip the database and then take the onsset data into `onsset\onsset_replication` (the folder will exist in the code but will be empty when downloading the code from github). After completing this correctly the folder should have 3 sub-folders `clusters`, `mled`, and `onsset_input_files` and no longer be as .zip file. If done incorrectly the code in the next steps will likely fail.
+  - Include the "onsset_replication" data from the [the official Zenodo repository of the RE4AFAGRI platform](https://zenodo.org/record/8365630#.ZFnjK3ZBxhk) Unzip the database and then take the onsset data into `onsset\onsset_replication` (the folder will exist in the code but will be empty when downloading the code from github). After completing this correctly the folder should have 3 sub-folders `clusters`, `mled`, and `onsset_input_files` and no longer be as .zip file. If done incorrectly the code in the next steps will likely fail.
   - Go to the instructions below to run the different OnSSET parts of the model.
 
 ### For NEST:
@@ -86,7 +86,7 @@ Each models is developed in a specific programming language and has thus specifi
   - After having run run `lines 1-75` to configure the environment and the required dependencies (as discussed above), run `line 80` to start running the scenarios specified in the `MLED_hourly.r` preamble in sequence (see below for more details on scenarios definition).
   
 ### For OnSSET:
-- Make sure the replication data is downloaded from [the official Zenodo repository of the RE4AFAGRI platform](https://zenodo.org/record/7908475#.ZFnjK3ZBxhk) as described above. 
+- Make sure the replication data is downloaded from [the official Zenodo repository of the RE4AFAGRI platform](https://zenodo.org/record/8365630#.ZFnjK3ZBxhk) as described above. 
 - In the root of the `onsset` folder first open `MLED_extraction_to_OnSSET.ipynb` and run all of the cells. This will extract the MLED demands and create OnSSET compatible input files for use in the next step. The process may take a few minutes. You should find them as .CSV files in the `onsset\mled_processed_input_files` folder with the names of the scenarios. If for any reason this step fails, then there are pre-processed input files available in the `onsset_replication\mled_processed_input_files` database download which you could use instead or if you wish to double check your results.
 - Then, navigate into the `onsset/onsset` sub folder which also includes the .py Python files used by OnSSET.
 - Open the `OnSSET_Scenario_Running.ipynb` Notebook and run all of the cells. This will take a few minutes and will run the different scenarios and calculate the least-cost electrification options for the entire country. It will output it's results into several folders as .CSV files both as full results files for every population cluster in the country as well as summary files (also used later by NEST). 
