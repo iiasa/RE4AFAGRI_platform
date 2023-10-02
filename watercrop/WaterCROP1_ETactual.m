@@ -1,39 +1,45 @@
-cd '~\WaterCrop_replication' 
+maxNumCompThreads(8);
+
+cd '~/WaterCROP' 
 climate = imread('thcli1.tif');
 
-cd '~\WaterCrop_replication\1-ET0mm_day'
-ET0_2020=importdata('ET0_2020_370_GFDL_bias.mat'); 
-ET0_2020(isnan(ET0_2020))=0;
+year=[{'2020_370_GFDL'},'2030_370_GFDL','2040_370_GFDL','2050_370_GFDL','2010_CRU'];
 
-ET0_jan=ET0_2020(:,:,1);
-ET0_feb=ET0_2020(:,:,2);
-ET0_mar=ET0_2020(:,:,3);
-ET0_apr=ET0_2020(:,:,4);
-ET0_may=ET0_2020(:,:,5);
-ET0_jun=ET0_2020(:,:,6);
-ET0_jul=ET0_2020(:,:,7);
-ET0_aug=ET0_2020(:,:,8);
-ET0_sep=ET0_2020(:,:,9);
-ET0_oct=ET0_2020(:,:,10);
-ET0_nov=ET0_2020(:,:,11);
-ET0_dec=ET0_2020(:,:,12);
+for v = 1:5
+
+cd '~/WaterCROP/1-ET0'
+ET0=importdata(['ET0_',char(year(v)),'_bias.mat']); 
+ET0(isnan(ET0))=0;
+
+ET0_jan=ET0(:,:,1);
+ET0_feb=ET0(:,:,2);
+ET0_mar=ET0(:,:,3);
+ET0_apr=ET0(:,:,4);
+ET0_may=ET0(:,:,5);
+ET0_jun=ET0(:,:,6);
+ET0_jul=ET0(:,:,7);
+ET0_aug=ET0(:,:,8);
+ET0_sep=ET0(:,:,9);
+ET0_oct=ET0(:,:,10);
+ET0_nov=ET0(:,:,11);
+ET0_dec=ET0(:,:,12);
  
-cd '~\WaterCrop_replication\2-Prec_mm_day'
-P_2020=importdata('P_2020_370_GFDL_bias.mat'); 
-P_2020(isnan(P_2020))=0;
+cd '~/WaterCROP/2-P'
+P=importdata(['P_',char(year(v)),'_bias.mat']); 
+P(isnan(P))=0;
 
-P_jan=P_2020(:,:,1);
-P_feb=P_2020(:,:,2);
-P_mar=P_2020(:,:,3);
-P_apr=P_2020(:,:,4);
-P_may=P_2020(:,:,5);
-P_jun=P_2020(:,:,6);
-P_jul=P_2020(:,:,7);
-P_aug=P_2020(:,:,8);
-P_sep=P_2020(:,:,9);
-P_oct=P_2020(:,:,10);
-P_nov=P_2020(:,:,11);
-P_dec=P_2020(:,:,12);
+P_jan=P(:,:,1);
+P_feb=P(:,:,2);
+P_mar=P(:,:,3);
+P_apr=P(:,:,4);
+P_may=P(:,:,5);
+P_jun=P(:,:,6);
+P_jul=P(:,:,7);
+P_aug=P(:,:,8);
+P_sep=P(:,:,9);
+P_oct=P(:,:,10);
+P_nov=P(:,:,11);
+P_dec=P(:,:,12);
 
 x=(1:14)';
 dec_before=1:1/30:2-1/30;
@@ -52,20 +58,100 @@ dec=13:1/30:14-1/30;
 jan_after=14:1/30:15-1/30;
 days=[dec_before,jan,feb,mar,apr,may,jun,jul,aug,sep,oct,nov,dec,jan_after]';
 
-cartella_kc = '~\WaterCrop_replication';
+folder_kc = '~/WaterCROP';
  
-raccolto=1;%,2,3,4,5,6,7,8,9,10,11,12,13,14,15,24,31,32,33]; %19 crops
+raccolto=(1:1:14); %14 crops
 for r = 1:length(raccolto) %r crop index
   
     switch raccolto(r)
-    
-%--  II growing season 
+        
+        case 1 %cassava  
+            folder='~/WaterCROP/Cassava'; %input
 
-        case 1 %Mais
-            cartella='~\WaterCrop_replication\Maize';
+            coeff_coltural='cassava';
+            results_folder=['~/WaterCROP/Results1/Cassava/',char(year(v)),'']; %output
+
+            rd_ini=0.3;  %m - initial root depth
+            rd_max_rainfed = 1; %fao 56 tab 22 pag 190
+            rd_max_irrigated = 0.7; %different root depth for irrigated conditions
+            depl_fraction = 0.40; %depletion fraction coefficient
+            ky=1.1; %Doorenbos relation coefficient between ET and yield
+
+            area_irrigated='spam2017V2r1_SSA_H_CASS_I.mat';
+            area_rainfed='spam2017V2r1_SSA_H_CASS_R.mat';
+            area_total='spam2017V2r1_SSA_H_CASS_A.mat';
+            
+            seed_date='semina_rf_2017_CASS.mat';
+            seed_date_irr='semina_ir_2017_CASS.mat';
+            lgp='lgp_rf_2017_CASS.mat';
+            lgp_irr='lgp_irr_2017_CASS.mat';
+        
+        case 2 %cocoa
+             folder='~/WaterCROP/Cocoa';
+             coeff_coltural='kc_maize';
+             results_folder=['~/WaterCROP/Results1/Cocoa/',char(year(v)),''];
+
+             rd_ini=0.3;  %m
+             rd_max_rainfed=1; %fao 56 tab 22 pag 190
+             rd_max_irrigated=0.7;
+             depl_fraction=0.30;
+             ky=1.25;
+
+             area_irrigated='spam2017V2r1_SSA_H_COCO_I.mat';
+             area_rainfed='spam2017V2r1_SSA_H_COCO_R.mat';
+             area_total='spam2017V2r1_SSA_H_COCO_A.mat';
+
+             seed_date='semina_rf_2017_COCO.mat';
+             seed_date_irr='semina_ir_2017_COCO.mat';
+             lgp='lgp_rf_2017_COCO.mat';
+             lgp_irr='lgp_irr_2017_COCO.mat';
+        
+        case 3 %cotton
+            folder='~/WaterCROP/Cotton';
+
+            coeff_coltural = 'seedcotton';
+
+            results_folder = ['~/WaterCROP/Results1/Cotton/',char(year(v)),''];
+            area_irrigated='spam2017V2r1_SSA_H_COTT_I.mat';
+            area_rainfed='spam2017V2r1_SSA_H_COTT_R.mat';
+            area_total='spam2017V2r1_SSA_H_COTT_A.mat';
+
+            seed_date='semina_rf_2017_COTT.mat';
+            seed_date_irr='semina_ir_2017_COTT.mat';
+            lgp='lgp_rf_2017_COTT.mat';
+            lgp_irr='lgp_irr_2017_COTT.mat';
+        
+            rd_ini = 0.3; 
+            rd_max_rainfed = 1.7; %Allen
+            rd_max_irrigated = 1.0;
+            depl_fraction = 0.65;
+            ky = 0.85; %  Allen
+        
+        case 4 %groundnut
+            folder='~/WaterCROP/Groundnut';
+            coeff_coltural='groundnut';
+            results_folder=['~/WaterCROP/Results1/Groundnut/',char(year(v)),''];
+
+            rd_ini=0.3;  %m
+            rd_max_rainfed = 1.0; %fao 56 tab 22 pag 190
+            rd_max_irrigated = 0.5;
+            depl_fraction=0.50;
+            ky=0.7; %irrigationdrainage66
+            
+            area_irrigated='spam2017V2r1_SSA_H_GROU_I.mat';
+            area_rainfed='spam2017V2r1_SSA_H_GROU_R.mat';
+            area_total='spam2017V2r1_SSA_H_GROU_A.mat';
+            
+            seed_date='semina_rf_2017_GROU.mat';
+            seed_date_irr='semina_ir_2017_GROU.mat';
+            lgp='lgp_rf_2017_GROU.mat';
+            lgp_irr='lgp_irr_2017_GROU.mat';
+
+        case 5 %Maize
+            folder='~/WaterCROP/Maize';
          
-            coeff_colturale='kc_maize';
-            cartella_risultati='~\WaterCrop_replication\Results1_ETa\Maize';
+            coeff_coltural='kc_maize';
+            results_folder=['~/WaterCROP/Results1/Maize/',char(year(v)),''];
             
             rd_ini=0.3;  %m
             rd_max_rainfed=1.7; %fao 56 tab 22 pag 190
@@ -73,716 +159,232 @@ for r = 1:length(raccolto) %r crop index
             depl_fraction=0.55;
             ky=1.25;
              
-            area_irrigata='spam2017V2r1_SSA_H_MAIZ_I.mat';
+            area_irrigated='spam2017V2r1_SSA_H_MAIZ_I.mat';
             area_rainfed='spam2017V2r1_SSA_H_MAIZ_R.mat';
-            area_totale='spam2017V2r1_SSA_H_MAIZ_A.mat';
+            area_total='spam2017V2r1_SSA_H_MAIZ_A.mat';
             
-            data_semina='semina_rf_2017_MAIZ.mat';
-            data_semina_irr='semina_ir_2017_MAIZ.mat';
+            seed_date='semina_rf_2017_MAIZ.mat';
+            seed_date_irr='semina_ir_2017_MAIZ.mat';
             lgp='lgp_rf_2017_MAIZ.mat';
             lgp_irr='lgp_irr_2017_MAIZ.mat';
+        
+        case 6 % pearl millet  
+            folder='~/WaterCROP/Millet_pearl';
+
+            coeff_coltural='millet';
+            results_folder=['~/WaterCROP/Results1/Millet_pearl/',char(year(v)),''];
+
+            rd_ini=0.3;  %m
+            rd_max_rainfed = 2; %fao 56 tab 22 pag 190
+            rd_max_irrigated = 1;
+            depl_fraction = 0.55;
+            ky=1.05;
+
+            area_irrigated='spam2017V2r1_SSA_H_PMIL_I.mat';
+            area_rainfed='spam2017V2r1_SSA_H_PMIL_R.mat';
+            area_total='spam2017V2r1_SSA_H_PMIL_A.mat';
+
+            seed_date='semina_rf_2017_PMIL.mat';
+            seed_date_irr='semina_ir_2017_PMIL.mat';
+            lgp='lgp_rf_2017_PMIL.mat';
+            lgp_irr='lgp_irr_2017_PMIL.mat';
+        
+        case 7 %small millet  
+            folder='~/WaterCROP/Millet_small';
+
+            coeff_coltural='millet';
+            results_folder=['~/WaterCROP/Results1/Millet_small/',char(year(v)),''];
+            rd_ini=0.3;  %m
+            rd_max_rainfed = 2; %fao 56 tab 22 pag 190
+            rd_max_irrigated = 1;
+            depl_fraction = 0.55;
+            ky=1.05; 
+
+            area_irrigated='spam2017V2r1_SSA_H_SMIL_I.mat';
+            area_rainfed='spam2017V2r1_SSA_H_SMIL_R.mat';
+            area_total='spam2017V2r1_SSA_H_SMIL_A.mat';
+
+            seed_date='semina_rf_2017_SMIL.mat';
+            seed_date_irr='semina_ir_2017_SMIL.mat';
+            lgp='lgp_rf_2017_SMIL.mat';
+            lgp_irr='lgp_irr_2017_SMIL.mat';
+        
+        case 8 %potatoes
+            folder = '~/WaterCROP/Potatoes';
+
+            coeff_coltural = 'kc_potato';
+
+            results_folder = ['~/WaterCROP/Results1/Potatoes/',char(year(v)),''];
+            
+            area_irrigated='spam2017V2r1_SSA_H_POTA_I.mat';
+            area_rainfed='spam2017V2r1_SSA_H_POTA_R.mat';
+            area_total='spam2017V2r1_SSA_H_POTA_A.mat';
+
+            seed_date='semina_rf_2017_POTA.mat';
+            seed_date_irr='semina_ir_2017_POTA.mat';
+            lgp='lgp_rf_2017_POTA.mat';
+            lgp_irr='lgp_irr_2017_POTA.mat';
+
+            rd_ini = 0.3; 
+            rd_max_rainfed = 0.6; %Allen 1998 tab 22 pag 160
+            rd_max_irrigated = 0.4;
+            depl_fraction = 0.35;
+            ky = 1.1; 
                     
-%         case 2 %Rice
-%             cartella='~/work/solarirr/Rice';
-%             
-%             area_irrigata='spam2017V2r1_SSA_H_RICE_I.mat';
-%             area_rainfed='spam2017V2r1_SSA_H_RICE_R.mat';
-%             area_totale='spam2017V2r1_SSA_H_RICE_A.mat';
-% 
-%             data_semina='semina_rf_2017_RICE.mat';
-%             data_semina_irr='semina_ir_2017_RICE.mat';
-%             lgp='lgp_rf_2017_RICE.mat';
-%             lgp_irr='lgp_irr_2017_RICE.mat';
-% 
-%             coeff_colturale='rice';
-%             cartella_risultati='~/work/solarirr/Risultati/Rice';
-%             
-%             rd_ini=0.3; 
-%             rd_max_rainfed=1; %fao 56 tab 22 pag 190
-%             rd_max_irrigated=0.5;
-%             depl_fraction=0.2;
-%             ky=1.5; %Ho messo ipotizzando che il riso sia molto sensibile alla carenza d'acqua. Cercare fonte
-%       
-%         case 3 %Wheat
-%             cartella='~/work/solarirr/Wheat';
-%            
-%             area_irrigata='spam2017V2r1_SSA_H_WHEA_I.mat';
-%             area_rainfed='spam2017V2r1_SSA_H_WHEA_R.mat';
-%             area_totale='spam2017V2r1_SSA_H_WHEA_A.mat';
-%             coeff_colturale='wheat'; %nome del foglio sull'excel del KC
-%             
-%             cartella_risultati='~/work/solarirr/Risultati/Wheat';
-%           
-%             data_semina='semina_rf_2017_WHEA.mat';
-%             data_semina_irr='semina_ir_2017_WHEA.mat';
-%             
-%             lgp='lgp_rf_2017_WHEA.mat';
-%             lgp_irr='lgp_irr_2017_WHEA.mat';
-%             
-%             rd_ini=0.3; %radicamento iniziale in m
-%             rd_max_rainfed=1.8; %Siebert and doll
-%             rd_max_irrigated=1.5; %radicamento cambia se condizioni irr o rf
-%             
-%             depl_fraction=0.55; %coefficiencte di deplezione critica, TAWC e RAWC
-%             ky=1.05; %doorenbos. Mette in relazione delta Et e delta resa. Se Et subisce una variazione
-%             % anche la resa varia in modo proporzionale. ky è il coeff. di proporzione. 5% in questo caso
-%          
-%          case 4 %Soy
-%             cartella='~/work/solarirr/Soybean';
-%             
-%             coeff_colturale='kc_soybean';
-%             cartella_risultati='~/work/solarirr/Risultati/Soybean';
-%             
-%             area_irrigata='spam2017V2r1_SSA_H_SOYB_I.mat';
-%             area_rainfed='spam2017V2r1_SSA_H_SOYB_R.mat';
-%             area_totale='spam2017V2r1_SSA_H_SOYB_A.mat';
-%             
-%             data_semina='semina_rf_2017_SOYB.mat';
-%             data_semina_irr='semina_ir_2017_SOYB.mat';
-%             lgp='lgp_rf_2017_SOYB.mat';
-%             lgp_irr='lgp_irr_2017_SOYB.mat';
-% 
-%             rd_ini=0.3;  
-%             rd_max_rainfed=1.30; %Siebert and doll
-%             rd_max_irrigated=0.60;
-%             depl_fraction=0.50;
-%             ky=0.85;
-%         
-%         case 5 %sorghum  
-%             cartella='~/work/solarirr/Sorghum';
-%             
-%             coeff_colturale='sorghum';
-%             cartella_risultati='~/work/solarirr/Risultati/Sorghum';
-%             rd_ini=0.3;  %m
-%             rd_max_rainfed = 2; %fao 56 tab 22 pag 190
-%             rd_max_irrigated = 1;
-%             depl_fraction = 0.55;
-%             ky = 0.9;
-%             
-%             area_irrigata='spam2017V2r1_SSA_H_SORG_I.mat';
-%             area_rainfed='spam2017V2r1_SSA_H_SORG_R.mat';
-%             area_totale='spam2017V2r1_SSA_H_SORG_A.mat';
-%             
-%             data_semina='semina_rf_2017_SORG.mat';
-%             data_semina_irr='semina_ir_2017_SORG.mat';
-%             lgp='lgp_rf_2017_SORG.mat';
-%             lgp_irr='lgp_irr_2017_SORG.mat';
-%             
-%         case 6 %groundnut
-%             cartella='~/work/solarirr/Groundnut';
-%             coeff_colturale='groundnut';
-%             cartella_risultati='~/work/solarirr/Risultati/Groundnut';
-% 
-%             rd_ini=0.3;  %m
-%             rd_max_rainfed = 1.0; %fao 56 tab 22 pag 190
-%             rd_max_irrigated = 0.5;
-%             depl_fraction=0.50;
-%             ky=0.7; %irrigationdrainage6
-%             
-%             area_irrigata='spam2017V2r1_SSA_H_GROU_I.mat';
-%             area_rainfed='spam2017V2r1_SSA_H_GROU_R.mat';
-%             area_totale='spam2017V2r1_SSA_H_GROU_A.mat';
-%             
-%             data_semina='semina_rf_2017_GROU.mat';
-%             data_semina_irr='semina_ir_2017_GROU.mat';
-%             lgp='lgp_rf_2017_GROU.mat';
-%             lgp_irr='lgp_irr_2017_GROU.mat';
-%         
-%         case 7 %barley
-%             cartella = '~/work/solarirr/Barley'; %input
-% 
-%             coeff_colturale = 'barley';
-% 
-%             cartella_risultati = '~/work/solarirr/Risultati/Barley'; %output
-%             area_irrigata='spam2017V2r1_SSA_H_BARL_I.mat';
-%             area_rainfed='spam2017V2r1_SSA_H_BARL_R.mat';
-%             area_totale='spam2017V2r1_SSA_H_BARL_A.mat';
-% 
-%             data_semina='semina_rf_2017_BARL.mat';
-%             data_semina_irr='semina_ir_2017_BARL.mat';
-%             lgp='lgp_rf_2017_BARL.mat';
-%             lgp_irr='lgp_irr_2017_BARL.mat';
-% 
-%             rd_ini = 0.3; 
-%             rd_max_rainfed = 1.5; 
-%             rd_max_irrigated = 1.0;
-%             depl_fraction = 0.55;
-%             ky = 1.05; 
-%         
-%         case 8 %cassava  
-%             cartella='~/work/solarirr/Cassava';
-% 
-%             coeff_colturale='cassava';
-%             cartella_risultati='~/work/solarirr/Risultati/Cassava';
-% 
-%             rd_ini=0.3;  %m
-%             rd_max_rainfed = 1; %fao 56 tab 22 pag 190
-%             rd_max_irrigated = 0.7;
-%             depl_fraction = 0.40;
-%             ky=1.1;
-% 
-%             area_irrigata='spam2017V2r1_SSA_H_CASS_I.mat';
-%             area_rainfed='spam2017V2r1_SSA_H_CASS_R.mat';
-%             area_totale='spam2017V2r1_SSA_H_CASS_A.mat';
-%             
-%             data_semina='semina_rf_2017_CASS.mat';
-%             data_semina_irr='semina_ir_2017_CASS.mat';
-%             lgp='lgp_rf_2017_CASS.mat';
-%             lgp_irr='lgp_irr_2017_CASS.mat';
-%         
-%         case 9 %cotton
-%             cartella = '~/work/solarirr/Cotton'; %input
-% 
-%             coeff_colturale = 'seedcotton';
-% 
-%             cartella_risultati = '~/work/solarirr/Risultati/Cotton'; %output
-%             area_irrigata='spam2017V2r1_SSA_H_COTT_I.mat';
-%             area_rainfed='spam2017V2r1_SSA_H_COTT_R.mat';
-%             area_totale='spam2017V2r1_SSA_H_COTT_A.mat';
-% 
-%             data_semina='semina_rf_2017_COTT.mat';
-%             data_semina_irr='semina_ir_2017_COTT.mat';
-%             lgp='lgp_rf_2017_COTT.mat';
-%             lgp_irr='lgp_irr_2017_COTT.mat';
-%         
-%             rd_ini = 0.3; 
-%             rd_max_rainfed = 1.7; %Allen
-%             rd_max_irrigated = 1.0;
-%             depl_fraction = 0.65;
-%             ky = 0.85; %  Allen
-%         
-%         case 10 % pearl millet  
-%             cartella='~/work/solarirr/Millet_pearl';
-% 
-%             coeff_colturale='millet';
-%             cartella_risultati='~/work/solarirr/Risultati/Millet_pearl';
-% 
-%             rd_ini=0.3;  %m
-%             rd_max_rainfed = 2; %fao 56 tab 22 pag 190
-%             rd_max_irrigated = 1;
-%             depl_fraction = 0.55;
-%             ky=1.05; %valore ipotetico, tipico dei cereali poiché mancante del drainage66
-% 
-%             area_irrigata='spam2017V2r1_SSA_H_PMIL_I.mat';
-%             area_rainfed='spam2017V2r1_SSA_H_PMIL_R.mat';
-%             area_totale='spam2017V2r1_SSA_H_PMIL_A.mat';
-% 
-%             data_semina='semina_rf_2017_PMIL.mat';
-%             data_semina_irr='semina_ir_2017_PMIL.mat';
-%             lgp='lgp_rf_2017_PMIL.mat';
-%             lgp_irr='lgp_irr_2017_PMIL.mat';
-%         
-%         case 11 %sugarcane
-%             cartella = '~/work/solarirr/Sugarcane'; %input
-% 
-%             coeff_colturale = 'sugarcane';
-%             cartella_risultati = '~/work/solarirr/Risultati/Sugarcane'; %output
-% 
-%             area_irrigata='spam2017V2r1_SSA_H_SUGC_I.mat';
-%             area_rainfed='spam2017V2r1_SSA_H_SUGC_R.mat';
-%             area_totale='spam2017V2r1_SSA_H_SUGC_A.mat';
-%             
-%             data_semina='semina_rf_2017_SUGC.mat';
-%             data_semina_irr='semina_ir_2017_SUGC.mat';
-%             lgp='lgp_rf_2017_SUGC.mat';
-%             lgp_irr='lgp_irr_2017_SUGC.mat';
-% 
-%             rd_ini = 0.3; 
-%             rd_max_rainfed = 2.0; %Allen 1998 tab 22 pag 160
-%             rd_max_irrigated = 1.2;
-%             depl_fraction = 0.65;
-%             ky = 1.2; %%Allen 1998 tab 24 pag 181
-%         
-%         case 12 %yams 
-%             cartella='~/work/solarirr/Yams';
-% 
-%             coeff_colturale='yams';
-%             cartella_risultati='~/work/solarirr/Risultati/Yams';
-% 
-%             rd_ini=0.3;  %m
-%             rd_max_rainfed = 1.5; %fao 56 tab 22 pag 190
-%             rd_max_irrigated = 1;
-%             depl_fraction = 0.65;
-%             ky=1.1;
-%             
-%             area_irrigata='spam2017V2r1_SSA_H_YAMS_I.mat';
-%             area_rainfed='spam2017V2r1_SSA_H_YAMS_R.mat';
-%             area_totale='spam2017V2r1_SSA_H_YAMS_A.mat';
-% 
-%             data_semina='semina_rf_2017_YAMS.mat';
-%             data_semina_irr='semina_ir_2017_YAMS.mat';
-%             lgp='lgp_rf_2017_YAMS.mat';
-%             lgp_irr='lgp_irr_2017_YAMS.mat';
-%             
-%         case 13 %potatoes
-%             cartella = '~/work/solarirr/Potatoes';
-% 
-%             coeff_colturale = 'kc_potato';
-% 
-%             cartella_risultati = '~/work/solarirr/Risultati/Potatoes';
-%             
-%             area_irrigata='spam2017V2r1_SSA_H_POTA_I.mat';
-%             area_rainfed='spam2017V2r1_SSA_H_POTA_R.mat';
-%             area_totale='spam2017V2r1_SSA_H_POTA_A.mat';
-% 
-%             data_semina='semina_rf_2017_POTA.mat';
-%             data_semina_irr='semina_ir_2017_POTA.mat';
-%             lgp='lgp_rf_2017_POTA.mat';
-%             lgp_irr='lgp_irr_2017_POTA.mat';
-% 
-%             rd_ini = 0.3; 
-%             rd_max_rainfed = 0.6; %Allen 1998 tab 22 pag 160
-%             rd_max_irrigated = 0.4;
-%             depl_fraction = 0.35;
-%             ky = 1.1;    
-%             
-%         case 14 %sugarbeet
-%             cartella = '~/work/Risultati/Sugarbeet';
-% 
-%             coeff_colturale = 'sugarbeet';
-% 
-%             cartella_risultati = '~/work/solarirr/Risultati/Sugarbeet';
-% 
-%             area_irrigata='spam2017V2r1_SSA_H_SUGB_I.mat';
-%             area_rainfed='spam2017V2r1_SSA_H_SUGB_R.mat';
-%             area_totale='spam2017V2r1_SSA_H_SUGB_A.mat';
-% 
-%             data_semina='semina_rf_2017_SUGB.mat';
-%             data_semina_irr='semina_ir_2017_SUGB.mat';
-%             lgp='lgp_rf_2017_SUGB.mat';
-%             lgp_irr='lgp_irr_2017_SUGB.mat';
-% 
-%             rd_ini = 0.3; 
-% 
-%             rd_max_rainfed = 1.20; %Siebert and Doll 2008
-%             rd_max_irrigated = 0.70;
-%             depl_fraction = 0.55;
-%             ky = 1.0; %%Allen 1998 tab 24 pag 181    
-% 
-%         case 15 %small millet  
-%             cartella='~/work/solarirr/Millet_small';
-% 
-%             coeff_colturale='millet';
-%             cartella_risultati='~/work/solarirr/Risultati/Millet_small';
-% 
-%             rd_ini=0.3;  %m
-%             rd_max_rainfed = 2; %fao 56 tab 22 pag 190
-%             rd_max_irrigated = 1;
-%             depl_fraction = 0.55;
-%             ky=1.05; %valore ipotetico, tipico dei cereali poiché mancante del drainage66
-% 
-%             area_irrigata='spam2017V2r1_SSA_H_SMIL_I.mat';
-%             area_rainfed='spam2017V2r1_SSA_H_SMIL_R.mat';
-%             area_totale='spam2017V2r1_SSA_H_SMIL_A.mat';
-% 
-%             data_semina='semina_rf_2017_SMIL.mat';
-%             data_semina_irr='semina_ir_2017_SMIL.mat';
-%             lgp='lgp_rf_2017_SMIL.mat';
-%             lgp_irr='lgp_irr_2017_SMIL.mat';
+        case 9 %Rice
+            folder='~/WaterCROP/Rice';
             
-%         case 16 %greenbean  
-%             cartella='~/work/solarirr/Vegetables';
-% 
-%             coeff_colturale='greenbean';
-%             cartella_risultati='~/work/Risultati/Greenbean';
-% 
-%             rd_ini=0.3;  %m
-%             rd_max_rainfed = 0.7; %fao 56 tab 22 pag 190
-%             rd_max_irrigated = 0.5;
-%             depl_fraction = 0.45;
-%             ky=1.15; %beans
-% 
-%             area_irrigata='spam2017V2r1_SSA_H_VEGE_I.mat';
-%             area_rainfed='spam2017V2r1_SSA_H_VEGE_R.mat';
-%             area_totale='spam2017V2r1_SSA_H_VEGE_A.mat';
-% 
-%             data_semina='semina_rf_2017.mat';
-%             data_semina_irr='semina_ir_2017.mat';
-%             lgp='lgp_rf_2017.mat';
-%             lgp_irr='lgp_ir_2017.mat';
+            area_irrigated='spam2017V2r1_SSA_H_RICE_I.mat';
+            area_rainfed='spam2017V2r1_SSA_H_RICE_R.mat';
+            area_total='spam2017V2r1_SSA_H_RICE_A.mat';
+
+            seed_date='semina_rf_2017_RICE.mat';
+            seed_date_irr='semina_ir_2017_RICE.mat';
+            lgp='lgp_rf_2017_RICE.mat';
+            lgp_irr='lgp_irr_2017_RICE.mat';
+
+            coeff_coltural='rice';
+            results_folder=['~/WaterCROP/Results1/Rice/',char(year(v)),''];
             
-%         case 17 %beansdry  
-%             cartella='~/work/solarirr/Beans';
-% 
-%             coeff_colturale='beansdry';
-%             cartella_risultati='~/work/Risultati/Bean';
-% 
-%             rd_ini=0.3;  %m
-%             rd_max_rainfed = 0.9; %fao 56 tab 22 pag 190
-%             rd_max_irrigated = 0.6;
-%             depl_fraction = 0.45;
-%             ky=1.15; %beans
-% 
-%             area_irrigata='spam2017V2r1_SSA_H_BEAN_I.mat';
-%             area_rainfed='spam2017V2r1_SSA_H_BEAN_R.mat';
-%             area_totale='spam2017V2r1_SSA_H_BEAN_A.mat';
-% 
-%             data_semina='semina_rf_2017.mat';
-%             data_semina_irr='semina_ir_2017.mat';
-%             lgp='lgp_rf_2017.mat';
-%             lgp_irr='lgp_ir_2017.mat';
-%             
-%         case 18 %peasdry  
-%              cartella='~/work/solarirr/Pulses, other';
-% 
-%              coeff_colturale='peasdry';
-%              cartella_risultati='~/work/Risultati/Peasdry';
-% 
-%              rd_ini=0.3;  %m
-%              rd_max_rainfed = 1.0; %fao 56 tab 22 pag 190
-%              rd_max_irrigated = 0.6;
-%              depl_fraction = 0.40;
-%              ky=1.15; %peas
-% 
-%              area_irrigata='spam2017V2r1_SSA_H_OPUL_I.mat';
-%              area_rainfed='spam2017V2r1_SSA_H_OPUL_R.mat';
-%              area_totale='spam2017V2r1_SSA_H_OPUL_A.mat';
-% 
-%              data_semina='semina_rf_2017.mat';
-%              data_semina_irr='semina_ir_2017.mat';
-%              lgp='lgp_rf_2017.mat';
-%              lgp_irr='lgp_ir_2017.mat';
-%              
-%         case 19 %pigeonpea  
-%              cartella='~/work/solarirr/Pigeon pea';
-% 
-%              coeff_colturale='pigeonpea';
-%              cartella_risultati='~/work/Risultati/Pigeon pea';
-% 
-%              rd_ini=0.3;  %m
-%              rd_max_rainfed = 1.0; %fao 56 tab 22 pag 190
-%              rd_max_irrigated = 0.6;
-%              depl_fraction = 0.40;
-%              ky=1.15; %peas
-% 
-%              area_irrigata='spam2017V2r1_SSA_H_PIGE_I.mat';
-%              area_rainfed='spam2017V2r1_SSA_H_PIGE_R.mat';
-%              area_totale='spam2017V2r1_SSA_H_PIGE_A.mat';       
-% 
-%              data_semina='semina_rf_2017.mat';
-%              data_semina_irr='semina_ir_2017.mat';
-%              lgp='lgp_rf_2017.mat';
-%              lgp_irr='lgp_ir_2017.mat';
-%              
-%         case 20 %broadbean 
-%              cartella='~/work/solarirr/Pulses, other';
-% 
-%              coeff_colturale='broadbean';
-%              cartella_risultati='~/work/Risultati/Broadbean';
-% 
-%              rd_ini=0.3;  %m
-%              rd_max_rainfed = 0.7; %fao 56 tab 22 pag 190
-%              rd_max_irrigated = 0.5;
-%              depl_fraction = 0.45;
-%              ky=1.15; %peas
-% 
-%              area_irrigata='spam2017V2r1_SSA_H_OPUL_I.mat';
-%              area_rainfed='spam2017V2r1_SSA_H_OPUL_R.mat';
-%              area_totale='spam2017V2r1_SSA_H_OPUL_A.mat';
-% 
-%              data_semina='semina_rf_2017.mat';
-%              data_semina_irr='semina_ir_2017.mat';
-%              lgp='lgp_rf_2017.mat';
-%              lgp_irr='lgp_ir_2017.mat';
-%              
-%       case 21 %chickpea  
-%              cartella='~/work/solarirr/Chickpea';
-% 
-%              coeff_colturale='chickpea';
-%              cartella_risultati='~/work/Risultati/Chickpea';
-% 
-%              rd_ini=0.3;  %m
-%              rd_max_rainfed = 1.0; %fao 56 tab 22 pag 190
-%              rd_max_irrigated = 0.6;
-%              depl_fraction = 0.50;
-%              ky=0; %definire
-% 
-%              area_irrigata='spam2017V2r1_SSA_H_CHIC_I.mat';
-%              area_rainfed='spam2017V2r1_SSA_H_CHIC_R.mat';
-%              area_totale='spam2017V2r1_SSA_H_CHIC_A.mat';
-% 
-%              data_semina='semina_rf_2017.mat';
-%              data_semina_irr='semina_ir_2017.mat';
-%              lgp='lgp_rf_2017.mat';
-%              lgp_irr='lgp_ir_2017.mat';
-% 
-%       case 22 %cowpea  
-%              cartella='~/work/solarirr/Cowpea';
-% 
-%              coeff_colturale='cowpea';
-%              cartella_risultati='~/work/Risultati/Cowpea';
-% 
-%              rd_ini=0.3;  %m
-%              rd_max_rainfed = 1.0; %fao 56 tab 22 pag 190
-%              rd_max_irrigated = 0.6;
-%              depl_fraction = 0.45;
-%              ky=0; %definire
-% 
-%              area_irrigata='area_ir.mat';
-%              area_rainfed='area_rf.mat';
-% 
-%              data_semina='semina_rf_2017.mat';
-%              data_semina_irr='semina_ir_2017.mat';
-%              lgp='lgp_rf_2017.mat';
-%              lgp_irr='lgp_ir_2017.mat';
-% 
-%       case 23 %lupin  
-%              cartella='~/work/solarirr/Pulses, other';
-% 
-%              coeff_colturale='lupin';
-%              cartella_risultati='~/work/Risultati/Lupin';
-% 
-%              rd_ini=0.3;  %m
-%              rd_max_rainfed = 0.7; %fao 56 tab 22 pag 190
-%              rd_max_irrigated = 0.5;
-%              depl_fraction = 0.45;
-%              ky=1.15; %peas
-% 
-%              area_irrigata='spam2017V2r1_SSA_H_OPUL_I.mat';
-%              area_rainfed='spam2017V2r1_SSA_H_OPUL_R.mat';
-%              area_totale='spam2017V2r1_SSA_H_OPUL_A.mat';
-% 
-%              data_semina='semina_rf_2017.mat';
-%              data_semina_irr='semina_ir_2017.mat';
-%              lgp='lgp_rf_2017.mat';
-%              lgp_irr='lgp_ir_2017.mat';
-             
-%      case 24 %rapeseed  
-%              cartella='~/work/solarirr/Rapeseed';
-% 
-%              coeff_colturale='rapeseed';
-%              cartella_risultati='~/work/solarirr/Risultati/Rapeseed';
-% 
-%              rd_ini=0.3;  %m
-%              rd_max_rainfed = 1.5; %fao 56 tab 22 pag 190
-%              rd_max_irrigated = 1;
-%              depl_fraction = 0.6;
-%              ky=1.15;
-% 
-%              area_irrigata='spam2017V2r1_SSA_H_RAPE_I.mat';
-%              area_rainfed='spam2017V2r1_SSA_H_RAPE_R.mat';
-%              area_totale='spam2017V2r1_SSA_H_RAPE_A.mat';
-% 
-%              data_semina='semina_rf_2017_RAPE.mat';
-%              data_semina_irr='semina_ir_2017_RAPE.mat';
-%              lgp='lgp_rf_2017_RAPE.mat';
-%              lgp_irr='lgp_irr_2017_RAPE.mat';
-             
-%       case 25 %vegetable X
-%              cartella='~/work/solarirr/Vegetables';
-% 
-%             coeff_colturale='vegetableandroots';
-%             cartella_risultati='~/work/Risultati/Vegetables';
-% 
-%             rd_ini=0.3;  %m
-%             rd_max_rainfed = 1; %fao 56 tab 22 pag 190
-%             rd_max_irrigated = 0.6;
-%             depl_fraction = 0.5;
-%             ky=0; %definire
-% 
-%             area_irrigata='spam2017V2r1_SSA_H_VEGE_I.mat';
-%             area_rainfed='spam2017V2r1_SSA_H_VEGE_R.mat';
-%             area_totale='spam2017V2r1_SSA_H_VEGE_A.mat';
-% 
-%              data_semina='semina_rf_2017.mat';
-%              data_semina_irr='semina_ir_2017.mat';
-%              lgp='lgp_rf_2017.mat';
-%              lgp_irr='lgp_ir_2017.mat';
-%              
-%        case 26 %oat X
-%              cartella='~/work/solarirr/Cereals, others';
-% 
-%              coeff_colturale='oat';
-%              cartella_risultati='~/work/Risultati/Oat';
-% 
-%              rd_ini=0.3;  %m
-%              rd_max_rainfed = 1.5; %fao 56 tab 22 pag 190
-%              rd_max_irrigated = 1;
-%              depl_fraction = 0.55;
-%              ky=1.1;
-% 
-%             area_irrigata='spam2017V2r1_SSA_H_OCER_I.mat';
-%             area_rainfed='spam2017V2r1_SSA_H_OCER_R.mat';
-%             area_totale='spam2017V2r1_SSA_H_OCER_A.mat';
-% 
-%              data_semina='semina_rf_2017.mat';
-%              data_semina_irr='semina_ir_2017.mat';
-%              lgp='lgp_rf_2017.mat';
-%              lgp_irr='lgp_ir_2017.mat';
-%              
-%        case 27 %rye  
-%              cartella='~/work/solarirr/Cereals, others';
-% 
-%              coeff_colturale='rye';
-%              cartella_risultati='~/work/Risultati/Rye';
-% 
-%              rd_ini=0.3;  %m
-%              rd_max_rainfed = 1; %fao 56 tab 22 pag 190
-%              rd_max_irrigated = 0.6;
-%              depl_fraction = 0.60;
-%              ky=1.1; 
-% 
-%              area_irrigata='spam2017V2r1_SSA_H_OCER_I.mat';
-%              area_rainfed='spam2017V2r1_SSA_H_OCER_R.mat';
-%              area_totale='spam2017V2r1_SSA_H_OCER_A.mat';
-%              
-%              data_semina='semina_rf_2017.mat';
-%              data_semina_irr='semina_ir_2017.mat';
-%              lgp='lgp_rf_2017.mat';
-%              lgp_irr='lgp_ir_2017.mat';
-%              
-%         case 28 %mustardseed  
-%              cartella='~/work/solarirr/Rapeseed';
-% 
-%              coeff_colturale='mustard';
-%              cartella_risultati='~/work/Risultati/Mustardseed';
-% 
-%              rd_ini=0.3;  %m
-%              rd_max_rainfed = 1.5; %fao 56 tab 22 pag 190
-%              rd_max_irrigated = 1;
-%              depl_fraction = 0.60;
-%              ky=0; %definire
-% 
-%              area_irrigata='spam2017V2r1_SSA_H_RAPE_I.mat';
-%              area_rainfed='spam2017V2r1_SSA_H_RAPE_R.mat';
-%              area_totale='spam2017V2r1_SSA_H_RAPE_A.mat';
-% 
-%              data_semina='semina_rf_2017.mat';
-%              data_semina_irr='semina_ir_2017.mat';
-%              lgp='lgp_rf_2017.mat';
-%              lgp_irr='lgp_ir_2017.mat';
-% 
-%          case 29 %sesameseed  
-%              cartella='~/work/solarirr/Sesameseed';
-% 
-%              coeff_colturale='sesame';
-%              cartella_risultati='~/work/Risultati/Sesameseed';
-% 
-%              rd_ini=0.3;  %m
-%              rd_max_rainfed = 1.5; %fao 56 tab 22 pag 190
-%              rd_max_irrigated = 1;
-%              depl_fraction = 0.60;
-%              ky=0; %definire
-% 
-%              area_irrigata='spam2017V2r1_SSA_H_SESA_I.mat';
-%              area_rainfed='spam2017V2r1_SSA_H_SESA_R.mat';
-%              area_totale='spam2017V2r1_SSA_H_SESA_A.mat';
-%              
-%              data_semina='semina_rf_2017.mat';
-%              data_semina_irr='semina_ir_2017.mat';
-%              lgp='lgp_rf_2017.mat';
-%              lgp_irr='lgp_ir_2017.mat';
-% 
-%         case 30 %sweet potatoes  
-%              cartella='~/work/solarirr/Sweet potato';
-% 
-%              coeff_colturale='sweetpotatoes';
-%              cartella_risultati='~/work/Risultati/Sweet potato';
-% 
-%              rd_ini=0.3;  %m
-%              rd_max_rainfed = 1.5; %fao 56 tab 22 pag 190
-%              rd_max_irrigated = 1;
-%              depl_fraction = 0.65;
-%              ky=1.1; 
-% 
-%              area_irrigata='spam2017V2r1_SSA_H_SWPO_I.mat';
-%              area_rainfed='spam2017V2r1_SSA_H_SWPO_R.mat';
-%              area_totale='spam2017V2r1_SSA_H_SWPO_A.mat';
-% 
-%              data_semina='semina_rf_2017.mat';
-%              data_semina_irr='semina_ir_2017.mat';
-%              lgp='lgp_rf_2017.mat';
-%              lgp_irr='lgp_ir_2017.mat';
-             
-%         case 31 %oil palm 
-%              cartella='~/work/solarirr/Oil palm';
-% 
-%              coeff_colturale='oil_palm';
-%              cartella_risultati='~/work/solarirr/Risultati/Oil palm';
-% 
-%              rd_ini=0.3;  %m
-%              rd_max_rainfed = 1.1; %fao 56 tab 22 pag 190
-%              rd_max_irrigated = 0.7;
-%              depl_fraction = 0.65;
-%              ky=1.1; %
-% 
-%              area_irrigata='spam2017V2r1_SSA_H_OILP_I.mat';
-%              area_rainfed='spam2017V2r1_SSA_H_OILP_R.mat';
-%              area_totale='spam2017V2r1_SSA_H_OILP_A.mat';
-% 
-%              data_semina='semina_rf_2017_OILP.mat';
-%              data_semina_irr='semina_ir_2017_OILP.mat';
-%              lgp='lgp_rf_2017_OILP.mat';
-%              lgp_irr='lgp_irr_2017_OILP.mat';
-%                     
-%         case 32 %cocoa
-%              cartella='~/work/solarirr/Cocoa';
-% 
-%              coeff_colturale='kc_maize';
-%              cartella_risultati='~/work/solarirr/Risultati/Cocoa';
-% 
-%              rd_ini=0.3;  %m
-%              rd_max_rainfed=1; %fao 56 tab 22 pag 190
-%              rd_max_irrigated=0.7;
-%              depl_fraction=0.30;
-%              ky=1.25;
-% 
-%              area_irrigata='spam2017V2r1_SSA_H_COCO_I.mat';
-%              area_rainfed='spam2017V2r1_SSA_H_COCO_R.mat';
-%              area_totale='spam2017V2r1_SSA_H_COCO_A.mat';
-% 
-%              data_semina='semina_rf_2017_COCO.mat';
-%              data_semina_irr='semina_ir_2017_COCO.mat';
-%              lgp='lgp_rf_2017_COCO.mat';
-%              lgp_irr='lgp_irr_2017_COCO.mat';
-%              
-%              case 33 %sunflower
-%              cartella='~/work/solarirr/Sunflower';
-% 
-%              coeff_colturale='sunflower';
-%              cartella_risultati='~/work/solarirr/Risultati/Sunflower';
-% 
-%              rd_ini=0.3;  %m
-%              rd_max_rainfed=1.5; %fao 56 tab 22 pag 190
-%              rd_max_irrigated=0.8;
-%              depl_fraction=0.45;
-%              ky=0.95;
-% 
-%              area_irrigata='spam2017V2r1_SSA_H_SUNF_I.mat';
-%              area_rainfed='spam2017V2r1_SSA_H_SUNF_R.mat';
-%              area_totale='spam2017V2r1_SSA_H_SUNF_A.mat';
-% 
-%              data_semina='semina_rf_2017_SUNF.mat';
-%              data_semina_irr='semina_ir_2017_SUNF.mat';
-%              lgp='lgp_rf_2017_SUNF.mat';
-%              lgp_irr='lgp_irr_2017_SUNF.mat';
+            rd_ini=0.3; 
+            rd_max_rainfed=1; %fao 56 tab 22 pag 190
+            rd_max_irrigated=0.5;
+            depl_fraction=0.2;
+            ky=1.5;
+        
+        case 10 %sorghum  
+            folder='~/WaterCROP/Sorghum';
+            
+            coeff_coltural='sorghum';
+            results_folder=['~/WaterCROP/Results1/Sorghum/',char(year(v)),''];
+            rd_ini=0.3;  %m
+            rd_max_rainfed = 2; %fao 56 tab 22 pag 190
+            rd_max_irrigated = 1;
+            depl_fraction = 0.55;
+            ky = 0.9;
+            
+            area_irrigated='spam2017V2r1_SSA_H_SORG_I.mat';
+            area_rainfed='spam2017V2r1_SSA_H_SORG_R.mat';
+            area_total='spam2017V2r1_SSA_H_SORG_A.mat';
+            
+            seed_date='semina_rf_2017_SORG.mat';
+            seed_date_irr='semina_ir_2017_SORG.mat';
+            lgp='lgp_rf_2017_SORG.mat';
+            lgp_irr='lgp_irr_2017_SORG.mat';
+        
+        case 11 %Soybean
+            folder='~/WaterCROP/Soybean';
+            
+            coeff_coltural='kc_soybean';
+            results_folder=['~/WaterCROP/Results1/Soybean/',char(year(v)),''];
+            
+            area_irrigated='spam2017V2r1_SSA_H_SOYB_I.mat';
+            area_rainfed='spam2017V2r1_SSA_H_SOYB_R.mat';
+            area_total='spam2017V2r1_SSA_H_SOYB_A.mat';
+            
+            seed_date='semina_rf_2017_SOYB.mat';
+            seed_date_irr='semina_ir_2017_SOYB.mat';
+            lgp='lgp_rf_2017_SOYB.mat';
+            lgp_irr='lgp_irr_2017_SOYB.mat';
+
+            rd_ini=0.3;  
+            rd_max_rainfed=1.30; %Siebert and doll
+            rd_max_irrigated=0.60;
+            depl_fraction=0.50;
+            ky=0.85;
+
+        case 12 %sugarcane
+            folder = '~/WaterCROP/Sugarcane'; 
+
+            coeff_coltural = 'sugarcane';
+            results_folder = ['~/WaterCROP/Results1/Sugarcane/',char(year(v)),''];
+
+            area_irrigated='spam2017V2r1_SSA_H_SUGC_I.mat';
+            area_rainfed='spam2017V2r1_SSA_H_SUGC_R.mat';
+            area_total='spam2017V2r1_SSA_H_SUGC_A.mat';
+            
+            seed_date='semina_rf_2017_SUGC.mat';
+            seed_date_irr='semina_ir_2017_SUGC.mat';
+            lgp='lgp_rf_2017_SUGC.mat';
+            lgp_irr='lgp_irr_2017_SUGC.mat';
+
+            rd_ini = 0.3; 
+            rd_max_rainfed = 2.0; %Allen 1998 tab 22 pag 160
+            rd_max_irrigated = 1.2;
+            depl_fraction = 0.65;
+            ky = 1.2; %%Allen 1998 tab 24 pag 181 
+        
+        case 13 %sunflower
+             folder='~/WaterCROP/Sunflower';
+
+             coeff_coltural='sunflower';
+             results_folder=['~/WaterCROP/Results1/Sunflower/',char(year(v)),''];
+
+             rd_ini=0.3;  %m
+             rd_max_rainfed=1.5; %fao 56 tab 22 pag 190
+             rd_max_irrigated=0.8;
+             depl_fraction=0.45;
+             ky=0.95;
+
+             area_irrigated='spam2017V2r1_SSA_H_SUNF_I.mat';
+             area_rainfed='spam2017V2r1_SSA_H_SUNF_R.mat';
+             area_total='spam2017V2r1_SSA_H_SUNF_A.mat';
+
+             seed_date='semina_rf_2017_SUNF.mat';
+             seed_date_irr='semina_ir_2017_SUNF.mat';
+             lgp='lgp_rf_2017_SUNF.mat';
+             lgp_irr='lgp_irr_2017_SUNF.mat';
+
+
+        case 14 %Wheat
+            folder='~/WaterCROP/Wheat';
+           
+            area_irrigated='spam2017V2r1_SSA_H_WHEA_I.mat';
+            area_rainfed='spam2017V2r1_SSA_H_WHEA_R.mat';
+            area_total='spam2017V2r1_SSA_H_WHEA_A.mat';
+            coeff_coltural='wheat';
+            
+            results_folder=['~/WaterCROP/Results1/Wheat/',char(year(v)),''];
+          
+            seed_date='semina_rf_2017_WHEA.mat';
+            seed_date_irr='semina_ir_2017_WHEA.mat';
+            
+            lgp='lgp_rf_2017_WHEA.mat';
+            lgp_irr='lgp_irr_2017_WHEA.mat';
+            
+            rd_ini=0.3; %m
+            rd_max_rainfed=1.8; %Siebert and doll
+            rd_max_irrigated=1.5;
+            
+            depl_fraction=0.55;
+            ky=1.05;
                     
     end
     
 %crop data
-cd(cartella)
+cd(folder)
 
-%2017 mapspam areas
-area_irr=importdata(area_irrigata);
+% mapspam areas
+area_irr=importdata(area_irrigated);
 
 area_rain=importdata(area_rainfed);
 
-area_tot=importdata(area_totale);
+area_tot=importdata(area_total);
  
-%Portmann planting date, updated to 2017
-day_plant_modified=importdata(data_semina); 
-day_plant_modified_irr=importdata(data_semina_irr);
+%Portmann planting date
+day_plant_modified=importdata(seed_date); 
+day_plant_modified_irr=importdata(seed_date_irr);
  
-%Portmann growing period, updated to 2017
+%Portmann growing period
 lgp_ini=importdata(lgp);
 lgp_ini_irr=importdata(lgp_irr);
 
 %
-cd(cartella_kc)
-kc=xlsread('kc_global_NEWCROPS_def.xlsx',coeff_colturale,'C17:I26');
+cd(folder_kc)
+kc=xlsread('kc_global_NEWCROPS_def.xlsx',coeff_coltural,'C17:I26');
 
 %
-cd '~\WaterCrop_replication'
+cd '~/WaterCROP'
 awc_final=importdata('awc_mmalm.mat');
        
 temp=zeros(14,2);
@@ -1161,7 +763,7 @@ ETc_daily_irr=zeros(lgp_irr,1);
 ETa_daily=zeros(lgp,1); %(CWU)
 
 ETgreen_daily=zeros(lgp_irr,1);%irrigated
-CWU_daily=zeros(lgp_irr,1); %(blue+green)
+CWU_daily=zeros(lgp_irr,1); %(blue+green) irrigated
 ETblue_daily=zeros(lgp_irr,1);
 
 ks_rain=zeros(lgp,1);
@@ -1241,8 +843,8 @@ ET0_ir=zeros(lgp_irr,1);
  
                 day=day+1;
                 
-                if day>=377 % 31 december
-                        day=17; % 1 january
+                if day>=377 % 376 = 31 december
+                        day=17; % 2 january
                 end
 %            
                 
@@ -1281,7 +883,7 @@ ET0_ir=zeros(lgp_irr,1);
       end
       
       ETa_month(m,n,1)=sum(ETa_annual(1:30,1));
-      ETa_month(m,n,1)=sum(ETa_annual(31:60,1));
+      ETa_month(m,n,2)=sum(ETa_annual(31:60,1));
       ETa_month(m,n,3)=sum(ETa_annual(61:90,1));
       ETa_month(m,n,4)=sum(ETa_annual(91:120,1));
       ETa_month(m,n,5)=sum(ETa_annual(121:150,1));
@@ -1295,7 +897,7 @@ ET0_ir=zeros(lgp_irr,1);
       
            
       ETc_month(m,n,1)=sum(ETc_annual(1:30,1));
-      ETc_month(m,n,1)=sum(ETc_annual(31:60,1));
+      ETc_month(m,n,2)=sum(ETc_annual(31:60,1));
       ETc_month(m,n,3)=sum(ETc_annual(61:90,1));
       ETc_month(m,n,4)=sum(ETc_annual(91:120,1));
       ETc_month(m,n,5)=sum(ETc_annual(121:150,1));
@@ -1309,7 +911,7 @@ ET0_ir=zeros(lgp_irr,1);
 
             
       ET0_rf_month(m,n,1)=sum(ET0_rf_annual(1:30,1));
-      ET0_rf_month(m,n,1)=sum(ET0_rf_annual(31:60,1));
+      ET0_rf_month(m,n,2)=sum(ET0_rf_annual(31:60,1));
       ET0_rf_month(m,n,3)=sum(ET0_rf_annual(61:90,1));
       ET0_rf_month(m,n,4)=sum(ET0_rf_annual(91:120,1));
       ET0_rf_month(m,n,5)=sum(ET0_rf_annual(121:150,1));
@@ -1430,7 +1032,7 @@ end
 if deficit_st_irrigated(i,1)>=rawc_irrigated(i,1)
 
 
-    %--------------------------VERSIONE 1.1--------------------------------
+    %--------------------------VERSION 1.1--------------------------------
     I(i,1)=deficit_st_irrigated(i,1)-rawc_irrigated(i,1); %irrigation that closes the water deficit
     %----------------------------------------------------------------------
 
@@ -1453,7 +1055,7 @@ if ks_irrigated(i,1)<0
     ks_irrigated(i,1)=0;
 end
 
-    %--------------------------VERSIONE 1.1-------------------------------------------------                          
+    %--------------------------VERSION 1.1-------------------------------------------------                          
             CWU_daily(i,1)=ks_irrigated(i,1)*ETc_daily_irr(i,1); %crop water use
             deficit_end_irrigated(i,1)=deficit_st_irrigated(i,1)+CWU_daily(i,1);
             ETblue_daily(i,1)=CWU_daily(i,1)-ETgreen_daily(i,1);                                               
@@ -1525,7 +1127,7 @@ end
       
            
       CWU_month(m,n,1)=sum(CWU_annual(1:30,1));
-      CWU_month(m,n,1)=sum(CWU_annual(31:60,1));
+      CWU_month(m,n,2)=sum(CWU_annual(31:60,1));
       CWU_month(m,n,3)=sum(CWU_annual(61:90,1));
       CWU_month(m,n,4)=sum(CWU_annual(91:120,1));
       CWU_month(m,n,5)=sum(CWU_annual(121:150,1));
@@ -1539,7 +1141,7 @@ end
 
             
       ETblue_month(m,n,1)=sum(ETblue_annual(1:30,1));
-      ETblue_month(m,n,1)=sum(ETblue_annual(31:60,1));
+      ETblue_month(m,n,2)=sum(ETblue_annual(31:60,1));
       ETblue_month(m,n,3)=sum(ETblue_annual(61:90,1));
       ETblue_month(m,n,4)=sum(ETblue_annual(91:120,1));
       ETblue_month(m,n,5)=sum(ETblue_annual(121:150,1));
@@ -1553,7 +1155,7 @@ end
 
       
       ETc_irr_month(m,n,1)=sum(ETc_irr_annual(1:30,1));
-      ETc_irr_month(m,n,1)=sum(ETc_irr_annual(31:60,1));
+      ETc_irr_month(m,n,2)=sum(ETc_irr_annual(31:60,1));
       ETc_irr_month(m,n,3)=sum(ETc_irr_annual(61:90,1));
       ETc_irr_month(m,n,4)=sum(ETc_irr_annual(91:120,1));
       ETc_irr_month(m,n,5)=sum(ETc_irr_annual(121:150,1));
@@ -1567,7 +1169,7 @@ end
 
       
       ET0_irr_month(m,n,1)=sum(ET0_irr_annual(1:30,1));
-      ET0_irr_month(m,n,1)=sum(ET0_irr_annual(31:60,1));
+      ET0_irr_month(m,n,2)=sum(ET0_irr_annual(31:60,1));
       ET0_irr_month(m,n,3)=sum(ET0_irr_annual(61:90,1));
       ET0_irr_month(m,n,4)=sum(ET0_irr_annual(91:120,1));
       ET0_irr_month(m,n,5)=sum(ET0_irr_annual(121:150,1));
@@ -1638,8 +1240,8 @@ end
     end
 end
 
-mkdir(cartella_risultati)
-cd(cartella_risultati)
+mkdir(results_folder)
+cd(results_folder)
 
 save('ETa_rain.mat','ETa_tot') 
 save('Ptot_rf.mat','Ptot_rf')
@@ -1665,4 +1267,5 @@ save('ET0_irr_month.mat','ET0_irr_month')
 save('Pre_eff_irr_month.mat','Pre_eff_irr_month')
 save('Pre_tot_irr_month_gs.mat','Pre_tot_irr_month_gs')
 
+end
 end
