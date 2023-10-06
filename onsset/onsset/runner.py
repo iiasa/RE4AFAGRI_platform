@@ -74,7 +74,7 @@ def calibration(specs_path, csv_path, specs_path_calib, calibrated_csv_path):
     start_year = int(specs_data.loc[0, SPE_START_YEAR])
     end_year = int(specs_data.loc[0, SPE_END_YEAR])
 
-    intermediate_year = 2040
+    intermediate_year = 2030
     elec_actual = specs_data.loc[0, SPE_ELEC]
     elec_actual_urban = specs_data.loc[0, SPE_ELEC_URBAN]
     elec_actual_rural = specs_data.loc[0, SPE_ELEC_RURAL]
@@ -279,9 +279,9 @@ def scenario(specs_path, calibrated_csv_path, results_folder, summary_folder, ml
 
         # RUN_PARAM: One shall define here the years of analysis (excluding start year),
         # together with access targets per interval and timestep duration
-        yearsofanalysis = [2040, 2060]
-        eleclimits = {2040: five_year_target, 2060: final_year_target}
-        time_steps = {2040: 20, 2060: 20}
+        yearsofanalysis = [2030, 2060]
+        eleclimits = {2030: five_year_target, 2060: final_year_target}
+        time_steps = {2030: 10, 2060: 30}
 
         elements = ["1.Population", "2.New_Connections", "3.Capacity", "4.Investment"]
         techs = ["Grid", "SA_Diesel", "SA_PV", "MG_Diesel", "MG_PV", "MG_Wind", "MG_Hydro", "MG_PV_Hybrid",
