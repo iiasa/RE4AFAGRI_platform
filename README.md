@@ -31,8 +31,8 @@ The database to run the platform for the pilot country of Zambia is avaiable at 
 
 Once downloaded, the database(s) (a zipped folder for each of the four models) should be extracted. The exact full path to the database (e.g. *C:/Users/[yourusername]/Documents/RE4AFAGRI_database/...* should be parsed onto the different model at the following positions:
 
-- For WaterCROP: at *lines 1, 4, 21, 55, 65, 68 - and subsequently for each crop - and 785* of the 'WaterCROP1_ETactual.mat' file
-                 at *lines 9, 14, 20, 94* of the 'WaterCROP2_Irrigation_requirements.mat' file
+- For WaterCROP: at *lines 3, 10, 27, 61, 69 & 72 (repeat for each of the 14 crops), 387* of the 'WaterCROP1_ETactual.mat' file
+                 at *lines 12, 17, 23, 58, 72, 217, 342, 616* of the 'WaterCROP2_Irrigation_requirements.mat' file
 - For M-LED: at *line 10* of the `MLED_hourly.R` file, defining the `db_folder` parameter
 - For OnSSET: include the OnSSET replication data folder unzipped in `onsset\onsset_replication` (more details below)
 - For NEST: The database only raw data needed in the pre-processing phase. The data needed to run the model is already included in the Github repository
@@ -78,8 +78,8 @@ Each models is developed in a specific programming language and has thus specifi
 ## Operating the platform
 
 ### For WaterCROP:
-  - Open 'WaterCROP1_ETactual.mat' file in MATLAB and select the scenario to run; then run the code.
-  - Open 'WaterCROP2_Irrigation_requirements.mat' and run the code. The code will produce the input files produces netcdf files of irrigation water requirements and       yield growth potential for all African countries.
+  - Open 'WaterCROP1_ETactual.mat' file in MATLAB and run the code which will output crop actual and potential evapotranspiration results in .mat files for each crop and scenario, which serve as input to the second part of the code;
+  - Open 'WaterCROP2_Irrigation_requirements.mat' and run the code. It will output yield growth potential for African countries and the related water requirement into specific folders for each crop and scenario in georeferenced .tiff format;
 
 ### For M-LED:
   - Open the `MLED_hourly.r` file in RStudio
@@ -100,7 +100,7 @@ Each models is developed in a specific programming language and has thus specifi
 **RELEASE NOtE:** the current release is still not including all the exchange of data for future scenarios, which will be included in the next release.
 
 ### WaterCrop to M-LED:
-  - WaterCrop produces netcdf files of irrigation water requirements and yield growth potential for all African countries. These files are contained (and can be updated) in the `./MLED_database/input_folder/watercrop` folder and corresponding subfolders for each crop. These files are then read in the `scenario_countryname.R` file of M-LED.
+  - WaterCrop produces georeferenced .tiff files of irrigation water requirements and yield growth potential for all African countries. These files are contained (and can be updated) in the `./MLED_database/input_folder/watercrop` folder and corresponding subfolders for each crop. These files are then read in the `scenario_countryname.R` file of M-LED.
  
 ### WaterCROP to NEST:
   - NEST uses the same input as M-LED
@@ -123,9 +123,9 @@ Currently, each model has own reporting methods and formats, although a joint re
 In particular results can be examined by:
 
 ### For WaterCROP:
-  - WaterCROP outputs are found in 'results2' folder, and in each specific crop subfolder, which are automatically created after a model run.
-  - WaterCROP writes output data at 5 arcmin for the whole African continent
-  - The results files can be analysed using MATLAB and can be vsualized in GIS softwares
+  - WaterCROP outputs are found in `Results2` folder, and in each specific crop and scenario subfolder, which are automatically created after a model run.
+  - WaterCROP writes output data at 5 arcmin for the whole African continent;
+  - The results files can be analysed using MATLAB and can be vsualized in GIS softwares;
  
 ### For M-LED:
   - M-LED outputs are found in the `results` folder which is automatically created inside the `m-led` home folder after a model run.
