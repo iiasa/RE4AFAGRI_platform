@@ -86,7 +86,7 @@ Each models is developed in a specific programming language and has thus specifi
   - Have a recent version of `RStudio` installed on your local computer: https://posit.co/download/rstudio-desktop/
   - Open the `MLED_hourly.r` file in RStudio
   - Here, in [`line 8`](https://github.com/iiasa/RE4AFAGRI_platform/blob/8f8ee4a12caa1895375f52fa0e09d588bd874f46/mled/MLED_hourly.r#L8) set the working directory (i.e. the folder path containing the cloned Github repository folder called mled)  
-   - In addition, in [`line 10`] edit the [`db_folder`](https://github.com/iiasa/RE4AFAGRI_platform/blob/8f8ee4a12caa1895375f52fa0e09d588bd874f46/mled/MLED_hourly.r#L10) parameter, specifying the path where the M-LED database was downloaded from Zenodo or where it should be automatically downloaded if the  [`download_data`](https://github.com/iiasa/RE4AFAGRI_platform/blob/8f8ee4a12caa1895375f52fa0e09d588bd874f46/mled/MLED_hourly.r#L14) parameter is set to `TRUE`.
+   - In addition, in [`line 10`](https://github.com/iiasa/RE4AFAGRI_platform/blob/8f8ee4a12caa1895375f52fa0e09d588bd874f46/mled/MLED_hourly.r#L10) edit the `db_folder` parameter, specifying the path where the M-LED database was downloaded from Zenodo or where it should be automatically downloaded if the  [`download_data`](https://github.com/iiasa/RE4AFAGRI_platform/blob/8f8ee4a12caa1895375f52fa0e09d588bd874f46/mled/MLED_hourly.r#L14) parameter is set to `TRUE`.
   - Finally, run `lines 1-75`. This will automatically run the `backend.R` file, which will take care of installing all the required package dependencies
   - During this procedure (to be carried out only the first time M-LED is run), please reply "no" if asked "Install from sources?"
   
