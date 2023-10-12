@@ -2,7 +2,7 @@
 
 setwd("C:/Users/falchetta/OneDrive - IIASA/IIASA_official_RE4AFAGRI_platform/online_dashboards")
 
-ctrs <- c("kenya", "rwanda", "zambia", "zimbabwe")
+ctrs <- c("nigeria", "kenya", "rwanda", "zimbabwe", "zambia") 
 
 # Country dashboards
 

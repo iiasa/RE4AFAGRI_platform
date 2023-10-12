@@ -114,7 +114,7 @@ if (download_data==T){
   
   setwd(db_folder)
 
-  d <- download.file(paste0("https://zenodo.org/record/7908475/files/mled_replication_", countrystudy, ".zip"), destfile = paste0("mled_replication_", countrystudy, ".zip"))
+  d <- download.file(paste0("https://zenodo.org/record/8365630/files/mled_replication_", countrystudy, ".zip"), destfile = paste0("mled_replication_", countrystudy, ".zip"))
 
   unzip(paste0("mled_replication_", countrystudy, ".zip"))
   file.remove(paste0("mled_replication_", countrystudy, ".zip"))

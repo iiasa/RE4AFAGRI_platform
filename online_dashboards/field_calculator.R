@@ -72,7 +72,7 @@ write(out, "field_calculators/cropland_A.txt")
 
 # 2) yield growth potential (total and crop specific)
 
-year <- seq(2020, 2060, 10)
+year <- seq(2020, 2050, 10)
 rcps <- c("rcp26", "rcp60")
 ssps <- c("ssp2")
 crop <- as.character(crops_list$V1)
@@ -89,7 +89,7 @@ out <- paste0('ELSEIF
  \nAND
 [Year]=="', l$Var4,'"
 THEN',
-              '\n[yg_potential_',l$Var3, '_', l$Var4, '_', l$Var5, '] \n')
+              '\n[yg_potential_',l$Var3, '_', l$Var4, '_', l$Var5, '] ', ifelse(l$Var5=="baseline", '/ 1000000', '/ 1000'), ' \n')
 
 out[1] <- gsub("ELSE", "", out[1])
 out[length(out)+1] <- "END"
@@ -419,30 +419,6 @@ write(out, "field_calculators/nest_water_infr_invest_bn.txt")
 
 ####
 
-months <- c("Yearly")
-scen <- c("baseline", "improved_access", "ambitious_development")
-year <- seq(2020, 2060, 10)
-techs <- c("total", "Off-Grid", "Biomass", "Coal", "Gas", "Geothermal", "Hydro", "Nuclear", "Oil", "Solar", "Transmission and Distribution", "Wind")
-
-l <- expand.grid(scen, year, months, techs, stringsAsFactors = F)
-
-out <- paste0('ELSEIF
-[Year]=="', l$Var2,
-              '" \nAND
-[tech_electricity_investment]=="', l$Var4,
-              '" \nAND              
-[Scenario]=="', l$Var1,
-              '"
-THEN',
-              '\n[', 'electricity_investment_', l$Var4, "_bn_usd_yr", "_", l$Var1, '_', "Yearly", '_', l$Var2, ']\n')
-
-out[1] <- gsub("ELSE", "", out[1])
-out[length(out)+1] <- "END"
-
-write(out, "field_calculators/electricity_investment_bn_usd_yr.txt")
-
-####
-
 months <- c("Yearly", 1:12)
 scen <- c("baseline", "improved_access", "ambitious_development")
 year <- seq(2020, 2060, 10)
@@ -496,31 +472,6 @@ write(out, "field_calculators/water_extraction_km3_yr.txt")
 
 ####
 
-months <- c("Yearly", 1:12)
-scen <- c("baseline", "improved_access", "ambitious_development")
-year <- seq(2020, 2060, 10)
-techs <- c("total", "Off-Grid", "Biomass", "Coal", "Gas", "Geothermal", "Hydro", "Nuclear", "Oil", "Solar", "Wind")
-
-l <- expand.grid(scen, year, months, techs, stringsAsFactors = F)
-
-out <- paste0('ELSEIF
-[Year]=="', l$Var2,
-              '" \nAND
-[tech_electricity_supply]=="', l$Var4,
-              '" \nAND              
-[Scenario]=="', l$Var1,
-              '" \nAND
-[Month]=="', l$Var3,'"
-THEN',
-              '\n[', 'electricity_supply_', l$Var4, "_twh_yr", "_", l$Var1, '_', l$Var3, '_', l$Var2, ']\n')
-
-out[1] <- gsub("ELSE", "", out[1])
-out[length(out)+1] <- "END"
-
-write(out, "field_calculators/electricity_supply_twh_yr.txt")
-
-####
-
 months <- c(1:12)
 scen <- c("baseline")
 year <- seq(2020, 2060, 10)
@@ -540,4 +491,7 @@ out[1] <- gsub("ELSE", "", out[1])
 out[length(out)+1] <- "END"
 
 write(out, "field_calculators/drinking_water_price_usd_m3.txt")
+
+#####
+
 
