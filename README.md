@@ -58,8 +58,8 @@ Each models is developed in a specific programming language and has thus specifi
 
 ### For OnSSET:
   - Have Python (version 3+) and the conda package manager installed on your local computer:
-  - If you do not have this, then download and install Anaconda for your operating system from here: https://www.anaconda.com/ (Many useful Jupyter Notebook tutorials are also available there if you are unfamiliar with Jupyter)
-  - Then open "Anaconda Prompt" and navigate to this repository and into the `onsset` folder, and run the following commands:
+  - Or, if you do not have this, then download and install Anaconda for your operating system from here: https://www.anaconda.com/ (Many useful Jupyter Notebook tutorials are also available there if you are unfamiliar with Jupyter)
+  - Then open "Anaconda Prompt" and navigate to where you cloned or downloaded the RE4AFAGRI repository using `cd <path to repository>` and then `cd` again and into the `onsset` folder with `cd onsset`, and then run the following commands:
   - `conda env create --name gep_onsset_env --file gep_onsset_env.yml` (This might take a while and download 100+MB of Python packages)
   - Then run the following commands:
     - `conda activate gep_onsset_env`
