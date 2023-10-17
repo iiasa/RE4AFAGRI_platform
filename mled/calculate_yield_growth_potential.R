@@ -113,7 +113,7 @@ for (X in 1:nlayers(files)){
 
 for (timestep in planning_year[-length(planning_year)]){
   
-  if(rownames(scenarios)[scenario]=="baseline"){
+  if(rownames(scenarios)[scenario]==rownames(scenarios)[1]){
     
     yg_potential_s <- yield[grepl("scen1", basename(yg_potential)) & grepl(timestep, basename(yg_potential))]
     yield_s <- yield[grepl("scen1", basename(yield)) & grepl(timestep, basename(yield))]
@@ -159,7 +159,7 @@ for (timestep in planning_year[-length(planning_year)]){
     
     a = paste0("yg_potential_" , crops_v[X], "_", timestep)
     
-    if(rownames(scenarios)[scenario]!="baseline"){
+    if(rownames(scenarios)[scenario]!=rownames(scenarios)[1]){
     
     clusters[a] <- outs[[X]] 
     
