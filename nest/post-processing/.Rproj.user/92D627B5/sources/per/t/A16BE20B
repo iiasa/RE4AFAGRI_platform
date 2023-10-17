@@ -1,0 +1,26 @@
+{
+    "id": "A16BE20B",
+    "path": "~/Github/RE4AFAGRI_platform/nest/message-ix-models/message_ix_models/project/leap_re_nest/data/land_irrigation.R",
+    "project_path": null,
+    "type": "r_source",
+    "hash": "3932021280",
+    "contents": "",
+    "dirty": false,
+    "created": 1696930862213.0,
+    "source_on_save": false,
+    "relative_order": 3,
+    "properties": {
+        "source_window_id": "",
+        "Source": "Source",
+        "cursorPosition": "18,0",
+        "scrollLine": "0"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1695912423,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1695912423,
+    "read_only": false,
+    "read_only_alternatives": []
+}
