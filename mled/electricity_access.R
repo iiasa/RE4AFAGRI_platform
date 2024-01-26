@@ -6,8 +6,8 @@
 GHSSMOD2015 <- raster(find_it("builtup_africa.tif"))
 GHSSMOD2015_lit <- raster(find_it("builtup_lit_africa.tif"))
   
-GHSSMOD2015 <- crop(GHSSMOD2015, extent(clusters))
-GHSSMOD2015_lit <- crop(GHSSMOD2015_lit, extent(clusters))
+GHSSMOD2015 <- crop(GHSSMOD2015, extent(clusters %>% st_transform(crs(GHSSMOD2015))))
+GHSSMOD2015_lit <- crop(GHSSMOD2015_lit, extent(clusters %>% st_transform(crs(GHSSMOD2015_lit))))
 
 clusters$elrate <-  exact_extract(GHSSMOD2015_lit, clusters, fun="sum") / exact_extract(GHSSMOD2015, clusters, fun="sum")
 clusters$elrate <- ifelse(is.na(clusters$elrate), 0, clusters$elrate)
