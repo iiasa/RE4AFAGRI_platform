@@ -1,7 +1,7 @@
 # linear regression of gdp-capita on stats evolution
 
 el_acc = read_xlsx(find_it("sdg-7.1.1-access_to_electricity.xlsx"))
-el_acc = filter(el_acc, grepl(countrystudy, el_acc$Country, ignore.case = T))
+el_acc = filter(el_acc, grepl(countrystudy, gsub(" ", "", el_acc$Country), ignore.case = T))
 
 el_acc_trend = as.numeric(el_acc[,13:23])
 el_acc_y = as.numeric(names(el_acc[,13:23]))
@@ -20,7 +20,7 @@ el_access_share_target[1] <- last(el_acc_pred)
 ######
 
 irr_acc = read_xlsx(find_it("power_irr_area.xlsx"))
-irr_acc = filter(irr_acc, grepl(countrystudy, irr_acc$Area, ignore.case = T))
+irr_acc = filter(irr_acc, grepl(countrystudy, gsub(" ", "", irr_acc$Area), ignore.case = T))
 irr_acc = filter(irr_acc, `Variable Name` =="% of area equipped for irrigation power irrigated")
 
 irr_acc_trend = irr_acc$Value

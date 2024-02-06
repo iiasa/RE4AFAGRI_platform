@@ -18,11 +18,11 @@ allowparallel=T # allows paralellised processing. considerably shortens run time
 ######################
 # country and year
 
-countrystudy <- c("rwanda", "kenya", "zimbabwe", "zambia", "nigeria") # country(ies) to run M-LED on 
+countrystudy <- c("zambia") # country(ies) to run M-LED on 
 
 for (countrystudy in countrystudy){
 
-exclude_countries <- paste(gsub("\\.r", "",gsub("scenario_", "", basename(list.files(pattern="scenario_", recursive = T))))[! gsub("\\.r", "",gsub("scenario_", "", basename(list.files(pattern="scenario_", recursive = T)))) %in% c(countrystudy)], collapse ="|") # countries in the database files to exclude from the current run 
+exclude_countries <- paste(gsub("\\.r", "",gsub("scenario_", "", basename(list.files(pattern="scenario_", recursive = T))), ignore.case = T)[! gsub("\\.r", "",gsub("scenario_", "", basename(list.files(pattern="scenario_", recursive = T))), ignore.case = T) %in% c(countrystudy)], collapse ="|") # countries in the database files to exclude from the current run 
 
 planning_year = seq(2020, 2060, 10) # time steps and horizon year to make projections
 
