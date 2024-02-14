@@ -1,0 +1,3 @@
+[submodule "nest/message-ix-models"]
+	path = nest/message-ix-models
+	url = https://github.com/iiasa/message-ix-models.git
