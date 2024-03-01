@@ -1,0 +1,16 @@
+name: re4afagri_onsset_env
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - geopandas
+  - pyogrio
+  - ipykernel
+  - pyarrow
+  - plotly
+  - python-kaleido
+  - pip
+  - pip:
+    - onsset
+
+
