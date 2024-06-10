@@ -5,19 +5,19 @@ library(sf)
 library(countrycode)
 library(googledrive)
 
-googledrive::drive_auth(email="giacomo.falchetta@unive.it")
+googledrive::drive_auth(email="giacomo.Utente@unive.it")
 
-setwd("C:/Users/falchetta/OneDrive - IIASA/IIASA_official_RE4AFAGRI_platform") # path of the cloned M-LED GitHub repository
+setwd("C:/Users/Utente/OneDrive - IIASA/IIASA_official_RE4AFAGRI_platform") # path of the cloned M-LED GitHub repository
 
 for (ctr in "zambia"){
   
 #############
 
-nest_r1 <- read.csv(paste0("C:/Users/falchetta/OneDrive - IIASA/IIASA_official_RE4AFAGRI_platform/online_dashboards/NEST outputs/MESSAGEix_", countrycode(ctr, 'country.name', 'iso2c'), "_MLED_baseline_nexus_full_leap-re.csv"))
+nest_r1 <- read.csv(paste0("C:/Users/Utente/OneDrive - IIASA/IIASA_official_RE4AFAGRI_platform/online_dashboards/NEST outputs/MESSAGEix_", countrycode(ctr, 'country.name', 'iso2c'), "_MLED_baseline_nexus_full_leap-re.csv"))
 
-nest_r2 <- read.csv(paste0("C:/Users/falchetta/OneDrive - IIASA/IIASA_official_RE4AFAGRI_platform/online_dashboards/NEST outputs/MESSAGEix_", countrycode(ctr, 'country.name', 'iso2c'), "_MLED_improved_nexus_full_leap-re.csv"))
+nest_r2 <- read.csv(paste0("C:/Users/Utente/OneDrive - IIASA/IIASA_official_RE4AFAGRI_platform/online_dashboards/NEST outputs/MESSAGEix_", countrycode(ctr, 'country.name', 'iso2c'), "_MLED_improved_nexus_full_leap-re.csv"))
 
-nest_r3 <- read.csv(paste0("C:/Users/falchetta/OneDrive - IIASA/IIASA_official_RE4AFAGRI_platform/online_dashboards/NEST outputs/MESSAGEix_", countrycode(ctr, 'country.name', 'iso2c'), "_MLED_ambitious_nexus_full_leap-re.csv"))
+nest_r3 <- read.csv(paste0("C:/Users/Utente/OneDrive - IIASA/IIASA_official_RE4AFAGRI_platform/online_dashboards/NEST outputs/MESSAGEix_", countrycode(ctr, 'country.name', 'iso2c'), "_MLED_ambitious_nexus_full_leap-re.csv"))
 
 nest_r <- bind_rows(nest_r1, nest_r2, nest_r3)
 
@@ -50,6 +50,28 @@ nest_r_2$value <- nest_r_2$value*1000
 nest_r_2 <- nest_r_2 %>% ungroup() %>% tidyr::complete(variable, scenario, subannual, year, region_m)
 nest_r_2 <- nest_r_2 %>% dplyr::group_by(variable, scenario, subannual, year) %>% dplyr::mutate(value=ifelse(is.na(value), sum(na.omit(value))/length(unique(sf$region_m)), value))
 nest_r_2 <- pivot_wider(nest_r_2, names_from = c("variable", "scenario", "subannual", "year"), names_sep = "_",
+                        values_from = value)
+
+nest_r_3 <- filter(nest_r, grepl("Investment\\|Energy Supply\\|Electricity",  variable))
+nest_r_3 <- group_by(nest_r_3, region_m, variable, year, scenario, subannual) %>% dplyr::summarise(value=sum(value, na.rm=T))
+nest_r_3$variable = paste0(ifelse(gsub("Investment\\|Energy Supply\\|Electricity\\|", "", nest_r_3$variable)=="Investment|Energy Supply|Electricity", "total", gsub("Investment\\|Energy Supply\\|Electricity\\|", "", nest_r_3$variable)))
+nest_r_3 <- filter(nest_r_3, variable!="total")
+nest_r_3$value <- nest_r_3$value*1000
+nest_r_3 <- nest_r_3 %>% ungroup() %>% tidyr::complete(variable, scenario, subannual, year)
+nest_r_3 <- nest_r_3 %>% dplyr::group_by(variable, scenario, subannual, year) %>% dplyr::mutate(value=ifelse(is.na(value),0, value))
+nest_r_3 <- pivot_wider(nest_r_3, names_from = c("variable", "scenario", "subannual", "year"), names_sep = "_",
+                        values_from = value)
+
+nest_r_4 <- filter(nest_r, grepl("Secondary Energy\\|Electricity",  variable))
+nest_r_4 <- group_by(nest_r_4, region_m, variable, year, scenario, subannual) %>% dplyr::summarise(value=sum(value, na.rm=T))
+nest_r_4$variable = paste0(ifelse(gsub("Secondary Energy\\|Electricity\\|", "", nest_r_4$variable)=="Secondary Energy|Electricity", "total", gsub("Secondary Energy\\|Electricity\\|", "", nest_r_4$variable)))
+nest_r_4 <- filter(nest_r_4, !(variable=="Off-Grid" & region_m=="Zambia"))
+nest_r_4 <- filter(nest_r_4, variable!="total")
+nest_r_4$value <- nest_r_4$value * 277.77777777778 #convert to twh
+nest_r_4 <- nest_r_4 %>% ungroup() %>% tidyr::complete(variable, scenario, year)
+nest_r_4 <- filter(nest_r_4, !(variable=="Off-Grid" & region_m=="Zambia"))
+nest_r_4 <- nest_r_4 %>% dplyr::group_by(variable, scenario, year) %>% dplyr::mutate(value=ifelse(is.na(value),0, value))
+nest_r_4 <- pivot_wider(nest_r_4, names_from = c("variable", "scenario", "subannual", "year"), names_sep = "_",
                         values_from = value)
 
 nest_r_5 <- filter(nest_r, variable=="Price|Drinking Water")
@@ -116,11 +138,11 @@ ups <- drive_upload(paste0("mled/results/", ctr, "/", ctr, "_gadm2_with_mled_loa
 #######
 #######
 
-nest_r1 <- read.csv(paste0("C:/Users/falchetta/OneDrive - IIASA/IIASA_official_RE4AFAGRI_platform/online_dashboards/NEST outputs/MESSAGEix_", countrycode(ctr, 'country.name', 'iso2c'), "_MLED_baseline_nexus_full_leap-re.csv"))
+nest_r1 <- read.csv(paste0("C:/Users/Utente/OneDrive - IIASA/IIASA_official_RE4AFAGRI_platform/online_dashboards/NEST outputs/MESSAGEix_", countrycode(ctr, 'country.name', 'iso2c'), "_MLED_baseline_nexus_full_leap-re.csv"))
 
-nest_r2 <- read.csv(paste0("C:/Users/falchetta/OneDrive - IIASA/IIASA_official_RE4AFAGRI_platform/online_dashboards/NEST outputs/MESSAGEix_", countrycode(ctr, 'country.name', 'iso2c'), "_MLED_improved_nexus_full_leap-re.csv"))
+nest_r2 <- read.csv(paste0("C:/Users/Utente/OneDrive - IIASA/IIASA_official_RE4AFAGRI_platform/online_dashboards/NEST outputs/MESSAGEix_", countrycode(ctr, 'country.name', 'iso2c'), "_MLED_improved_nexus_full_leap-re.csv"))
 
-nest_r3 <- read.csv(paste0("C:/Users/falchetta/OneDrive - IIASA/IIASA_official_RE4AFAGRI_platform/online_dashboards/NEST outputs/MESSAGEix_", countrycode(ctr, 'country.name', 'iso2c'), "_MLED_ambitious_nexus_full_leap-re.csv"))
+nest_r3 <- read.csv(paste0("C:/Users/Utente/OneDrive - IIASA/IIASA_official_RE4AFAGRI_platform/online_dashboards/NEST outputs/MESSAGEix_", countrycode(ctr, 'country.name', 'iso2c'), "_MLED_ambitious_nexus_full_leap-re.csv"))
 
 nest_r <- bind_rows(nest_r1, nest_r2, nest_r3)
 
@@ -140,8 +162,9 @@ nest_r$region_m <- sub("\\|.*", "", nest_r$region)
 #############################
 
 nest_r_3 <- filter(nest_r, grepl("Investment\\|Energy Supply\\|Electricity",  variable))
-nest_r_3 <- group_by(nest_r_3, variable, year, scenario, subannual) %>% dplyr::summarise(value=sum(value, na.rm=T))
 nest_r_3$variable = paste0(ifelse(gsub("Investment\\|Energy Supply\\|Electricity\\|", "", nest_r_3$variable)=="Investment|Energy Supply|Electricity", "total", gsub("Investment\\|Energy Supply\\|Electricity\\|", "", nest_r_3$variable)))
+nest_r_3 <- filter(nest_r_3, !(variable=="Off-Grid" & region_m=="Zambia"))
+nest_r_3 <- group_by(nest_r_3, variable, year, scenario, subannual) %>% dplyr::summarise(value=sum(value, na.rm=T))
 nest_r_3 <- filter(nest_r_3, variable!="total")
 nest_r_3$value <- nest_r_3$value*1000
 nest_r_3 <- nest_r_3 %>% ungroup() %>% tidyr::complete(variable, scenario, subannual, year)
@@ -150,8 +173,9 @@ nest_r_3 <- nest_r_3 %>% dplyr::group_by(variable, scenario, subannual, year) %>
 write.csv(nest_r_3, paste0("mled/results/", ctr, "/", ctr, "_ely_invest.csv"))
 
 nest_r_4 <- filter(nest_r, grepl("Secondary Energy\\|Electricity",  variable))
-nest_r_4 <- group_by(nest_r_4, variable, year, scenario) %>% dplyr::summarise(value=sum(value, na.rm=T))
 nest_r_4$variable = paste0(ifelse(gsub("Secondary Energy\\|Electricity\\|", "", nest_r_4$variable)=="Secondary Energy|Electricity", "total", gsub("Secondary Energy\\|Electricity\\|", "", nest_r_4$variable)))
+nest_r_4 <- filter(nest_r_4, !(variable=="Off-Grid" & region_m=="Zambia"))
+nest_r_4 <- group_by(nest_r_4, variable, year, scenario) %>% dplyr::summarise(value=sum(value, na.rm=T))
 nest_r_4 <- filter(nest_r_4, variable!="total")
 nest_r_4$value <- nest_r_4$value * 277.77777777778 #convert to twh
 nest_r_4 <- nest_r_4 %>% ungroup() %>% tidyr::complete(variable, scenario, year)

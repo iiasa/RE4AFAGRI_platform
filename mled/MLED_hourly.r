@@ -18,7 +18,7 @@ allowparallel=T # allows paralellised processing. considerably shortens run time
 ######################
 # country and year
 
-countrystudy <- c("zambia") # country(ies) to run M-LED on 
+countrystudy <- c("rwanda") # country(ies) to run M-LED on 
 
 for (countrystudy in countrystudy){
 
@@ -29,7 +29,7 @@ planning_year = seq(2020, 2060, 10) # time steps and horizon year to make projec
 ######################
 # options and constriants 
 
-latent_d_tot <- T # estimate evolution of demand given current (and projected) electricity access rates (if FALSE) OR total LATENT DEMAND (DEMAND If EVERYBODY HAD SUDDEN ACCESS TO ELECTRICITY, if TRUE)
+latent_d_tot <- F # estimate evolution of demand given current (and projected) electricity access rates (if FALSE) OR total LATENT DEMAND (DEMAND If EVERYBODY HAD SUDDEN ACCESS TO ELECTRICITY, if TRUE)
 
 watercrop_unit  <- "m3" # unit of water demand for irrigation, from Watercrop
 

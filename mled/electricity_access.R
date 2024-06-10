@@ -3,15 +3,6 @@
 ##      1) estimates electricity access in each cluster in the spirit of Falchetta et al. (2019) Scientific Data's paper, using built-up area and nighttime lights
 ##      2) downscales national electricity consumption statistics to each cluster using the dissever methodology (see Roudier et al. 2017 Computers and Electronics in Agriculture paper)
 
-GHSSMOD2015 <- raster(find_it("builtup_africa.tif"))
-GHSSMOD2015_lit <- raster(find_it("builtup_lit_africa.tif"))
-  
-GHSSMOD2015 <- crop(GHSSMOD2015, extent(clusters %>% st_transform(crs(GHSSMOD2015))))
-GHSSMOD2015_lit <- crop(GHSSMOD2015_lit, extent(clusters %>% st_transform(crs(GHSSMOD2015_lit))))
-
-clusters$elrate <-  exact_extract(GHSSMOD2015_lit, clusters, fun="sum") / exact_extract(GHSSMOD2015, clusters, fun="sum")
-clusters$elrate <- ifelse(is.na(clusters$elrate), 0, clusters$elrate)
-
 ######
 
 # Spread current (residential) consumption

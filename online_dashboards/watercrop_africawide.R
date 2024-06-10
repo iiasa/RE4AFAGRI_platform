@@ -6,11 +6,13 @@ library(tidyverse)
 library(exactextractr)
 library(future)
 library(future.apply)
-plan(multisession, workers = 20) ## Run in parallel on local computer
+plan(multisession, workers = 10) ## Run in parallel on local computer
 
 setwd("C:/Users/falchetta/OneDrive - IIASA/IIASA_official_RE4AFAGRI_platform") # path of the cloned M-LED GitHub repository
 
-clusters <- read_sf("online_dashboards/supporting_files/gadm_410-level_2.gpkg")
+clusters <- read_sf("online_dashboards/supporting_files/gadm_410-levels.gpkg", layer="ADM_1")
+
+irrigated_cropland_share_target <- c(0.05, .5, .75)
 
 ###
 
@@ -25,9 +27,8 @@ for (scenario in c("baseline", "improved_access", "ambitious_development")){
   
   print(scenario)
 
-rainfed <- list.files(paste0(input_folder, "watercrop"), full.names = T, pattern = "watergap", recursive=T) %>% .[grepl(ifelse(scenario=="baseline", "scen1", ifelse(scenario=="improved_access", "scen2", "scen3")), .)]
-
-irrigated <- list.files(paste0(input_folder, "watercrop"), full.names = T, pattern = "waterwith", recursive=T) %>% .[grepl(ifelse(scenario=="baseline", "scen1", ifelse(scenario=="improved_access", "scen2", "scen3")), .)]
+rainfed <- list.files(paste0(input_folder, "watercrop"), full.names = T, pattern = "watergap", recursive=T) %>% .[grepl("scen3", .)]
+irrigated <- list.files(paste0(input_folder, "watercrop"), full.names = T, pattern = "waterwith", recursive=T) %>% .[grepl("scen3", .)]
 
 ####
 
@@ -189,7 +190,7 @@ for (timestep in planning_year){
       
       clusters[paste0('IRREQ_irrigated_total' , "_" , as.character(i), "_", timestep, "_", scenario)] <- outs2[[i]]
       
-      clusters[paste0('IRREQ_rainfed_total' , "_" , as.character(i), "_", timestep, "_", scenario)] <- outs[[i]]
+      clusters[paste0('IRREQ_rainfed_total' , "_" , as.character(i), "_", timestep, "_", scenario)] <- (outs[[i]] * irrigated_cropland_share_target[match(scenario, c("baseline", "improved_access", "ambitious_development"))])
       
       
     }
@@ -230,10 +231,7 @@ clusters <- st_as_sf(clusters)
 
 ####
 
-# adjust yield extraction
-
-
-####
+# yield extraction
 
 for (scenario in c("baseline", "improved_access", "ambitious_development")){
   
