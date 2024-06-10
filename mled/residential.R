@@ -77,7 +77,7 @@ clusters$PerHHD_ely <- clusters$current_consumption_kWh / (clusters$HHs * cluste
 
 clusters$PerHHD_ely <- ifelse(is.na(clusters$PerHHD_ely) | is.infinite(clusters$PerHHD_ely), 0, clusters$PerHHD_ely)
 
-diff <- sum(clusters$current_consumption_kWh[(clusters$HHs * clusters$elrate)==0])
+diff <- sum(clusters$current_consumption_kWh[(clusters$HHs * clusters$elrate)==0], na.rm=T)
 
 clusters$w <- clusters$PerHHD_ely / sum(clusters$PerHHD_ely, na.rm=T)
 

@@ -3,6 +3,12 @@
 ##      1) estimates electricity access in each cluster in the spirit of Falchetta et al. (2019) Scientific Data's paper, using built-up area and nighttime lights
 ##      2) downscales national electricity consumption statistics to each cluster using the dissever methodology (see Roudier et al. 2017 Computers and Electronics in Agriculture paper)
 
+GHSSMOD2015 <- raster(find_it("builtup_africa.tif"))
+GHSSMOD2015_lit <- raster(find_it("builtup_lit_africa.tif"))
+  
+GHSSMOD2015 <- crop(GHSSMOD2015, extent(clusters %>% st_transform(crs(GHSSMOD2015))))
+GHSSMOD2015_lit <- crop(GHSSMOD2015_lit, extent(clusters %>% st_transform(crs(GHSSMOD2015_lit))))
+
 ######
 
 # Spread current (residential) consumption
@@ -69,12 +75,23 @@ if (paste0("ely_cons_1_km_", countrystudy, ".tif") %in% all_input_files_basename
   resources <- mask_raster_to_polygon(resources, gadm0)
   
   # resources (PRIO)
-  resources <- raster::distance(projectRaster(resources, crs="+proj=merc +lon_0=0 +k=1 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs"))
+  
+  if(!is.na(unique(values(resources)))){
+  
+  resources <- raster::distance(projectRaster(resources, crs="+proj=merc +lon_0=0 +k=1 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs")) 
   resources <- projectRaster(resources, crs="+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs 
 ")
   resources <- mask_raster_to_polygon(resources/1000, gadm0)
   resources <- -resources 
-  resources <- resources - min(raster::values(resources), na.rm=T)
+  resources <- resources - min(raster::values(resources), na.rm=T) } else{
+    
+    values(resources) <- 1
+    
+    resources <- projectRaster(resources, crs="+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs 
+")
+    resources <- mask_raster_to_polygon(resources/1000, gadm0)
+    
+  }
   
   #
   
