@@ -95,7 +95,7 @@ el_inv = ggplot(data = elec_cost.df %>% filter(year >= 2020, year < 2060,
   theme_classic()+
   facet_wrap(inv_oem~factor(scenario, levels =c("baseline","improved","ambitious")))+
   xlab("")+ylab("billion US$2010/y")+
-  ggtitle("Energy average expenditure for electricity generation")
+  ggtitle("Average expenditure for electricity generation")
 
 # save as png
 ggsave(paste0("out_figures/Electricity_investments_OM_",country,".png"), el_inv, scale=1, height = 4.5, width = 7)
