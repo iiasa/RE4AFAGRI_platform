@@ -12,7 +12,10 @@ in_path = paste0(getwd(),"/outputs")
 # setwd(in_path)
 iso3 = "ZMB"
 country = "Zambia"
-basin.sf = st_read( paste0(country, '_NEST_delineation/',country,'_NEST_delineation.shp'))
+# this might eb wrong
+# get parent path of getwd
+data_path = paste0(dirname(getwd()),"/data/ZMB/")
+basin.sf = st_read( paste0(data_path,country, '_NEST_delineation/',country,'_NEST_delineation.shp'))
 # map plotting
 regions <- st_as_sf(rworldmap::countriesLow)
 
@@ -67,6 +70,35 @@ ggplot(data = inv.df)+
            stat = 'identity', position = 'stack')+
   facet_wrap(~scenario)+
   theme_classic()
+
+# elec investments
+elec_cost.df = marker_output %>% filter(grepl("Energy Supply\\|Electricity", variable)) %>% 
+  mutate(tec = gsub(".+\\|([^\\|]+)$", "\\1", variable),
+         inv_oem = if_else(grepl("Investment", variable),"Investment","Operational"),
+         tec = if_else(grepl("Distribution",tec),"Transmission and Distribution", tec)) %>% 
+  filter(!tec %in% c("Electricity")) %>% 
+  group_by(scenario,tec, inv_oem,year, unit) %>% 
+  summarise(value = sum(value)) %>% ungroup()
+
+# plot
+el_inv = ggplot(data = elec_cost.df %>% filter(year >= 2020, year < 2060,
+                                      value != 0
+                                      # ,!grepl("Distribution", tec)
+                                      ))+
+  geom_bar(aes(x = year,
+               y = value,
+               fill = tec),
+           stat = 'identity', position = 'stack',
+           alpha = 0.6, color = "grey20", linewidth = 0.2)+
+  scale_fill_brewer(name = "Sectors",palette = "Set3")+
+  scale_y_continuous(expand=c(0,0))+
+  theme_classic()+
+  facet_wrap(inv_oem~factor(scenario, levels =c("baseline","improved","ambitious")))+
+  xlab("")+ylab("billion US$2010/y")+
+  ggtitle("Average expenditure for electricity generation")
+
+# save as png
+ggsave(paste0("out_figures/Electricity_investments_OM_",country,".png"), el_inv, scale=1, height = 4.5, width = 7)
 
 en_inv.df = inv.df %>% filter(grepl("Energy Supply|Cooling", variable)) %>% 
   mutate(variable = gsub(".+\\|([^\\|]+)$", "\\1", variable),
@@ -185,9 +217,11 @@ ggplot(data = sec_en.df )+# %>% filter(scenario == "baseline"))+
   theme_classic()+
   theme(axis.title.x=element_blank(),
         # axis.text.x = element_text(angle = 90),
-        legend.position = "right")+
+        legend.position = "right",
+        panel.spacing.x = unit(1, "lines"),
+        axis.text = element_text(size = 9))+
   facet_wrap(~factor(scenario, levels =c("baseline","improved","ambitious")) )+
-  ggtitle("Energy mix")+
+  ggtitle("Total electricity summply, by technology")+
   ylab("TWh" )
 
 # check treament capacity
@@ -266,27 +300,27 @@ p = ggplot(data = water_ts_plot %>% mutate(subannual = as.numeric(subannual)) %>
 wbp = p + guides(fill = guide_legend(ncol = 3))
 ggsave(paste0("out_figures/water_balance_",country,".png"), wbp, scale=1, height = 6, width = 9)
 # basins detail
-ggplot(data = water_ts_plot %>% mutate(subannual = as.numeric(subannual)) %>% 
-         filter(
-           # scenario == 'baseline',
-           year %in% c(2050)
-           , !region %in% c("Zambia")
-         ))+
-  geom_area(aes(x = subannual,y = value,fill = variable),
-            stat = 'identity', position = 'stack', color = "black",size = 0.005)+
-  geom_hline(yintercept = 0, color = "black"  )+
-  scale_fill_brewer(name = "sectors",palette = "RdYlBu",direction = -3)+
-  theme_bw(base_size=8)+
-  theme(axis.title.x=element_blank(),
-        # axis.text.x = element_text(angle = 90),
-        axis.ticks.x=element_blank(),
-        legend.position = "right")+
-  facet_wrap(factor(scenario, levels =c("baseline","improved","ambitious"))~region)+
-  ggtitle("Water supply and withdrawals")+
-  ylab(paste0(unique(water_ts_plot$unit)) )
+# ggplot(data = water_ts_plot %>% mutate(subannual = as.numeric(subannual)) %>% 
+#          filter(
+#            # scenario == 'baseline',
+#            year %in% c(2050)
+#            , !region %in% c("Zambia")
+#          ))+
+#   geom_area(aes(x = subannual,y = value,fill = variable),
+#             stat = 'identity', position = 'stack', color = "black",size = 0.005)+
+#   geom_hline(yintercept = 0, color = "black"  )+
+#   scale_fill_brewer(name = "sectors",palette = "RdYlBu",direction = -3)+
+#   theme_bw(base_size=8)+
+#   theme(axis.title.x=element_blank(),
+#         # axis.text.x = element_text(angle = 90),
+#         axis.ticks.x=element_blank(),
+#         legend.position = "right")+
+#   facet_wrap(factor(scenario, levels =c("baseline","improved","ambitious"))~region)+
+#   ggtitle("Water supply and withdrawals")+
+#   ylab(paste0(unique(water_ts_plot$unit)) )
 
 #### Onsset shares of electricity ####
-ONSET_xls = read.csv(paste0( getwd(),
+ONSET_xls = read.csv(paste0( data_path,
                             "/OnSSET/shares_grid/energy_allocation_results_for_nest.csv"),
                     check.names = FALSE)
 # group in grid, offgrid and unconnected, sum urban rural
@@ -401,3 +435,41 @@ a4 = ggplot()+
   ggtitle("Share of off-grid electricity generation for different scenarios")
 
 ggsave(paste0("out_figures/offgrid_generation_OnSSET_NEST_",country,"_2030.png"), a4, scale=1, height = 5, width = 10)
+
+
+# check investment costs
+#read excel
+library(readxl)
+# inv cost: million $/GW and million $/km3
+inv_costs = read_excel(paste0(getwd(),"/paper_review_analysis.xlsx"), sheet = 3) %>% 
+  select(region, tec, unit, everything()) %>% 
+  gather(year, invc, -region, -tec, -unit)
+# cap in GWa and Km3
+cap_new = read_excel(paste0(getwd(),"/paper_review_analysis.xlsx"), sheet = 4) %>% 
+  gather(year, capn,-region,-tec) %>% 
+  drop_na()
+
+cap_new2 = cap_new %>% left_join(inv_costs %>% filter(region != "all_reg")) %>% 
+  left_join(inv_costs %>% filter(region == "all_reg") %>% select(-region,-unit) %>%  
+              rename(invc_all_reg = invc) ) %>% 
+  mutate(invc = if_else(is.na(invc), invc_all_reg, invc) ) %>% 
+  select(-invc_all_reg,-unit) %>% drop_na() # temp just on hydro, offgrid and irr
+
+capn_agg = cap_new2 %>% mutate(tot_inv = capn * invc, # million $
+                               region = "Zambia") %>% 
+  group_by(region, tec, year) %>% 
+  summarise(capn = sum(capn),
+            tot_inv = sum(tot_inv)) %>% ungroup() %>% 
+  mutate(avg_cap_cost = tot_inv / capn) 
+
+# huge ratio hydro/other is confirmed
+# orger of magnitudes different
+# energy is billion
+# water is million, lower than plotted
+
+# hydro reported inv
+hydro_inv = marker_output %>% 
+  filter(grepl('Investment\\|Energy Supply\\|Electricity\\|Hydro', variable),
+         year >= 2020) %>% 
+  mutate(value = value * 1000,
+         unit = "million US$2010/y")
