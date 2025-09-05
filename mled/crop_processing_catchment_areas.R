@@ -3,7 +3,7 @@
 ##      1) if the relative constraint is activated in the main M-LED script, it generates catchment areas within a given travel time (specified in the scenario file) around each city to constrain crop processing to those clusters which are sufficiently close to markets (i.e. cities)
 ##      2) it generates a new variable identifying crop processing eligible clusters
 
-pop <- population_baseline # gridded population raster of reference
+pop <- population_baseline # gridded population rast of reference
 
 all_facilities <- cities
 all_facilities$id <- 1:nrow(all_facilities)
@@ -17,9 +17,9 @@ function_sens <- function(x){
 
 #friction <- aggregate(friction, fact=10, fun=function_sens, na.rm=TRUE)## to reduce resolution of orignal friction layer and hasten the process (to the cost of accuracy, of course)
 
-#friction <- raster::aggregate(friction, fact=10, fun=mean)
+#friction <- terra::aggregate(friction, fact=10, fun=mean)
 
-Tr <- transition(friction, function_sens, 8) # RAM intensive, can be very slow for large areas
+Tr <- transition(raster(friction), function_sens, 8) # RAM intensive, can be very slow for large areas
 
 saveRDS(Tr, "T_sens.rds")
 
@@ -67,7 +67,7 @@ write_sf(clusters_traveltime_processing, paste0(processed_folder, "clusters_trav
 
 }
 
-clusters_traveltime_processing <- fasterize(clusters_traveltime_processing, friction, "id")
+clusters_traveltime_processing <- terra::rasterize(clusters_traveltime_processing, friction, "id")
 
 clusters$suitable_for_local_processing <- exact_extract(clusters_traveltime_processing, clusters, "sum")
 

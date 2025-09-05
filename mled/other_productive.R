@@ -14,8 +14,8 @@ empl_wealth <- dplyr::select(empl_wealth, (starts_with("EM") | starts_with("id")
 
 if(nrow(empl_wealth)>0){
 
-empl_wealth_1 <- fasterize::fasterize(empl_wealth, traveltime, "EMEMPLWEMC", "first")
-empl_wealth_2 <- fasterize::fasterize(empl_wealth, traveltime, "EMEMPLMEMC", "first")
+empl_wealth_1 <- terra::rasterize(empl_wealth, traveltime, "EMEMPLWEMC", "first")
+empl_wealth_2 <- terra::rasterize(empl_wealth, traveltime, "EMEMPLMEMC", "first")
 
 clusters$EMEMPLWEMC = exact_extract(traveltime, clusters, 'mean') / 100
 clusters$EMEMPLMEMC = exact_extract(traveltime, clusters, 'mean') / 100

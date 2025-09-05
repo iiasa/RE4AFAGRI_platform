@@ -6,8 +6,8 @@
 
 # Groundwater and surface water pumping module
 
-img_01 <- raster(find_it("slope_africa.tif"))
-img_02 <- raster(find_it("surfwater_distance_africa.tif"))
+img_01 <- rast(find_it("slope_africa.tif"))
+img_02 <- rast(find_it("surfwater_distance_africa.tif"))
 
 img_01 <- crop(img_01, extent(clusters_voronoi))
 img_02 <- crop(img_02, extent(clusters_voronoi))

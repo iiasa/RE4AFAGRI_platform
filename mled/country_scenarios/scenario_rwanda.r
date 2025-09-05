@@ -183,6 +183,7 @@ rainfed <- list.files(paste0(input_folder, "watercrop"), full.names = T, pattern
 irrigated <- list.files(paste0(input_folder, "watercrop"), full.names = T, pattern = "waterwith", recursive=T) %>% .[grepl("scen3", .)]
 
 yield <- list.files(paste0(input_folder, "watercrop"), full.names = T, pattern = "yield_avg_ton", recursive=T) %>% .[grepl(ifelse(rownames(scenarios)[scenario]=="baseline", "scen1", ifelse(rownames(scenarios)[scenario]=="improved_access", "scen2", "scen3")), .)]
+
 yg_potential <- list.files(paste0(input_folder, "watercrop"), full.names = T, pattern = "yield_avg_closure", recursive=T) %>% .[grepl(ifelse(rownames(scenarios)[scenario]=="baseline", "scen1", ifelse(rownames(scenarios)[scenario]=="improved_access", "scen2", "scen3")), .)]
 
 #####################
@@ -214,14 +215,14 @@ clusters_nest <- gadm2 %>% mutate(BCU=1:nrow(gadm2)) #read_sf(find_it("Rwanda_NE
 #####################
 
 # gridded population (current)
-population_baseline <- raster(find_it("rwa_ppp_2020_UNadj_constrained.tif"))
+population_baseline <- rast(find_it("rwa_ppp_2020_UNadj_constrained.tif"))
 
 # gridded gdp_baseline (current)
-gdp_baseline <- stack(find_it(paste0("gdp_", scenarios$ssp[scenario], "soc_10km_2010-2100.nc")))[[2]]
+gdp_baseline <- rast(find_it(paste0("gdp_", scenarios$ssp[scenario], "soc_10km_2010-2100.nc")))[[2]]
 gdp_baseline <- mask_raster_to_polygon(gdp_baseline, gadm0)
 
 # groundwater recharge (baseline)
-qr_baseline <- stack(find_it(paste0("lpjml_gfdl-esm2m_ewembi_", scenarios$rcp[scenario], "_", scenarios$rcp[scenario], "soc_co2_qr_global_monthly_2006_2099.nc4")))
+qr_baseline <- rast(find_it(paste0("lpjml_gfdl-esm2m_ewembi_", scenarios$rcp[scenario], "_", scenarios$rcp[scenario], "soc_co2_qr_global_monthly_2006_2099.nc4")))
 
 # wealth / GDP per capita
 
@@ -234,11 +235,11 @@ source("rwi_to_gdp_capita.R", local = T)
 
 wealth_baseline <- st_as_sf(as.data.frame(wealth_baseline), coords=c("longitude", "latitude"), crs=4326)
 
-# lv_grid_density <- raster(find_it("targets.tif"))
+# lv_grid_density <- rast(find_it("targets.tif"))
 # lv_grid_density <- mask_raster_to_polygon(lv_grid_density, st_as_sfc(st_bbox(clusters)))
 # lv_grid_density <- terra::aggregate(lv_grid_density, fun=sum, fact=20)
 # writeRaster(lv_grid_density, file=find_it("targets_10km.tif"), overwrite=T)
-lv_grid_density <- raster(find_it("targets_10km.tif"))
+lv_grid_density <- rast(find_it("targets_10km.tif"))
 crs(lv_grid_density) <- crs(population)
 lv_grid_density <- lv_grid_density>=1
 
@@ -344,37 +345,37 @@ primaryschools = read_sf(find_it('schools.geojson'))
 ##########
 # SSA-wide data
 
-field_size <- raster(find_it("field_size_10_40_cropland.img"))
+field_size <- rast(find_it("field_size_10_40_cropland.img"))
 field_size <- mask_raster_to_polygon(field_size, st_as_sfc(st_bbox(clusters)))
 gc()
 
 maxflow <- field_size
 gc()
-v <- scales::rescale(raster::values(maxflow), to = maxflow_boundaries)
-raster::values(maxflow) <- v
+v <- scales::rescale(terra::values(maxflow), to = maxflow_boundaries)
+terra::values(maxflow) <- v
 rm(v); gc()
 
 mining_sites <- read_sf(find_it("global_mining_polygons_v2.gpkg"))
 mining_sites <- filter(mining_sites, COUNTRY_NAME == countryname)  
 
 # Import diesel price layer (In each pixel: 2015 prices baseline , cost per transporting it from large cities)
-diesel_price = raster(find_it('diesel_price_baseline_countryspecific.tif'))
+diesel_price = rast(find_it('diesel_price_baseline_countryspecific.tif'))
 diesel_price <- mask_raster_to_polygon(diesel_price, gadm0)
 
 DepthToGroundwater = read.delim(find_it('xyzASCII_dtwmap_v1.txt'), sep='\t')
 GroundwaterStorage = read.delim(find_it('xyzASCII_gwstor_v1.txt'), sep='\t')
 GroundwaterProductivity = read.delim(find_it('xyzASCII_gwprod_v1.txt'), sep='\t')
 
-roads<-raster(find_it('grip4_total_dens_m_km2.asc'), crs="+proj=longlat +datum=WGS84")
+roads<-rast(find_it('grip4_total_dens_m_km2.asc'))
 roads <- mask_raster_to_polygon(roads, gadm0)
 
-traveltime <- raster(find_it('travel.tif'))
+traveltime <- rast(find_it('travel.tif'))
 traveltime <- mask_raster_to_polygon(traveltime, gadm0)
 
-raster_tiers = raster(find_it('tiersofaccess_SSA_2018.nc'))
+raster_tiers = rast(find_it('tiersofaccess_SSA_2018.nc'))
 raster_tiers <- mask_raster_to_polygon(raster_tiers, gadm0)
 
-friction <- raster(find_it("friction_cut_1209.tif")) # friction layer from Weiss et al. (minutes per meter)
+friction <- rast(find_it("friction_cut_1209.tif")) # friction layer from Weiss et al. (minutes per meter)
 friction <- mask_raster_to_polygon(friction, gadm0)
 
 cities <- read_sf(find_it("cities.geojson")) %>% filter(cou_name_en==countryname)

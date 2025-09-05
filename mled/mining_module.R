@@ -5,7 +5,7 @@
 
 # extract nighttime lights above mining sites
 
-nl <- raster(find_it("ntl.tif"))
+nl <- rast(find_it("ntl.tif"))
 
 mining_sites$ntl <- exact_extract(nl, mining_sites, "sum")
 
@@ -17,7 +17,7 @@ mining_sites$mining_kwh_tt <- industry_final_demand_tot * (mining_sites$ntl / su
 
 clusters_mining <- mining_sites
 
-clusters_mining_r <- fasterize(clusters_mining, diesel_price, "mining_kwh_tt")
+clusters_mining_r <- terra::rasterize(clusters_mining, diesel_price, "mining_kwh_tt")
 
 clusters$mining_kwh_tt <- exact_extract(clusters_mining_r, clusters, "mean")
 

@@ -8,7 +8,7 @@ if (!require("pacman")) install.packages("pacman"); library(pacman)
 
 if (!require("Rcpp")) install.packages("Rcpp", repos="https://rcppcore.github.io/drat"); library(Rcpp)
 
-pacman::p_load(sf, raster, exactextractr, dplyr, readxl, cowplot, ggplot2, scales, tidyr, tidyverse, rgeos, gdalUtils, chron, nngeo, strex, data.table, gdata, FactoMineR, factoextra, maps  , mapdata, maptools, grid, randomForestSRC, countrycode, remotes, stars, gdistance, rgl, rasterVis, qlcMatrix, stars, tvm, gtools, wbstats, stars, patchwork, ggrepel, terra, pbapply, googledrive, nnet, caret, randomForest, beepr, ncdf4, s2, zip, sfsmisc, dissever, gam, lsa, doBy, geojsonio, matrixStats, purrr, future.apply, parallel, doParallel, qdapRegex, geodata, lwgeom)
+pacman::p_load(sf, raster, terra, exactextractr, dplyr, readxl, cowplot, ggplot2, scales, tidyr, tidyverse, chron, nngeo, strex, data.table, gdata, FactoMineR, factoextra, maps  , mapdata, grid, randomForestSRC, countrycode, remotes, stars, gdistance, rgl, rasterVis, qlcMatrix, stars, tvm, gtools, wbstats, stars, patchwork, ggrepel, terra, pbapply, googledrive, nnet, caret, randomForest, beepr, ncdf4, s2, zip, sfsmisc, dissever, gam, lsa, doBy, geojsonio, matrixStats, purrr, future.apply, parallel, doParallel, qdapRegex, geodata, lwgeom)
 
 if (allowparallel==T){
 
@@ -32,14 +32,13 @@ exact_extract <- purrr::partial(exactextractr::exact_extract, max_cells_in_memor
 tmpDir(create=TRUE)
 
 if (!require("rgis")) remotes::install_github("JGCRI/rgis"); library(rgis)
-if (!require("fasterize")) remotes::install_github("ecohealthalliance/fasterize"); library(fasterize)
-if (!require("gdalUtils")) remotes::install_github("gearslaboratory/gdalUtils"); library(gdalUtils)
 
 mask_raster_to_polygon <- function (raster_object, polygon) 
 {
   if (class(polygon)[[1]] != "sf") 
     polygon <- st_as_sf(polygon)
   r_crs <- st_crs(projection(raster_object))
+  r_crs <- ifelse(is.na(r_crs), 4326, r_crs)
   polys <- polygon %>% st_transform(crs = r_crs)
   n_lcs <- crop(raster_object, polys) %>% mask(polys)
   return(n_lcs)
@@ -51,11 +50,11 @@ options(future.globals.maxSize= 891289600)
 
 fast_mask <- function(ras = NULL, mask = NULL, inverse = FALSE, updatevalue = NA) {
   
-  stopifnot(inherits(ras, "Raster"))
+  stopifnot(inherits(ras, "SpatRaster"))
   
-  stopifnot(inherits(mask, "Raster") | inherits(mask, "sf"))
+  stopifnot(inherits(mask, "SpatRaster") | inherits(mask, "sf"))
   
-  stopifnot(raster::compareCRS(ras, mask))
+  stopifnot(terra::compare(ras, mask))
   
   
   ## If mask is a polygon sf, pre-process:
@@ -64,18 +63,18 @@ fast_mask <- function(ras = NULL, mask = NULL, inverse = FALSE, updatevalue = NA
     
     stopifnot(unique(as.character(sf::st_geometry_type(mask))) %in% c("POLYGON", "MULTIPOLYGON"))
     
-    # First, crop sf to raster extent
+    # First, crop sf to rast extent
     sf.crop <- suppressWarnings(sf::st_crop(mask,
                                             y = c(
-                                              xmin = raster::xmin(ras),
-                                              ymin = raster::ymin(ras),
-                                              xmax = raster::xmax(ras),
-                                              ymax = raster::ymax(ras)
+                                              xmin = terra::xmin(ras),
+                                              ymin = terra::ymin(ras),
+                                              xmax = terra::xmax(ras),
+                                              ymax = terra::ymax(ras)
                                             )))
     sf.crop <- sf::st_cast(sf.crop)
     
     # Now rasterize sf
-    mask <- fasterize::fasterize(sf.crop, raster = ras)
+    mask <- terra::rasterize(sf.crop, rast = ras)
     
   }
   
@@ -83,13 +82,13 @@ fast_mask <- function(ras = NULL, mask = NULL, inverse = FALSE, updatevalue = NA
   
   if (isTRUE(inverse)) {
     
-    ras.masked <- raster::overlay(ras, mask,
+    ras.masked <- terra::overlay(ras, mask,
                                   fun = function(x, y)
                                   {ifelse(!is.na(y), updatevalue, x)})
     
   } else {
     
-    ras.masked <- raster::overlay(ras, mask,
+    ras.masked <- terra::overlay(ras, mask,
                                   fun = function(x, y)
                                   {ifelse(is.na(y), updatevalue, x)})
     

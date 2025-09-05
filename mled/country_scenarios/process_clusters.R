@@ -3,7 +3,7 @@ gc()
 
 # Task 12.2 - Integration of Modelling Infrastructure -> data_repository
 
-library(raster)
+library(rast)
 library(sf)
 library(devtools)
 devtools::install_github('jgcri/rgis')
@@ -54,7 +54,7 @@ urb_rate =   0.176
 
 clusters$pop_start_un <- clusters$population * (un_pop / sum(clusters$population, na.rm=T))
 
-pop <- raster("ethiopia/eth_ppp_2020_constrained.tif")
+pop <- rast("ethiopia/eth_ppp_2020_constrained.tif")
 clusters$pop_start_worldpop <- exact_extract(pop, clusters, "sum", max_cells_in_memory= 1e9 )
 
 
@@ -76,17 +76,17 @@ clusters <- filter(clusters, pop_start_un>5)
 ntl <- list.files(pattern="VNL", full.names = T, recursive = T)
 
 # mean to see if elec_status >0
-ntl_s <- raster(ntl[[1]])
+ntl_s <- rast(ntl[[1]])
 
 ntl_s <- crop(ntl_s, extent(clusters))
 
 clusters$nightlight <- exact_extract(ntl_s, clusters, "mean", max_cells_in_memory= 1e9 )
 clusters$nightlight <- ifelse(is.na(clusters$nightlight ), 0, clusters$nightlight )
 
-pop <- raster::aggregate(pop, fact=5, fun="sum")
+pop <- terra::aggregate(pop, fact=5, fun="sum")
 pop <- projectRaster(pop, ntl_s)
-raster::values(ntl_s) <- ifelse(is.na(raster::values(ntl_s)), 0, raster::values(ntl_s))
-raster::values(pop) <- ifelse(is.na(raster::values(pop)), 0, raster::values(pop))
+terra::values(ntl_s) <- ifelse(is.na(terra::values(ntl_s)), 0, terra::values(ntl_s))
+terra::values(pop) <- ifelse(is.na(terra::values(pop)), 0, terra::values(pop))
 
 clusters$elecperc <- clusters$elrate <- exact_extract(ntl_s>0, clusters, "weighted_mean", weights=pop, max_cells_in_memory= 1e9 )
 

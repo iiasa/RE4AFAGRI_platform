@@ -171,7 +171,7 @@ lapply(1:nrow(scenarios), function(scenario){
     clusters_onsset[paste0("tot_dem_", timestep)] <- aa[paste0("residential_tt_", timestep)] + aa[paste0("nonfarm_smes_tt_", timestep)] + aa[paste0("healthcare_tt_", timestep)] + aa[paste0("education_tt_", timestep)] + aa[paste0("water_pumping_tt_", timestep)] + aa[paste0("crop_processing_tt_", timestep)] + aa[paste0("mining_kwh_tt_", timestep)] + aa[paste0("other_tt_", timestep)]
   }
   
-  clusters_nest_BCU <- fasterize(st_cast(clusters_nest, "MULTIPOLYGON"), disaggregate(rainfed[[1]][[1]], fact=100), "BCU")
+  clusters_nest_BCU <- terra::rasterize(st_cast(clusters_nest, "MULTIPOLYGON"), disagg(rainfed[[1]][[1]], fact=100), "BCU")
   
   clusters_onsset$BCU <- exact_extract(clusters_nest_BCU, clusters_onsset, "majority")
   
@@ -187,7 +187,7 @@ lapply(1:nrow(scenarios), function(scenario){
   
   clusters_nest_output <- st_cast(clusters_nest, "MULTIPOLYGON")
   clusters_nest_output$id <- 1:nrow(st_cast(clusters_nest, "MULTIPOLYGON"))
-  id <- fasterize(clusters_nest_output,  disaggregate(rainfed[[1]][[1]], fact=100), "id")
+  id <- terra::rasterize(clusters_nest_output,  disagg(rainfed[[1]][[1]], fact=100), "id")
   
   clusters_onsset$id <- exact_extract(id, clusters_onsset, "majority")
   clusters_onsset$geom <- NULL
@@ -241,7 +241,7 @@ lapply(1:nrow(scenarios), function(scenario){
   gadm2_output <- gadm2
   
   gadm2_output$id <- 1:nrow(gadm2_output)
-  id <- fasterize(st_collection_extract(gadm2_output, "POLYGON"), disaggregate(rainfed[[1]][[1]], fact=100), "id")
+  id <- terra::rasterize(st_collection_extract(gadm2_output, "POLYGON"), disagg(rainfed[[1]][[1]], fact=100), "id")
   
   clusters_onsset <- dplyr::select(clusters, contains(demand_fields) & !contains("surface"), contains("IRREQ"), starts_with("Y_"), contains("machines"), contains("yg_potential_"), starts_with("A_"), starts_with("yield_"))
   clusters_onsset$id <- exact_extract(id, clusters_onsset, "majority")
@@ -251,7 +251,7 @@ lapply(1:nrow(scenarios), function(scenario){
     gadm2_output <- gadm1
     
     gadm2_output$id <- 1:nrow(gadm2_output)
-    id <- fasterize(st_collection_extract(gadm2_output, "POLYGON"), disaggregate(rainfed[[1]][[1]], fact=100), "id")
+    id <- terra::rasterize(st_collection_extract(gadm2_output, "POLYGON"), disagg(rainfed[[1]][[1]], fact=100), "id")
     
     clusters_onsset <- dplyr::select(clusters, contains(demand_fields) & !contains("surface"), contains("IRREQ"), starts_with("Y_"), contains("machines"), contains("yg_potential_"), starts_with("A_"), starts_with("yield_"))
     clusters_onsset$id <- exact_extract(id, clusters_onsset, "majority")

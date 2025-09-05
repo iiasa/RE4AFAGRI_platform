@@ -11,30 +11,30 @@
 #####################
 
 # Country parameters
-countryname = 'Zambia' 
-countryiso3 = 'ZMB' # ISO3
-national_official_population = 18400000 # number of people
-national_official_elrate = 0.43 # national residential electricity access rate
+countryname = 'burkinafaso' 
+countryiso3 = 'BFA' # ISO3
+national_official_population = 20487979 # number of people
+national_official_elrate = 0.21 # national residential electricity access rate
 national_official_population_without_access = national_official_population- (national_official_population*national_official_elrate) # headcount of people without access
-ppp_gdp_capita <- 3457.6
-gini <- 57.1
+ppp_gdp_capita <- 733.356
+gini <- 45.16
 
-electr_final_demand_tot <- 12913610000  #https://www.iea.org/countries/zambia
+electr_final_demand_tot <- 3.283 * 10e9  #https://www.iea.org/countries/burkinafaso
 
-industry_final_demand_tot <- 7059722200
+industry_final_demand_tot <- 0.03283 * 10e9
 
-residential_final_demand_tot <- 4022500000
+residential_final_demand_tot <- 1.3132 * 10e9
 
 other_final_demand_tot <- electr_final_demand_tot - industry_final_demand_tot - residential_final_demand_tot
 
 cropland_equipped_irrigation = 0.25 #https://tableau.apps.fao.org/#/views/ReviewDashboard-v1/country_dashboard
 
-urban_hh_size <- 3.5
-rural_hh_size <- 4.5
+urban_hh_size <- 4.4
+rural_hh_size <- 5.6
 
 # Planning horizon parameters
-today = 2022
-planning_horizon = last(planning_year) - today
+today = 2020
+planning_horizon = today
 discount_rate = 0.2 
 
 # if cluster population is smaller than parameter value, then do not allow for productive demand
@@ -102,9 +102,9 @@ beds_tier2 <- 45
 beds_tier3 <- 150
 beds_tier4 <- 450
 
-pupils_per_school <- 500
+pupils_per_school <- 460
 
-threshold_community_elec <- 0.75
+threshold_community_elec <- 0.725
 
 #
 
@@ -199,25 +199,22 @@ ext = extent(gadm0)
 
 #
 
-clusters <- read_sf(find_it("clusters_Zambia_GRID3_above5population.gpkg"), crs=4326)
+clusters <- read_sf(find_it("clusters_burkinafaso_GRID3_above5population.gpkg"), crs=4326) #%>% sample_n(1000)
 clusters <- filter(clusters, pop_start_worldpop>10)
-
-#bounding_box = terra::drawExtent()
 
 clusters_centroids <- st_centroid(clusters)
 clusters_buffers_cropland_distance <- st_transform(clusters_centroids, 3395) %>% st_buffer(m_radius_buffer_cropland_distance) %>% st_transform(4326)
 
 #clusters$elrate <- clusters$elecpop_start_worldpop/clusters$pop_start_worldpop
 
-clusters_nest <- read_sf(find_it("Zambia_NEST_delineation.shp"))
-
+clusters_nest <- gadm2 %>% mutate(BCU=1:nrow(gadm2)) #read_sf(find_it("burkinafaso_NEST_delineation.shp"))
 
 #####################
 # Current gridded data
 #####################
 
 # gridded population (current)
-population_baseline <- rast(find_it("ZMB_population_v1_0_gridded.tif"))
+population_baseline <- rast(find_it("BFA_ppp_2020_UNadj_constrained.tif"))
 
 # gridded gdp_baseline (current)
 gdp_baseline <- rast(find_it(paste0("gdp_", scenarios$ssp[scenario], "soc_10km_2010-2100.nc")))[[2]]
@@ -292,34 +289,34 @@ for (i in 1:12){
   
   assign(paste0('urb5' , "_" , as.character(i)), read.csv(paste0(input_folder , '/ramp/RAMP_households/Urban/Outputs/Tier-5/output_file_' , as.character(i) , '.csv')) %>% rename(values = X0, minutes = X) %>% mutate(hour=minutes%/%60%%24) %>% group_by(hour) %>% summarise(values=(mean(values)/1000) * (1-eff_impr_urb5*planning_horizon))) 
   
- }
+}
 
 # healthcare and education appliances ownership and usage 
+
+for (i in 1:12){
+  assign(paste0('health1' , "_" , as.character(i)), read.csv(paste0(input_folder , '/ramp/RAMP_services/1.Health/Dispensary/Outputs/output_file_' , as.character(i) , '.csv')) %>% rename(values = X0, minutes = X) %>% mutate(hour=minutes%/%60%%24) %>% group_by(hour) %>% summarise(values=(mean(values)/1000))) 
   
-  for (i in 1:12){
-    assign(paste0('health1' , "_" , as.character(i)), read.csv(paste0(input_folder , '/ramp/RAMP_services/1.Health/Dispensary/Outputs/output_file_' , as.character(i) , '.csv')) %>% rename(values = X0, minutes = X) %>% mutate(hour=minutes%/%60%%24) %>% group_by(hour) %>% summarise(values=(mean(values)/1000))) 
-    
-    assign(paste0('health2' , "_" , as.character(i)), read.csv(paste0(input_folder , '/ramp/RAMP_services/1.Health/HealthCentre/Outputs/output_file_' , as.character(i) , '.csv')) %>% rename(values = X0, minutes = X) %>% mutate(hour=minutes%/%60%%24) %>% group_by(hour) %>% summarise(values=(mean(values)/1000))) 
-    
-    assign(paste0('health3' , "_" , as.character(i)), read.csv(paste0(input_folder , '/ramp/RAMP_services/1.Health/SubCountyH/Outputs/output_file_' , as.character(i) , '.csv')) %>% rename(values = X0, minutes = X) %>% mutate(hour=minutes%/%60%%24) %>% group_by(hour) %>% summarise(values=(mean(values)/1000))) 
-    
-    assign(paste0('health4' , "_" , as.character(i)), read.csv(paste0(input_folder , '/ramp/RAMP_services/1.Health/SubCountyH/Outputs/output_file_' , as.character(i) , '.csv')) %>% rename(values = X0, minutes = X) %>% mutate(hour=minutes%/%60%%24) %>% group_by(hour) %>% summarise(values=mean(values)*1.3/1000)) 
-    
-    assign(paste0('health5' , "_" , as.character(i)), read.csv(paste0(input_folder , '/ramp/RAMP_services/1.Health/SubCountyH/Outputs/output_file_' , as.character(i) , '.csv')) %>% rename(values = X0, minutes = X) %>% mutate(hour=minutes%/%60%%24) %>% group_by(hour) %>% summarise(values=mean(values)*1.6/1000)) 
-    
-  }
+  assign(paste0('health2' , "_" , as.character(i)), read.csv(paste0(input_folder , '/ramp/RAMP_services/1.Health/HealthCentre/Outputs/output_file_' , as.character(i) , '.csv')) %>% rename(values = X0, minutes = X) %>% mutate(hour=minutes%/%60%%24) %>% group_by(hour) %>% summarise(values=(mean(values)/1000))) 
   
-  for (i in 1:12){
-    assign(paste0('edu' , "_" , as.character(i)), read.csv(paste0(input_folder , '/ramp/RAMP_services/2.School/Output/output_file_' , as.character(i) , '.csv')) %>% rename(values = X0, minutes = X) %>% mutate(hour=minutes%/%60%%24) %>% group_by(hour) %>% summarise(values=(mean(values)/1000))) #/10 schools simulated 
-    
-  }
+  assign(paste0('health3' , "_" , as.character(i)), read.csv(paste0(input_folder , '/ramp/RAMP_services/1.Health/SubCountyH/Outputs/output_file_' , as.character(i) , '.csv')) %>% rename(values = X0, minutes = X) %>% mutate(hour=minutes%/%60%%24) %>% group_by(hour) %>% summarise(values=(mean(values)/1000))) 
+  
+  assign(paste0('health4' , "_" , as.character(i)), read.csv(paste0(input_folder , '/ramp/RAMP_services/1.Health/SubCountyH/Outputs/output_file_' , as.character(i) , '.csv')) %>% rename(values = X0, minutes = X) %>% mutate(hour=minutes%/%60%%24) %>% group_by(hour) %>% summarise(values=mean(values)*1.3/1000)) 
+  
+  assign(paste0('health5' , "_" , as.character(i)), read.csv(paste0(input_folder , '/ramp/RAMP_services/1.Health/SubCountyH/Outputs/output_file_' , as.character(i) , '.csv')) %>% rename(values = X0, minutes = X) %>% mutate(hour=minutes%/%60%%24) %>% group_by(hour) %>% summarise(values=mean(values)*1.6/1000)) 
+  
+}
+
+for (i in 1:12){
+  assign(paste0('edu' , "_" , as.character(i)), read.csv(paste0(input_folder , '/ramp/RAMP_services/2.School/Output/output_file_' , as.character(i) , '.csv')) %>% rename(values = X0, minutes = X) %>% mutate(hour=minutes%/%60%%24) %>% group_by(hour) %>% summarise(values=(mean(values)/1000))) #/10 schools simulated 
+  
+}
 
 # Taxes on PV equipment
 vat_import <- read.csv(find_it("vat_import.csv"), stringsAsFactors = F)
 vat_import$ISO3 <- countrycode::countrycode(vat_import[,1], 'country.name', 'iso3c')
 
 # Crop and harvest calendar
-crops = readxl::read_xlsx(find_it('crops_cfs_ndays_months_ZMB.xlsx'))
+crops = readxl::read_xlsx(find_it('crops_cfs_ndays_months_BFA.xlsx'))
 
 # Read xlsx of spline surface for water pumps costing
 x = read_xlsx(paste0(input_folder, "interp_surface_cost/smooth_q.xlsx"), col_names = T)
@@ -336,10 +333,10 @@ dhs <- empl_wealth <- filter(dhs, dhs$ISO==countrycode(countryiso3, "iso3c", "is
 # Classifying schools and healthcare facilities
 health = read_sf(find_it('health.geojson'))
 
-health$Tier <- ifelse(health$SubType=="Health Post" | health$SubType=="Rural Health Post" | health$SubType=="Health Compound" | health$SubType=="Doctor Office" | health$SubType=="Health Office", 1, NA)
-health$Tier <- ifelse(health$SubType=="Health Center" | health$SubType=="Rural Health Center" | health$SubType=="Health Compound", 2, health$Tier)
-health$Tier <- ifelse(health$SubType=="Clinic"  | health$SubType=="Clinic Well" | health$SubType=="Under Five Clinic" | health$SubType=="Health Facility" | health$SubType=="Hospital Affiliated Health Center", 3, health$Tier)
-health$Tier <- ifelse(health$SubType=="Hospital" | health$SubType=="Hospital Well", 4, health$Tier)
+health$Tier <- ifelse(grepl("hosp", health$TYPEOFFACI , ignore.case = T), 4, NA)
+health$Tier <- ifelse(grepl("clinic", health$TYPEOFFACI , ignore.case = T), 3, health$Tier)
+health$Tier <- ifelse(grepl("centre|center|post", health$TYPEOFFACI , ignore.case = T), 2, health$Tier)
+health$Tier <- ifelse(grepl("rural", health$TYPEOFFACI , ignore.case = T) | is.na(health$TYPEOFFACI), 1, health$Tier)
 
 #Import primaryschools
 primaryschools = read_sf(find_it('schools.geojson'))
@@ -384,4 +381,4 @@ cities <- read_sf(find_it("cities.geojson")) %>% filter(cou_name_en==countryname
 
 #
 
-#save.image(paste0(processed_folder, "scenario_zambia.Rdata"))
+#save.image(paste0(processed_folder, "scenario_burkinafaso.Rdata"))

@@ -1,6 +1,6 @@
 # gridded population 
-population_fut <- stack(find_it(paste0("population_", scenarios$ssp[scenario], "soc_0p5deg_annual_2006-2100.nc")))[[-c(1:14)]]
-population_fut <- exact_extract(brick(population_fut), gadm2, "sum")
+population_fut <- rast(find_it(paste0("population_", scenarios$ssp[scenario], "soc_0p5deg_annual_2006-2100.nc")))[[-c(1:14)]]
+population_fut <- exact_extract(population_fut, gadm2, "sum")
 population_fut <- dplyr::select(population_fut, 1:((last(planning_year)-2020)+1))
 
 colnames(population_fut) <- paste0("pop_", 2020:last(planning_year))
@@ -19,9 +19,9 @@ colnames(population_fut_gr) <- paste0("pop_gr_", 2021:last(planning_year))
 population_fut_gr$geometry <- gadm2$geometry
 population_fut_gr <- st_as_sf(population_fut_gr)
 
-# fasterize all layers and extract them into clusters !
+# terra::rasterize all layers and extract them into clusters !
 
-template <- stack(find_it("population_ssp2soc_0p5deg_annual_2006-2100.nc"))[[1]]
+template <- rast(find_it("population_ssp2soc_0p5deg_annual_2006-2100.nc"))[[1]]
 
 out <- list()
 j = 0
@@ -32,11 +32,11 @@ for (i in list_cols[1:((last(planning_year)-2020))]){
 
   j = j+1
   
-  out[[j]] <- fasterize(st_collection_extract(population_fut_gr, "POLYGON"), template, i, "first")
+  out[[j]] <- terra::rasterize(st_collection_extract(population_fut_gr, "POLYGON"), template, i, "mean")
   
 }
 
-population_fut_gr <- exact_extract(stack(out), clusters, "mean")
+population_fut_gr <- exact_extract(rast(out), clusters, "mean")
 colnames(population_fut_gr) <- list_cols[1:((last(planning_year)-2020))]
 
 population_fut_gr <- population_fut_gr %>% mutate_all(~ifelse(is.na(.x), mean(.x, na.rm = TRUE), .x)) 
@@ -46,8 +46,8 @@ clusters <- bind_cols(clusters, population_fut_gr)
 ######################################
 
 # gridded gdp (planning year)
-gdp_future <- stack(find_it(paste0("gdp_", scenarios$ssp[scenario], "soc_10km_2010-2100.nc")))[[2:(2 + ((last(planning_year) - 2020) / 10))]]
-gdp_fut <- exact_extract(brick(gdp_future), gadm2, "sum")
+gdp_future <- rast(find_it(paste0("gdp_", scenarios$ssp[scenario], "soc_10km_2010-2100.nc")))[[2:(2 + ((last(planning_year) - 2020) / 10))]]
+gdp_fut <- exact_extract(gdp_future, gadm2, "sum")
 
 colnames(gdp_fut) <- paste0("gdp_", seq(2020, last(planning_year), 10))
 
@@ -82,7 +82,7 @@ for (i in 1:(ncol(gdp_fut_gr)-1)){
   
 }
 
-gdp_fut_gr_r <- stack(gdp_fut_gr_r)
+gdp_fut_gr_r <- rast(gdp_fut_gr_r)
 gdp_fut_gr_r <- exact_extract(gdp_fut_gr_r, clusters, "mean")
 gdp_fut_gr_r <- as.data.frame(gdp_fut_gr_r)
 

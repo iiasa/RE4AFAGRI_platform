@@ -6,7 +6,8 @@ el_acc = filter(el_acc, grepl(countrystudy, gsub(" ", "", el_acc$Country), ignor
 el_acc_trend = as.numeric(el_acc[,13:23])
 el_acc_y = as.numeric(names(el_acc[,13:23]))
 
-el_acc_model <- glm(el_acc_trend/100 ~ el_acc_y + I(el_acc_y^2), family = "binomial")
+el_acc_model <- glm(el_acc_trend/100 ~ el_acc_y , family = "binomial")
+# el_acc_model <- glm(el_acc_trend/100 ~ el_acc_y + I(el_acc_y^2), family = "binomial")
 
 el_acc_pred = predict(el_acc_model, data.frame(el_acc_y=planning_year), type="response")
 

@@ -6,8 +6,8 @@
 
 # Groundwater and surface water pumping module
 
-img_01 <- raster(find_it("slope_africa.tif"))
-img_02 <- raster(find_it("surfwater_distance_africa.tif"))
+img_01 <- rast(find_it("slope_africa.tif"))
+img_02 <- rast(find_it("surfwater_distance_africa.tif"))
 
 img_01 <- crop(img_01, extent(clusters_voronoi))
 img_02 <- crop(img_02, extent(clusters_voronoi))
@@ -22,7 +22,7 @@ DepthToGroundwater$depthwater = ifelse(DepthToGroundwater$DTWAFRICA_ == 'VS', 3.
 
 DepthToGroundwater$depthwater <- as.numeric(DepthToGroundwater$depthwater)
 
-groundwater_depth <- rasterFromXYZ(DepthToGroundwater[c("X", "Y", "depthwater")], crs = 4326)
+groundwater_depth <- rast(rasterFromXYZ(DepthToGroundwater[c("X", "Y", "depthwater")], crs = 4326))
 
 # Extract mean value within each cluster
 clusters$gr_wat_depth <- exact_extract(groundwater_depth, clusters, fun="mean")
@@ -32,7 +32,7 @@ GroundwaterStorage$storagewater = ifelse(GroundwaterStorage$GWSTOR_V2 == 'VL', 0
 
 GroundwaterStorage$storagewater <- as.numeric(GroundwaterStorage$storagewater)
 
-groundwater_storage <- rasterFromXYZ(GroundwaterStorage[c("X", "Y", "storagewater")], crs = 4326)
+groundwater_storage <- rast(rasterFromXYZ(GroundwaterStorage[c("X", "Y", "storagewater")], crs = 4326))
 
 # Extract mean value within each cluster
 clusters$gr_wat_storage <- exact_extract(groundwater_storage, clusters, fun="mean")
@@ -43,7 +43,7 @@ GroundwaterProductivity$Productivitywater = ifelse(GroundwaterProductivity$GWPRO
 
 GroundwaterProductivity$Productivitywater <- as.numeric(GroundwaterProductivity$Productivitywater)
 
-groundwater_Productivity <- rasterFromXYZ(GroundwaterProductivity[c("X", "Y", "Productivitywater")], crs = 4326)
+groundwater_Productivity <- rast(rasterFromXYZ(GroundwaterProductivity[c("X", "Y", "Productivitywater")], crs = 4326))
 
 # Extract mean value within each cluster
 clusters$gr_wat_productivity <- exact_extract(groundwater_Productivity, clusters, fun="mean")

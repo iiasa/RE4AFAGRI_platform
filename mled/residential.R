@@ -12,10 +12,6 @@
 # Calculate the number of people in each tier in each cluster
 clusters$popdens <- clusters$population / clusters$area
 
-#plot_raster_tiers <- rasterVis::levelplot(ratify(raster_tiers))
-
-#raster::values(raster_tiers) <- ifelse(raster::values(raster_tiers)==0, NA, raster::values(raster_tiers))
-
 clusters$tier <- exact_extract(raster_tiers, clusters, "max")
 
 #

@@ -5,7 +5,7 @@
 ##      3) calculates crop-specific and total electricity demand for crop processing at each time step
 
 
-for (X in 1:nlayers(files)){
+for (X in 1:nlyr(files)){
   for (timestep in planning_year){
     
     aa <- clusters
@@ -23,7 +23,7 @@ for (X in 1:nlayers(files)){
 
 if (process_already_irrigated_crops==T){
   
-  for (X in 1:nlayers(files)){
+  for (X in 1:nlyr(files)){
     for (timestep in planning_year){
       
       aa <- clusters

@@ -12,17 +12,17 @@ files2 = list.files(path = paste0(input_folder, "spam_folder/spam2017v2r1_ssa_ha
 
 ## implement these constraints
 
-files <- stack(lapply(files, function(X)(raster(X))))
+files <- rast(lapply(files, function(X)(rast(X))))
 names(files) <- tolower(unlist(qdapRegex::ex_between(names(files), "SSA_Y_", "_R")))
 
-files2 <- stack(lapply(files2, function(X)(raster(X))))
+files2 <- rast(lapply(files2, function(X)(rast(X))))
 names(files2) <- tolower(unlist(qdapRegex::ex_between(names(files2), "SSA_H_", "_R")))
 
-for (i in 1:nlayers(files)){
+for (i in 1:nlyr(files)){
   crs(files[[i]]) <- as.character(CRS("+init=epsg:4236"))
 }
 
-for (i in 1:nlayers(files2)){
+for (i in 1:nlyr(files2)){
   crs(files2[[i]]) <- as.character(CRS("+init=epsg:4236"))
 }
 
@@ -31,11 +31,11 @@ files2 <- mask_raster_to_polygon(files2, st_as_sfc(st_bbox(clusters_voronoi)))
 
 ###########
 
-outs <- future_lapply(1:nlayers(files2), function(X){  exact_extract(files2[[X]], clusters_voronoi, fun="sum")})
+outs <- pblapply(1:nlyr(files2), function(X){  exact_extract(files2[[X]], clusters_voronoi, fun="sum")})
 
-outs2 <- future_lapply(1:nlayers(files), function(X){  exact_extract(files[[X]], clusters_voronoi, fun="mean")})
+outs2 <- pblapply(1:nlyr(files), function(X){  exact_extract(files[[X]], clusters_voronoi, fun="mean")})
 
-for (X in 1:nlayers(files)){
+for (X in 1:nlyr(files)){
   
   a = paste0("A_" , names(files)[X], "_r")
   clusters[a] <- outs[[X]]
@@ -67,29 +67,29 @@ files2 = list.files(path = paste0(input_folder, "spam_folder/spam2017v2r1_ssa_ha
 
 ## implement these constraints
 
-files <- stack(lapply(files, function(X)(raster(X))))
+files <- rast(lapply(files, function(X)(rast(X))))
 names(files) <- tolower(unlist(qdapRegex::ex_between(names(files), "SSA_Y_", "_I")))
 
-files2 <- stack(lapply(files2, function(X)(raster(X))))
+files2 <- rast(lapply(files2, function(X)(rast(X))))
 names(files2) <- tolower(unlist(qdapRegex::ex_between(names(files2), "SSA_H_", "_I")))
 
-for (i in 1:nlayers(files)){
+for (i in 1:nlyr(files)){
   crs(files[[i]]) <- as.character(CRS("+init=epsg:4236"))
 }
 
-for (i in 1:nlayers(files2)){
+for (i in 1:nlyr(files2)){
   crs(files2[[i]]) <- as.character(CRS("+init=epsg:4236"))
 }
 
 files <- mask_raster_to_polygon(files, st_as_sfc(st_bbox(clusters_voronoi)))
 files2 <- mask_raster_to_polygon(files2, st_as_sfc(st_bbox(clusters_voronoi)))
 
-outs <- future_lapply(1:nlayers(files2), function(X){  exact_extract(files2[[X]], clusters_voronoi, fun="sum")})
+outs <- pblapply(1:nlyr(files2), function(X){  exact_extract(files2[[X]], clusters_voronoi, fun="sum")})
 
-outs2 <- future_lapply(1:nlayers(files), function(X){  exact_extract(files[[X]], clusters_voronoi, fun="mean")})
+outs2 <- pblapply(1:nlyr(files), function(X){  exact_extract(files[[X]], clusters_voronoi, fun="mean")})
 
 
-for (X in 1:nlayers(files)){
+for (X in 1:nlyr(files)){
   
   a = paste0("A_" , names(files)[X], "_i")
   clusters[a] <- outs[[X]] 
@@ -133,21 +133,21 @@ for (timestep in planning_year[-length(planning_year)]){
   ####
   
   yg_potential_s <- mixedsort(yg_potential_s)
-  yg_potential_s <- lapply(yg_potential_s, raster)
-  yg_potential_s <- stack(yg_potential_s)
+  yg_potential_s <- lapply(yg_potential_s, rast)
+  yg_potential_s <- rast(yg_potential_s)
   crs(yg_potential_s) <- as.character(CRS("+init=epsg:4236"))
   yg_potential_s <- mask_raster_to_polygon(yg_potential_s, st_as_sfc(st_bbox(clusters_voronoi)))
   
   yield_s <- mixedsort(yield_s)
-  yield_s <- lapply(yield_s, raster)
-  yield_s <- stack(yield_s)
+  yield_s <- lapply(yield_s, rast)
+  yield_s <- rast(yield_s)
   crs(yield_s) <- as.character(CRS("+init=epsg:4236"))
   yield_s <- mask_raster_to_polygon(yield_s, st_as_sfc(st_bbox(clusters_voronoi)))
   
   ##############
   
-  outs <- lapply(1:nlayers(yg_potential_s), function(X){  exact_extract(yg_potential_s[[X]], clusters_voronoi, fun="mean") })
-  #outs2 <- lapply(1:nlayers(yield_s), function(X){  exact_extract(yield_s[[X]], clusters_voronoi, fun="mean") })
+  outs <- lapply(1:nlyr(yg_potential_s), function(X){  exact_extract(yg_potential_s[[X]], clusters_voronoi, fun="mean") })
+  #outs2 <- lapply(1:nlyr(yield_s), function(X){  exact_extract(yield_s[[X]], clusters_voronoi, fun="mean") })
   
   ###############################
   
