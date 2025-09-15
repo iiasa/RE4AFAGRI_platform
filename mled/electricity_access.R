@@ -3,6 +3,14 @@
 ##      1) estimates electricity access in each cluster in the spirit of Falchetta et al. (2019) Scientific Data's paper, using built-up area and nighttime lights
 ##      2) downscales national electricity consumption statistics to each cluster using the dissever methodology (see Roudier et al. 2017 Computers and Electronics in Agriculture paper)
 
+##
+
+if(is.null(clusters$elrate)){
+  clusters$elrate <- clusters$elecperc
+}
+
+##
+
 GHSSMOD2015 <- rast(find_it("builtup_africa.tif"))
 GHSSMOD2015_lit <- rast(find_it("builtup_lit_africa.tif"))
   
@@ -70,7 +78,7 @@ if (paste0("ely_cons_1_km_", countrystudy, ".tif") %in% all_input_files_basename
   prio <- filter(prio, resources>0)
   prio <- st_transform(prio, 3395) %>% st_buffer(1000) %>% st_transform(4326)
   
-  resources <- terra::rasterize(prio, pop, field="resources", fun="first")
+  resources <- terra::rasterize(prio, pop, field="resources", fun="max")
   resources <- resources>0
   resources <- mask_raster_to_polygon(resources, gadm0)
   
